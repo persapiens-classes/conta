@@ -89,6 +89,13 @@
             <exec.args>-classpath %classpath br.edu.ifrn.ContaApplication</exec.args>
             <exec.executable>java</exec.executable>
         </properties>
-    </action>        
+    </action>
+    <action>
+            <actionName>CUSTOM-site</actionName>
+            <displayName>site</displayName>
+            <goals>
+                <goal>site</goal>
+            </goals>
+        </action>        
         
 </actions>
