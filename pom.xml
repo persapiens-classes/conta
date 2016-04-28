@@ -115,7 +115,8 @@
                     <failOnError>true</failOnError>
                     <xmlOutput>true</xmlOutput>
                     <effort>Max</effort>
-                    <includeTests>true</includeTests>                    
+                    <includeTests>true</includeTests>
+                    <excludeFilterFile>src/main/docs/findbugs-exclude.xml</excludeFilterFile>
                 </configuration>
             </plugin>
             <plugin>
@@ -208,6 +209,7 @@
                             </execution>
                         </executions>
                         <configuration>
+                            <excludeFilterFile>src/main/docs/findbugs-exclude.xml</excludeFilterFile>
                             <failOnError>true</failOnError>
                             <includeTests>true</includeTests>
                         </configuration>
