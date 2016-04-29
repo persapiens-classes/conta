@@ -1,4 +1,4 @@
-package br.edu.ifrn.dominio;
+package br.edu.ifrn.conta.dominio;
 
 import java.util.Set;
 import lombok.EqualsAndHashCode;

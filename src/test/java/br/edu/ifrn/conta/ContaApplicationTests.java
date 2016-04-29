@@ -1,4 +1,4 @@
-package br.edu.ifrn;
+package br.edu.ifrn.conta;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

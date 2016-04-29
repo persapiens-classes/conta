@@ -1,4 +1,4 @@
-package br.edu.ifrn.dominio;
+package br.edu.ifrn.conta.dominio;
 
 import java.math.BigDecimal;
 import java.util.Date;

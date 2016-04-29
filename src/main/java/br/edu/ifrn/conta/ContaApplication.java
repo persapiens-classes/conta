@@ -1,4 +1,4 @@
-package br.edu.ifrn;
+package br.edu.ifrn.conta;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
