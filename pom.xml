@@ -86,6 +86,7 @@
             </plugin>
         </plugins>
     </build>
+    
     <reporting>
         <plugins>
             <plugin>
@@ -105,8 +106,12 @@
                     <targetJdk>${java.source}</targetJdk>
                     <skipEmptyReport>false</skipEmptyReport>
                     <includeTests>true</includeTests>
+                    <rulesets>
+                        <ruleset>src/main/docs/pmd-ruleset.xml</ruleset>
+                    </rulesets>
                 </configuration>
             </plugin>
+            <!--
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
@@ -126,21 +131,22 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
                 <version>${maven-jxr-plugin.version}</version>
                 <configuration>
                     <aggregate>false</aggregate>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven-javadoc-plugin.version}</version>
-            </plugin>
+            -->
         </plugins>
     </reporting>
-    <profiles>
-        
+    
+    <profiles>        
         <profile>
             <id>attach-test-source-javadoc</id>
             <build>
@@ -228,6 +234,9 @@
                             <printFailingErrors>true</printFailingErrors>
                             <verbose>true</verbose>
                             <includeTests>true</includeTests>
+                            <rulesets>
+                                <ruleset>src/main/docs/pmd-ruleset.xml</ruleset>
+                            </rulesets>
                         </configuration>
                         <executions>
                             <execution>
