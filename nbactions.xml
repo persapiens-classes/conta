@@ -94,6 +94,7 @@
         <actionName>CUSTOM-site</actionName>
         <displayName>site</displayName>
         <goals>
+            <goal>clean</goal>
             <goal>install</goal>
             <goal>site</goal>
         </goals>
