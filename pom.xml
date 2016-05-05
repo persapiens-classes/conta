@@ -22,7 +22,8 @@
         <testng.version>6.9.10</testng.version>
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
         <lombok.version>1.16.8</lombok.version>
-        <lombok-maven-plugin.version>1.16.8.0</lombok-maven-plugin.version>
+        <lombok-maven-plugin.version>1.16.8.0</lombok-maven-plugin.version>        
+        <juplo-maven-plugin.version>2.0.0</juplo-maven-plugin.version>        
         
         <!-- plugins de relatorios -->
         <findbugs-maven-plugin.version>3.0.3</findbugs-maven-plugin.version>
@@ -374,6 +375,49 @@
                 </plugins>
             </build>
         </profile>
+        
+        <!-- criar script do esquema do banco de dados -->
+        <profile>
+            <id>schema</id>
+            <build>
+                <plugins>
+                    <!-- gerando o script de criacao do banco -->            
+                    <plugin>
+                        <groupId>de.juplo</groupId>
+                        <artifactId>hibernate-maven-plugin</artifactId>
+                        <version>${juplo-maven-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>drop-schema</id>
+                                <goals>
+                                    <goal>drop</goal>
+                                </goals>
+                                <configuration>
+                                    <outputFile>${project.build.directory}/classes/drop-schema.sql</outputFile>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>create-schema</id>
+                                <goals>
+                                    <goal>create</goal>
+                                </goals>
+                                <configuration>
+                                    <outputFile>${project.build.directory}/classes/create-schema.sql</outputFile>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <delimiter>;</delimiter>
+                            <format>true</format>
+                            <dialect>org.hibernate.dialect.PostgreSQLDialect</dialect>                            
+                            <scanDependencies>system</scanDependencies>
+                            <export>false</export>
+                            <show>true</show>
+                        </configuration>
+                    </plugin>         
+                </plugins>
+            </build>
+        </profile>        
     </profiles>
 
     <name>conta</name>
