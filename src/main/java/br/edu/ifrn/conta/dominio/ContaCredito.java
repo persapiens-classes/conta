@@ -1,5 +1,6 @@
 package br.edu.ifrn.conta.dominio;
 
+import javax.persistence.Entity;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -10,9 +11,10 @@ import lombok.ToString;
 @Setter
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
+@Entity
 public class ContaCredito extends Conta {
     @Builder
-    public ContaCredito(String descricao, Categoria categoria) {
-        super(descricao, categoria);
+    public ContaCredito(Long id, String descricao, Categoria categoria) {
+        super(id, descricao, categoria);
     }    
 }
