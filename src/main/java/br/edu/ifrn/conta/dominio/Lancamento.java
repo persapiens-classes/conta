@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -48,6 +50,7 @@ public class Lancamento implements Serializable, Comparable<Lancamento> {
     @Column(nullable = false)
     private BigDecimal valor;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date data;
 
