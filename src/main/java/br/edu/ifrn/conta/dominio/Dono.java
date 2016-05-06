@@ -18,7 +18,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString(exclude = {"lancamentos", "valoresIniciaisNasContasPatrimonio"})
+@ToString(exclude = {"id", "lancamentos", "valoresIniciaisNasContasPatrimonio"})
 @EqualsAndHashCode(exclude = {"lancamentos", "valoresIniciaisNasContasPatrimonio"})
 @Builder
 @Entity
