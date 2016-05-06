@@ -1,8 +1,10 @@
 package br.edu.ifrn.conta.dominio;
 
 import java.math.BigDecimal;
-import org.testng.annotations.Test;
+import java.util.Set;
+import java.util.TreeSet;
 import static org.assertj.core.api.Assertions.assertThat;
+import org.testng.annotations.Test;
 
 @Test
 public class DonoTests {
@@ -47,6 +49,17 @@ public class DonoTests {
         assertThat(Dono.builder().descricao(PAPAI).build())
             .isNotEqualTo(Dono.builder().descricao(MAMAE).build());
         
+    }
+    
+    public void compareTo() {
+        Set<Dono> donos = new TreeSet<>();
+
+        Dono papai = Dono.builder().descricao(PAPAI).build();
+        donos.add(papai);
+        Dono mamae = Dono.builder().descricao(MAMAE).build();
+        donos.add(mamae);
+        
+        assertThat(donos.iterator().next()).isEqualTo(mamae);
     }
     
 }
