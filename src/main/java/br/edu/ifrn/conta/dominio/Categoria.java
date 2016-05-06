@@ -3,7 +3,6 @@ package br.edu.ifrn.conta.dominio;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +33,7 @@ public class Categoria implements Serializable {
     private String descricao;
     
     @Singular
-    @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "categoria")
     private Set<Conta> contas;
     
 }

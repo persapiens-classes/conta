@@ -12,58 +12,58 @@ public class ContaPatrimonioTests {
     private static final String PATRIMONIO_PESSOAL = "patrimonio pessoal";
     private static final String POUPANCA = "poupança";
     
-    public void descricaoECategoriaEValorInicialIguais() {
+    public void descricaoECategoriaIguais() {
         assertThat(ContaPatrimonio.builder().descricao(CARTEIRA)
             .categoria(Categoria.builder().descricao(PATRIMONIO_INDIVIDUAL).build())
-            .valorInicial(new BigDecimal(100))
             .build())
         .isEqualTo(ContaPatrimonio.builder().descricao(CARTEIRA)
             .categoria(Categoria.builder().descricao(PATRIMONIO_INDIVIDUAL).build())
-            .valorInicial(new BigDecimal(100))
             .build());
     }
     
-    public void descricaoEValorIgualECategoriaDiferente() {
+    public void descricaoECategoriaDiferente() {
         assertThat(ContaPatrimonio.builder().descricao(CARTEIRA)
             .categoria(Categoria.builder().descricao(PATRIMONIO_INDIVIDUAL).build())
-            .valorInicial(new BigDecimal(100))
             .build())
         .isNotEqualTo(ContaPatrimonio.builder().descricao(CARTEIRA)
             .categoria(Categoria.builder().descricao(PATRIMONIO_PESSOAL).build())
-            .valorInicial(new BigDecimal(100))
             .build());        
     }
     
     public void descricaoDiferenteECategoriaIgual() {
         assertThat(ContaPatrimonio.builder().descricao(CARTEIRA)
             .categoria(Categoria.builder().descricao(PATRIMONIO_PESSOAL).build())
-            .valorInicial(new BigDecimal(100))
             .build())
         .isNotEqualTo(ContaPatrimonio.builder().descricao(POUPANCA)
             .categoria(Categoria.builder().descricao(PATRIMONIO_PESSOAL).build())
-            .valorInicial(new BigDecimal(100))
             .build());        
-    }
-
-    public void descricaoECategoriaIguaisEValorInicialDiferente() {
-        assertThat(ContaPatrimonio.builder().descricao(POUPANCA)
-            .categoria(Categoria.builder().descricao("banco").build())
-            .valorInicial(new BigDecimal(100))
-            .build())
-        .isEqualTo(ContaPatrimonio.builder().descricao(POUPANCA)
-            .categoria(Categoria.builder().descricao("banco").build())
-            .valorInicial(new BigDecimal(999))
-            .build());
     }
 
     @Test(expectedExceptions = NullPointerException.class)
-    public void descricaoEValorInicialIguaisSemCategoria() {
+    public void descricaoIgualSemCategoria() {
         assertThat(ContaPatrimonio.builder().descricao(CARTEIRA)
-            .valorInicial(new BigDecimal(100))
             .build())
         .isNotEqualTo(ContaPatrimonio.builder().descricao(POUPANCA)
-            .valorInicial(new BigDecimal(100))
             .build());        
+    }
+    
+    public void descricaoECategoriaIguaisEValorInicialDoDonoDiferente() {
+        
+        ValorInicialDoDonoNaContaPatrimonio valorInicialNaCarteira = ValorInicialDoDonoNaContaPatrimonio.builder()
+            .dono(Dono.builder().descricao("papai").build())
+            .valorInicial(new BigDecimal(100))
+            .build();        
+        
+        ContaPatrimonio carteira1 = ContaPatrimonio.builder().descricao(CARTEIRA)
+            .categoria(Categoria.builder().descricao(PATRIMONIO_INDIVIDUAL).build())
+            .valorInicialDoDono(valorInicialNaCarteira)
+            .build();        
+        
+        ContaPatrimonio carteira2 = ContaPatrimonio.builder().descricao(CARTEIRA)
+            .categoria(Categoria.builder().descricao(PATRIMONIO_INDIVIDUAL).build())
+            .build();        
+        
+        assertThat(carteira1).isEqualTo(carteira2);
     }
     
 }

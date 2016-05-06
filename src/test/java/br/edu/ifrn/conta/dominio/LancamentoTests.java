@@ -19,7 +19,6 @@ public class LancamentoTests {
                 .descricao("gasolina").categoria(
                     Categoria.builder().descricao("transporte").build()).build())
             .contaSaida(ContaPatrimonio.builder()
-                .valorInicial(new BigDecimal(100))
                 .descricao("carteira").categoria(
                     Categoria.builder().descricao("patrimônio pessoal").build()).build())
             .build();        

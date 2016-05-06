@@ -1,28 +1,30 @@
 package br.edu.ifrn.conta.dominio;
 
-import java.math.BigDecimal;
-import javax.persistence.Column;
+import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Singular;
 import lombok.ToString;
 
 @Getter
 @Setter
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true, exclude = "valorInicial")
+@ToString(callSuper = true, exclude = "valoresIniciaisDosDonos")
+@EqualsAndHashCode(callSuper = true, exclude = "valoresIniciaisDosDonos")
 @Entity
 public class ContaPatrimonio extends Conta {
 
     @Builder
-    public ContaPatrimonio(BigDecimal valorInicial, Long id, String descricao, Categoria categoria) {
+    public ContaPatrimonio(@Singular("valorInicialDoDono") Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisDosDonos
+            , Long id, String descricao, Categoria categoria) {
         super(id, descricao, categoria);
-        this.valorInicial = valorInicial;
-    }    
+        this.valoresIniciaisDosDonos = valoresIniciaisDosDonos;
+    }
     
-    @Column(nullable = false)
-    private BigDecimal valorInicial;
+    @OneToMany(mappedBy = "contaPatrimonio")
+    private Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisDosDonos;
     
 }

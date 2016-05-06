@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,14 +18,14 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode(exclude = "lancamentos")
+@ToString(exclude = {"lancamentos", "valoresIniciaisNasContasPatrimonio"})
+@EqualsAndHashCode(exclude = {"lancamentos", "valoresIniciaisNasContasPatrimonio"})
 @Builder
 @Entity
 @SequenceGenerator(sequenceName = "seq_dono", name = "ID_SEQUENCE", allocationSize = 1)
 public class Dono implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
@@ -36,7 +35,11 @@ public class Dono implements Serializable {
     private String descricao;
 
     @Singular
-    @OneToMany(mappedBy = "dono", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "dono")
     private Set<Lancamento> lancamentos;
+    
+    @Singular("valorInicialNaContaPatrimonio")
+    @OneToMany(mappedBy = "dono")
+    private Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisNasContasPatrimonio;
     
 }

@@ -27,30 +27,30 @@ import lombok.ToString;
 @SequenceGenerator(sequenceName = "seq_lancamento", name = "ID_SEQUENCE", allocationSize = 1)
 public class Lancamento implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-    
+    private static final long serialVersionUID = 1L;
+
     @Id
-    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
     private Long id;
 
     @ManyToOne
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_lancamento_dono"))
     private Dono dono;
-    
+
     @ManyToOne
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_lancamento_contaEntrada"))
     private Conta contaEntrada;
-    
+
     @ManyToOne
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_lancamento_contaSaida"))
     private Conta contaSaida;
-    
+
     @Column(nullable = false)
     private BigDecimal valor;
-    
+
     @Column(nullable = false)
     private Date data;
-    
+
     private String descricao;
-    
+
 }
