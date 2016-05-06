@@ -24,7 +24,7 @@ import lombok.ToString;
 @Builder
 @Entity
 @SequenceGenerator(sequenceName = "seq_valorInicial", name = "ID_SEQUENCE", allocationSize = 1)
-public class ValorInicialDoDonoNaContaPatrimonio implements Serializable {
+public class ValorInicialDoDonoNaContaPatrimonio implements Serializable, Comparable<ValorInicialDoDonoNaContaPatrimonio> {
 
     private static final long serialVersionUID = 1L;
     
@@ -42,5 +42,19 @@ public class ValorInicialDoDonoNaContaPatrimonio implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_valorInicial_contaPatrimonio"))
     private ContaPatrimonio contaPatrimonio;
+
+    @Override
+    public int compareTo(ValorInicialDoDonoNaContaPatrimonio o) {
+        int result = valorInicial.compareTo(o.valorInicial);
+        if (result == 0)
+        {
+            result = dono.compareTo(o.dono);
+        }
+        if (result == 0)
+        {
+            result = contaPatrimonio.compareTo(o.contaPatrimonio);
+        }
+        return result;
+    }
     
 }

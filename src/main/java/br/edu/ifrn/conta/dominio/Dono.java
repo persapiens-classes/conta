@@ -23,7 +23,7 @@ import lombok.ToString;
 @Builder
 @Entity
 @SequenceGenerator(sequenceName = "seq_dono", name = "ID_SEQUENCE", allocationSize = 1)
-public class Dono implements Serializable {
+public class Dono implements Serializable, Comparable<Dono> {
 
     private static final long serialVersionUID = 1L;
     
@@ -41,5 +41,10 @@ public class Dono implements Serializable {
     @Singular("valorInicialNaContaPatrimonio")
     @OneToMany(mappedBy = "dono")
     private Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisNasContasPatrimonio;
+
+    @Override
+    public int compareTo(Dono o) {
+        return descricao.compareTo(o.descricao);
+    }
     
 }

@@ -27,7 +27,7 @@ import lombok.ToString;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @SequenceGenerator(sequenceName = "seq_conta", name = "ID_SEQUENCE", allocationSize = 1)
-public abstract class Conta implements Serializable {
+public abstract class Conta implements Serializable, Comparable<Conta> {
 
     private static final long serialVersionUID = 1L;
 
@@ -43,4 +43,15 @@ public abstract class Conta implements Serializable {
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_conta_categoria"))
     private Categoria categoria;
 
+    @Override
+    public int compareTo(Conta o) {
+        int result = descricao.compareTo(o.descricao);
+        if (result ==0)
+        {
+            result = categoria.compareTo(o.categoria);
+        }
+        return result;
+    }
+
+    
 }

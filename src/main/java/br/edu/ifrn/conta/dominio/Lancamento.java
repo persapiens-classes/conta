@@ -25,7 +25,7 @@ import lombok.ToString;
 @Builder
 @Entity
 @SequenceGenerator(sequenceName = "seq_lancamento", name = "ID_SEQUENCE", allocationSize = 1)
-public class Lancamento implements Serializable {
+public class Lancamento implements Serializable, Comparable<Lancamento> {
 
     private static final long serialVersionUID = 1L;
 
@@ -52,5 +52,19 @@ public class Lancamento implements Serializable {
     private Date data;
 
     private String descricao;
+
+    @Override
+    public int compareTo(Lancamento o) {
+        int result = data.compareTo(o.data);
+        if (result == 0)
+        {
+            result = valor.compareTo(o.valor);
+        }
+        if (result == 0)
+        {
+            result = dono.compareTo(o.dono);
+        }
+        return result;
+    }
 
 }
