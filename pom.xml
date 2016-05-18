@@ -24,6 +24,7 @@
         <lombok.version>1.16.8</lombok.version>
         <lombok-maven-plugin.version>1.16.8.0</lombok-maven-plugin.version>        
         <juplo-maven-plugin.version>2.0.0</juplo-maven-plugin.version>        
+        <javax.inject.version>1</javax.inject.version>
         
         <!-- plugins de relatorios -->
         <findbugs-maven-plugin.version>3.0.3</findbugs-maven-plugin.version>
@@ -84,6 +85,12 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>${javax.inject.version}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 	
