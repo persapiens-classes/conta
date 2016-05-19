@@ -95,9 +95,22 @@
         <displayName>site</displayName>
         <goals>
             <goal>clean</goal>
-            <goal>install</goal>
             <goal>site</goal>
         </goals>
-    </action>        
-        
+        <activatedProfiles>
+            <activatedProfile>attach-integration-test</activatedProfile>
+        </activatedProfiles>
+    </action>
+    <action>
+            <actionName>CUSTOM-cobertura</actionName>
+            <displayName>cobertura</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>cobertura:cobertura-integration-test</goal>
+            </goals>
+            <activatedProfiles>
+                <activatedProfile>attach-integration-test</activatedProfile>
+                <activatedProfile>attach-cobertura</activatedProfile>
+            </activatedProfiles>
+        </action>        
 </actions>
