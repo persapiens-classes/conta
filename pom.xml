@@ -40,6 +40,7 @@
         <maven-changelog-plugin.version>2.3</maven-changelog-plugin.version>
         <cobertura-maven-plugin.version>2.7</cobertura-maven-plugin.version>
         <coveralls-maven-plugin.version>4.1.0</coveralls-maven-plugin.version>
+        <maven-jar-plugin.version>3.0.0</maven-jar-plugin.version>
     </properties>
 
     <dependencies>
@@ -218,6 +219,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-jar-plugin</artifactId>
+                        <version>${maven-jar-plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>attach-test</id>
