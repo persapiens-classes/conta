@@ -3,9 +3,11 @@ package br.edu.ifrn.conta.dominio;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.Singular;
 import lombok.ToString;
@@ -15,6 +17,7 @@ import lombok.ToString;
 @ToString(callSuper = true, exclude = "valoresIniciaisDosDonos")
 @EqualsAndHashCode(callSuper = true, exclude = "valoresIniciaisDosDonos")
 @Entity
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ContaPatrimonio extends Conta {
 
     @Builder

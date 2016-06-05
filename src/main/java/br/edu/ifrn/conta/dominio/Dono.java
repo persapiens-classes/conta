@@ -9,20 +9,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.Singular;
 import lombok.ToString;
 
 @Getter
 @Setter
-@ToString(exclude = {"id", "lancamentos", "valoresIniciaisNasContasPatrimonio"})
+@ToString(exclude = {"lancamentos", "valoresIniciaisNasContasPatrimonio"})
 @EqualsAndHashCode(exclude = {"lancamentos", "valoresIniciaisNasContasPatrimonio"})
 @Builder
 @Entity
 @SequenceGenerator(sequenceName = "seq_dono", name = "ID_SEQUENCE", allocationSize = 1)
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Dono implements Serializable, Comparable<Dono> {
 
     private static final long serialVersionUID = 1L;
