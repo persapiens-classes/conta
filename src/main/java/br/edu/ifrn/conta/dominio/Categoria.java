@@ -2,6 +2,7 @@ package br.edu.ifrn.conta.dominio;
 
 import java.io.Serializable;
 import java.util.Set;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,6 +36,7 @@ public class Categoria implements Serializable, Comparable<Categoria> {
     @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String descricao;
     
     @Singular

@@ -38,7 +38,7 @@ public abstract class Conta implements Serializable, Comparable<Conta> {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String descricao;
 
     @NonNull
