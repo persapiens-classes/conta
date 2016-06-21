@@ -75,4 +75,12 @@ public class Lancamento implements Serializable, Comparable<Lancamento> {
         return result;
     }
 
+    public void verificarAtributos() {
+        if (contaEntrada instanceof ContaCredito) {
+            throw new IllegalArgumentException("Conta de entrada do lançamento não pode ser do tipo conta de crédito: " + contaEntrada);
+        }
+        if (contaSaida instanceof ContaDebito) {
+            throw new IllegalArgumentException("Conta de saída do lançamento não pode ser do tipo conta de débito: " + contaSaida);     
+        }    
+    }
 }
