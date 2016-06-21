@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ContaPatrimonioRepositoryIT extends AbstractTestNGSpringContextTests {
     
     @Inject
-    private FabricaDominio dominioFactory;
+    private ContaPatrimonioFabrica contaPatrimonioFabrica;
 
     @Inject
     private ContaPatrimonioRepository contaPatrimonioRepository;
@@ -36,10 +36,10 @@ public class ContaPatrimonioRepositoryIT extends AbstractTestNGSpringContextTest
     
     public void findAllByExample () {
         // cria o ambiente de teste
-        dominioFactory.poupanca();
+        contaPatrimonioFabrica.poupanca();
 
         ContaPatrimonio contaPatrimonioExemplo = ContaPatrimonio.builder()
-            .categoria(Categoria.builder().descricao(FabricaDominio.BANCO).build())
+            .categoria(Categoria.builder().descricao(CategoriaFabrica.BANCO).build())
             .build();
                 
         // executa a operacao a ser testada

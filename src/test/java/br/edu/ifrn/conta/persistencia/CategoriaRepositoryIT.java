@@ -19,7 +19,7 @@ public class CategoriaRepositoryIT extends AbstractTestNGSpringContextTests {
     private CategoriaRepository categoriaRepository;
     
     @Inject
-    private FabricaDominio dominioFactory;
+    private CategoriaFabrica categoriaFabrica;
     
     @BeforeMethod
     void deletarTodos()
@@ -34,7 +34,7 @@ public class CategoriaRepositoryIT extends AbstractTestNGSpringContextTests {
     
     public void deletarUm () {
         // cria o ambiente de teste
-        Categoria categoria = dominioFactory.transporte();
+        Categoria categoria = categoriaFabrica.transporte();
         
         // executa a operacao a ser testada
         categoriaRepository.delete(categoria);
@@ -45,7 +45,7 @@ public class CategoriaRepositoryIT extends AbstractTestNGSpringContextTests {
     
     public void salvarUm () {
         // cria o ambiente de teste
-        Categoria categoria = Categoria.builder().descricao(FabricaDominio.TRANSPORTE).build();
+        Categoria categoria = Categoria.builder().descricao(CategoriaFabrica.TRANSPORTE).build();
         
         // executa a operacao a ser testada
         categoriaRepository.save(categoria);

@@ -2,8 +2,8 @@ package br.edu.ifrn.conta.persistencia;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.Dono;
-import static br.edu.ifrn.conta.persistencia.FabricaDominio.MAMAE;
-import static br.edu.ifrn.conta.persistencia.FabricaDominio.PAPAI;
+import static br.edu.ifrn.conta.persistencia.DonoFabrica.MAMAE;
+import static br.edu.ifrn.conta.persistencia.DonoFabrica.PAPAI;
 import javax.inject.Inject;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -21,7 +21,7 @@ public class DonoRepositoryIT extends AbstractTestNGSpringContextTests {
     private DonoRepository donoRepository;
     
     @Inject
-    private FabricaDominio dominioFactory;
+    private DonoFabrica donoFabrica;
     
     @BeforeMethod
     void deletarTodos()
@@ -36,8 +36,8 @@ public class DonoRepositoryIT extends AbstractTestNGSpringContextTests {
     
     public void findByDescricao() {
         // cria o ambiente de teste
-        Dono papai = dominioFactory.papai();
-        Dono mamae = dominioFactory.mamae();
+        Dono papai = donoFabrica.papai();
+        Dono mamae = donoFabrica.mamae();
         
         // executa a operacao a ser testada        
         // verifica o efeito da execucao da operacao a ser testada
@@ -47,8 +47,8 @@ public class DonoRepositoryIT extends AbstractTestNGSpringContextTests {
     
     public void countByDescricao() {
         // cria o ambiente de teste
-        dominioFactory.papai();
-        dominioFactory.mamae();
+        donoFabrica.papai();
+        donoFabrica.mamae();
         
         // executa a operacao a ser testada        
         // verifica o efeito da execucao da operacao a ser testada
@@ -57,7 +57,7 @@ public class DonoRepositoryIT extends AbstractTestNGSpringContextTests {
     
     public void deleteByDescricao () {
         // cria o ambiente de teste
-        dominioFactory.papai();
+        donoFabrica.papai();
         
         // executa a operacao a ser testada
         donoRepository.deleteByDescricao(PAPAI);

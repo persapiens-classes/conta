@@ -19,10 +19,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ValorInicialDoDonoNaContaPatrimonioRepositoryIT extends AbstractTestNGSpringContextTests {
     
     @Inject
-    private FabricaDominio dominioFactory;
+    private ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;
     
     @Inject
-    private ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;
+    private DonoFabrica donoFabrica;
+    
+    @Inject
+    private ValorInicialDoDonoNaContaPatrimonioFabrica valorInicialDoDonoNaContaPatrimonioFabrica;
+    
+    @Inject
+    private ContaPatrimonioFabrica contaPatrimonioFabrica;
     
     @BeforeMethod
     void deletarTodos()
@@ -37,12 +43,12 @@ public class ValorInicialDoDonoNaContaPatrimonioRepositoryIT extends AbstractTes
     
     public void findByDonoAndContaPatrimonio() {
         // cria o ambiente de teste        
-        Dono papai = dominioFactory.papai();
+        Dono papai = donoFabrica.papai();
                 
-        ContaPatrimonio contaPatrimonio = dominioFactory.poupanca();
+        ContaPatrimonio contaPatrimonio = contaPatrimonioFabrica.poupanca();
         
         ValorInicialDoDonoNaContaPatrimonio valorInicialDoDonoNaContaPatrimonio
-            = dominioFactory.valorInicialDoDonoNaContaPatrimonio(papai, contaPatrimonio, new BigDecimal(100));
+            = valorInicialDoDonoNaContaPatrimonioFabrica.valorInicialDoDonoNaContaPatrimonio(papai, contaPatrimonio, new BigDecimal(100));
         
         // executa a operacao a ser testada        
         // verifica o efeito da execucao da operacao a ser testada

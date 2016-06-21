@@ -21,7 +21,7 @@ public class ContaCreditoRepositoryIT extends AbstractTestNGSpringContextTests {
     private ContaCreditoRepository contaCreditoRepository;
     
     @Inject
-    private FabricaDominio dominioFactory;
+    private ContaCreditoFabrica contaCreditoFabrica;
     
     @BeforeMethod
     void deletarTodos()
@@ -36,10 +36,10 @@ public class ContaCreditoRepositoryIT extends AbstractTestNGSpringContextTests {
     
     public void findOneByExample () {
         // cria o ambiente de teste
-        ContaCredito contaCredito = dominioFactory.estagio();
+        ContaCredito contaCredito = contaCreditoFabrica.estagio();
 
         ContaCredito contaCreditoExemplo = ContaCredito.builder()
-            .categoria(Categoria.builder().descricao(FabricaDominio.SALARIO).build())
+            .categoria(Categoria.builder().descricao(CategoriaFabrica.SALARIO).build())
             .build();
                        
         // executa a operacao a ser testada

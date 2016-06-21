@@ -20,7 +20,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LancamentoRepositoryIT extends AbstractTestNGSpringContextTests {
     
     @Inject
-    private FabricaDominio dominioFactory;
+    private LancamentoFabrica lancamentoFabrica;
+    
+    @Inject
+    private DonoFabrica donoFabrica;
+    
+    @Inject
+    private ContaCreditoFabrica contaCreditoFabrica;
+    
+    @Inject
+    private ContaDebitoFabrica contaDebitoFabrica;
+    
+    @Inject
+    private ContaPatrimonioFabrica contaPatrimonioFabrica;
+    
+    @Inject
+    private ValorInicialDoDonoNaContaPatrimonioFabrica valorInicialDoDonoNaContaPatrimonioFabrica;
     
     @Inject
     private LancamentoRepository lancamentoRepository;
@@ -38,22 +53,22 @@ public class LancamentoRepositoryIT extends AbstractTestNGSpringContextTests {
     
     public void saldo800() {
         // cria o ambiente de teste
-        Dono papai = dominioFactory.papai();
+        Dono papai = donoFabrica.papai();
 
         ContaPatrimonio poupanca = 
-            dominioFactory.poupanca();
+            contaPatrimonioFabrica.poupanca();
 
         ContaDebito gasolina = 
-            dominioFactory.gasolina();
+            contaDebitoFabrica.gasolina();
 
         ContaCredito estagio = 
-            dominioFactory.estagio();
+            contaCreditoFabrica.estagio();
         
-        dominioFactory.valorInicialDoDonoNaContaPatrimonio(
+        valorInicialDoDonoNaContaPatrimonioFabrica.valorInicialDoDonoNaContaPatrimonio(
             papai, poupanca, new BigDecimal(1000));
         
-        dominioFactory.lancamento(papai, gasolina, poupanca, new BigDecimal(500));
-        dominioFactory.lancamento(papai, poupanca, estagio, new BigDecimal(300));
+        lancamentoFabrica.lancamento(papai, gasolina, poupanca, new BigDecimal(500));
+        lancamentoFabrica.lancamento(papai, poupanca, estagio, new BigDecimal(300));
         
         // executa a operacao a ser testada        
         // verifica o efeito da execucao da operacao a ser testada
