@@ -2,25 +2,29 @@ package br.edu.ifrn.conta.servico;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.ContaCredito;
-import br.edu.ifrn.conta.persistencia.FabricaDominio;
+import br.edu.ifrn.conta.persistencia.CategoriaFabrica;
+import br.edu.ifrn.conta.persistencia.ContaCreditoFabrica;
 import javax.inject.Inject;
-import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringApplicationConfiguration(classes = ContaApplication.class)
 @WebAppConfiguration
-@Test
+@Test(groups = "contaCredito", dependsOnGroups = "categoria")
 public class ContaCreditoServicoIT extends AbstractTestNGSpringContextTests {
 
     @Inject
     private ContaCreditoServico contaCreditoServico;
     
     @Inject
-    private FabricaDominio dominioFactory;
+    private ContaCreditoFabrica contaCreditoFabrica;
+    
+    @Inject
+    private CategoriaFabrica categoriaFabrica;
     
     @BeforeMethod
     void deletarTodos()
@@ -36,8 +40,8 @@ public class ContaCreditoServicoIT extends AbstractTestNGSpringContextTests {
     public void salvarUm () {
         // cria o ambiente de teste
         ContaCredito contaCredito = ContaCredito.builder()
-            .descricao(FabricaDominio.GASOLINA)
-            .categoria(dominioFactory.transporte())
+            .descricao(ContaCreditoFabrica.ESTAGIO)
+            .categoria(categoriaFabrica.salario())
             .build();
         
         // executa a operacao a ser testada
@@ -50,8 +54,8 @@ public class ContaCreditoServicoIT extends AbstractTestNGSpringContextTests {
     public void deletarUm () {
         // cria o ambiente de teste
         ContaCredito contaCredito = ContaCredito.builder()
-            .descricao(FabricaDominio.GASOLINA)
-            .categoria(dominioFactory.transporte())
+            .descricao(ContaCreditoFabrica.ESTAGIO)
+            .categoria(categoriaFabrica.salario())
             .build();
         contaCreditoServico.save(contaCredito);
         

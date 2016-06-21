@@ -2,18 +2,18 @@ package br.edu.ifrn.conta.servico;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.Dono;
-import br.edu.ifrn.conta.persistencia.FabricaDominio;
+import br.edu.ifrn.conta.persistencia.DonoFabrica;
 import javax.inject.Inject;
-import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeMethod;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringApplicationConfiguration(classes = ContaApplication.class)
 @WebAppConfiguration
-@Test
+@Test(groups = "dono")
 public class DonoServicoIT extends AbstractTestNGSpringContextTests {
 
     @Inject
@@ -32,7 +32,7 @@ public class DonoServicoIT extends AbstractTestNGSpringContextTests {
     
     public void salvarUm () {
         // cria o ambiente de teste
-        Dono dono = Dono.builder().descricao(FabricaDominio.PAPAI).build();
+        Dono dono = Dono.builder().descricao(DonoFabrica.PAPAI).build();
         
         // executa a operacao a ser testada
         donoServico.save(dono);
@@ -43,7 +43,7 @@ public class DonoServicoIT extends AbstractTestNGSpringContextTests {
     
     public void deletarUm () {
         // cria o ambiente de teste
-        Dono dono = Dono.builder().descricao(FabricaDominio.PAPAI).build();
+        Dono dono = Dono.builder().descricao(DonoFabrica.PAPAI).build();
         donoServico.save(dono);
         
         // executa a operacao a ser testada
