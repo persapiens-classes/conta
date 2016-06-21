@@ -7,5 +7,7 @@ import org.springframework.data.repository.CrudRepository;
  * Usando apenas CrudRepository
  */
 public interface CategoriaRepository extends CrudRepository<Categoria, Long> {
+    
+    Categoria findByDescricao(String descricao);
 
 }
