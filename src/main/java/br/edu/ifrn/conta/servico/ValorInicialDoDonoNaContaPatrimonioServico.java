@@ -4,5 +4,5 @@ import br.edu.ifrn.conta.dominio.ValorInicialDoDonoNaContaPatrimonio;
 import javax.inject.Named;
 
 @Named
-public class ValorInicialDoDonoNaContaPatrimonioServico extends AbstratoServico<ValorInicialDoDonoNaContaPatrimonio, Long> {
+public class ValorInicialDoDonoNaContaPatrimonioServico extends CrudServico<ValorInicialDoDonoNaContaPatrimonio, Long> {
 }

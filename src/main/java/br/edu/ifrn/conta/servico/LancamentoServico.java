@@ -13,7 +13,7 @@ import javax.inject.Named;
 import org.springframework.transaction.annotation.Transactional;
 
 @Named
-public class LancamentoServico extends AbstratoServico<Lancamento, Long> {
+public class LancamentoServico extends CrudServico<Lancamento, Long> {
     private LancamentoRepository lancamentoRepository;
     
     @Inject
@@ -27,10 +27,10 @@ public class LancamentoServico extends AbstratoServico<Lancamento, Long> {
     }    
 
     @Override
-    public void save(Lancamento objeto) {
+    public Lancamento save(Lancamento objeto) {
         objeto.verificarAtributos();
         
-        super.save(objeto);
+        return super.save(objeto);
     }
     
     @Transactional

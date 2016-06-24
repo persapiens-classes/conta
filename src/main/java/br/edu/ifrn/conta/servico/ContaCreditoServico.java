@@ -4,5 +4,5 @@ import br.edu.ifrn.conta.dominio.ContaCredito;
 import javax.inject.Named;
 
 @Named
-public class ContaCreditoServico extends AbstratoServico<ContaCredito, Long> {
+public class ContaCreditoServico extends CrudServico<ContaCredito, Long> {
 }
