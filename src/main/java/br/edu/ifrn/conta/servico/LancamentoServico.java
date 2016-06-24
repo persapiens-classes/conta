@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.springframework.transaction.annotation.Transactional;
 
 @Named
 public class LancamentoServico extends AbstratoServico<Lancamento, Long> {
@@ -32,6 +33,7 @@ public class LancamentoServico extends AbstratoServico<Lancamento, Long> {
         super.save(objeto);
     }
     
+    @Transactional
     public void transferir(BigDecimal valor
         , Dono donoDebito, ContaDebito contaDebito, ContaPatrimonio contaPatrimonioADebitar
         , Dono donoCredito, ContaPatrimonio contaPatrimonioACreditar, ContaCredito contaCredito) {
