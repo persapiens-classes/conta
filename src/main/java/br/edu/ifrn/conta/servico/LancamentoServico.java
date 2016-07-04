@@ -27,6 +27,7 @@ public class LancamentoServico extends CrudServico<Lancamento, Long> {
     }    
 
     @Override
+    @Transactional
     public Lancamento save(Lancamento objeto) {
         objeto.verificarAtributos();
         
