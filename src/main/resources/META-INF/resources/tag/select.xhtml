@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:m="http://ifrn.edu.br/conta" >
+
+    <c:set var="id" value="${empty id ? fn:replace(label,' ', '_') : id}" />
+    <c:set var="rendered" value="#{empty rendered ? true : rendered}" />
+    <c:set var="required" value="#{empty required ? false : required}" />
+    <c:set var="requiredMessage" value="#{empty requiredMessage ? 'o campo é obrigatório.' : requiredMessage}" />
+    <c:set var="disabled" value="#{empty disabled ? false : disabled}" />
+    <c:set var="temVazio" value="#{empty temVazio ? true : temVazio}" />    
+    <c:set var="styleClass" value="#{empty styleClass ? '' : styleClass}" />
+    <c:set var="style" value="#{empty style ? '' : style}" />
+    <c:set var="labelStyleClass" value="#{empty labelStyleClass ? '' : labelStyleClass}" />
+    <c:set var="labelStyle" value="#{empty labelStyle ? '' : labelStyle}" />
+    <c:set var="converter" value="#{empty converter ? options.listConverter : converter}" />
+    <c:set var="disabledAjaxUpdate" value="#{empty update ? true : false}" />
+    <c:set var="process" value="#{empty process ? '@this': process}" />
+
+    <ui:include src="label.xhtml" >
+    	<ui:param name="id" value="input_#{id}" />
+        <ui:param name="labelStyleClass" value="#{labelStyleClass}" />
+        <ui:param name="labelStyle" value="#{labelStyle}" />
+    </ui:include>
+    
+    <p:selectOneMenu id="input_#{id}_selectVazio" value="#{value}" required="#{required}" requiredMessage="#{label}: #{requiredMessage}"
+                     rendered="#{temVazio and rendered}" converter="#{converter}" disabled="#{disabled}"
+                     style="#{style}" styleClass="#{styleClass}" >
+        <f:selectItem itemLabel=""/>
+        <f:selectItems value="#{options.list}" var="item" itemLabel="#{options.label(item)}" itemValue="#{item}"/>
+        <p:ajax disabled="#{disabledAjaxUpdate}" update="#{update}" process="#{process}"
+                event="change" />
+    </p:selectOneMenu>
+    <p:selectOneMenu id="input_#{id}_select" value="#{value}" required="#{required}" requiredMessage="#{label}: #{requiredMessage}"
+                     rendered="#{not temVazio and rendered}" converter="#{converter}" disabled="#{disabled}" 
+                     style="#{style}" styleClass="#{styleClass}" >
+        <f:selectItems value="#{options.list}" var="item" itemLabel="#{options.label(item)}" itemValue="#{item}" />
+        <p:ajax disabled="#{disabledAjaxUpdate}" update="#{update}" process="#{process}"
+                event="change" />
+    </p:selectOneMenu>
+
+    
+</ui:composition>

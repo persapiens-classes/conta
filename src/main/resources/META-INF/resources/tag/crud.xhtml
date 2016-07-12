@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:m="http://ifrn.edu.br/conta"
+                >
+    <m:contentLayout title="#{title}">
+
+        <ui:define name="afterTitle">
+
+            <c:set var="showInsert"          value="#{empty showInsert ? true : showInsert}" />
+            <c:set var="showList"            value="#{empty showList ? true : showList}" />
+
+            <p:focus context="startInsertCommandButton" id="focusInsertCommandButton"/>
+            
+            <span style="float:left;">
+                <p:commandButton
+                    rendered="#{(managedBean.visualizationMode == 'LIST') and showInsert}" id="startInsertCommandButton"
+                    title="Incluir" icon="ui-icon-plusthick"
+                    style="padding: 4px 4px 4px 4px; width: 38px;"
+                    action="#{managedBean.startInsertAction}"
+                    process="@this"
+                    value="" 
+                    accesskey="i"
+                    update="@form" ajax="true">
+                </p:commandButton>
+            </span>
+
+            <ui:insert name="middleTitle"></ui:insert>
+
+            <c:set var="dataExporterEncoding" value="#{empty dataExporterEncoding ? 'iso-8859-1' : dataExporterEncoding}" />
+
+            <span style="float:right;padding-right: 20px;">
+                <h:commandLink title="excel" rendered="#{(managedBean.visualizationMode == 'LIST') and showList}">  
+                    <p:graphicImage value="#{resource['images/excel.png']}" width="23px"/>  
+                    <p:dataExporter type="xls" target="datatable" fileName="planilha" encoding="#{dataExporterEncoding}" postProcessor="#{managedBean.postProcessXLS}" />  
+                </h:commandLink>
+
+                <h:commandLink title="pdf" rendered="#{(managedBean.visualizationMode == 'LIST') and showList}">  
+                    <p:graphicImage value="#{resource['images/pdf.png']}" width="23px"/>  
+                    <p:dataExporter type="pdf" target="datatable" fileName="planilha" encoding="#{dataExporterEncoding}" preProcessor="#{managedBean.preProcessPDF}"/>  
+                </h:commandLink>  
+
+                <h:commandLink title="csv" rendered="#{(managedBean.visualizationMode == 'LIST') and showList}">  
+                    <p:graphicImage value="#{resource['images/csv.png']}" width="23px"/>  
+                    <p:dataExporter type="csv" target="datatable" fileName="planilha" encoding="#{dataExporterEncoding}" />  
+                </h:commandLink>  
+
+                <p:spacer width="20" height="10"/>
+
+                <h:commandLink id="lnk">  
+                    <p:printer target="layout" />  
+                    <p:graphicImage value="#{resource['images/print.png']}" style="padding-top: 3px;"/>  
+                </h:commandLink>  
+            </span>
+        </ui:define>
+
+        <ui:define name="layoutContent" >
+
+            <c:set var="showList"                     value="#{empty showList ? true : showList}" />
+            <c:set var="showActionLinksColumn"        value="#{empty showActionLinksColumn ? true : showActionLinksColumn}" />
+            <c:set var="showUpdateActionLink"         value="#{empty showUpdateActionLink ? true : showUpdateActionLink}" />
+            <c:set var="showDetailActionLink"         value="#{empty showDetailActionLink ? true : showDetailActionLink}" />
+            <c:set var="showDeleteActionLink"         value="#{empty showDeleteActionLink ? false : showDeleteActionLink}" />
+            <c:set var="showButtonsAtDetailMode"      value="#{empty showButtonsAtDetailMode ? true : showButtonsAtDetailMode}" />
+            <c:set var="listActionLinksStyleClass"    value="#{empty listActionLinksStyleClass ? ( (showUpdateActionLink and showDetailActionLink and showDeleteActionLink) ? 'listActionLinksStyleClassThree' : ((showUpdateActionLink and showDetailActionLink) or (showUpdateActionLink and showDeleteActionLink) or (showDetailActionLink and showDeleteActionLink) ? 'listActionLinksStyleClassTwo' : 'listActionLinksStyleClassOne')) : listActionLinksStyleClass}" />
+            <c:set var="visualizationModeAfterInsert" value="#{empty visualizationModeAfterInsert ? managedBean.visualizationModeAfterInsert : visualizationModeAfterInsert}" />
+            <c:set var="visualizationModeAfterUpdate" value="#{empty visualizationModeAfterUpdate ? managedBean.visualizationModeAfterUpdate : visualizationModeAfterUpdate}" />
+            <c:set var="visualizationModeAfterDelete" value="#{empty visualizationModeAfterDelete ? managedBean.visualizationModeAfterDelete : visualizationModeAfterDelete}" />
+            <c:set var="dataTableRows"                value="#{empty dataTableRows ? 10 : dataTableRows}" />
+            <c:set var="dataTableRowsPerPageTemplate" value="#{empty dataTableRowsPerPageTemplate ? '10,20,50' : dataTableRowsPerPageTemplate}" />
+            <c:set var="dataTableStyle" 			  value="#{empty dataTableStyle ? '' : dataTableStyle}" />
+            <c:set var="insertButtonLabel"            value="#{empty insertButtonLabel ? 'Incluir' : insertButtonLabel}" />
+            <c:set var="updateButtonLabel"            value="#{empty updateButtonLabel ? 'Salvar' : updateButtonLabel}" />
+
+            <p:messages id="messages" showDetail="true" showSummary="false" escape="false"/>
+
+            <p:outputPanel id="listPanel" rendered="#{managedBean.visualizationMode == 'LIST' and showList}" >
+                <ui:insert name="listBeforeDatatable"></ui:insert>                
+                
+                <p:dataTable id="datatable" var="bean"
+                			 style="#{dataTableStyle}"
+                             rows="#{dataTableRows}"
+                             paginator="true"
+                             rowsPerPageTemplate="#{dataTableRowsPerPageTemplate}"
+                             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+                             paginatorPosition="bottom"
+                             currentPageReportTemplate="{startRecord} a {endRecord} em {totalRecords} registro(s). {totalPages} página(s)."
+                             value="#{managedBean.beanList}"
+                             filteredValue="#{managedBean.filteredBeanList}"
+                             emptyMessage="Sem Registros"
+                             rowStyleClass="#{dataTableRowStyleClass}"
+                             lazy="#{dataTableLazy}"  
+                             selection="#{selection}"
+                             >
+                    <p:ajax event="sort" oncomplete="applyStyleLine()" />
+                    <p:ajax event="filter" oncomplete="applyStyleLine()" />
+                    <p:ajax event="page" oncomplete="applyStyleLine()" />
+                    
+                    <ui:insert name="listColumns"></ui:insert>                
+
+                    <p:column headerText="Ações" styleClass="#{listActionLinksStyleClass}" rendered="#{showActionLinksColumn}" exportable="false">
+                        <ui:insert name="listActionLinks"></ui:insert>
+
+                        <p:commandLink
+                            title="Remover"
+                            rendered="#{showDeleteActionLink and !managedBean.alarmOnDelete(bean)}"
+                            action="#{managedBean.deleteAction(visualizationModeAfterDelete)}"
+                            value=" " styleClass="ui-icon ui-icon-trash"
+                            update="@form" ajax="true"
+                            process="@this"
+                            disabled="#{!managedBean.isCheckBeforeDelete(bean)}">
+                            <f:setPropertyActionListener
+                                target="#{managedBean.bean}"
+                                value="#{bean}" />
+                        </p:commandLink>
+
+                        <p:commandLink
+                            title="Remover"
+                            rendered="#{showDeleteActionLink and managedBean.alarmOnDelete(bean)}"
+                            oncomplete="PF('confirmationDelete').show()"
+                            value=" " styleClass="ui-icon ui-icon-trash"
+                            process="@this"
+                            disabled="#{!managedBean.isCheckBeforeDelete(bean)}">
+                            <f:setPropertyActionListener
+                                target="#{managedBean.bean}"
+                                value="#{bean}" />                        
+                        </p:commandLink>
+
+                        <p:commandLink
+                            title="Alterar"
+                            action="#{managedBean.startUpdateAction}"
+                            rendered="#{showUpdateActionLink}"
+                            disabled="#{not managedBean.isCheckStartUpdate(bean)}"
+                            value=" " styleClass="ui-icon ui-icon-pencil"
+                            process="@this"
+                            update="@form" ajax="true">
+                            <f:setPropertyActionListener
+                                target="#{managedBean.bean}"
+                                value="#{bean}" />
+                        </p:commandLink>
+
+                        <p:commandLink
+                            title="Visualizar"
+                            action="#{managedBean.startDetailAction}"
+                            rendered="#{showDetailActionLink}"
+                            disabled="#{not managedBean.isDetailable(bean)}" 
+                            value=" " styleClass="ui-icon ui-icon-search"
+                            process="@this"
+                            update="@form" ajax="true">
+                            <f:setPropertyActionListener
+                                target="#{managedBean.bean}"
+                                value="#{bean}" />
+                        </p:commandLink>
+                    </p:column>
+                </p:dataTable>
+                
+                <ui:insert name="listAfterDatatable"></ui:insert>                
+                
+            </p:outputPanel>
+
+            <p:focus context="insertPanel" id="focusInsert"/>
+
+            <c:set var="showInsert" value="#{empty showInsert ? managedBean.isCheckStartInsert(managedBean.bean) : (showInsert and managedBean.isCheckStartInsert(managedBean.bean))}" />
+
+            <p:panel id="insertPanel" rendered="#{managedBean.visualizationMode == 'INSERT' and showInsert}" 
+                     style="padding: 10px 10px 10px 10px !important">
+                <ui:insert name="insert"></ui:insert>
+
+                <br />
+                
+                <p:outputPanel rendered="#{showInsert}">
+                    <p:commandButton 
+                        title="#{insertButtonLabel}" value="#{insertButtonLabel}" 
+                        update="@form" ajax="true"
+                        process=":contentForm:insertPanel :contentForm:messages"
+                        accesskey="i"                        
+                        action="#{managedBean.insertAction(visualizationModeAfterInsert)}" 
+                        disabled="#{managedBean.disabledInsertButton}" 
+                    />
+
+                    <p:spacer width="10px"/>
+
+                    <p:commandButton
+                        title="Cancelar" value="Cancelar" 
+                        update="@form" ajax="true"
+                        process="@this"
+                        accesskey="c"
+                        action="#{managedBean.cancelInsertAction}"                        
+                        immediate="true"
+                        />
+                </p:outputPanel>
+            </p:panel>
+            
+            <p:focus context="updatePanel" id="focusUpdate"/>
+            
+            <p:panel id="updatePanel" rendered="#{managedBean.visualizationMode == 'UPDATE' and managedBean.isCheckStartUpdate(managedBean.bean)}" 
+                     style="padding: 10px 10px 10px 10px !important">
+                <ui:insert name="update"></ui:insert>
+
+                <br />
+
+                <p:outputPanel rendered="#{managedBean.isCheckStartUpdate(managedBean.bean)}">
+                    <p:commandButton 
+                        title="#{updateButtonLabel}" value="#{updateButtonLabel}" 
+                        update="@form" ajax="true"
+                        process=":contentForm:updatePanel :contentForm:messages"
+                        accesskey="a"
+                        action="#{managedBean.updateAction(visualizationModeAfterUpdate)}"
+                        disabled="#{managedBean.disabledUpdateButton}" 
+                    />
+
+                    <p:spacer width="10px"/>
+
+                    <p:commandButton
+                        title="Cancelar" value="Cancelar" 
+                        update="@form" ajax="true"
+                        process="@this"
+                        accesskey="c"
+                        action="#{managedBean.cancelUpdateAction}"                        
+                        immediate="true"
+                        />
+                </p:outputPanel>
+
+            </p:panel>
+
+            <p:panel id="detailPanel" rendered="#{managedBean.visualizationMode == 'DETAIL' and (managedBean.isDetailable(managedBean.bean))}" 
+                     style="padding: 10px 10px 10px 10px !important">
+                <ui:insert name="detail"></ui:insert>
+
+                <br />
+                <p:outputPanel rendered="#{showButtonsAtDetailMode}">
+                    <p:commandButton title="Ok" value="Ok" 
+                                     update="@form"
+                                     ajax="true"
+                                     process="@this"
+                                     accesskey="o"
+                                     action="#{managedBean.detailAction}" />
+
+                    <p:spacer width="10px"/>
+
+                    <p:commandButton title="Alterar" value="Alterar" 
+                                     accesskey="a"
+                                     update="@form"
+                                     ajax="true"
+                                     process="@this"
+                                     rendered="#{managedBean.isCheckStartUpdate(managedBean.bean)}"
+                                     action="#{managedBean.startUpdateAction}" />
+                </p:outputPanel>
+            </p:panel>
+
+            <ui:insert name="custom"></ui:insert>
+            
+            <p:confirmDialog id="confirmDialogDelete"
+                message="#{managedBean.deleteAlertMessage(bean)}"
+                rendered="#{showDeleteActionLink}"
+                header="Ativação" severity="alert"
+                widgetVar="confirmationDelete">
+                <br />
+                
+                <p:commandButton id="confirmDelete" value="Sim"
+                    update=":contentForm:contentLayoutPanel"
+                    process="@this"
+                    oncomplete="PF('confirmationDelete').hide()"
+                    action="#{managedBean.deleteAction(visualizationModeAfterDelete)}"
+                    ajax="true" >
+                </p:commandButton>
+                
+                <p:commandButton id="declineDelete" value="Não"
+                    onclick="PF('confirmationDelete').hide()"
+                    type="button" />
+            </p:confirmDialog>
+        </ui:define>
+    </m:contentLayout>
+</ui:composition>

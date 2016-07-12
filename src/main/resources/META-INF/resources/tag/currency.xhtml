@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:m="http://ifrn.edu.br/conta">
+
+	<c:set var="id" value="${empty id ? fn:replace(label,' ', '_') : id}" />
+	<c:set var="rendered" value="#{empty rendered ? true : rendered}" />
+	<c:set var="required" value="#{empty required ? false : required}" />
+	<c:set var="requiredMessage" value="#{empty requiredMessage ? 'o campo é obrigatório.' : requiredMessage}" />
+	<c:set var="readonly" value="#{empty readonly ? false : readonly}" />
+	<c:set var="disabled" value="#{empty disabled ? false : disabled}" />
+	<c:set var="styleClass" value="#{empty styleClass ? '' : styleClass}" />
+	<c:set var="style" value="#{empty style ? '' : style}" />
+	<c:set var="labelStyleClass" value="#{empty labelStyleClass ? '' : labelStyleClass}" />
+	<c:set var="labelStyle" value="#{empty labelStyle ? '' : labelStyle}" />
+	<c:set var="currencySymbol" value="#{empty currencySymbol ? 'R$' : currencySymbol}" />
+	<c:set var="precision" value="#{empty precision ? 2 : precision}" />
+	<c:set var="allowNegative" value="#{empty allowNegative ? false : allowNegative}" />
+	<c:set var="showSymbol" value="#{empty showSymbol ? true : showSymbol}" />
+	<c:set var="showSymbolInsideInput" value="#{empty showSymbolInsideInput ? false : showSymbolInsideInput}" />
+	<c:set var="removeReadonlyPanel" value="#{empty removeReadonlyPanel ? false : removeReadonlyPanel}" />
+	<c:set var="disabledAjaxUpdate" value="#{empty update ? true : false}" />
+    <c:set var="process" value="#{empty process ? '@this': process}" />
+    <c:set var="allowZero" value="#{empty allowZero ? true : false}" />
+
+	<c:if test="#{showSymbolInsideInput}">
+		<c:set var="symbol" value="#{currencySymbol} " />
+	</c:if>
+
+	<c:if test="#{not empty label}">
+		<c:if test="#{readonly}">
+			<c:set var="label" value="#{label}" />
+		</c:if>
+		<c:if test="#{showSymbol and not readonly}">
+			<c:set var="label" value="#{label} (#{currencySymbol})" />
+		</c:if>
+	</c:if>
+
+	<ui:include src="label.xhtml">
+		<ui:param name="id" value="label_id_#{readonly}_#{id}" />
+		<ui:param name="labelStyleClass" value="#{labelStyleClass}" />
+		<ui:param name="labelStyle" value="#{labelStyle}" />
+	</ui:include>
+
+	<p:inputText id="input_currency#{readonly}_#{id}" value="#{value}" requiredMessage="#{label}: #{requiredMessage}" 
+                 rendered="#{not readonly and rendered}"
+                 required="#{required}" style="#{style}" styleClass="#{styleClass} input_currency#{id}"
+                 onfocus="applyMaskNumber('.input_currency#{id}', '#{symbol}', #{allowNegative}, #{precision}, #{allowZero})"
+                 onclick="applyMaskNumber('.input_currency#{id}', '#{symbol}', #{allowNegative}, #{precision}, #{allowZero})">
+		<p:ajax disabled="#{disabledAjaxUpdate}" update="#{update}" process="#{process}" 
+                event="blur" />
+		<f:convertNumber maxFractionDigits="#{precision}" minFractionDigits="#{precision}" />
+	</p:inputText>
+
+	<p:outputPanel rendered="#{not removeReadonlyPanel and readonly and rendered}">
+		<p:outputLabel rendered="#{showSymbol and readonly and rendered}" id="output_currency#{id}_symbol_withOutputPanel" value="#{currencySymbol} " />
+		<h:outputText id="output_currency#{readonly}_#{id}_withOutputPanel" value="#{value}" style="#{style}" styleClass="#{styleClass}"
+			rendered="#{readonly and rendered}">
+			<f:convertNumber maxFractionDigits="#{precision}" minFractionDigits="#{precision}" />
+		</h:outputText>
+	</p:outputPanel>
+
+	<p:outputLabel rendered="#{showSymbol and readonly and rendered and removeReadonlyPanel}" id="output_currency#{id}_symbol" value="#{currencySymbol} " />
+	<h:outputText id="output_currency#{readonly}_#{id}" value="#{value}" style="#{style}" styleClass="#{styleClass}"
+		rendered="#{readonly and rendered and removeReadonlyPanel}">
+		<f:convertNumber maxFractionDigits="#{precision}" minFractionDigits="#{precision}" />
+	</h:outputText>
+
+</ui:composition>
