@@ -13,6 +13,7 @@ spring:
   jpa:
     hibernate:
       naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+      ddl-auto: update
     show-sql: true
 jsf:
   primefaces:
