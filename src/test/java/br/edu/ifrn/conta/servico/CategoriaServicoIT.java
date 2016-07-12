@@ -1,14 +1,34 @@
+/*
+ * Copyright 2016-2016 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package br.edu.ifrn.conta.servico;
+
+import javax.inject.Inject;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.Categoria;
 import br.edu.ifrn.conta.persistencia.CategoriaFabrica;
-import javax.inject.Inject;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeMethod;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringApplicationConfiguration(classes = ContaApplication.class)
@@ -16,41 +36,40 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Test(groups = "categoria")
 public class CategoriaServicoIT extends AbstractTestNGSpringContextTests {
 
-    @Inject
-    private CategoriaServico categoriaServico;
-    
-    @BeforeMethod
-    void deletarTodos()
-    {
-        categoriaServico.deleteAll();
-        assertThat(categoriaServico.findAll()).isEmpty();
-    }
-    
-    public void repositorioNaoEhNulo () {
-        assertThat(categoriaServico).isNotNull();
-    }
-    
-    public void salvarUm () {
-        // cria o ambiente de teste
-        Categoria categoria = Categoria.builder().descricao(CategoriaFabrica.TRANSPORTE).build();
-        
-        // executa a operacao a ser testada
-        categoriaServico.save(categoria);
-        
-        // verifica o efeito da execucao da operacao a ser testada
-        assertThat(categoriaServico.findAll().iterator().next()).isEqualTo(categoria);
-    }
-    
-    public void deletarUm () {
-        // cria o ambiente de teste
-        Categoria categoria = Categoria.builder().descricao(CategoriaFabrica.TRANSPORTE).build();
-        categoriaServico.save(categoria);
-        
-        // executa a operacao a ser testada
-        categoriaServico.delete(categoria);
-        
-        // verifica o efeito da execucao da operacao a ser testada
-        assertThat(categoriaServico.findAll().iterator().hasNext()).isFalse();
-    }
-    
+	@Inject
+	private CategoriaServico categoriaServico;
+
+	@BeforeMethod
+	void deletarTodos() {
+		this.categoriaServico.deleteAll();
+		assertThat(this.categoriaServico.findAll()).isEmpty();
+	}
+
+	public void repositorioNaoEhNulo() {
+		assertThat(this.categoriaServico).isNotNull();
+	}
+
+	public void salvarUm() {
+		// cria o ambiente de teste
+		Categoria categoria = Categoria.builder().descricao(CategoriaFabrica.TRANSPORTE).build();
+
+		// executa a operacao a ser testada
+		this.categoriaServico.save(categoria);
+
+		// verifica o efeito da execucao da operacao a ser testada
+		assertThat(this.categoriaServico.findAll().iterator().next()).isEqualTo(categoria);
+	}
+
+	public void deletarUm() {
+		// cria o ambiente de teste
+		Categoria categoria = Categoria.builder().descricao(CategoriaFabrica.TRANSPORTE).build();
+		this.categoriaServico.save(categoria);
+
+		// executa a operacao a ser testada
+		this.categoriaServico.delete(categoria);
+
+		// verifica o efeito da execucao da operacao a ser testada
+		assertThat(this.categoriaServico.findAll().iterator().hasNext()).isFalse();
+	}
+
 }
