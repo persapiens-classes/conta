@@ -16,14 +16,18 @@
 
 package br.edu.ifrn.conta.servico;
 
+import java.io.Serializable;
+
 import javax.inject.Named;
 
-import br.edu.ifrn.conta.dominio.ContaCredito;
+import br.edu.ifrn.conta.dominio.Conta;
 
 /**
- * Servico de ContaCredito.
+ * Servico de Conta.
+ * @param <T> tipo da conta
+ * @param <ID> tipo do id da conta
  * @author Marcelo Fernandes
  */
 @Named
-public class ContaCreditoServico extends ContaServico<ContaCredito, Long> {
+public class ContaServico<T extends Conta, ID extends Serializable> extends CrudServico<T, ID> {
 }
