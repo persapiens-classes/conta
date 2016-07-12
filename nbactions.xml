@@ -57,7 +57,7 @@
             <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
         </goals>
         <properties>
-            <exec.args>-classpath %classpath br.edu.ifrn.conta.ContaApplication</exec.args>
+            <exec.args>-Duser.country=BR -Duser.language=pt_BR -classpath %classpath br.edu.ifrn.conta.ContaApplication</exec.args>
             <exec.executable>java</exec.executable>
         </properties>
     </action>
@@ -71,7 +71,7 @@
             <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
         </goals>
         <properties>
-            <exec.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -classpath %classpath br.edu.ifrn.conta.ContaApplication</exec.args>
+            <exec.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -Duser.country=BR -Duser.language=pt_BR -classpath %classpath br.edu.ifrn.conta.ContaApplication</exec.args>
             <exec.executable>java</exec.executable>
             <jpda.listen>true</jpda.listen>
         </properties>
@@ -86,7 +86,7 @@
             <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
         </goals>
         <properties>
-            <exec.args>-classpath %classpath br.edu.ifrn.conta.ContaApplication</exec.args>
+            <exec.args>-Duser.country=BR -Duser.language=pt_BR -classpath %classpath br.edu.ifrn.conta.ContaApplication</exec.args>
             <exec.executable>java</exec.executable>
         </properties>
     </action>
@@ -116,6 +116,33 @@
         </properties>
         <activatedProfiles>
             <activatedProfile>attach-integration-test</activatedProfile>
+        </activatedProfiles>
+    </action>
+    <action>
+        <actionName>CUSTOM-attach-test-source-javadoc</actionName>
+        <displayName>test-source-javadoc</displayName>
+        <goals>
+            <goal>clean</goal>
+            <goal>verify</goal>
+        </goals>
+        <activatedProfiles>
+            <activatedProfile>attach-test-jar</activatedProfile>
+            <activatedProfile>attach-source</activatedProfile>
+            <activatedProfile>attach-javadoc</activatedProfile>
+        </activatedProfiles>
+    </action>
+    <action>
+        <actionName>CUSTOM-checkstyle-pmd-cpd-cycles-findbugs</actionName>
+        <displayName>checkstyle-pmd-cpd-cycles-findbugs</displayName>
+        <goals>
+            <goal>clean</goal>
+            <goal>verify</goal>
+        </goals>
+        <activatedProfiles>
+            <activatedProfile>check-checkstyle</activatedProfile>
+            <activatedProfile>check-cycles</activatedProfile>
+            <activatedProfile>check-pmd-cpd</activatedProfile>
+            <activatedProfile>check-findbugs</activatedProfile>
         </activatedProfiles>
     </action>
 </actions>
