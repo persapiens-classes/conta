@@ -140,10 +140,18 @@
                 <artifactId>cobertura-maven-plugin</artifactId>
                 <configuration>
                     <instrumentation>
+                        <ignores>
+                            <ignore>br.edu.ifrn.conta.dominio.Q*</ignore>
+                        </ignores>
                         <excludes>
                             <exclude>br/edu/ifrn/conta/dominio/QCategoria.class</exclude>
-                            <exclude>br/edu/ifrn/conta/dominio/QDono.class</exclude>
+                            <exclude>br/edu/ifrn/conta/dominio/QConta.class</exclude>
+                            <exclude>br/edu/ifrn/conta/dominio/QContaCredito.class</exclude>
+                            <exclude>br/edu/ifrn/conta/dominio/QContaDebito.class</exclude>
                             <exclude>br/edu/ifrn/conta/dominio/QContaPatrimonio.class</exclude>
+                            <exclude>br/edu/ifrn/conta/dominio/QDono.class</exclude>
+                            <exclude>br/edu/ifrn/conta/dominio/QLancamento.class</exclude>
+                            <exclude>br/edu/ifrn/conta/dominio/QValorInicialDoDonoNaContaPatrimonio.class</exclude>
                         </excludes>
                     </instrumentation>
                 </configuration>            
