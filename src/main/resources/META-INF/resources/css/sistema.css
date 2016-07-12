@@ -1,0 +1,245 @@
+#contentLayoutPanel {
+    padding: 0 !important;
+}
+
+#contentLayoutPanel_content{    
+ padding: 0 !important;       
+}
+/* ------------------ */
+
+body {
+    margin: 0px;
+    padding: 0;
+    font-size: 12px !important;
+    color: #616161;
+    font-family: Verdana, Arial, sans-serif !important;
+}
+
+h1, h2, h3 {
+    margin-top: 0;
+}
+
+h1 {
+    font-size: 1.6em;
+    font-weight: normal;
+}
+
+h2 {
+    margin-top: 10px;
+    font-size: 1.6em;
+}
+
+h4 {
+    margin-top:-10px;
+}
+
+.ui-widget {
+    font-size: 98%;
+    font-family: inherit !important;
+}
+
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+    font-family: inherit !important;
+    font-size: 1em;
+}
+
+
+/* body > header */
+
+#header {
+    width: 100%;
+    height: 75px;
+    margin: 0 auto;
+    padding: 0px 0px 0px 0px;
+}
+
+#header a {
+    border: none;
+    text-decoration: none;
+    color: #DC8700;
+}
+
+/* body > header > logo*/
+
+#logo {
+    float:left;
+    position: absolute;
+    top: 0px;
+}
+
+/* body > menu */
+#menu {
+    width: auto;
+    margin: 3px;
+    padding: 0;
+}
+
+#menu ul {
+    margin: 0;
+    padding-left: 0px;
+    list-style: none;
+}
+
+#menu li {
+    display: inline;
+}
+
+#menu li a {
+    display: block;
+    float: left;
+    margin: 0;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+#menu li a:hover {
+    text-decoration: underline;
+}
+
+/* body > contentForm > page */
+
+#page {
+    width: auto;
+    margin: 0 3px;
+    background: #FFFFFF;
+    padding: 0px;
+}
+
+#page table{
+	font-size: 12px !important;
+	font-family: Arial, Helvetica, sans-serif !important;
+}
+
+/* body > contentForm > page > layout > tituloAtividade > title */
+
+.title {
+    height: 30px;
+    margin-left: 0px;
+    margin-bottom: 3px;
+    padding: 8px 0 0 10px;
+    text-align: center;
+}
+
+.title a {
+    border-bottom: none;
+    color: #FFFFFF;
+}
+
+.title a:hover {
+    border-bottom: 1px dotted #000000;
+}
+
+/* body > footer */
+
+#footer {
+    width: auto;
+    margin: 0 3px;
+    padding: 0px;
+}
+
+#footer .link {
+    float: right;
+    padding-top: 10px;
+    padding-right: 5px;
+    color: black;
+}
+
+#footer .copyright {
+    float: left;
+    padding-top: 10px;
+    text-decoration: underline !important;
+}
+
+/* classe para deixar texto com fonte vermelha (registros inativos) */
+.red {
+    color: red !important;
+}
+
+/* classe para a coluna do ativo */
+.ativoColumn {
+    width: 50px !important;
+}
+
+.listActionLinksStyleClassOne .ui-icon, .listActionLinksStyleClassTwo .ui-icon, .listActionLinksStyleClassThree .ui-icon, .listActionLinksStyleClassFour .ui-icon, .listActionLinksStyleClassFive .ui-icon, .listActionLinksStyleClassSix .ui-icon, .listActionLinksStyleClassSeven .ui-icon, .listActionLinksStyleClassEight .ui-icon {
+    float: left;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.listActionLinksStyleClassOne {
+    width: 35px !important;
+}
+
+.listActionLinksStyleClassTwo {
+    width: 45px !important;
+}
+
+.listActionLinksStyleClassThree {
+    width: 66px !important;
+}
+
+.listActionLinksStyleClassFour {
+    width: 85px !important;
+}
+
+.listActionLinksStyleClassFive {
+    width: 100px !important;
+}
+
+.listActionLinksStyleClassSix {
+    width: 120px !important;
+}
+
+.listActionLinksStyleClassSeven {
+    width: 140px !important;
+}
+
+.listActionLinksStyleClassEight {
+    width: 160px !important;
+}
+
+/* colocando a quebra de linha na tabela */
+.ui-datatable tbody td, .ui-datatable tfoot td {
+  white-space: normal !important;
+}
+
+.middleTitle {
+    float: left; 
+    width: 74%;
+}
+
+.input_mask_readonly{
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+    border: 0 none !important;
+    box-shadow: none !important;
+    color: #000 !important;
+    padding: 0 !important;
+}
+
+.input_textarea_readonly{
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+	color: #000 !important;
+	box-shadow: none !important;
+}
+
+.ui-datatable table {
+    table-layout: auto !important;
+}
+
+.ambienteExecucao {
+	position: absolute;
+	top: 20px;
+	color: red;
+	font-size: 40px;
+    text-align: center;
+    width: 100%;
+}
+
+.nomeSistema {
+	position: absolute;
+	top: 20px;
+	color: darkblue;
+	font-size: 50px;
+    text-align: left;
+    width: 100%;
+}
