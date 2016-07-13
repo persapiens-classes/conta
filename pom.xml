@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.github.persapiens</groupId>
         <artifactId>jsf-spring-boot-parent</artifactId>
-        <version>1.7.1</version>
+        <version>1.7.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -20,6 +20,12 @@
         
         <check.dir>src/checkconfig</check.dir>
         <pmd.excludeFromFailureFile>${check.dir}/pmd/pmd-exclude.properties</pmd.excludeFromFailureFile>
+        <cobertura.totalBranchRate>49</cobertura.totalBranchRate>
+        <cobertura.totalLineRate>41</cobertura.totalLineRate>
+        <cobertura.packageLineRate>4</cobertura.packageLineRate>
+        <cobertura.packageBranchRate>50</cobertura.packageBranchRate>
+        <cobertura.branchRate>0</cobertura.branchRate>
+        <cobertura.lineRate>0</cobertura.lineRate>
         
         <testng.version>6.9.12</testng.version>
         <juplo-maven-plugin.version>2.0.0</juplo-maven-plugin.version>        
