@@ -11,3 +11,23 @@ O aplicativo Conta é o projeto didático da [Disciplina Desenvolvimento de Sist
 Normalmente, a cada semana, o aplicativo é evoluído com a conclusão de uma milestone.
 
 As notas de aula utilizadas no desenvolvimento deste projeto estão [aqui](https://docente.ifrn.edu.br/marcelofernandes/disciplinas/desenvolvimento-de-sistemas-corporativos-dsc).
+
+### Execute o sistema localmente
+
+1- Clone o projeto
+```Shell
+git clone https://github.com/persapiens/jsf-spring-boot-starter-example.git
+```
+
+2- Construa a aplicação
+```Shell
+mvn clean install
+```
+
+3- Execute a aplicação
+```Shell
+java -jar target/conta-1.0-SNAPSHOT.jar
+```
+
+4- Acesse uma página em **http://localhost:8080/dono.jsf**
+
