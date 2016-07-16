@@ -20,7 +20,7 @@
         
         <pmd.excludeFromFailureFile>${check.dir}/pmd/pmd-exclude.properties</pmd.excludeFromFailureFile>
         <cobertura.totalLineRate>41</cobertura.totalLineRate>
-        <cobertura.totalBranchRate>49</cobertura.totalBranchRate>
+        <cobertura.totalBranchRate>48</cobertura.totalBranchRate>
         <cobertura.packageLineRate>4</cobertura.packageLineRate>
         <cobertura.packageBranchRate>50</cobertura.packageBranchRate>
         <cobertura.lineRate>0</cobertura.lineRate>
