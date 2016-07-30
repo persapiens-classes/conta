@@ -23,19 +23,17 @@ import br.edu.ifrn.conta.dominio.ContaCredito;
 import br.edu.ifrn.conta.persistencia.CategoriaFabrica;
 import br.edu.ifrn.conta.persistencia.ContaCreditoFabrica;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringApplicationConfiguration(classes = ContaApplication.class)
-@WebAppConfiguration
-@Test(groups = "contaCredito", dependsOnGroups = "categoria")
-public class ContaCreditoServicoIT extends AbstractTestNGSpringContextTests {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+public class ContaCreditoServicoIT {
 
 	@Inject
 	private ContaCreditoServico contaCreditoServico;
@@ -46,43 +44,33 @@ public class ContaCreditoServicoIT extends AbstractTestNGSpringContextTests {
 	@Inject
 	private CategoriaFabrica categoriaFabrica;
 
-	@BeforeMethod
-	void deletarTodos() {
-		this.contaCreditoServico.deleteAll();
-		assertThat(this.contaCreditoServico.findAll()).isEmpty();
-	}
-
+	@Test
 	public void repositorioNaoEhNulo() {
 		assertThat(this.contaCreditoServico).isNotNull();
 	}
 
+	@Test
 	public void salvarUm() {
 		// cria o ambiente de teste
-		ContaCredito contaCredito = ContaCredito.builder()
-			.descricao(ContaCreditoFabrica.ESTAGIO)
-			.categoria(this.categoriaFabrica.salario())
-			.build();
-
-		// executa a operacao a ser testada
-		this.contaCreditoServico.save(contaCredito);
+		ContaCredito contaCredito = this.contaCreditoFabrica.receitaComConjuge();
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.contaCreditoServico.findAll().iterator().next()).isEqualTo(contaCredito);
+		assertThat(this.contaCreditoServico.findOne(contaCredito.getId()))
+			.isEqualTo(contaCredito);
 	}
 
+	@Test
 	public void deletarUm() {
 		// cria o ambiente de teste
-		ContaCredito contaCredito = ContaCredito.builder()
-			.descricao(ContaCreditoFabrica.ESTAGIO)
-			.categoria(this.categoriaFabrica.salario())
-			.build();
-		this.contaCreditoServico.save(contaCredito);
+		ContaCredito contaCredito = this.contaCreditoFabrica.contaCredito(
+			"CONTA ÚNICA DO SERVICO IT", this.categoriaFabrica.banco());
 
 		// executa a operacao a ser testada
 		this.contaCreditoServico.delete(contaCredito);
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.contaCreditoServico.findAll().iterator().hasNext()).isFalse();
+		assertThat(this.contaCreditoServico.findOne(contaCredito.getId()))
+			.isNull();
 	}
 
 }

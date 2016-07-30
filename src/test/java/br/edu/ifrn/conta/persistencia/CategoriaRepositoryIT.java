@@ -21,19 +21,17 @@ import javax.inject.Inject;
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.Categoria;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringApplicationConfiguration(classes = ContaApplication.class)
-@WebAppConfiguration
-@Test(groups = "categoria")
-public class CategoriaRepositoryIT extends AbstractTestNGSpringContextTests {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+public class CategoriaRepositoryIT {
 
 	@Inject
 	private CategoriaRepository categoriaRepository;
@@ -41,36 +39,33 @@ public class CategoriaRepositoryIT extends AbstractTestNGSpringContextTests {
 	@Inject
 	private CategoriaFabrica categoriaFabrica;
 
-	@BeforeMethod
-	void deletarTodos() {
-		this.categoriaRepository.deleteAll();
-		assertThat(this.categoriaRepository.findAll()).isEmpty();
-	}
-
+	@Test
 	public void repositorioNaoEhNulo() {
-		assertThat(this.categoriaRepository).isNotNull();
+		assertThat(this.categoriaRepository)
+			.isNotNull();
 	}
 
+	@Test
 	public void deletarUm() {
 		// cria o ambiente de teste
-		Categoria categoria = this.categoriaFabrica.transporte();
+		Categoria categoria = this.categoriaFabrica.categoria("CATEGORIA UNICA");
 
 		// executa a operacao a ser testada
 		this.categoriaRepository.delete(categoria);
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.categoriaRepository.findOne(categoria.getId())).isNull();
+		assertThat(this.categoriaRepository.findOne(categoria.getId()))
+			.isNull();
 	}
 
+	@Test
 	public void salvarUm() {
-		// cria o ambiente de teste
-		Categoria categoria = Categoria.builder().descricao(CategoriaFabrica.TRANSPORTE).build();
-
 		// executa a operacao a ser testada
-		this.categoriaRepository.save(categoria);
+		Categoria categoria = this.categoriaFabrica.transporte();
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.categoriaRepository.findAll().iterator().next()).isEqualTo(categoria);
+		assertThat(categoria.getId())
+			.isNotNull();
 	}
 
 }

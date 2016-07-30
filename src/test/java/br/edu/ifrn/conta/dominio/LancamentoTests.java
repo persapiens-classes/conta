@@ -21,11 +21,10 @@ import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Test
 public class LancamentoTests {
 
 	private static final String PAPAI = "papai";
@@ -51,6 +50,7 @@ public class LancamentoTests {
 			.build();
 	}
 
+	@Test
 	public void donoValorDataContaEntradaContaSaidaIguaisComDescricaoDiferente() {
 		Date hoje = new Date();
 
@@ -60,6 +60,7 @@ public class LancamentoTests {
 		assertThat(lancamentoGasolina1).isEqualTo(lancamentoGasolina2);
 	}
 
+	@Test
 	public void donoValorDataContaEntradaContaSaidaDescricaoIguaisComValorDiferente() {
 		Date hoje = new Date();
 
@@ -69,6 +70,7 @@ public class LancamentoTests {
 		assertThat(lancamentoGasolina1).isNotEqualTo(lancamentoGasolina2);
 	}
 
+	@Test
 	public void compareToComDatasDiferentes() {
 		Set<Lancamento> lancamentos = new TreeSet<>();
 
@@ -80,6 +82,7 @@ public class LancamentoTests {
 		assertThat(lancamentos.iterator().next()).isEqualTo(lancamentoGasolina1);
 	}
 
+	@Test
 	public void compareToComValoresDiferentes() {
 		Date hoje = new Date();
 
@@ -93,6 +96,7 @@ public class LancamentoTests {
 		assertThat(lancamentos.iterator().next()).isEqualTo(lancamentoGasolina2);
 	}
 
+	@Test
 	public void compareToComDonosDiferentes() {
 		Date hoje = new Date();
 

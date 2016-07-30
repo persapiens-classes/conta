@@ -19,11 +19,10 @@ package br.edu.ifrn.conta.dominio;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Test
 public class ContaDebitoTests {
 
 	private static final String GASOLINA = "gasolina";
@@ -32,6 +31,7 @@ public class ContaDebitoTests {
 	private static final String AVIAO = "avião";
 	private static final String DESPESAS_CORRENTES = "despesasCorrentes";
 
+	@Test
 	public void descricaoECategoriaIguais() {
 		assertThat(ContaDebito.builder().descricao(GASOLINA)
 			.categoria(Categoria.builder().descricao(TRANSPORTE).build())
@@ -41,6 +41,7 @@ public class ContaDebitoTests {
 				.build());
 	}
 
+	@Test
 	public void descricaoIgualECategoriaDiferente() {
 		assertThat(ContaDebito.builder().descricao(GASOLINA)
 			.categoria(Categoria.builder().descricao(TRANSPORTE).build())
@@ -50,6 +51,7 @@ public class ContaDebitoTests {
 				.build());
 	}
 
+	@Test
 	public void descricaoDiferenteECategoriaIgual() {
 		assertThat(ContaDebito.builder().descricao(GASOLINA)
 			.categoria(Categoria.builder().descricao(TRANSPORTE).build())
@@ -59,12 +61,13 @@ public class ContaDebitoTests {
 				.build());
 	}
 
-	@Test(expectedExceptions = NullPointerException.class)
+	@Test(expected = NullPointerException.class)
 	public void descricaoIgualIgualSemCategoria() {
 		assertThat(ContaDebito.builder().descricao(GASOLINA).build())
 			.isEqualTo(ContaDebito.builder().descricao(GASOLINA).build());
 	}
 
+	@Test
 	public void compareTo() {
 		Set<ContaDebito> contasDebito = new TreeSet<>();
 

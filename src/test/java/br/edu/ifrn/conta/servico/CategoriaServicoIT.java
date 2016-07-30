@@ -22,54 +22,50 @@ import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.Categoria;
 import br.edu.ifrn.conta.persistencia.CategoriaFabrica;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringApplicationConfiguration(classes = ContaApplication.class)
-@WebAppConfiguration
-@Test(groups = "categoria")
-public class CategoriaServicoIT extends AbstractTestNGSpringContextTests {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+public class CategoriaServicoIT {
 
 	@Inject
 	private CategoriaServico categoriaServico;
 
-	@BeforeMethod
-	void deletarTodos() {
-		this.categoriaServico.deleteAll();
-		assertThat(this.categoriaServico.findAll()).isEmpty();
-	}
+	@Inject
+	private CategoriaFabrica categoriaFabrica;
 
+	@Test
 	public void repositorioNaoEhNulo() {
 		assertThat(this.categoriaServico).isNotNull();
 	}
 
+	@Test
 	public void salvarUm() {
 		// cria o ambiente de teste
-		Categoria categoria = Categoria.builder().descricao(CategoriaFabrica.TRANSPORTE).build();
-
-		// executa a operacao a ser testada
-		this.categoriaServico.save(categoria);
+		Categoria categoria = this.categoriaFabrica.banco();
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.categoriaServico.findAll().iterator().next()).isEqualTo(categoria);
+		assertThat(this.categoriaServico.findOne(categoria.getId()))
+			.isEqualTo(categoria);
 	}
 
+	@Test
 	public void deletarUm() {
 		// cria o ambiente de teste
-		Categoria categoria = Categoria.builder().descricao(CategoriaFabrica.TRANSPORTE).build();
-		this.categoriaServico.save(categoria);
+		Categoria categoria = this.categoriaFabrica.categoria("CATEGORIA UNICA DO SERVICOIT");
 
 		// executa a operacao a ser testada
 		this.categoriaServico.delete(categoria);
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.categoriaServico.findAll().iterator().hasNext()).isFalse();
+		assertThat(this.categoriaServico.findOne(categoria.getId()))
+			.isNull();
 	}
 
 }

@@ -12,7 +12,6 @@ spring:
     validationQuery: SELECT 1    
   jpa:
     hibernate:
-      naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
       ddl-auto: update
     show-sql: true
 jsf:

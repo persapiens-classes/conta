@@ -33,7 +33,7 @@ public class CategoriaFabrica {
 	@Inject
 	private CategoriaRepository categoriaRepository;
 
-	private Categoria categoria(String descricao) {
+	public Categoria categoria(String descricao) {
 		Categoria categoria = this.categoriaRepository.findByDescricao(descricao);
 		if (categoria == null) {
 			categoria = Categoria.builder().descricao(descricao).build();

@@ -22,20 +22,18 @@ import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.Categoria;
 import br.edu.ifrn.conta.dominio.ContaPatrimonio;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Example;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringApplicationConfiguration(classes = ContaApplication.class)
-@WebAppConfiguration
-@Test(groups = "contaPatrimonio", dependsOnGroups = "categoria")
-public class ContaPatrimonioRepositoryIT extends AbstractTestNGSpringContextTests {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+public class ContaPatrimonioRepositoryIT {
 
 	@Inject
 	private ContaPatrimonioFabrica contaPatrimonioFabrica;
@@ -43,16 +41,12 @@ public class ContaPatrimonioRepositoryIT extends AbstractTestNGSpringContextTest
 	@Inject
 	private ContaPatrimonioRepository contaPatrimonioRepository;
 
-	@BeforeMethod
-	void deletarTodos() {
-		this.contaPatrimonioRepository.deleteAll();
-		assertThat(this.contaPatrimonioRepository.findAll()).isEmpty();
-	}
-
+	@Test
 	public void repositorioNaoEhNulo() {
 		assertThat(this.contaPatrimonioRepository).isNotNull();
 	}
 
+	@Test
 	public void findAllByExample() {
 		// cria o ambiente de teste
 		this.contaPatrimonioFabrica.poupanca();

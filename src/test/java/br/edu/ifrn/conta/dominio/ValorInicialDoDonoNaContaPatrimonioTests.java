@@ -20,11 +20,10 @@ import java.math.BigDecimal;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Test
 public class ValorInicialDoDonoNaContaPatrimonioTests {
 
 	private static final String CARTEIRA = "carteira";
@@ -44,21 +43,25 @@ public class ValorInicialDoDonoNaContaPatrimonioTests {
 			.build();
 	}
 
+	@Test
 	public void donoEContaPatrimonioEValorInicialIguais() {
 		assertThat(valorInicialDoDonoNaContaPatrimonio(CARTEIRA, PAPAI, new BigDecimal(100)))
 			.isEqualTo(valorInicialDoDonoNaContaPatrimonio(CARTEIRA, PAPAI, new BigDecimal(100)));
 	}
 
+	@Test
 	public void donoEContaPatrimonioIguaisEValorInicialDiferente() {
 		assertThat(valorInicialDoDonoNaContaPatrimonio(CARTEIRA, PAPAI, new BigDecimal(100)))
 			.isNotEqualTo(valorInicialDoDonoNaContaPatrimonio(CARTEIRA, PAPAI, new BigDecimal(999)));
 	}
 
+	@Test
 	public void donoEValorInicialIguaisEContaPatrimonioDiferente() {
 		assertThat(valorInicialDoDonoNaContaPatrimonio(CARTEIRA, PAPAI, new BigDecimal(100)))
 			.isNotEqualTo(valorInicialDoDonoNaContaPatrimonio(POUPANCA, PAPAI, new BigDecimal(100)));
 	}
 
+	@Test
 	public void contaPatrimonioEValorInicialIguaisEDonoDiferente() {
 		assertThat(valorInicialDoDonoNaContaPatrimonio(CARTEIRA, PAPAI, new BigDecimal(100)))
 			.isNotEqualTo(valorInicialDoDonoNaContaPatrimonio(CARTEIRA, MAMAE, new BigDecimal(100)));
@@ -75,6 +78,7 @@ public class ValorInicialDoDonoNaContaPatrimonioTests {
 			.build();
 	}
 
+	@Test
 	public void compareToComDonosDiferentes() {
 		Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciais = new TreeSet<>();
 
@@ -89,6 +93,7 @@ public class ValorInicialDoDonoNaContaPatrimonioTests {
 		assertThat(valoresIniciais.iterator().next()).isEqualTo(valorInicialCarteiraMamae);
 	}
 
+	@Test
 	public void compareToComValoresIniciaisDiferentes() {
 		Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciais = new TreeSet<>();
 
@@ -103,6 +108,7 @@ public class ValorInicialDoDonoNaContaPatrimonioTests {
 		assertThat(valoresIniciais.iterator().next()).isEqualTo(valorInicial100);
 	}
 
+	@Test
 	public void compareToComContaPatrimonioDiferentes() {
 		Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciais = new TreeSet<>();
 

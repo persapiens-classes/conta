@@ -20,11 +20,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Test
 public class CategoriaTests {
 
 	private static final String TRANSPORTE = "transporte";
@@ -32,11 +31,13 @@ public class CategoriaTests {
 	private static final String IPVA = "ipva";
 	private static final String HABITACAO = "habitação";
 
+	@Test
 	public void descricaoTransporteIgualSemContas() {
 		assertThat(Categoria.builder().descricao(TRANSPORTE).build())
 			.isEqualTo(Categoria.builder().descricao(TRANSPORTE).build());
 	}
 
+	@Test
 	public void descricaoTransporteIgualComContasDiferentes() {
 		Categoria categoriaTransporte1 = Categoria.builder().descricao(TRANSPORTE)
 			.build();
@@ -51,11 +52,13 @@ public class CategoriaTests {
 		assertThat(categoriaTransporte1).isEqualTo(categoriaTransporte2);
 	}
 
+	@Test
 	public void descricaoDiferente() {
 		assertThat(Categoria.builder().descricao(TRANSPORTE).build())
 			.isNotEqualTo(Categoria.builder().descricao(HABITACAO).build());
 	}
 
+	@Test
 	public void compareTo() {
 		Set<Categoria> categorias = new TreeSet<>();
 

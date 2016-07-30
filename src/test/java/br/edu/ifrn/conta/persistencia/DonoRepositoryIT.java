@@ -21,19 +21,17 @@ import javax.inject.Inject;
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.Dono;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringApplicationConfiguration(classes = ContaApplication.class)
-@WebAppConfiguration
-@Test(groups = "dono")
-public class DonoRepositoryIT extends AbstractTestNGSpringContextTests {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+public class DonoRepositoryIT {
 
 	@Inject
 	private DonoRepository donoRepository;
@@ -41,16 +39,13 @@ public class DonoRepositoryIT extends AbstractTestNGSpringContextTests {
 	@Inject
 	private DonoFabrica donoFabrica;
 
-	@BeforeMethod
-	void deletarTodos() {
-		this.donoRepository.deleteAll();
-		assertThat(this.donoRepository.findAll()).isEmpty();
-	}
-
+	@Test
 	public void repositorioNaoEhNulo() {
-		assertThat(this.donoRepository).isNotNull();
+		assertThat(this.donoRepository)
+			.isNotNull();
 	}
 
+	@Test
 	public void findByDescricao() {
 		// cria o ambiente de teste
 		Dono papai = this.donoFabrica.papai();
@@ -58,10 +53,13 @@ public class DonoRepositoryIT extends AbstractTestNGSpringContextTests {
 
 		// executa a operacao a ser testada
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.donoRepository.findByDescricao(DonoFabrica.PAPAI)).isEqualTo(papai);
-		assertThat(this.donoRepository.findByDescricao(DonoFabrica.MAMAE)).isEqualTo(mamae);
+		assertThat(this.donoRepository.findByDescricao(DonoFabrica.PAPAI))
+			.isEqualTo(papai);
+		assertThat(this.donoRepository.findByDescricao(DonoFabrica.MAMAE))
+			.isEqualTo(mamae);
 	}
 
+	@Test
 	public void countByDescricao() {
 		// cria o ambiente de teste
 		this.donoFabrica.papai();
@@ -69,17 +67,22 @@ public class DonoRepositoryIT extends AbstractTestNGSpringContextTests {
 
 		// executa a operacao a ser testada
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.donoRepository.countByDescricaoContains("a")).isEqualTo(2);
+		assertThat(this.donoRepository.countByDescricaoContains("a"))
+			.isEqualTo(2);
 	}
 
+	@Test
 	public void deleteByDescricao() {
+		String descricaoUnica = "Dono único";
+
 		// cria o ambiente de teste
-		this.donoFabrica.papai();
+		this.donoFabrica.dono(descricaoUnica);
 
 		// executa a operacao a ser testada
-		this.donoRepository.deleteByDescricao(DonoFabrica.PAPAI);
+		this.donoRepository.deleteByDescricao(descricaoUnica);
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.donoRepository.findAll()).isEmpty();
+		assertThat(this.donoRepository.countByDescricaoContains(descricaoUnica))
+			.isEqualTo(0);
 	}
 }

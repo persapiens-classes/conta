@@ -25,19 +25,17 @@ import br.edu.ifrn.conta.dominio.ContaPatrimonio;
 import br.edu.ifrn.conta.dominio.Dono;
 import br.edu.ifrn.conta.dominio.ValorInicialDoDonoNaContaPatrimonio;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringApplicationConfiguration(classes = ContaApplication.class)
-@WebAppConfiguration
-@Test(groups = "valorInicialDoDonoNaContaPatrimonio", dependsOnGroups = "contaPatrimonio")
-public class ValorInicialDoDonoNaContaPatrimonioRepositoryIT extends AbstractTestNGSpringContextTests {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+public class ValorInicialDoDonoNaContaPatrimonioRepositoryIT {
 
 	@Inject
 	private ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;
@@ -51,16 +49,13 @@ public class ValorInicialDoDonoNaContaPatrimonioRepositoryIT extends AbstractTes
 	@Inject
 	private ContaPatrimonioFabrica contaPatrimonioFabrica;
 
-	@BeforeMethod
-	void deletarTodos() {
-		this.valorInicialDoDonoNaContaPatrimonioRepository.deleteAll();
-		assertThat(this.valorInicialDoDonoNaContaPatrimonioRepository.findAll()).isEmpty();
-	}
-
+	@Test
 	public void repositorioNaoEhNulo() {
-		assertThat(this.valorInicialDoDonoNaContaPatrimonioRepository).isNotNull();
+		assertThat(this.valorInicialDoDonoNaContaPatrimonioRepository)
+			.isNotNull();
 	}
 
+	@Test
 	public void findByDonoAndContaPatrimonio() {
 		// cria o ambiente de teste
 		Dono papai = this.donoFabrica.papai();

@@ -18,11 +18,10 @@ package br.edu.ifrn.conta.dominio;
 
 import java.math.BigDecimal;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Test
 public class ContaPatrimonioTests {
 
 	private static final String CARTEIRA = "carteira";
@@ -30,6 +29,7 @@ public class ContaPatrimonioTests {
 	private static final String PATRIMONIO_PESSOAL = "patrimonio pessoal";
 	private static final String POUPANCA = "poupança";
 
+	@Test
 	public void descricaoECategoriaIguais() {
 		assertThat(ContaPatrimonio.builder().descricao(CARTEIRA)
 			.categoria(Categoria.builder().descricao(PATRIMONIO_INDIVIDUAL).build())
@@ -39,6 +39,7 @@ public class ContaPatrimonioTests {
 				.build());
 	}
 
+	@Test
 	public void descricaoECategoriaDiferente() {
 		assertThat(ContaPatrimonio.builder().descricao(CARTEIRA)
 			.categoria(Categoria.builder().descricao(PATRIMONIO_INDIVIDUAL).build())
@@ -48,6 +49,7 @@ public class ContaPatrimonioTests {
 				.build());
 	}
 
+	@Test
 	public void descricaoDiferenteECategoriaIgual() {
 		assertThat(ContaPatrimonio.builder().descricao(CARTEIRA)
 			.categoria(Categoria.builder().descricao(PATRIMONIO_PESSOAL).build())
@@ -57,7 +59,7 @@ public class ContaPatrimonioTests {
 				.build());
 	}
 
-	@Test(expectedExceptions = NullPointerException.class)
+	@Test(expected = NullPointerException.class)
 	public void descricaoIgualSemCategoria() {
 		assertThat(ContaPatrimonio.builder().descricao(CARTEIRA)
 			.build())
@@ -65,6 +67,7 @@ public class ContaPatrimonioTests {
 				.build());
 	}
 
+	@Test
 	public void descricaoECategoriaIguaisEValorInicialDoDonoDiferente() {
 
 		ValorInicialDoDonoNaContaPatrimonio valorInicialNaCarteira = ValorInicialDoDonoNaContaPatrimonio.builder()

@@ -19,11 +19,10 @@ package br.edu.ifrn.conta.dominio;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Test
 public class ContaCreditoTests {
 
 	private static final String BOLSA = "bolsa";
@@ -40,6 +39,7 @@ public class ContaCreditoTests {
 				.build());
 	}
 
+	@Test
 	public void descricaoIgualECategoriaDiferente() {
 		assertThat(ContaCredito.builder().descricao(BOLSA)
 			.categoria(Categoria.builder().descricao(VENCIMENTO).build())
@@ -49,6 +49,7 @@ public class ContaCreditoTests {
 				.build());
 	}
 
+	@Test
 	public void descricaoDiferenteECategoriaIgual() {
 		assertThat(ContaCredito.builder().descricao(BOLSA)
 			.categoria(Categoria.builder().descricao(VENCIMENTO).build())
@@ -58,12 +59,13 @@ public class ContaCreditoTests {
 				.build());
 	}
 
-	@Test(expectedExceptions = NullPointerException.class)
+	@Test(expected = NullPointerException.class)
 	public void descricaoIgualIgualSemCategoria() {
 		assertThat(ContaCredito.builder().descricao(BOLSA).build())
 			.isEqualTo(ContaCredito.builder().descricao(BOLSA).build());
 	}
 
+	@Test
 	public void compareTo() {
 		Set<ContaCredito> contasCredito = new TreeSet<>();
 
