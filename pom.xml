@@ -19,11 +19,11 @@
         <java.version>1.8</java.version>
         
         <pmd.excludeFromFailureFile>${check.dir}/pmd/pmd-exclude.properties</pmd.excludeFromFailureFile>
-        <cobertura.totalLineRate>41</cobertura.totalLineRate>
-        <cobertura.totalBranchRate>48</cobertura.totalBranchRate>
-        <cobertura.packageLineRate>4</cobertura.packageLineRate>
-        <cobertura.packageBranchRate>50</cobertura.packageBranchRate>
+        <cobertura.totalLineRate>34</cobertura.totalLineRate>
+        <cobertura.packageLineRate>33</cobertura.packageLineRate>
         <cobertura.lineRate>0</cobertura.lineRate>
+        <cobertura.totalBranchRate>48</cobertura.totalBranchRate>
+        <cobertura.packageBranchRate>50</cobertura.packageBranchRate>
         <cobertura.branchRate>0</cobertura.branchRate>
         
         <juplo-maven-plugin.version>2.0.0</juplo-maven-plugin.version>    
