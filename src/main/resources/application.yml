@@ -16,7 +16,7 @@ spring:
     show-sql: true
 jsf:
   primefaces:
-    theme: cupertino
+    theme: aristo
 info:
   url: @project.url@
   version: @project.version@
