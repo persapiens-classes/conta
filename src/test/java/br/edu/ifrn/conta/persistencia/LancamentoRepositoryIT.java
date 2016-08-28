@@ -26,19 +26,18 @@ import br.edu.ifrn.conta.dominio.ContaDebito;
 import br.edu.ifrn.conta.dominio.ContaPatrimonio;
 import br.edu.ifrn.conta.dominio.Dono;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringApplicationConfiguration(classes = ContaApplication.class)
-@WebAppConfiguration
-@Test(groups = "lancamento", dependsOnGroups = {"valorInicialDoDonoNaContaPatrimonio", "contaCredito", "contaDebito"})
-public class LancamentoRepositoryIT extends AbstractTestNGSpringContextTests {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+public class LancamentoRepositoryIT {
 
 	@Inject
 	private LancamentoFabrica lancamentoFabrica;
@@ -61,16 +60,20 @@ public class LancamentoRepositoryIT extends AbstractTestNGSpringContextTests {
 	@Inject
 	private LancamentoRepository lancamentoRepository;
 
-	@BeforeMethod
-	void deletarTodos() {
+	@Before
+	public void deletarTodos() {
 		this.lancamentoRepository.deleteAll();
-		assertThat(this.lancamentoRepository.findAll()).isEmpty();
+		assertThat(this.lancamentoRepository.findAll())
+			.isEmpty();
 	}
 
+	@Test
 	public void repositorioNaoEhNulo() {
-		assertThat(this.lancamentoRepository).isNotNull();
+		assertThat(this.lancamentoRepository)
+			.isNotNull();
 	}
 
+	@Test
 	public void saldo800() {
 		// cria o ambiente de teste
 		Dono papai = this.donoFabrica.papai();

@@ -22,20 +22,18 @@ import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.Categoria;
 import br.edu.ifrn.conta.dominio.ContaDebito;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Example;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringApplicationConfiguration(classes = ContaApplication.class)
-@WebAppConfiguration
-@Test(groups = "contaDebito", dependsOnGroups = "categoria")
-public class ContaDebitoRepositoryIT extends AbstractTestNGSpringContextTests {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+public class ContaDebitoRepositoryIT {
 
 	@Inject
 	private ContaDebitoFabrica contaDebitoFabrica;
@@ -43,16 +41,13 @@ public class ContaDebitoRepositoryIT extends AbstractTestNGSpringContextTests {
 	@Inject
 	private ContaDebitoRepository contaDebitoRepository;
 
-	@BeforeMethod
-	void deletarTodos() {
-		this.contaDebitoRepository.deleteAll();
-		assertThat(this.contaDebitoRepository.findAll()).isEmpty();
-	}
-
+	@Test
 	public void repositorioNaoEhNulo() {
-		assertThat(this.contaDebitoRepository).isNotNull();
+		assertThat(this.contaDebitoRepository)
+			.isNotNull();
 	}
 
+	@Test
 	public void findAllByExample() {
 		// cria o ambiente de teste
 		ContaDebito contaDebito = this.contaDebitoFabrica.gasolina();
@@ -63,7 +58,7 @@ public class ContaDebitoRepositoryIT extends AbstractTestNGSpringContextTests {
 
 		// executa a operacao a ser testada
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.contaDebitoRepository.findAll(Example.of(contaDebitoExemplo)).iterator().next())
+		assertThat(this.contaDebitoRepository.findOne(Example.of(contaDebitoExemplo)))
 			.isEqualTo(contaDebito);
 	}
 

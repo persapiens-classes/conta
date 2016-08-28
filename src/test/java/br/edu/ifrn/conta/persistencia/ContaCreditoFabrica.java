@@ -34,7 +34,7 @@ public class ContaCreditoFabrica {
 	@Inject
 	private CategoriaFabrica categoriaFabrica;
 
-	private ContaCredito contaCredito(String descricao, Categoria categoria) {
+	public ContaCredito contaCredito(String descricao, Categoria categoria) {
 		ContaCredito contaCredito = this.contaCreditoRepository.findByDescricao(descricao);
 		if (contaCredito == null) {
 			contaCredito = ContaCredito.builder()

@@ -22,10 +22,6 @@ import java.util.Date;
 import javax.inject.Inject;
 
 import br.edu.ifrn.conta.ContaApplication;
-import br.edu.ifrn.conta.dominio.ContaCredito;
-import br.edu.ifrn.conta.dominio.ContaDebito;
-import br.edu.ifrn.conta.dominio.ContaPatrimonio;
-import br.edu.ifrn.conta.dominio.Dono;
 import br.edu.ifrn.conta.dominio.Lancamento;
 import br.edu.ifrn.conta.persistencia.ContaCreditoFabrica;
 import br.edu.ifrn.conta.persistencia.ContaDebitoFabrica;
@@ -34,19 +30,18 @@ import br.edu.ifrn.conta.persistencia.DonoFabrica;
 import br.edu.ifrn.conta.persistencia.LancamentoFabrica;
 import br.edu.ifrn.conta.persistencia.ValorInicialDoDonoNaContaPatrimonioFabrica;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringApplicationConfiguration(classes = ContaApplication.class)
-@WebAppConfiguration
-@Test(groups = "lancamento", dependsOnGroups = {"valorInicialDoDonoNaContaPatrimonio", "contaCredito", "contaDebito"})
-public class LancamentoServicoIT extends AbstractTestNGSpringContextTests {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+public class LancamentoServicoIT {
 
 	@Inject
 	private LancamentoFabrica lancamentoFabrica;
@@ -69,42 +64,20 @@ public class LancamentoServicoIT extends AbstractTestNGSpringContextTests {
 	@Inject
 	private ContaDebitoFabrica contaDebitoFabrica;
 
-	@BeforeMethod
-	void deletarTodos() {
+	@Before
+	public void deletarTodos() {
 		this.lancamentoServico.deleteAll();
-		assertThat(this.lancamentoServico.findAll()).isEmpty();
+		assertThat(this.lancamentoServico.findAll())
+			.isEmpty();
 	}
 
+	@Test
 	public void repositorioNaoEhNulo() {
-		assertThat(this.lancamentoServico).isNotNull();
+		assertThat(this.lancamentoServico)
+			.isNotNull();
 	}
 
-	public void saldo800() {
-		// cria o ambiente de teste
-		Dono papai = this.donoFabrica.papai();
-
-		ContaPatrimonio poupanca
-			= this.contaPatrimonioFabrica.poupanca();
-
-		ContaDebito gasolina
-			= this.contaDebitoFabrica.gasolina();
-
-		ContaCredito bolsa
-			= this.contaCreditoFabrica.estagio();
-
-		this.valorInicialDoDonoNaContaPatrimonioFabrica.valorInicialDoDonoNaContaPatrimonio(
-			papai, poupanca, new BigDecimal(1000));
-
-		this.lancamentoFabrica.lancamento(papai, gasolina, poupanca, new BigDecimal(500));
-		this.lancamentoFabrica.lancamento(papai, poupanca, bolsa, new BigDecimal(300));
-
-		// executa a operacao a ser testada
-		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.lancamentoServico.saldo(papai, poupanca))
-			.isEqualTo(new BigDecimal(800).setScale(2));
-	}
-
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void lancamentoComContaEntradaInvalida() {
 		Lancamento lancamento = Lancamento.builder()
 			.contaEntrada(this.contaCreditoFabrica.estagio())
@@ -117,7 +90,7 @@ public class LancamentoServicoIT extends AbstractTestNGSpringContextTests {
 		this.lancamentoServico.save(lancamento);
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void lancamentoComContaSaidaInvalida() {
 		Lancamento lancamento = Lancamento.builder()
 			.contaEntrada(this.contaPatrimonioFabrica.poupanca())
@@ -130,6 +103,7 @@ public class LancamentoServicoIT extends AbstractTestNGSpringContextTests {
 		this.lancamentoServico.save(lancamento);
 	}
 
+	@Test
 	public void transferenciaDePapaiParaMamae() {
 		this.lancamentoServico.transferir(BigDecimal.TEN, this.donoFabrica.papai(),
 			this.contaDebitoFabrica.despesaComConjuge(), this.contaPatrimonioFabrica.poupanca(),

@@ -68,7 +68,7 @@ public class Categoria implements Serializable, Comparable<Categoria> {
 	@Override
 	public int compareTo(Categoria o) {
 		int result = 0;
-		if (descricao != null && o.descricao != null) {
+		if (this.descricao != null && o.descricao != null) {
 			result = this.descricao.compareTo(o.descricao);
 		}
 		else if (this.descricao == null && o.descricao == null) {

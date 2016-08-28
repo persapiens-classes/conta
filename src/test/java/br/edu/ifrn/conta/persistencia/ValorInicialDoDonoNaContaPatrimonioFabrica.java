@@ -33,14 +33,19 @@ public class ValorInicialDoDonoNaContaPatrimonioFabrica {
 
 	public ValorInicialDoDonoNaContaPatrimonio valorInicialDoDonoNaContaPatrimonio(
 		Dono dono, ContaPatrimonio contaPatrimonio, BigDecimal valor) {
-		ValorInicialDoDonoNaContaPatrimonio valorInicialDoDonoNaContaPatrimonio
-			= ValorInicialDoDonoNaContaPatrimonio.builder()
-			.dono(dono)
-			.contaPatrimonio(contaPatrimonio)
-			.valorInicial(valor.setScale(2))
-			.build();
+		ValorInicialDoDonoNaContaPatrimonio valorInicialDoDonoNaContaPatrimonio = valorInicialDoDonoNaContaPatrimonioRepository.findByDonoAndContaPatrimonio(dono, contaPatrimonio);
+
+		if (valorInicialDoDonoNaContaPatrimonio == null) {
+			valorInicialDoDonoNaContaPatrimonio
+				= ValorInicialDoDonoNaContaPatrimonio.builder()
+				.dono(dono)
+				.contaPatrimonio(contaPatrimonio)
+				.build();
+		}
+		valorInicialDoDonoNaContaPatrimonio.setValorInicial(valor.setScale(2));
+
 		this.valorInicialDoDonoNaContaPatrimonioRepository.save(valorInicialDoDonoNaContaPatrimonio);
-		this.valorInicialDoDonoNaContaPatrimonioRepository.save(valorInicialDoDonoNaContaPatrimonio);
+
 		return valorInicialDoDonoNaContaPatrimonio;
 	}
 }

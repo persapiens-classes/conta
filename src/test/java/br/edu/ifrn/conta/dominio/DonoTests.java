@@ -20,11 +20,10 @@ import java.math.BigDecimal;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Test
 public class DonoTests {
 
 	private static final String PAPAI = "papai";
@@ -35,11 +34,13 @@ public class DonoTests {
 	private static final String BANCO = "banco";
 	private static final String PATRIMONIO_INDIVIDUAL = "patrimônio individual";
 
+	@Test
 	public void descricaoPapaiIgualSemLancamentos() {
 		assertThat(Dono.builder().descricao(PAPAI).build())
 			.isEqualTo(Dono.builder().descricao(PAPAI).build());
 	}
 
+	@Test
 	public void descricaoTransporteIgualComLancamentosDiferentes() {
 		Lancamento lancamentoGasolina = Lancamento.builder().descricao(GASOLINA).build();
 		Lancamento lancamentoIpva = Lancamento.builder().descricao(IPVA).build();
@@ -68,12 +69,14 @@ public class DonoTests {
 		assertThat(papai1).isEqualTo(papai2);
 	}
 
+	@Test
 	public void descricaoDiferente() {
 		assertThat(Dono.builder().descricao(PAPAI).build())
 			.isNotEqualTo(Dono.builder().descricao(MAMAE).build());
 
 	}
 
+	@Test
 	public void compareTo() {
 		Set<Dono> donos = new TreeSet<>();
 

@@ -30,7 +30,7 @@ public class DonoFabrica {
 	@Inject
 	private DonoRepository donoRepository;
 
-	private Dono dono(String descricao) {
+	public Dono dono(String descricao) {
 		Dono dono = this.donoRepository.findByDescricao(descricao);
 		if (dono == null) {
 			dono = Dono.builder().descricao(descricao).build();

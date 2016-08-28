@@ -22,54 +22,51 @@ import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.Dono;
 import br.edu.ifrn.conta.persistencia.DonoFabrica;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringApplicationConfiguration(classes = ContaApplication.class)
-@WebAppConfiguration
-@Test(groups = "dono")
-public class DonoServicoIT extends AbstractTestNGSpringContextTests {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+public class DonoServicoIT {
 
 	@Inject
 	private DonoServico donoServico;
 
+	@Inject
+	private DonoFabrica donoFabrica;
+
+	@Test
 	public void repositorioNaoEhNulo() {
-		assertThat(this.donoServico).isNotNull();
+		assertThat(this.donoServico)
+			.isNotNull();
 	}
 
-	@BeforeMethod
-	void deletarTodos() {
-		this.donoServico.deleteAll();
-		assertThat(this.donoServico.findAll()).isEmpty();
-	}
-
+	@Test
 	public void salvarUm() {
 		// cria o ambiente de teste
-		Dono dono = Dono.builder().descricao(DonoFabrica.PAPAI).build();
-
-		// executa a operacao a ser testada
-		this.donoServico.save(dono);
+		Dono dono = this.donoFabrica.mamae();
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.donoServico.findAll().iterator().next()).isEqualTo(dono);
+		assertThat(this.donoServico.findOne(dono.getId()))
+			.isEqualTo(dono);
 	}
 
+	@Test
 	public void deletarUm() {
 		// cria o ambiente de teste
-		Dono dono = Dono.builder().descricao(DonoFabrica.PAPAI).build();
-		this.donoServico.save(dono);
+		Dono dono = this.donoFabrica.dono("DONO UNICO DO DONO SERVIÇO IT");
 
 		// executa a operacao a ser testada
 		this.donoServico.delete(dono);
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.donoServico.findAll().iterator().hasNext()).isFalse();
+		assertThat(this.donoServico.findOne(dono.getId()))
+			.isNull();
 	}
 
 }
