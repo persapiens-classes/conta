@@ -29,5 +29,5 @@ mvn clean install
 java -jar target/conta-1.0-SNAPSHOT.jar
 ```
 
-4- Acesse a página da aplicação em **http://localhost:8080/index.jsf**
+4- Acesse a página da aplicação em **http://localhost:8080**
 
