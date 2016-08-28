@@ -16,7 +16,7 @@ As notas de aula utilizadas no desenvolvimento deste projeto estão [aqui](https
 
 1- Clone o projeto
 ```Shell
-git clone https://github.com/persapiens/jsf-spring-boot-starter-example.git
+git clone https://github.com/persapiens/conta.git
 ```
 
 2- Construa a aplicação
@@ -29,5 +29,5 @@ mvn clean install
 java -jar target/conta-1.0-SNAPSHOT.jar
 ```
 
-4- Acesse uma página em **http://localhost:8080/dono.jsf**
+4- Acesse a página da aplicação em **http://localhost:8080/index.jsf**
 

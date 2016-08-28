@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <p:menubar>
+        <p:menuitem value="Dono" ajax="true" update="@form"
+                    actionListener="#{contentMBean.setPage('dono')}" />
+        <p:menuitem value="Categoria" ajax="true" update="@form"
+                    actionListener="#{contentMBean.setPage('categoria')}" />
+        <p:menuitem value="Conta Crédito" ajax="true" update="@form"
+                    actionListener="#{contentMBean.setPage('contaCredito')}" />
+        <p:menuitem value="Conta Débito" ajax="true" update="@form"
+                    actionListener="#{contentMBean.setPage('contaDebito')}" />
+        <p:menuitem value="Conta Patrimônio" ajax="true" update="@form"
+                    actionListener="#{contentMBean.setPage('contaPatrimonio')}" />
+        <p:menuitem value="Valor Inicial" ajax="true" update="@form"
+                    actionListener="#{contentMBean.setPage('valorInicialDoDonoNaContaPatrimonio')}" />
+        <p:menuitem value="Lançamento" ajax="true" update="@form"
+                    actionListener="#{contentMBean.setPage('lancamento')}" />
+    </p:menubar>
+</ui:composition>
