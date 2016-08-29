@@ -17,6 +17,8 @@ spring:
 jsf:
   primefaces:
     theme: aristo
+  bootsfaces:
+    usetheme: false
 info:
   url: @project.url@
   version: @project.version@

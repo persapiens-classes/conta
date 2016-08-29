@@ -20,8 +20,8 @@ h1, h2, h3 {
 }
 
 h1 {
-    font-size: 1.6em;
-    font-weight: normal;
+    font-size: 1.6em !important;
+    font-weight: normal !important;
 }
 
 h2 {

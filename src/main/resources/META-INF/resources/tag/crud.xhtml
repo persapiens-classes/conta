@@ -103,7 +103,7 @@
                     
                     <ui:insert name="listColumns"></ui:insert>                
 
-                    <p:column headerText="Ações" styleClass="#{listActionLinksStyleClass}" rendered="#{showActionLinksColumn}" exportable="false">
+                    <p:column headerText="Ações" styleClass="#{listActionLinksStyleClass}" rendered="#{showActionLinksColumn}" exportable="false" priority="2">
                         <ui:insert name="listActionLinks"></ui:insert>
 
                         <p:commandLink

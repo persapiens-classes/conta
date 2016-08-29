@@ -10,22 +10,22 @@
             <p:column headerText="Data" sortBy="#{bean.data}" >
                 <c:date pattern="dd/MM/yyyy HH:mm:ss" readonly="true" value="#{bean.data}" />
             </p:column>
-            <p:column headerText="Dono" sortBy="#{bean.dono.descricao}" 
+            <p:column headerText="Dono" sortBy="#{bean.dono.descricao}" priority="3"
                       filterBy="#{bean.dono.id}" filterOptions="#{donoOptions.emptyOptions}" filterMatchMode="exact">
                 <h:outputText value="#{bean.dono.descricao}" />
             </p:column>
-            <p:column headerText="Conta Entrada" sortBy="#{bean.contaEntrada.descricao}" 
+            <p:column headerText="Conta Entrada" sortBy="#{bean.contaEntrada.descricao}" priority="2"
                       filterBy="#{bean.contaEntrada.id}" filterOptions="#{contaEntradaOptions.emptyOptions}" filterMatchMode="exact">
                 <h:outputText value="#{bean.contaEntrada.descricao}" />
             </p:column>
-            <p:column headerText="Conta Saída" sortBy="#{bean.contaSaida.descricao}" 
+            <p:column headerText="Conta Saída" sortBy="#{bean.contaSaida.descricao}" priority="2"
                       filterBy="#{bean.contaSaida.id}" filterOptions="#{contaSaidaOptions.emptyOptions}" filterMatchMode="exact">
                 <h:outputText value="#{bean.contaSaida.descricao}" />
             </p:column>
             <p:column headerText="Valor" sortBy="#{bean.valor}" >
                 <c:currency readonly="true" value="#{bean.valor}" />
             </p:column>
-            <p:column headerText="Descrição" sortBy="#{bean.descricao}" filterBy="#{bean.descricao}" >
+            <p:column headerText="Descrição" sortBy="#{bean.descricao}" filterBy="#{bean.descricao}" priority="4">
                 <h:outputText value="#{bean.descricao}" />
             </p:column>
         </ui:define>
