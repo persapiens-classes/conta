@@ -40,6 +40,12 @@
                 <artifactId>querydsl-apt</artifactId>
                 <version>${querydsl.version}</version>
                 <scope>provided</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>javax.transaction</groupId>
+                        <artifactId>jta</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.querydsl</groupId>
