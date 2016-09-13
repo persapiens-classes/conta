@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.joinfaces</groupId>
         <artifactId>jsf-spring-boot-parent</artifactId>
-        <version>2.2.3</version>
+        <version>2.2.4</version>
         <relativePath/>
     </parent>
 
@@ -21,6 +21,7 @@
         <duplicate.ignoredClassPattern>javax.persistence.Persistence(Context|ContextType|Contexts|Property|Unit|Units)</duplicate.ignoredClassPattern>
         <duplicate.ignoredResourcePattern>(changelog.txt|application.yml)</duplicate.ignoredResourcePattern>
         <pmd.excludeFromFailureFile>${check.dir}/pmd/pmd-exclude.properties</pmd.excludeFromFailureFile>        
+        <checkstyle.excludes>br/edu/ifrn/conta/dominio/Q*</checkstyle.excludes>
         <cobertura.totalLineRate>33</cobertura.totalLineRate>
         <cobertura.packageLineRate>33</cobertura.packageLineRate>
         <cobertura.lineRate>0</cobertura.lineRate>
