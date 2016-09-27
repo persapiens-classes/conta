@@ -29,6 +29,8 @@ import br.edu.ifrn.conta.dominio.Categoria;
 @Named
 public class CategoriaOptions extends Options<Categoria, Long> {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	public String label(Categoria e) {
 		return e.getDescricao();

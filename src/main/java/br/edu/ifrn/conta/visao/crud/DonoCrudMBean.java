@@ -29,6 +29,8 @@ import br.edu.ifrn.conta.dominio.Dono;
 @Named
 public class DonoCrudMBean extends CrudMBean<Dono, Long> {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected Dono createBean() {
 		return Dono.builder().build();

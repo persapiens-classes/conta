@@ -29,6 +29,8 @@ import br.edu.ifrn.conta.dominio.ValorInicialDoDonoNaContaPatrimonio;
 @Named
 public class ValorInicialDoDonoNaContaPatrimonioCrudMBean extends CrudMBean<ValorInicialDoDonoNaContaPatrimonio, Long> {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected ValorInicialDoDonoNaContaPatrimonio createBean() {
 		return ValorInicialDoDonoNaContaPatrimonio.builder().build();

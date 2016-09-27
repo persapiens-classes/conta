@@ -32,5 +32,7 @@ import lombok.Setter;
 @ViewScoped
 public class ContentMBean extends AbstractMBean {
 
+	private static final long serialVersionUID = 1L;
+
 	private String page = "dono";
 }

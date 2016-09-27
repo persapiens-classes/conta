@@ -42,6 +42,8 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ContaPatrimonio extends Conta {
 
+	private static final long serialVersionUID = 1L;
+
 	@Builder
 	public ContaPatrimonio(@Singular("valorInicialDoDono") Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisDosDonos, Long id, String descricao, Categoria categoria) {
 		super(id, descricao, categoria);

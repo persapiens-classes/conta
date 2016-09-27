@@ -29,6 +29,8 @@ import br.edu.ifrn.conta.dominio.Lancamento;
 @Named
 public class LancamentoCrudMBean extends CrudMBean<Lancamento, Long> {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected Lancamento createBean() {
 		return Lancamento.builder().build();

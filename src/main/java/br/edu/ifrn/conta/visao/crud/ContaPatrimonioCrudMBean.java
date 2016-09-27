@@ -30,6 +30,8 @@ import br.edu.ifrn.conta.dominio.ContaPatrimonio;
 @Named
 public class ContaPatrimonioCrudMBean extends CrudMBean<ContaPatrimonio, Long> {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected ContaPatrimonio createBean() {
 		return ContaPatrimonio.builder()

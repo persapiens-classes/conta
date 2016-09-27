@@ -38,6 +38,8 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ContaDebito extends Conta {
 
+	private static final long serialVersionUID = 1L;
+
 	@Builder
 	public ContaDebito(Long id, String descricao, Categoria categoria) {
 		super(id, descricao, categoria);

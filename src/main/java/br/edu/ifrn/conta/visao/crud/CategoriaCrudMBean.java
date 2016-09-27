@@ -29,6 +29,8 @@ import br.edu.ifrn.conta.dominio.Categoria;
 @Named
 public class CategoriaCrudMBean extends CrudMBean<Categoria, Long> {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected Categoria createBean() {
 		return Categoria.builder().build();

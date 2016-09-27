@@ -29,6 +29,8 @@ import br.edu.ifrn.conta.dominio.Dono;
 @Named
 public class DonoOptions extends Options<Dono, Long> {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	public String label(Dono e) {
 		return e.getDescricao();

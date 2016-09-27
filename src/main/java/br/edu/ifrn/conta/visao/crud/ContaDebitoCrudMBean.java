@@ -30,6 +30,8 @@ import br.edu.ifrn.conta.dominio.ContaDebito;
 @Named
 public class ContaDebitoCrudMBean extends CrudMBean<ContaDebito, Long> {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected ContaDebito createBean() {
 		return ContaDebito.builder()
