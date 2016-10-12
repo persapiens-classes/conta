@@ -32,5 +32,5 @@ public class ContaApplicationMain {
 			.sources(ContaApplication.class)
 			.run(args);
 	}
-		
+
 }

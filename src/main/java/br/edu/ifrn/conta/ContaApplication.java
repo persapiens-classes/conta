@@ -27,5 +27,5 @@ public class ContaApplication {
 
 	protected ContaApplication() {
 	}
-		
+
 }
