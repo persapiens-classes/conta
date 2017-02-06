@@ -20,7 +20,6 @@ import javax.inject.Inject;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.Dono;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

@@ -29,7 +29,6 @@ import br.edu.ifrn.conta.persistencia.ContaPatrimonioFabrica;
 import br.edu.ifrn.conta.persistencia.DonoFabrica;
 import br.edu.ifrn.conta.persistencia.LancamentoFabrica;
 import br.edu.ifrn.conta.persistencia.ValorInicialDoDonoNaContaPatrimonioFabrica;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

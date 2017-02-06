@@ -22,7 +22,6 @@ import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.ContaCredito;
 import br.edu.ifrn.conta.persistencia.CategoriaFabrica;
 import br.edu.ifrn.conta.persistencia.ContaCreditoFabrica;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

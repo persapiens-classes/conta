@@ -25,7 +25,6 @@ import br.edu.ifrn.conta.dominio.ContaCredito;
 import br.edu.ifrn.conta.dominio.ContaDebito;
 import br.edu.ifrn.conta.dominio.ContaPatrimonio;
 import br.edu.ifrn.conta.dominio.Dono;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

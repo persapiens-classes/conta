@@ -21,7 +21,6 @@ import javax.inject.Inject;
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.Categoria;
 import br.edu.ifrn.conta.persistencia.CategoriaFabrica;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

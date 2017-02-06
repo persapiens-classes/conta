@@ -25,11 +25,9 @@ import javax.inject.Inject;
 
 import br.edu.ifrn.conta.servico.CrudServico;
 import br.edu.ifrn.conta.visao.AbstractMBean;
-
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-
 import org.primefaces.context.RequestContext;
 
 /**

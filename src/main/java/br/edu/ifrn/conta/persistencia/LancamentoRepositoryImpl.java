@@ -24,7 +24,6 @@ import javax.persistence.EntityManager;
 import br.edu.ifrn.conta.dominio.ContaPatrimonio;
 import br.edu.ifrn.conta.dominio.Dono;
 import br.edu.ifrn.conta.dominio.QLancamento;
-
 import com.querydsl.jpa.JPQLQueryFactory;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 

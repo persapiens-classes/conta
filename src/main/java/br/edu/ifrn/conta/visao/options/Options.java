@@ -26,7 +26,6 @@ import javax.inject.Inject;
 
 import br.edu.ifrn.conta.servico.CrudServico;
 import br.edu.ifrn.conta.visao.AbstractMBean;
-
 import org.omnifaces.converter.ListConverter;
 
 /**

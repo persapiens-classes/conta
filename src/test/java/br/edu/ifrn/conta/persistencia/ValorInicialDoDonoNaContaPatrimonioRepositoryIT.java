@@ -24,7 +24,6 @@ import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.ContaPatrimonio;
 import br.edu.ifrn.conta.dominio.Dono;
 import br.edu.ifrn.conta.dominio.ValorInicialDoDonoNaContaPatrimonio;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
