@@ -17,8 +17,6 @@
 
     <properties>
         <java.version>17</java.version>
-                
-        <pmd.excludeFromFailureFile>${check.dir}/pmd/pmd-exclude.properties</pmd.excludeFromFailureFile>        
         
         <joinfaces.version>5.0.5</joinfaces.version>
         <juplo-maven-plugin.version>2.0.0</juplo-maven-plugin.version>    
@@ -254,12 +252,4 @@
             <timezone>-3</timezone>
         </developer>
     </developers>
-
-    <repositories>
-        <repository>  
-            <id>primefaces-maven-repository</id>  
-            <name>PrimeFaces Maven Repository</name>  
-            <url>http://repository.primefaces.org</url>  
-        </repository>        
-    </repositories>
 </project>
