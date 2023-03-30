@@ -11,6 +11,14 @@
 			"installMaven": "true",
 			"installGradle": "false"
 		}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"cracrayol.java-pmd",
+				"vscjava.vscode-maven"
+			]
+		}
 	}
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
