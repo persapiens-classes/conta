@@ -18,8 +18,8 @@ package br.edu.ifrn.conta.persistencia;
 
 import java.math.BigDecimal;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import br.edu.ifrn.conta.dominio.ContaPatrimonio;
 import br.edu.ifrn.conta.dominio.Dono;

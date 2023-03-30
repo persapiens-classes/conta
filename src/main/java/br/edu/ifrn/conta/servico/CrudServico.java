@@ -17,8 +17,9 @@
 package br.edu.ifrn.conta.servico;
 
 import java.io.Serializable;
+import java.util.Optional;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,7 +43,7 @@ public class CrudServico<T extends Object, ID extends Serializable> {
 
 	@Transactional
 	public <S extends T> Iterable<S> save(Iterable<S> objetos) {
-		return this.repository.save(objetos);
+		return this.repository.saveAll(objetos);
 	}
 
 	@Transactional
@@ -52,12 +53,12 @@ public class CrudServico<T extends Object, ID extends Serializable> {
 
 	@Transactional
 	public void delete(Iterable<? extends T> objetos) {
-		this.repository.delete(objetos);
+		this.repository.deleteAll(objetos);
 	}
 
 	@Transactional
 	public void delete(ID id) {
-		this.repository.delete(id);
+		this.repository.deleteById(id);
 	}
 
 	@Transactional
@@ -70,8 +71,8 @@ public class CrudServico<T extends Object, ID extends Serializable> {
 		this.repository.deleteAll();
 	}
 
-	public T findOne(ID id) {
-		return this.repository.findOne(id);
+	public Optional<T> findOne(ID id) {
+		return this.repository.findById(id);
 	}
 
 	public Iterable<T> findAll() {
@@ -79,7 +80,7 @@ public class CrudServico<T extends Object, ID extends Serializable> {
 	}
 
 	public Iterable<T> findAll(Iterable<ID> ids) {
-		return this.repository.findAll(ids);
+		return this.repository.findAllById(ids);
 	}
 
 	public long count() {
@@ -87,7 +88,7 @@ public class CrudServico<T extends Object, ID extends Serializable> {
 	}
 
 	public boolean exists(ID id) {
-		return this.repository.exists(id);
+		return this.repository.existsById(id);
 	}
 
 }

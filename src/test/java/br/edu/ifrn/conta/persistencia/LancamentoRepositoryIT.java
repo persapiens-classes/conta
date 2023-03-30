@@ -18,23 +18,23 @@ package br.edu.ifrn.conta.persistencia;
 
 import java.math.BigDecimal;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.ContaCredito;
 import br.edu.ifrn.conta.dominio.ContaDebito;
 import br.edu.ifrn.conta.dominio.ContaPatrimonio;
 import br.edu.ifrn.conta.dominio.Dono;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class LancamentoRepositoryIT {
 
@@ -59,7 +59,7 @@ public class LancamentoRepositoryIT {
 	@Inject
 	private LancamentoRepository lancamentoRepository;
 
-	@Before
+	@BeforeAll
 	public void deletarTodos() {
 		this.lancamentoRepository.deleteAll();
 		assertThat(this.lancamentoRepository.findAll())

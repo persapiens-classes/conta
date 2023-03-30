@@ -349,7 +349,7 @@
             <description>Define um converter para o componente.</description>
             <name>converter</name>
             <required>false</required>
-            <type>javax.faces.convert.Converter</type>
+            <type>jakarta.faces.convert.Converter</type>
         </attribute>
         <attribute>
             <description>Define o label
@@ -448,7 +448,7 @@
             <description>Converter do selectOneMenu
             </description>
             <name>converter</name>
-            <type>javax.faces.convert.Converter</type>
+            <type>jakarta.faces.convert.Converter</type>
         </attribute>
         <attribute>
             <description>Define o label
@@ -766,7 +766,7 @@
             <description>Define um converter para o componente.</description>
             <name>converter</name>
             <required>false</required>
-            <type>javax.faces.convert.Converter</type>
+            <type>jakarta.faces.convert.Converter</type>
         </attribute>
         <attribute>
             <description>id do(s) componente(s) para ser atualizado via ajax.

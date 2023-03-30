@@ -18,7 +18,8 @@ package br.edu.ifrn.conta.dominio;
 
 import java.math.BigDecimal;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -59,12 +60,14 @@ public class ContaPatrimonioTests {
 				.build());
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void descricaoIgualSemCategoria() {
-		assertThat(ContaPatrimonio.builder().descricao(CARTEIRA)
-			.build())
-			.isNotEqualTo(ContaPatrimonio.builder().descricao(POUPANCA)
-				.build());
+		NullPointerException thrown = Assertions.assertThrows(NullPointerException.class, () -> {
+			ContaPatrimonio.builder().descricao(CARTEIRA).build().equals(
+				ContaPatrimonio.builder().descricao(POUPANCA).build());
+		});
+		assertThat(thrown)
+			.isNotNull();
 	}
 
 	@Test

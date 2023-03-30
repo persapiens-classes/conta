@@ -18,8 +18,8 @@ package br.edu.ifrn.conta.dominio;
 
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 
 import lombok.AccessLevel;
 import lombok.Builder;

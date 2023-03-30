@@ -19,7 +19,7 @@ package br.edu.ifrn.conta.servico;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.Lancamento;
@@ -29,16 +29,17 @@ import br.edu.ifrn.conta.persistencia.ContaPatrimonioFabrica;
 import br.edu.ifrn.conta.persistencia.DonoFabrica;
 import br.edu.ifrn.conta.persistencia.LancamentoFabrica;
 import br.edu.ifrn.conta.persistencia.ValorInicialDoDonoNaContaPatrimonioFabrica;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class LancamentoServicoIT {
 
@@ -63,7 +64,7 @@ public class LancamentoServicoIT {
 	@Inject
 	private ContaDebitoFabrica contaDebitoFabrica;
 
-	@Before
+	@BeforeAll
 	public void deletarTodos() {
 		this.lancamentoServico.deleteAll();
 		assertThat(this.lancamentoServico.findAll())
@@ -76,9 +77,10 @@ public class LancamentoServicoIT {
 			.isNotNull();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void lancamentoComContaEntradaInvalida() {
-		Lancamento lancamento = Lancamento.builder()
+		IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			Lancamento lancamento = Lancamento.builder()
 			.contaEntrada(this.contaCreditoFabrica.estagio())
 			.contaSaida(this.contaPatrimonioFabrica.poupanca())
 			.valor(BigDecimal.TEN)
@@ -86,12 +88,16 @@ public class LancamentoServicoIT {
 			.dono(this.donoFabrica.papai())
 			.build();
 
-		this.lancamentoServico.save(lancamento);
+			this.lancamentoServico.save(lancamento);
+		});
+		assertThat(thrown)
+			.isNotNull();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void lancamentoComContaSaidaInvalida() {
-		Lancamento lancamento = Lancamento.builder()
+		IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			Lancamento lancamento = Lancamento.builder()
 			.contaEntrada(this.contaPatrimonioFabrica.poupanca())
 			.contaSaida(this.contaDebitoFabrica.gasolina())
 			.valor(BigDecimal.TEN)
@@ -99,7 +105,10 @@ public class LancamentoServicoIT {
 			.dono(this.donoFabrica.papai())
 			.build();
 
-		this.lancamentoServico.save(lancamento);
+			this.lancamentoServico.save(lancamento);
+		});
+		assertThat(thrown)
+			.isNotNull();
 	}
 
 	@Test

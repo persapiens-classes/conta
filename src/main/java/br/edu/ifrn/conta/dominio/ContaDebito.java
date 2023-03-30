@@ -16,7 +16,7 @@
 
 package br.edu.ifrn.conta.dominio;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import lombok.AccessLevel;
 import lombok.Builder;

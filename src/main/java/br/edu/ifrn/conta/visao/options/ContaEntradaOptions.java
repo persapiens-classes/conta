@@ -19,9 +19,9 @@ package br.edu.ifrn.conta.visao.options;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.bean.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import br.edu.ifrn.conta.dominio.Conta;
 import br.edu.ifrn.conta.servico.ContaDebitoServico;

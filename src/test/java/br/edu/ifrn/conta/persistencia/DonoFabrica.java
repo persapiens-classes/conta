@@ -16,8 +16,8 @@
 
 package br.edu.ifrn.conta.persistencia;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import br.edu.ifrn.conta.dominio.Dono;
 
