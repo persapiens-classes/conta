@@ -19,7 +19,8 @@ package br.edu.ifrn.conta.dominio;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -61,10 +62,14 @@ public class ContaDebitoTests {
 				.build());
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void descricaoIgualIgualSemCategoria() {
-		assertThat(ContaDebito.builder().descricao(GASOLINA).build())
-			.isEqualTo(ContaDebito.builder().descricao(GASOLINA).build());
+		NullPointerException thrown = Assertions.assertThrows(NullPointerException.class, () -> {
+			ContaDebito.builder().descricao(GASOLINA).build().equals(
+				ContaDebito.builder().descricao(GASOLINA).build());
+		});
+		assertThat(thrown)
+			.isNotNull();
 	}
 
 	@Test

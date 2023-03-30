@@ -16,7 +16,7 @@
 
 package br.edu.ifrn.conta.servico;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 import br.edu.ifrn.conta.dominio.ContaDebito;
 

@@ -19,8 +19,8 @@ package br.edu.ifrn.conta.persistencia;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import br.edu.ifrn.conta.dominio.Conta;
 import br.edu.ifrn.conta.dominio.Dono;

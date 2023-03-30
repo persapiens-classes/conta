@@ -16,8 +16,8 @@
 
 package br.edu.ifrn.conta.visao.crud;
 
-import javax.faces.bean.ViewScoped;
-import javax.inject.Named;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 
 import br.edu.ifrn.conta.dominio.Dono;
 

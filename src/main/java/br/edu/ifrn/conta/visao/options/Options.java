@@ -20,9 +20,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.convert.Converter;
-import javax.faces.model.SelectItem;
-import javax.inject.Inject;
+import jakarta.faces.convert.Converter;
+import jakarta.faces.model.SelectItem;
+import jakarta.inject.Inject;
 
 import br.edu.ifrn.conta.servico.CrudServico;
 import br.edu.ifrn.conta.visao.AbstractMBean;
