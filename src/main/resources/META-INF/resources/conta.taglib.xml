@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <facelet-taglib 
-    version="2.2" 
-    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    version="4.0" 
+    xmlns="https://jakarta.ee/xml/ns/jakartaee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facelettaglibrary_2_2.xsd">
-    <namespace>http://ifrn.edu.br/conta</namespace>
+    xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-facelettaglibrary_4_0.xsd">
+    <namespace>https://ifrn.edu.br/conta</namespace>
     <composite-library-name>conta</composite-library-name>
     <tag>
         <description>Título do conteúdo. &lt;br/&gt;
