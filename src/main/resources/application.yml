@@ -14,7 +14,14 @@
 #    hibernate:
 #      ddl-auto: update
 #    show-sql: true
+spring:
+  devtools:
+    restart:
+      enabled: true
 joinfaces:
+  faces:
+    project-stage: Development
+    facelets-refresh-period: 0  
   primefaces:
     theme: saga
 info:
