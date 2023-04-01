@@ -96,6 +96,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>		
         <!--
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -146,17 +150,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <executable>true</executable>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>com.mysema.maven</groupId>
@@ -168,7 +161,7 @@
     <name>conta</name>
     <description>Conta do Desenvolvimento de Sistemas Corporativos</description>
     <url>https://github.com/persapiens/conta</url>
-    <inceptionYear>2016</inceptionYear>
+    <inceptionYear>2023</inceptionYear>
 
     <!-- Issue Managment -->
     <issueManagement>
