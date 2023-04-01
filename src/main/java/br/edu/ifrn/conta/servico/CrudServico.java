@@ -42,7 +42,7 @@ public class CrudServico<T extends Object, ID extends Serializable> {
 	}
 
 	@Transactional
-	public <S extends T> Iterable<S> save(Iterable<S> objetos) {
+	public <S extends T> Iterable<S> saveAll(Iterable<S> objetos) {
 		return this.repository.saveAll(objetos);
 	}
 
@@ -52,12 +52,12 @@ public class CrudServico<T extends Object, ID extends Serializable> {
 	}
 
 	@Transactional
-	public void delete(Iterable<? extends T> objetos) {
+	public void deleteAll(Iterable<? extends T> objetos) {
 		this.repository.deleteAll(objetos);
 	}
 
 	@Transactional
-	public void delete(ID id) {
+	public void deleteById(ID id) {
 		this.repository.deleteById(id);
 	}
 
@@ -71,7 +71,7 @@ public class CrudServico<T extends Object, ID extends Serializable> {
 		this.repository.deleteAll();
 	}
 
-	public Optional<T> findOne(ID id) {
+	public Optional<T> findById(ID id) {
 		return this.repository.findById(id);
 	}
 
@@ -79,7 +79,7 @@ public class CrudServico<T extends Object, ID extends Serializable> {
 		return this.repository.findAll();
 	}
 
-	public Iterable<T> findAll(Iterable<ID> ids) {
+	public Iterable<T> findAllById(Iterable<ID> ids) {
 		return this.repository.findAllById(ids);
 	}
 
@@ -87,7 +87,7 @@ public class CrudServico<T extends Object, ID extends Serializable> {
 		return this.repository.count();
 	}
 
-	public boolean exists(ID id) {
+	public boolean existsById(ID id) {
 		return this.repository.existsById(id);
 	}
 

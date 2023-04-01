@@ -51,7 +51,7 @@ public class DonoServicoIT {
 		Dono dono = this.donoFabrica.mamae();
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.donoServico.findOne(dono.getId()))
+		assertThat(this.donoServico.findById(dono.getId()))
 			.isEqualTo(dono);
 	}
 
@@ -64,7 +64,7 @@ public class DonoServicoIT {
 		this.donoServico.delete(dono);
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.donoServico.findOne(dono.getId()))
+		assertThat(this.donoServico.findById(dono.getId()))
 			.isNull();
 	}
 
