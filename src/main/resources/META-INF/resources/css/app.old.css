@@ -2,8 +2,8 @@
     padding: 0 !important;
 }
 
-#contentLayoutPanel_content{    
- padding: 0 !important;       
+#contentLayoutPanel_content{
+    padding: 0 !important;
 }
 /* ------------------ */
 
@@ -106,8 +106,8 @@ h4 {
 }
 
 #page table{
-	font-size: 12px !important;
-	font-family: Arial, Helvetica, sans-serif !important;
+    font-size: 12px !important;
+    font-family: Arial, Helvetica, sans-serif !important;
 }
 
 /* body > contentForm > page > layout > tituloAtividade > title */
@@ -200,16 +200,16 @@ h4 {
 
 /* colocando a quebra de linha na tabela */
 .ui-datatable tbody td, .ui-datatable tfoot td {
-  white-space: normal !important;
+    white-space: normal !important;
 }
 
 .middleTitle {
-    float: left; 
+    float: left;
     width: 74%;
 }
 
 .input_mask_readonly{
-	background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
     border: 0 none !important;
     box-shadow: none !important;
     color: #000 !important;
@@ -217,9 +217,9 @@ h4 {
 }
 
 .input_textarea_readonly{
-	background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
-	color: #000 !important;
-	box-shadow: none !important;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+    color: #000 !important;
+    box-shadow: none !important;
 }
 
 .ui-datatable table {
@@ -227,19 +227,34 @@ h4 {
 }
 
 .ambienteExecucao {
-	position: absolute;
-	top: 20px;
-	color: red;
-	font-size: 40px;
+    position: absolute;
+    top: 20px;
+    color: red;
+    font-size: 40px;
     text-align: center;
     width: 100%;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .nomeSistema {
-	position: absolute;
-	top: 20px;
-	color: darkblue;
-	font-size: 50px;
+    position: absolute;
+    top: 20px;
+    color: darkblue;
+    font-size: 50px;
     text-align: left;
     width: 100%;
 }

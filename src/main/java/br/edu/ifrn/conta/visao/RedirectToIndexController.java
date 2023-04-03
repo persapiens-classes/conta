@@ -29,6 +29,6 @@ public class RedirectToIndexController  {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String redirect() {
-		return "redirect:index.faces";
+		return "redirect:dono.faces";
 	}
 }

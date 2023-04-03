@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:ui="jakarta.faces.facelets"
+    xmlns:h="jakarta.faces.html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="https://ifrn.edu.br/conta"
+    template="/layout/template.xhtml">
+    <ui:define name="content" >
+        <c:crud title="Lançamento" managedBean="#{lancamentoCrudMBean}">
+            <ui:define name="listColumns">
+                <p:column headerText="Data" sortBy="#{bean.data}" >
+                    <c:date pattern="dd/MM/yyyy HH:mm:ss" readonly="true" value="#{bean.data}" />
+                </p:column>
+                <p:column headerText="Dono" sortBy="#{bean.dono.descricao}" 
+                          filterBy="#{bean.dono.id}" filterOptions="#{donoOptions.emptyOptions}" filterMatchMode="exact">
+                    <h:outputText value="#{bean.dono.descricao}" />
+                </p:column>
+                <p:column headerText="Conta Entrada" sortBy="#{bean.contaEntrada.descricao}" 
+                          filterBy="#{bean.contaEntrada.id}" filterOptions="#{contaEntradaOptions.emptyOptions}" filterMatchMode="exact">
+                    <h:outputText value="#{bean.contaEntrada.descricao}" />
+                </p:column>
+                <p:column headerText="Conta Saída" sortBy="#{bean.contaSaida.descricao}" 
+                          filterBy="#{bean.contaSaida.id}" filterOptions="#{contaSaidaOptions.emptyOptions}" filterMatchMode="exact">
+                    <h:outputText value="#{bean.contaSaida.descricao}" />
+                </p:column>
+                <p:column headerText="Valor" sortBy="#{bean.valor}" >
+                    <c:currency readonly="true" value="#{bean.valor}" />
+                </p:column>
+                <p:column headerText="Descrição" sortBy="#{bean.descricao}" filterBy="#{bean.descricao}" >
+                    <h:outputText value="#{bean.descricao}" />
+                </p:column>
+            </ui:define>
+            <ui:define name="detail">
+                <h:panelGrid columns="2" cellpadding="3">
+                    <c:date pattern="dd/MM/yyyy HH:mm:ss" readonly="true" value="#{lancamentoCrudMBean.bean.data}" label="Data"/>
+                    <c:text readonly="true" value="#{lancamentoCrudMBean.bean.dono.descricao}" label="Dono" />
+                    <c:text readonly="true" value="#{lancamentoCrudMBean.bean.contaEntrada.descricao}" label="Conta de Entrada"/>
+                    <c:text readonly="true" value="#{lancamentoCrudMBean.bean.contaSaida.descricao}" label="Conta de Saída"/>
+                    <c:currency readonly="true" value="#{lancamentoCrudMBean.bean.valor}" label="Valor" />
+                    <c:text readonly="true" value="#{lancamentoCrudMBean.bean.descricao}" label="Descrição" />
+                </h:panelGrid>
+            </ui:define>
+            <ui:define name="insert">
+                <h:panelGrid columns="2" cellpadding="3">
+                    <c:date required="true" pattern="dd/MM/yyyy HH:mm:ss" value="#{lancamentoCrudMBean.bean.data}" label="Data"/>
+                    <c:select id="dono" required="true" value="#{lancamentoCrudMBean.bean.dono}" label="Dono" options="#{donoOptions}"/>
+                    <c:select id="contaEntrada" required="true" value="#{lancamentoCrudMBean.bean.contaEntrada}" label="Conta de Entrada" options="#{contaEntradaOptions}"/>
+                    <c:select id="contaSaida" required="true" value="#{lancamentoCrudMBean.bean.contaSaida}" label="Conta de Saída" options="#{contaSaidaOptions}"/>
+                    <c:currency id="insertCurrency" required="true" value="#{lancamentoCrudMBean.bean.valor}" label="Valor" />
+                    <c:text id="descricao" value="#{lancamentoCrudMBean.bean.descricao}" label="Descrição" />
+                </h:panelGrid>                
+            </ui:define>
+            <ui:define name="update">
+                <h:panelGrid columns="2" cellpadding="3">
+                    <c:date id="updateDate" required="true" pattern="dd/MM/yyyy HH:mm:ss" value="#{lancamentoCrudMBean.bean.data}" label="Data"/>
+                    <c:select required="true" value="#{lancamentoCrudMBean.bean.dono}"
+                              label="Dono" options="#{donoOptions}"/>
+                    <c:select required="true" value="#{lancamentoCrudMBean.bean.contaEntrada}" label="Conta de Entrada" options="#{contaEntradaOptions}"/>
+                    <c:select required="true" value="#{lancamentoCrudMBean.bean.contaSaida}" label="Conta de Saída" options="#{contaSaidaOptions}"/>
+                    <c:currency id="updateCurrency" required="true" value="#{lancamentoCrudMBean.bean.valor}" label="Valor" />
+                    <c:text value="#{lancamentoCrudMBean.bean.descricao}" label="Descrição" />
+                </h:panelGrid>                
+            </ui:define>
+        </c:crud>
+    </ui:define>
+</ui:composition>
