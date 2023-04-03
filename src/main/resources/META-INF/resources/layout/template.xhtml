@@ -6,21 +6,20 @@
       xmlns:ui="jakarta.faces.facelets">
 
     <f:view contentType="text/html">
-
         <h:head>            
-            <ui:include src="layout/headLayout.xhtml" />
+            <ui:include src="headLayout.xhtml" />
         </h:head>
 
         <h:body>            
-            <ui:include src="layout/headerLayout.xhtml" />
+            <ui:include src="headerLayout.xhtml" />
 
             <h:form id="contentForm" prependId="false" enctype="#{enctype}">
-                <ui:include src="layout/menuLayout.xhtml" />
+                <ui:include src="menuLayout.xhtml" />
 
-                <ui:include src="layout/contentLayout.xhtml" />
+                <ui:include src="contentLayout.xhtml" />
             </h:form>
 
-            <ui:include src="layout/footerLayout.xhtml" />
+            <ui:include src="footerLayout.xhtml" />
         </h:body>
     </f:view>
 </html>

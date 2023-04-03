@@ -20,7 +20,7 @@
             <span style="float:left;">
                 <p:commandButton
                     rendered="#{(managedBean.visualizationMode == 'LIST') and showInsert}" id="startInsertCommandButton"
-                    title="Incluir" icon="ui-icon-plusthick"
+                    title="Incluir" icon="pi pi-plus"
                     style="padding: 4px 4px 4px 4px; width: 38px;"
                     action="#{managedBean.startInsertAction}"
                     process="@this"
@@ -32,19 +32,9 @@
 
             <ui:insert name="middleTitle"></ui:insert>
 
-            <c:set var="dataExporterEncoding" value="#{empty dataExporterEncoding ? 'iso-8859-1' : dataExporterEncoding}" />
+            <c:set var="dataExporterEncoding" value="#{empty dataExporterEncoding ? 'utf-8' : dataExporterEncoding}" />
 
             <span style="float:right;padding-right: 20px;">
-                <h:commandLink title="excel" rendered="#{(managedBean.visualizationMode == 'LIST') and showList}">  
-                    <p:graphicImage value="#{resource['images/excel.png']}" width="23px"/>  
-                    <p:dataExporter type="xls" target="datatable" fileName="planilha" encoding="#{dataExporterEncoding}" postProcessor="#{managedBean.postProcessXLS}" />  
-                </h:commandLink>
-
-                <h:commandLink title="pdf" rendered="#{(managedBean.visualizationMode == 'LIST') and showList}">  
-                    <p:graphicImage value="#{resource['images/pdf.png']}" width="23px"/>  
-                    <p:dataExporter type="pdf" target="datatable" fileName="planilha" encoding="#{dataExporterEncoding}" preProcessor="#{managedBean.preProcessPDF}"/>  
-                </h:commandLink>  
-
                 <h:commandLink title="csv" rendered="#{(managedBean.visualizationMode == 'LIST') and showList}">  
                     <p:graphicImage value="#{resource['images/csv.png']}" width="23px"/>  
                     <p:dataExporter type="csv" target="datatable" fileName="planilha" encoding="#{dataExporterEncoding}" />  
@@ -106,56 +96,60 @@
                     <p:column headerText="Ações" styleClass="#{listActionLinksStyleClass}" rendered="#{showActionLinksColumn}" exportable="false">
                         <ui:insert name="listActionLinks"></ui:insert>
 
-                        <p:commandLink
+                        <p:commandButton
                             title="Remover"
                             rendered="#{showDeleteActionLink and !managedBean.alarmOnDelete(bean)}"
                             action="#{managedBean.deleteAction(visualizationModeAfterDelete)}"
-                            value=" " styleClass="ui-icon ui-icon-trash"
+                            value="Remover" styleClass="pi pi-trash"
                             update="@form" ajax="true"
                             process="@this"
                             disabled="#{!managedBean.isCheckBeforeDelete(bean)}">
                             <f:setPropertyActionListener
                                 target="#{managedBean.bean}"
                                 value="#{bean}" />
-                        </p:commandLink>
+                        </p:commandButton>
 
-                        <p:commandLink
+                        <p:commandButton
                             title="Remover"
                             rendered="#{showDeleteActionLink and managedBean.alarmOnDelete(bean)}"
                             oncomplete="PF('confirmationDelete').show()"
-                            value=" " styleClass="ui-icon ui-icon-trash"
+                            value="Remover" icon="pi pi-trash"
                             process="@this"
                             disabled="#{!managedBean.isCheckBeforeDelete(bean)}">
                             <f:setPropertyActionListener
                                 target="#{managedBean.bean}"
                                 value="#{bean}" />                        
-                        </p:commandLink>
+                        </p:commandButton>
 
-                        <p:commandLink
+                        <p:spacer width="10px" rendered="#{managedBean.isCheckBeforeDelete(bean)}"/>
+
+                        <p:commandButton
                             title="Alterar"
                             action="#{managedBean.startUpdateAction}"
                             rendered="#{showUpdateActionLink}"
                             disabled="#{not managedBean.isCheckStartUpdate(bean)}"
-                            value=" " styleClass="ui-icon ui-icon-pencil"
+                            value="Alterar" icon="pi pi-pencil"
                             process="@this"
                             update="@form" ajax="true">
                             <f:setPropertyActionListener
                                 target="#{managedBean.bean}"
                                 value="#{bean}" />
-                        </p:commandLink>
+                        </p:commandButton>
 
-                        <p:commandLink
+                        <p:spacer width="10px"/>
+
+                        <p:commandButton
                             title="Visualizar"
                             action="#{managedBean.startDetailAction}"
                             rendered="#{showDetailActionLink}"
                             disabled="#{not managedBean.isDetailable(bean)}" 
-                            value=" " styleClass="ui-icon ui-icon-search"
+                            value="Visualizar" icon="pi pi-search"
                             process="@this"
                             update="@form" ajax="true">
                             <f:setPropertyActionListener
                                 target="#{managedBean.bean}"
                                 value="#{bean}" />
-                        </p:commandLink>
+                        </p:commandButton>
                     </p:column>
                 </p:dataTable>
                 
