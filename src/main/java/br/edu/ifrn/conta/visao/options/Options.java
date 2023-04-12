@@ -36,6 +36,8 @@ import org.omnifaces.converter.ListConverter;
  */
 public abstract class Options<T, ID extends Serializable> extends AbstractMBean {
 
+        private static final int serialVersionUID = 1;
+    
 	private boolean listCreated = false;
 
 	private CrudServico<T, ID> service;
