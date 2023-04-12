@@ -25,7 +25,6 @@ import jakarta.inject.Named;
 
 import br.edu.ifrn.conta.dominio.Conta;
 import br.edu.ifrn.conta.servico.ContaCreditoServico;
-import br.edu.ifrn.conta.servico.ContaPatrimonioServico;
 
 /**
  * Options de ContaSaida.
@@ -33,32 +32,15 @@ import br.edu.ifrn.conta.servico.ContaPatrimonioServico;
  */
 @ViewScoped
 @Named
-public class ContaSaidaOptions extends Options<Conta, Long> {
+public class ContaSaidaOptions extends AbstractContaOptions {
 
 	private static final long serialVersionUID = 1L;
 
 	private transient ContaCreditoServico contaCreditoServico;
 
-	private transient ContaPatrimonioServico contaPatrimonioServico;
-
 	@Inject
 	public void setContaCreditoServico(ContaCreditoServico contaCreditoServico) {
 		this.contaCreditoServico = contaCreditoServico;
-	}
-
-	@Inject
-	public void setContaPatrimonioServico(ContaPatrimonioServico contaPatrimonioServico) {
-		this.contaPatrimonioServico = contaPatrimonioServico;
-	}
-
-	@Override
-	public String label(Conta e) {
-		return e.getDescricao() + " - " + e.getCategoria().getDescricao();
-	}
-
-	@Override
-	protected Object key(Conta e) {
-		return e.getId();
 	}
 
 	@Override
@@ -66,7 +48,7 @@ public class ContaSaidaOptions extends Options<Conta, Long> {
 		List<Conta> result = new ArrayList<>();
 
 		result.addAll(toList(this.contaCreditoServico.findAll()));
-		result.addAll(toList(this.contaPatrimonioServico.findAll()));
+		result.addAll(toList(getContaPatrimonioServico().findAll()));
 
 		return result;
 	}
