@@ -16,41 +16,36 @@
 
 package br.edu.ifrn.conta.visao.options;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
-import jakarta.inject.Named;
 
 import br.edu.ifrn.conta.dominio.Conta;
-import br.edu.ifrn.conta.servico.ContaDebitoServico;
+import br.edu.ifrn.conta.servico.ContaPatrimonioServico;
+import lombok.Getter;
 
 /**
- * Options de ContaEntrada.
+ * Options de Conta abstrata.
  * @author Marcelo Fernandes
  */
-@ViewScoped
-@Named
-public class ContaEntradaOptions extends AbstractContaOptions {
+public abstract class AbstractContaOptions extends Options<Conta, Long> {
 
 	private static final long serialVersionUID = 1L;
 
-	private transient ContaDebitoServico contaDebitoServico;
+        @Getter
+	private transient ContaPatrimonioServico contaPatrimonioServico;
 
 	@Inject
-	public void setContaDebitoServico(ContaDebitoServico contaDebitoServico) {
-		this.contaDebitoServico = contaDebitoServico;
+	public void setContaPatrimonioServico(ContaPatrimonioServico contaPatrimonioServico) {
+		this.contaPatrimonioServico = contaPatrimonioServico;
 	}
 
 	@Override
-	protected List<Conta> fillList() {
-		List<Conta> result = new ArrayList<>();
+	public String label(Conta e) {
+		return e.getDescricao() + " - " + e.getCategoria().getDescricao();
+	}
 
-		result.addAll(toList(this.contaDebitoServico.findAll()));
-		result.addAll(toList(getContaPatrimonioServico().findAll()));
-
-		return result;
+	@Override
+	protected Object key(Conta e) {
+		return e.getId();
 	}
 
 }
