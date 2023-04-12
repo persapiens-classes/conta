@@ -112,7 +112,7 @@ public abstract class AbstractMBean implements Serializable {
 	}
 
 	protected boolean empty(String s) {
-		return s == null || s.trim().isEmpty();
+		return s == null || s.isEmpty();
 	}
 
 	@SuppressWarnings("rawtypes")
