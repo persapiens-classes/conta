@@ -52,4 +52,14 @@
                 <exec.appArgs></exec.appArgs>
             </properties>
         </action>
+        <action>
+            <actionName>CUSTOM-pmd</actionName>
+            <displayName>pmd</displayName>
+            <goals>
+                <goal>verify</goal>
+            </goals>
+            <activatedProfiles>
+                <activatedProfile>check-pmd</activatedProfile>
+            </activatedProfiles>
+        </action>
     </actions>
