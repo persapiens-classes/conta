@@ -17,7 +17,7 @@
 package br.edu.ifrn.conta.servico;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -66,7 +66,7 @@ public class LancamentoServico extends CrudServico<Lancamento, Long> {
 				+ donoDebito + " = " + donoCredito);
 		}
 
-		Date data = new Date();
+		LocalDateTime data = LocalDateTime.now();
 
 		Lancamento lancamentoComDespesa = Lancamento.builder()
 			.contaEntrada(contaDebito)

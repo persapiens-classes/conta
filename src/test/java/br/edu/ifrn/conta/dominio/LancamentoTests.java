@@ -17,7 +17,7 @@
 package br.edu.ifrn.conta.dominio;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -35,7 +35,7 @@ public class LancamentoTests {
 	private static final String CARTEIRA = "carteira";
 	private static final String DESCRICAO_POSTO_PREDILETO = "comprar gasolina no Posto Predileto";
 
-	private Lancamento lancamento(Date data, BigDecimal valor, String descricaoDono, String descricao) {
+	private Lancamento lancamento(LocalDateTime data, BigDecimal valor, String descricaoDono, String descricao) {
 		return Lancamento.builder()
 			.descricao(descricao)
 			.dono(Dono.builder().descricao(descricaoDono).build())
@@ -52,7 +52,7 @@ public class LancamentoTests {
 
 	@Test
 	public void donoValorDataContaEntradaContaSaidaIguaisComDescricaoDiferente() {
-		Date hoje = new Date();
+		LocalDateTime hoje = LocalDateTime.now();
 
 		Lancamento lancamentoGasolina1 = lancamento(hoje, new BigDecimal(100), PAPAI, DESCRICAO_POSTO_PREDILETO);
 		Lancamento lancamentoGasolina2 = lancamento(hoje, new BigDecimal(100), PAPAI, "outra descrição qualquer");
@@ -62,7 +62,7 @@ public class LancamentoTests {
 
 	@Test
 	public void donoValorDataContaEntradaContaSaidaDescricaoIguaisComValorDiferente() {
-		Date hoje = new Date();
+		LocalDateTime hoje = LocalDateTime.now();
 
 		Lancamento lancamentoGasolina1 = lancamento(hoje, new BigDecimal(200), PAPAI, DESCRICAO_POSTO_PREDILETO);
 		Lancamento lancamentoGasolina2 = lancamento(hoje, new BigDecimal(100), PAPAI, DESCRICAO_POSTO_PREDILETO);
@@ -74,8 +74,8 @@ public class LancamentoTests {
 	public void compareToComDatasDiferentes() {
 		Set<Lancamento> lancamentos = new TreeSet<>();
 
-		Lancamento lancamentoGasolina1 = lancamento(new Date(), new BigDecimal(100), PAPAI, DESCRICAO_POSTO_PREDILETO);
-		Lancamento lancamentoGasolina2 = lancamento(new Date(), new BigDecimal(100), PAPAI, DESCRICAO_POSTO_PREDILETO);
+		Lancamento lancamentoGasolina1 = lancamento(LocalDateTime.now(), new BigDecimal(100), PAPAI, DESCRICAO_POSTO_PREDILETO);
+		Lancamento lancamentoGasolina2 = lancamento(LocalDateTime.now(), new BigDecimal(100), PAPAI, DESCRICAO_POSTO_PREDILETO);
 		lancamentos.add(lancamentoGasolina2);
 		lancamentos.add(lancamentoGasolina1);
 
@@ -84,7 +84,7 @@ public class LancamentoTests {
 
 	@Test
 	public void compareToComValoresDiferentes() {
-		Date hoje = new Date();
+		LocalDateTime hoje = LocalDateTime.now();
 
 		Set<Lancamento> lancamentos = new TreeSet<>();
 
@@ -98,7 +98,7 @@ public class LancamentoTests {
 
 	@Test
 	public void compareToComDonosDiferentes() {
-		Date hoje = new Date();
+		LocalDateTime hoje = LocalDateTime.now();
 
 		Set<Lancamento> lancamentos = new TreeSet<>();
 

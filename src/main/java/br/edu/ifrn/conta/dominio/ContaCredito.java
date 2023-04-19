@@ -26,10 +26,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Conta Credito entity.
  * @author Marcelo Fernandes
  */
+@SuppressFBWarnings({"EI_EXPOSE_REP2"})	
 @Getter
 @Setter
 @ToString(callSuper = true)

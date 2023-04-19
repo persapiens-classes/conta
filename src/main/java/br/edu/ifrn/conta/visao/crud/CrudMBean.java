@@ -30,6 +30,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.PrimeFaces;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Managed Bean abstrato de crud.
  * @param <T> tipo do bean
@@ -64,6 +66,7 @@ public abstract class CrudMBean<T extends Object, ID extends Serializable>
 
 	private CrudServico<T, ID> service;
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP2"})	
 	@Inject
 	public void setService(CrudServico<T, ID> service) {
 		this.service = service;
@@ -79,6 +82,7 @@ public abstract class CrudMBean<T extends Object, ID extends Serializable>
 		setVisualizationMode(LIST);
 	}
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP"})	
 	public final List<T> getBeanList() {
 		try {
 			if (this.beanList == null) {
@@ -91,6 +95,7 @@ public abstract class CrudMBean<T extends Object, ID extends Serializable>
 		return this.beanList;
 	}
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP", "EI_EXPOSE_REP2"})	
 	@Getter
 	private List<T> filteredBeanList = null;
 

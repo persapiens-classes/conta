@@ -37,6 +37,8 @@ import lombok.Setter;
 import lombok.Singular;
 import lombok.ToString;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Dono entity.
  * @author Marcelo Fernandes
@@ -61,10 +63,12 @@ public class Dono implements Serializable, Comparable<Dono> {
 	@Column(nullable = false, unique = true)
 	private String descricao;
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP", "EI_EXPOSE_REP2"})
 	@Singular
 	@OneToMany(mappedBy = "dono")
 	private Set<Lancamento> lancamentos;
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP", "EI_EXPOSE_REP2"})
 	@Singular("valorInicialNaContaPatrimonio")
 	@OneToMany(mappedBy = "dono")
 	private Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisNasContasPatrimonio;

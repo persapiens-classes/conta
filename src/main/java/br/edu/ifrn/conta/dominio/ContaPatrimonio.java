@@ -30,10 +30,13 @@ import lombok.Setter;
 import lombok.Singular;
 import lombok.ToString;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Conta Patrimonio entity.
  * @author Marcelo Fernandes
  */
+@SuppressFBWarnings({"EI_EXPOSE_REP2"})	
 @Getter
 @Setter
 @ToString(callSuper = true, exclude = "valoresIniciaisDosDonos")
@@ -50,6 +53,7 @@ public class ContaPatrimonio extends Conta {
 		this.valoresIniciaisDosDonos = valoresIniciaisDosDonos;
 	}
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP", "EI_EXPOSE_REP2"})
 	@OneToMany(mappedBy = "contaPatrimonio")
 	private Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisDosDonos;
 

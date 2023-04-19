@@ -38,10 +38,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Valor Inicial do Dono na Conta Patrimonio entity.
  * @author Marcelo Fernandes
  */
+@SuppressFBWarnings({"EI_EXPOSE_REP2"})	
 @Getter
 @Setter
 @ToString
@@ -62,10 +65,12 @@ public class ValorInicialDoDonoNaContaPatrimonio implements Serializable, Compar
 	@Column(nullable = false)
 	private BigDecimal valorInicial;
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP"})	
 	@ManyToOne
 	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_valorInicial_dono"))
 	private Dono dono;
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP"})	
 	@ManyToOne
 	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_valorInicial_contaPatrimonio"))
 	private ContaPatrimonio contaPatrimonio;

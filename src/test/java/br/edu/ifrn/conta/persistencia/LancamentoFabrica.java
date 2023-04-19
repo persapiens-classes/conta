@@ -17,7 +17,7 @@
 package br.edu.ifrn.conta.persistencia;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -36,7 +36,7 @@ public class LancamentoFabrica {
 		Lancamento lancamento = Lancamento.builder()
 			.contaEntrada(contaEntrada)
 			.contaSaida(contaSaida)
-			.data(new Date())
+			.data(LocalDateTime.now())
 			.dono(dono)
 			.valor(valor.setScale(2))
 			.build();
