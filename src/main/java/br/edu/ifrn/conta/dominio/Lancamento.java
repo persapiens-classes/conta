@@ -18,7 +18,7 @@ package br.edu.ifrn.conta.dominio;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,10 +41,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Lancamento entity.
  * @author Marcelo Fernandes
  */
+@SuppressFBWarnings({"EI_EXPOSE_REP2"})	
 @Getter
 @Setter
 @ToString
@@ -62,14 +65,17 @@ public class Lancamento implements Serializable, Comparable<Lancamento> {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
 	private Long id;
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP", "EI_EXPOSE_REP2"})	
 	@ManyToOne
 	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_lancamento_dono"))
 	private Dono dono;
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP", "EI_EXPOSE_REP2"})	
 	@ManyToOne
 	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_lancamento_contaEntrada"))
 	private Conta contaEntrada;
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP", "EI_EXPOSE_REP2"})	
 	@ManyToOne
 	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_lancamento_contaSaida"))
 	private Conta contaSaida;
@@ -79,7 +85,7 @@ public class Lancamento implements Serializable, Comparable<Lancamento> {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false)
-	private Date data;
+	private LocalDateTime data;
 
 	private String descricao;
 

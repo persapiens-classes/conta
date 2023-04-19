@@ -37,6 +37,8 @@ import lombok.Setter;
 import lombok.Singular;
 import lombok.ToString;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Categoria entity.
  * @author Marcelo Fernandes
@@ -61,6 +63,7 @@ public class Categoria implements Serializable, Comparable<Categoria> {
 	@Column(nullable = false, unique = true)
 	private String descricao;
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP", "EI_EXPOSE_REP2"})
 	@Singular
 	@OneToMany(mappedBy = "categoria")
 	private Set<Conta> contas;

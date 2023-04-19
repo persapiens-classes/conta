@@ -28,6 +28,8 @@ import br.edu.ifrn.conta.servico.CrudServico;
 import br.edu.ifrn.conta.visao.AbstractMBean;
 import org.omnifaces.converter.ListConverter;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Options de entidades.
  * @param <ID> tipo da chave da entidade.
@@ -40,6 +42,7 @@ public abstract class Options<T, ID extends Serializable> extends AbstractMBean 
 
 	private CrudServico<T, ID> service;
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP2"})	
 	@Inject
 	public void setService(CrudServico<T, ID> service) {
 		this.service = service;
@@ -81,6 +84,7 @@ public abstract class Options<T, ID extends Serializable> extends AbstractMBean 
 
 	private transient ListConverter listConverter;
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP"})	
 	public Converter getListConverter() {
 		verify();
 
@@ -94,12 +98,14 @@ public abstract class Options<T, ID extends Serializable> extends AbstractMBean 
 
 	private List<T> list;
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP2"})	
 	public void setList(List<T> list) {
 		this.list = list;
 
 		clear();
 	}
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP"})	
 	public final List<T> getList() {
 		verify();
 
@@ -117,6 +123,7 @@ public abstract class Options<T, ID extends Serializable> extends AbstractMBean 
 		return result;
 	}
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP"})	
 	public final List<SelectItem> getOptions() {
 		verify();
 
@@ -132,6 +139,7 @@ public abstract class Options<T, ID extends Serializable> extends AbstractMBean 
 		return result;
 	}
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP"})	
 	public final List<SelectItem> getEmptyOptions() {
 		verify();
 

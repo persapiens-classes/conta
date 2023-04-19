@@ -24,6 +24,8 @@ import jakarta.inject.Inject;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Implementacao padrao de servico crud delegando a implementacao para o
  * repositorio.
@@ -36,6 +38,7 @@ public class CrudServico<T extends Object, ID extends Serializable> {
 
 	private CrudRepository<T, ID> repository;
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP2"})	
 	@Inject
 	public void setRepositorio(CrudRepository<T, ID> repository) {
 		this.repository = repository;

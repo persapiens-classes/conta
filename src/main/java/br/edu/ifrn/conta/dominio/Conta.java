@@ -39,6 +39,8 @@ import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Conta abstrata entity.
  * @author Marcelo Fernandes
@@ -63,6 +65,7 @@ public abstract class Conta implements Serializable, Comparable<Conta> {
 	@Column(nullable = false, unique = true)
 	private String descricao;
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP", "EI_EXPOSE_REP2"})
 	@NonNull
 	@ManyToOne
 	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_conta_categoria"))

@@ -27,6 +27,8 @@ import br.edu.ifrn.conta.dominio.Conta;
 import br.edu.ifrn.conta.servico.ContaCreditoServico;
 import br.edu.ifrn.conta.servico.ContaPatrimonioServico;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Options de ContaSaida.
  * @author Marcelo Fernandes
@@ -41,11 +43,13 @@ public class ContaSaidaOptions extends Options<Conta, Long> {
 
 	private transient ContaPatrimonioServico contaPatrimonioServico;
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP2"})	
 	@Inject
 	public void setContaCreditoServico(ContaCreditoServico contaCreditoServico) {
 		this.contaCreditoServico = contaCreditoServico;
 	}
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP2"})	
 	@Inject
 	public void setContaPatrimonioServico(ContaPatrimonioServico contaPatrimonioServico) {
 		this.contaPatrimonioServico = contaPatrimonioServico;

@@ -27,6 +27,8 @@ import br.edu.ifrn.conta.dominio.QLancamento;
 import com.querydsl.jpa.JPQLQueryFactory;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * CrudRepository customizado.
  * @author Marcelo Fernandes
@@ -37,6 +39,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryCustom {
 
 	private final ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;
 
+	@SuppressFBWarnings({"EI_EXPOSE_REP2"})	
 	@Inject
 	public LancamentoRepositoryImpl(EntityManager entityManager, ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository) {
 		this.entityManager = entityManager;
