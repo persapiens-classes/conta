@@ -21,6 +21,8 @@
         <joinfaces.version>5.0.5</joinfaces.version>
         <querydsl.version>5.0.0</querydsl.version>
         <apt-maven-plugin.version>1.1.3</apt-maven-plugin.version>
+
+        <spotbugs-maven-plugin.version>4.7.3.4</spotbugs-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -138,6 +140,17 @@
                         </execution>
                     </executions>
                 </plugin>                
+                <plugin>
+                    <groupId>com.github.spotbugs</groupId>
+                    <artifactId>spotbugs-maven-plugin</artifactId>
+                    <version>${spotbugs-maven-plugin.version}</version>
+                    <configuration>
+                        <includeTests>true</includeTests>
+                        <xmlOutput>true</xmlOutput>
+                        <effort>Max</effort>
+                        <failOnError>true</failOnError>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
         
@@ -152,6 +165,27 @@
             </plugin>        
         </plugins>
     </build>
+
+    <profiles>        
+        <profile>
+            <id>check-spotbugs</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.spotbugs</groupId>
+                        <artifactId>spotbugs-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <name>conta</name>
     <description>Conta do Desenvolvimento de Sistemas Corporativos</description>
