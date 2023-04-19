@@ -23,6 +23,7 @@
         <apt-maven-plugin.version>1.1.3</apt-maven-plugin.version>
 
         <spotbugs-maven-plugin.version>4.7.3.4</spotbugs-maven-plugin.version>
+        <findbugs-annotations.version>3.0.1</findbugs-annotations.version>
     </properties>
 
     <dependencyManagement>
@@ -53,6 +54,11 @@
                 <version>${querydsl.version}</version>
                 <classifier>jakarta</classifier>
             </dependency>    
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>findbugs-annotations</artifactId>
+                <version>${findbugs-annotations.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -118,6 +124,10 @@
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-jpa</artifactId>
             <classifier>jakarta</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>findbugs-annotations</artifactId>
         </dependency>
     </dependencies>
 
