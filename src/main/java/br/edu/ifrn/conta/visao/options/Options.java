@@ -109,7 +109,7 @@ public abstract class Options<T, ID extends Serializable> extends AbstractMBean 
 	private List<SelectItem> options;
 
 	protected final List<SelectItem> createOptions() {
-		List<SelectItem> result = new ArrayList<SelectItem>();
+		List<SelectItem> result = new ArrayList<>();
 		for (T e : this.list) {
 			Object key = key(e);
 			result.add(new SelectItem(key, label(e)));
@@ -126,7 +126,7 @@ public abstract class Options<T, ID extends Serializable> extends AbstractMBean 
 	private List<SelectItem> emptyOptions;
 
 	protected final List<SelectItem> createEmptyOptions(List<SelectItem> options) {
-		List<SelectItem> result = new ArrayList<SelectItem>(options.size() + 1);
+		List<SelectItem> result = new ArrayList<>(options.size() + 1);
 		result.add(new SelectItem("", "", ""));
 		result.addAll(options);
 		return result;
