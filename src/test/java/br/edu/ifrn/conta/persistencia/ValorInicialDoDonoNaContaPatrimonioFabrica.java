@@ -33,7 +33,7 @@ public class ValorInicialDoDonoNaContaPatrimonioFabrica {
 
 	public ValorInicialDoDonoNaContaPatrimonio valorInicialDoDonoNaContaPatrimonio(
 		Dono dono, ContaPatrimonio contaPatrimonio, BigDecimal valor) {
-		ValorInicialDoDonoNaContaPatrimonio valorInicialDoDonoNaContaPatrimonio = valorInicialDoDonoNaContaPatrimonioRepository.findByDonoAndContaPatrimonio(dono, contaPatrimonio);
+		ValorInicialDoDonoNaContaPatrimonio valorInicialDoDonoNaContaPatrimonio = this.valorInicialDoDonoNaContaPatrimonioRepository.findByDonoAndContaPatrimonio(dono, contaPatrimonio);
 
 		if (valorInicialDoDonoNaContaPatrimonio == null) {
 			valorInicialDoDonoNaContaPatrimonio
