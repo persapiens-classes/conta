@@ -264,7 +264,7 @@ public abstract class CrudMBean<T extends Object, ID extends Serializable>
 					}
 				}
 				if (indexOfBean > -1) {
-					List<T> newBeanList = new ArrayList<T>();
+					List<T> newBeanList = new ArrayList<>();
 					newBeanList.addAll(this.beanList.subList(0, indexOfBean));
 					newBeanList.add(updateBean);
 					newBeanList.addAll(this.beanList.subList(indexOfBean + 1, this.beanList.size()));
