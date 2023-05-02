@@ -21,6 +21,16 @@
         <joinfaces.version>5.0.5</joinfaces.version>
         <querydsl.version>5.0.0</querydsl.version>
         <apt-maven-plugin.version>1.1.3</apt-maven-plugin.version>
+
+        <maven-checkstyle-plugin.version>3.2.2</maven-checkstyle-plugin.version>
+        <checkstyle.version>10.10.0</checkstyle.version>
+
+        <checkstyle.dir>src/checkstyle</checkstyle.dir>
+        <checkstyle.configLocation>${checkstyle.dir}/checkstyle.xml</checkstyle.configLocation>
+        <checkstyle.suppressionsLocation>${checkstyle.dir}/checkstyle-suppressions.xml</checkstyle.suppressionsLocation>
+        <checkstyle.headerLocation>${checkstyle.dir}/checkstyle-header.txt</checkstyle.headerLocation>
+        <checkstyle.excludes/>
+
     </properties>
 
     <dependencyManagement>
@@ -138,6 +148,37 @@
                         </execution>
                     </executions>
                 </plugin>                
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${maven-checkstyle-plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.puppycrawl.tools</groupId>
+                            <artifactId>checkstyle</artifactId>
+                            <version>${checkstyle.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <failsOnError>true</failsOnError>
+                        <failOnViolation>true</failOnViolation>
+                        <configLocation>${checkstyle.configLocation}</configLocation>
+                        <suppressionsLocation>${checkstyle.suppressionsLocation}</suppressionsLocation>
+                        <headerLocation>${checkstyle.headerLocation}</headerLocation>
+                        <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+                        <consoleOutput>true</consoleOutput>
+                        <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                        <sourceDirectories>
+                            <param>${project.build.sourceDirectory}</param>
+                        </sourceDirectories>
+                        <testSourceDirectories>
+                            <param>${project.build.testSourceDirectory}</param>
+                        </testSourceDirectories>
+                        <excludes>${checkstyle.excludes}</excludes>
+                    </configuration>
+                </plugin>            
+
             </plugins>
         </pluginManagement>
         
@@ -152,6 +193,29 @@
             </plugin>        
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>checkstyle</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-checkstyle-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>checkstyle-validation</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <name>conta</name>
     <description>Conta do Desenvolvimento de Sistemas Corporativos</description>

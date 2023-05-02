@@ -29,9 +29,9 @@ import br.edu.ifrn.conta.persistencia.ContaPatrimonioFabrica;
 import br.edu.ifrn.conta.persistencia.DonoFabrica;
 import br.edu.ifrn.conta.persistencia.LancamentoFabrica;
 import br.edu.ifrn.conta.persistencia.ValorInicialDoDonoNaContaPatrimonioFabrica;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.boot.test.context.SpringBootTest;

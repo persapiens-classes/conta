@@ -40,16 +40,29 @@ public class LancamentoServico extends CrudServico<Lancamento, Long> {
 
 	private LancamentoRepository lancamentoRepository;
 
+	/**
+	 * Constructor injetando lancamento Repository.
+	 * @param lancamentoRepository repository to set
+	 */
 	@Inject
 	public LancamentoServico(LancamentoRepository lancamentoRepository) {
 		super();
 		this.lancamentoRepository = lancamentoRepository;
 	}
 
+	/**
+	 * Calcula o saldo.
+	 * @param dono da conta
+	 * @param contaPatrimonio conta
+	 * @return valor of saldo.
+	 */
 	public BigDecimal saldo(Dono dono, ContaPatrimonio contaPatrimonio) {
 		return this.lancamentoRepository.saldo(dono, contaPatrimonio);
 	}
 
+	/**
+	 * Salva o lancamento.
+	 */
 	@Override
 	@Transactional
 	public Lancamento save(Lancamento objeto) {
@@ -58,6 +71,16 @@ public class LancamentoServico extends CrudServico<Lancamento, Long> {
 		return super.save(objeto);
 	}
 
+	/**
+	 * Transfere valor entre duas contas.
+	 * @param valor a transferir
+	 * @param donoDebito dono de debito
+	 * @param contaDebito conta de debito
+	 * @param contaPatrimonioADebitar conta patrimonio a debitar
+	 * @param donoCredito dono do credito
+	 * @param contaPatrimonioACreditar conta patrimonio a creditar
+	 * @param contaCredito conta de credito
+	 */
 	@Transactional
 	public void transferir(BigDecimal valor, Dono donoDebito, ContaDebito contaDebito, ContaPatrimonio contaPatrimonioADebitar, Dono donoCredito, ContaPatrimonio contaPatrimonioACreditar, ContaCredito contaCredito) {
 
