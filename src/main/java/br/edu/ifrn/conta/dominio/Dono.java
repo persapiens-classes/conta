@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package br.edu.ifrn.conta.dominio;
 
 import java.io.Serializable;
@@ -39,6 +38,7 @@ import lombok.ToString;
 
 /**
  * Dono entity.
+ *
  * @author Marcelo Fernandes
  */
 @Getter
@@ -52,26 +52,26 @@ import lombok.ToString;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Dono implements Serializable, Comparable<Dono> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
+    private Long id;
 
-	@Column(nullable = false, unique = true)
-	private String descricao;
+    @Column(nullable = false, unique = true)
+    private String descricao;
 
-	@Singular
-	@OneToMany(mappedBy = "dono")
-	private Set<Lancamento> lancamentos;
+    @Singular
+    @OneToMany(mappedBy = "dono")
+    private Set<Lancamento> lancamentos;
 
-	@Singular("valorInicialNaContaPatrimonio")
-	@OneToMany(mappedBy = "dono")
-	private Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisNasContasPatrimonio;
+    @Singular("valorInicialNaContaPatrimonio")
+    @OneToMany(mappedBy = "dono")
+    private Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisNasContasPatrimonio;
 
-	@Override
-	public int compareTo(Dono o) {
-		return this.descricao.compareTo(o.descricao);
-	}
+    @Override
+    public int compareTo(Dono o) {
+        return this.descricao.compareTo(o.descricao);
+    }
 
 }

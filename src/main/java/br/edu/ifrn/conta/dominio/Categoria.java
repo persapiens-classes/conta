@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package br.edu.ifrn.conta.dominio;
 
 import java.io.Serializable;
 import java.util.Set;
+import java.util.Comparator;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,6 +39,7 @@ import lombok.ToString;
 
 /**
  * Categoria entity.
+ *
  * @author Marcelo Fernandes
  */
 @Getter
@@ -52,35 +53,22 @@ import lombok.ToString;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Categoria implements Serializable, Comparable<Categoria> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
+    private Long id;
 
-	@Column(nullable = false, unique = true)
-	private String descricao;
+    @Column(nullable = false, unique = true)
+    private String descricao;
 
-	@Singular
-	@OneToMany(mappedBy = "categoria")
-	private Set<Conta> contas;
+    @Singular
+    @OneToMany(mappedBy = "categoria")
+    private Set<Conta> contas;
 
-	@Override
-	public int compareTo(Categoria o) {
-		int result = 0;
-		if (this.descricao != null && o.descricao != null) {
-			result = this.descricao.compareTo(o.descricao);
-		}
-		else if (this.descricao == null && o.descricao == null) {
-			result = 0;
-		}
-		else if (this.descricao == null) {
-			result = -1;
-		}
-		else {
-			result = +1;
-		}
-		return result;
-	}
+    @Override
+    public int compareTo(Categoria o) {
+        return this.descricao.compareTo(o.getDescricao());
+    }
 
 }
