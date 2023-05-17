@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package br.edu.ifrn.conta.dominio;
 
 import java.io.Serializable;
@@ -28,6 +27,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
+import java.util.Comparator;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -40,6 +40,7 @@ import lombok.ToString;
 
 /**
  * Valor Inicial do Dono na Conta Patrimonio entity.
+ *
  * @author Marcelo Fernandes
  */
 @Getter
@@ -53,33 +54,29 @@ import lombok.ToString;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ValorInicialDoDonoNaContaPatrimonio implements Serializable, Comparable<ValorInicialDoDonoNaContaPatrimonio> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
+    private Long id;
 
-	@Column(nullable = false)
-	private BigDecimal valorInicial;
+    @Column(nullable = false)
+    private BigDecimal valorInicial;
 
-	@ManyToOne
-	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_valorInicial_dono"))
-	private Dono dono;
+    @ManyToOne
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_valorInicial_dono"))
+    private Dono dono;
 
-	@ManyToOne
-	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_valorInicial_contaPatrimonio"))
-	private ContaPatrimonio contaPatrimonio;
+    @ManyToOne
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_valorInicial_contaPatrimonio"))
+    private ContaPatrimonio contaPatrimonio;
 
-	@Override
-	public int compareTo(ValorInicialDoDonoNaContaPatrimonio o) {
-		int result = this.valorInicial.compareTo(o.valorInicial);
-		if (result == 0) {
-			result = this.dono.compareTo(o.dono);
-		}
-		if (result == 0) {
-			result = this.contaPatrimonio.compareTo(o.contaPatrimonio);
-		}
-		return result;
-	}
+    @Override
+    public int compareTo(ValorInicialDoDonoNaContaPatrimonio o) {
+        return Comparator.comparing(ValorInicialDoDonoNaContaPatrimonio::getValorInicial)
+                .thenComparing(ValorInicialDoDonoNaContaPatrimonio::getDono)
+                .thenComparing(ValorInicialDoDonoNaContaPatrimonio::getContaPatrimonio)
+                .compare(this, o);
+    }
 
 }

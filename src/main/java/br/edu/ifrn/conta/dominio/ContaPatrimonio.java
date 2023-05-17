@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package br.edu.ifrn.conta.dominio;
 
 import java.util.Set;
@@ -32,6 +31,7 @@ import lombok.ToString;
 
 /**
  * Conta Patrimonio entity.
+ *
  * @author Marcelo Fernandes
  */
 @Getter
@@ -42,15 +42,15 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ContaPatrimonio extends Conta {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Builder
-	public ContaPatrimonio(@Singular("valorInicialDoDono") Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisDosDonos, Long id, String descricao, Categoria categoria) {
-		super(id, descricao, categoria);
-		this.valoresIniciaisDosDonos = valoresIniciaisDosDonos;
-	}
+    @Builder
+    public ContaPatrimonio(@Singular("valorInicialDoDono") Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisDosDonos, Long id, String descricao, Categoria categoria) {
+        super(id, descricao, categoria);
+        this.valoresIniciaisDosDonos = valoresIniciaisDosDonos;
+    }
 
-	@OneToMany(mappedBy = "contaPatrimonio")
-	private Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisDosDonos;
+    @OneToMany(mappedBy = "contaPatrimonio")
+    private Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisDosDonos;
 
 }

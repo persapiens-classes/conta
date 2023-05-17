@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package br.edu.ifrn.conta.dominio;
 
 import jakarta.persistence.Entity;
@@ -28,6 +27,7 @@ import lombok.ToString;
 
 /**
  * Conta Credito entity.
+ *
  * @author Marcelo Fernandes
  */
 @Getter
@@ -38,10 +38,10 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ContaCredito extends Conta {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Builder
-	public ContaCredito(Long id, String descricao, Categoria categoria) {
-		super(id, descricao, categoria);
-	}
+    @Builder
+    public ContaCredito(Long id, String descricao, Categoria categoria) {
+        super(id, descricao, categoria);
+    }
 }

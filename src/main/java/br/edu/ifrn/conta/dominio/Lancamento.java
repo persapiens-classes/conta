@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package br.edu.ifrn.conta.dominio;
 
 import java.io.Serializable;
@@ -31,6 +30,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import java.util.Comparator;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -43,6 +43,7 @@ import lombok.ToString;
 
 /**
  * Lancamento entity.
+ *
  * @author Marcelo Fernandes
  */
 @Getter
@@ -56,51 +57,47 @@ import lombok.ToString;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Lancamento implements Serializable, Comparable<Lancamento> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
+    private Long id;
 
-	@ManyToOne
-	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_lancamento_dono"))
-	private Dono dono;
+    @ManyToOne
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_lancamento_dono"))
+    private Dono dono;
 
-	@ManyToOne
-	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_lancamento_contaEntrada"))
-	private Conta contaEntrada;
+    @ManyToOne
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_lancamento_contaEntrada"))
+    private Conta contaEntrada;
 
-	@ManyToOne
-	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_lancamento_contaSaida"))
-	private Conta contaSaida;
+    @ManyToOne
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_lancamento_contaSaida"))
+    private Conta contaSaida;
 
-	@Column(nullable = false)
-	private BigDecimal valor;
+    @Column(nullable = false)
+    private BigDecimal valor;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(nullable = false)
-	private Date data;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Date data;
 
-	private String descricao;
+    private String descricao;
 
-	@Override
-	public int compareTo(Lancamento o) {
-		int result = this.data.compareTo(o.data);
-		if (result == 0) {
-			result = this.valor.compareTo(o.valor);
-		}
-		if (result == 0) {
-			result = this.dono.compareTo(o.dono);
-		}
-		return result;
-	}
+    @Override
+    public int compareTo(Lancamento o) {
+        return Comparator.comparing(Lancamento::getData)
+                .thenComparing(Lancamento::getValor)
+                .thenComparing(Lancamento::getDono)
+                .compare(this, o);
+    }
 
-	public void verificarAtributos() {
-		if (this.contaEntrada instanceof ContaCredito) {
-			throw new IllegalArgumentException("Conta de entrada do lançamento não pode ser do tipo conta de crédito: " + this.contaEntrada);
-		}
-		if (this.contaSaida instanceof ContaDebito) {
-			throw new IllegalArgumentException("Conta de saída do lançamento não pode ser do tipo conta de débito: " + this.contaSaida);
-		}
-	}
+    public void verificarAtributos() {
+        if (this.contaEntrada instanceof ContaCredito) {
+            throw new IllegalArgumentException("Conta de entrada do lançamento não pode ser do tipo conta de crédito: " + this.contaEntrada);
+        }
+        if (this.contaSaida instanceof ContaDebito) {
+            throw new IllegalArgumentException("Conta de saída do lançamento não pode ser do tipo conta de débito: " + this.contaSaida);
+        }
+    }
 }
