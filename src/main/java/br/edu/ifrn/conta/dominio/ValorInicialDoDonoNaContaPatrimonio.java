@@ -46,7 +46,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(exclude = "id")
+@EqualsAndHashCode(of = {"valorInicial", "dono", "contaPatrimonio"})
 @Builder
 @Entity
 @SequenceGenerator(sequenceName = "seq_valorInicial", name = "ID_SEQUENCE", allocationSize = 1)

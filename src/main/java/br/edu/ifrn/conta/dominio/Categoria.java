@@ -17,7 +17,6 @@ package br.edu.ifrn.conta.dominio;
 
 import java.io.Serializable;
 import java.util.Set;
-import java.util.Comparator;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,7 +44,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(exclude = "contas")
-@EqualsAndHashCode(exclude = {"id", "contas"})
+@EqualsAndHashCode(of = "descricao")
 @Builder
 @Entity
 @SequenceGenerator(sequenceName = "seq_categoria", name = "ID_SEQUENCE", allocationSize = 1)
