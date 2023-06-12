@@ -18,8 +18,7 @@ package br.edu.ifrn.conta.servico;
 
 import java.io.Serializable;
 import java.util.Optional;
-
-import jakarta.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,7 +35,7 @@ public class CrudServico<T extends Object, ID extends Serializable> {
 
 	private CrudRepository<T, ID> repository;
 
-	@Inject
+	@Autowired
 	public void setRepositorio(CrudRepository<T, ID> repository) {
 		this.repository = repository;
 	}

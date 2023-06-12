@@ -16,15 +16,14 @@
 
 package br.edu.ifrn.conta.servico;
 
-import jakarta.inject.Named;
-
 import br.edu.ifrn.conta.dominio.Categoria;
+import org.springframework.stereotype.Component;
 
 /**
  * Servico de Categoria.
  * @author Marcelo Fernandes
  */
-@Named
+@Component
 public class CategoriaServico extends CrudServico<Categoria, Long> {
 
 }

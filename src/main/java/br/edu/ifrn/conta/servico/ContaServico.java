@@ -18,9 +18,8 @@ package br.edu.ifrn.conta.servico;
 
 import java.io.Serializable;
 
-import jakarta.inject.Named;
-
 import br.edu.ifrn.conta.dominio.Conta;
+import org.springframework.stereotype.Component;
 
 /**
  * Servico de Conta.
@@ -28,6 +27,6 @@ import br.edu.ifrn.conta.dominio.Conta;
  * @param <ID> tipo do id da conta
  * @author Marcelo Fernandes
  */
-@Named
+@Component
 public class ContaServico<T extends Conta, ID extends Serializable> extends CrudServico<T, ID> {
 }

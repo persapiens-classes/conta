@@ -16,15 +16,14 @@
 
 package br.edu.ifrn.conta.servico;
 
-import jakarta.inject.Named;
-
 import br.edu.ifrn.conta.dominio.Dono;
+import org.springframework.stereotype.Component;
 
 /**
  * Servico de Dono.
  * @author Marcelo Fernandes
  */
-@Named
+@Component
 public class DonoServico extends CrudServico<Dono, Long> {
 
 }
