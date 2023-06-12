@@ -16,7 +16,7 @@
 
 package br.edu.ifrn.conta.persistencia;
 
-import jakarta.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.Dono;
@@ -32,11 +32,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class DonoRepositoryIT {
 
-	@Inject
+	@Autowired
 	private DonoRepository donoRepository;
 
-	@Inject
-	private DonoFabrica donoFabrica;
+	@Autowired
+	private DonoFactory donoFactory;
 
 	@Test
 	public void repositorioNaoEhNulo() {
@@ -47,22 +47,22 @@ public class DonoRepositoryIT {
 	@Test
 	public void findByDescricao() {
 		// cria o ambiente de teste
-		Dono papai = this.donoFabrica.papai();
-		Dono mamae = this.donoFabrica.mamae();
+		Dono papai = this.donoFactory.papai();
+		Dono mamae = this.donoFactory.mamae();
 
 		// executa a operacao a ser testada
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.donoRepository.findByDescricao(DonoFabrica.PAPAI))
+		assertThat(this.donoRepository.findByDescricao(DonoFactory.PAPAI))
 			.isEqualTo(papai);
-		assertThat(this.donoRepository.findByDescricao(DonoFabrica.MAMAE))
+		assertThat(this.donoRepository.findByDescricao(DonoFactory.MAMAE))
 			.isEqualTo(mamae);
 	}
 
 	@Test
 	public void countByDescricao() {
 		// cria o ambiente de teste
-		this.donoFabrica.papai();
-		this.donoFabrica.mamae();
+		this.donoFactory.papai();
+		this.donoFactory.mamae();
 
 		// executa a operacao a ser testada
 		// verifica o efeito da execucao da operacao a ser testada
@@ -75,7 +75,7 @@ public class DonoRepositoryIT {
 		String descricaoUnica = "Dono único";
 
 		// cria o ambiente de teste
-		this.donoFabrica.dono(descricaoUnica);
+		this.donoFactory.dono(descricaoUnica);
 
 		// executa a operacao a ser testada
 		this.donoRepository.deleteByDescricao(descricaoUnica);

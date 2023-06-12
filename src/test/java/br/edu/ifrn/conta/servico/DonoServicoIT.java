@@ -16,11 +16,11 @@
 
 package br.edu.ifrn.conta.servico;
 
-import jakarta.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.Dono;
-import br.edu.ifrn.conta.persistencia.DonoFabrica;
+import br.edu.ifrn.conta.persistencia.DonoFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -33,11 +33,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class DonoServicoIT {
 
-	@Inject
+	@Autowired
 	private DonoServico donoServico;
 
-	@Inject
-	private DonoFabrica donoFabrica;
+	@Autowired
+	private DonoFactory donoFactory;
 
 	@Test
 	public void repositorioNaoEhNulo() {
@@ -48,24 +48,24 @@ public class DonoServicoIT {
 	@Test
 	public void salvarUm() {
 		// cria o ambiente de teste
-		Dono dono = this.donoFabrica.mamae();
+		Dono dono = this.donoFactory.mamae();
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.donoServico.findById(dono.getId()))
+		assertThat(this.donoServico.findById(dono.getId()).get())
 			.isEqualTo(dono);
 	}
 
 	@Test
 	public void deletarUm() {
 		// cria o ambiente de teste
-		Dono dono = this.donoFabrica.dono("DONO UNICO DO DONO SERVIÇO IT");
+		Dono dono = this.donoFactory.dono("DONO UNICO DO DONO SERVIÇO IT");
 
 		// executa a operacao a ser testada
 		this.donoServico.delete(dono);
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.donoServico.findById(dono.getId()))
-			.isNull();
+		assertThat(this.donoServico.findById(dono.getId()).isPresent())
+			.isFalse();
 	}
 
 }

@@ -18,14 +18,14 @@ package br.edu.ifrn.conta.persistencia;
 
 import java.math.BigDecimal;
 
-import jakarta.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.ContaCredito;
 import br.edu.ifrn.conta.dominio.ContaDebito;
 import br.edu.ifrn.conta.dominio.ContaPatrimonio;
 import br.edu.ifrn.conta.dominio.Dono;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -38,25 +38,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class LancamentoRepositoryIT {
 
-	@Inject
-	private LancamentoFabrica lancamentoFabrica;
+	@Autowired
+	private LancamentoFactory lancamentoFactory;
 
-	@Inject
-	private DonoFabrica donoFabrica;
+	@Autowired
+	private DonoFactory donoFactory;
 
-	@Inject
-	private ContaCreditoFabrica contaCreditoFabrica;
+	@Autowired
+	private ContaCreditoFactory contaCreditoFactory;
 
-	@Inject
-	private ContaDebitoFabrica contaDebitoFabrica;
+	@Autowired
+	private ContaDebitoFactory contaDebitoFactory;
 
-	@Inject
-	private ContaPatrimonioFabrica contaPatrimonioFabrica;
+	@Autowired
+	private ContaPatrimonioFactory contaPatrimonioFactory;
 
-	@Inject
+	@Autowired
 	private LancamentoRepository lancamentoRepository;
 
-	@BeforeAll
+	@BeforeEach
 	public void deletarTodos() {
 		this.lancamentoRepository.deleteAll();
 		assertThat(this.lancamentoRepository.findAll())
@@ -72,38 +72,38 @@ public class LancamentoRepositoryIT {
 	@Test
 	public void saldoCreditos300() {
             // cria o ambiente de teste
-            Dono papai = this.donoFabrica.papai();
+            Dono papai = this.donoFactory.papai();
 
             ContaPatrimonio poupanca
-                    = this.contaPatrimonioFabrica.poupanca();
+                    = this.contaPatrimonioFactory.poupanca();
 
             ContaCredito estagio
-                    = this.contaCreditoFabrica.estagio();
+                    = this.contaCreditoFactory.estagio();
 
-            this.lancamentoFabrica.lancamento(papai, poupanca, estagio, new BigDecimal(300));
+            this.lancamentoFactory.lancamento(papai, poupanca, estagio, new BigDecimal(300));
 
             // executa a operacao a ser testada
             // verifica o efeito da execucao da operacao a ser testada
-            assertThat(this.lancamentoRepository.creditosSum(papai, poupanca))
+            assertThat(this.lancamentoRepository.creditosSum(papai, poupanca).getValor())
                     .isEqualTo(new BigDecimal(300).setScale(2));
 	}
 
 	@Test
 	public void saldoDebitos500() {
 		// cria o ambiente de teste
-		Dono papai = this.donoFabrica.papai();
+		Dono papai = this.donoFactory.papai();
 
 		ContaPatrimonio poupanca
-			= this.contaPatrimonioFabrica.poupanca();
+			= this.contaPatrimonioFactory.poupanca();
 
 		ContaDebito gasolina
-			= this.contaDebitoFabrica.gasolina();
+			= this.contaDebitoFactory.gasolina();
 
-		this.lancamentoFabrica.lancamento(papai, gasolina, poupanca, new BigDecimal(500));
+		this.lancamentoFactory.lancamento(papai, gasolina, poupanca, new BigDecimal(500));
 
 		// executa a operacao a ser testada
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.lancamentoRepository.creditosSum(papai, poupanca))
+		assertThat(this.lancamentoRepository.debitosSum(papai, poupanca).getValor())
 			.isEqualTo(new BigDecimal(500).setScale(2));
 	}
 }

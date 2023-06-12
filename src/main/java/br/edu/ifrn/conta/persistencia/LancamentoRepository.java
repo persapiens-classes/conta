@@ -28,9 +28,9 @@ import org.springframework.data.repository.CrudRepository;
  * @author Marcelo Fernandes
  */
 public interface LancamentoRepository extends CrudRepository<Lancamento, Long> {
-    @Query("SELECT SUM(l.valor) FROM Lancamento l WHERE l.dono = ?1 and l.contaEntrada = ?2")
+    @Query("SELECT SUM(l.valor) as valor FROM Lancamento l WHERE l.dono = ?1 and l.contaEntrada = ?2")
     LancamentoSum creditosSum(Dono dono, ContaPatrimonio contaPatrimonio);
 
-    @Query("SELECT SUM(l.valor) FROM Lancamento l WHERE l.dono = ?1 and l.contaSaida = ?2")
+    @Query("SELECT SUM(l.valor) as valor FROM Lancamento l WHERE l.dono = ?1 and l.contaSaida = ?2")
     LancamentoSum debitosSum(Dono dono, ContaPatrimonio contaPatrimonio);
 }

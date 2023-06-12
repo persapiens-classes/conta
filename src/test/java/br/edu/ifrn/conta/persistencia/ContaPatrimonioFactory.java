@@ -16,22 +16,22 @@
 
 package br.edu.ifrn.conta.persistencia;
 
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.edu.ifrn.conta.dominio.Categoria;
 import br.edu.ifrn.conta.dominio.ContaPatrimonio;
 
-@Named
-public class ContaPatrimonioFabrica {
+@Component
+public class ContaPatrimonioFactory {
 
 	public final static String POUPANCA = "poupança";
 
-	@Inject
+	@Autowired
 	private ContaPatrimonioRepository contaPatrimonioRepository;
 
-	@Inject
-	private CategoriaFabrica categoriaFabrica;
+	@Autowired
+	private CategoriaFactory categoriaFactory;
 
 	private ContaPatrimonio contaPatrimonio(String descricao, Categoria categoria) {
 		ContaPatrimonio contaPatrimonio = this.contaPatrimonioRepository.findByDescricao(descricao);
@@ -46,6 +46,6 @@ public class ContaPatrimonioFabrica {
 	}
 
 	public ContaPatrimonio poupanca() {
-		return contaPatrimonio(POUPANCA, this.categoriaFabrica.banco());
+		return contaPatrimonio(POUPANCA, this.categoriaFactory.banco());
 	}
 }

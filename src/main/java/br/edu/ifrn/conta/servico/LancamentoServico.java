@@ -42,9 +42,10 @@ public class LancamentoServico extends CrudServico<Lancamento, Long> {
         private ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;
 
 	@Autowired
-	public LancamentoServico(LancamentoRepository lancamentoRepository) {
+	public LancamentoServico(LancamentoRepository lancamentoRepository, ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository) {
 		super();
 		this.lancamentoRepository = lancamentoRepository;
+                this.valorInicialDoDonoNaContaPatrimonioRepository = valorInicialDoDonoNaContaPatrimonioRepository;
 	}
 
 	public BigDecimal saldo(Dono dono, ContaPatrimonio contaPatrimonio) {

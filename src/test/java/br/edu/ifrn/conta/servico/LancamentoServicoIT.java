@@ -19,7 +19,7 @@ package br.edu.ifrn.conta.servico;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import jakarta.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.ContaCredito;
@@ -27,14 +27,14 @@ import br.edu.ifrn.conta.dominio.ContaDebito;
 import br.edu.ifrn.conta.dominio.ContaPatrimonio;
 import br.edu.ifrn.conta.dominio.Dono;
 import br.edu.ifrn.conta.dominio.Lancamento;
-import br.edu.ifrn.conta.persistencia.ContaCreditoFabrica;
-import br.edu.ifrn.conta.persistencia.ContaDebitoFabrica;
-import br.edu.ifrn.conta.persistencia.ContaPatrimonioFabrica;
-import br.edu.ifrn.conta.persistencia.DonoFabrica;
-import br.edu.ifrn.conta.persistencia.LancamentoFabrica;
-import br.edu.ifrn.conta.persistencia.ValorInicialDoDonoNaContaPatrimonioFabrica;
+import br.edu.ifrn.conta.persistencia.ContaCreditoFactory;
+import br.edu.ifrn.conta.persistencia.ContaDebitoFactory;
+import br.edu.ifrn.conta.persistencia.ContaPatrimonioFactory;
+import br.edu.ifrn.conta.persistencia.DonoFactory;
+import br.edu.ifrn.conta.persistencia.LancamentoFactory;
+import br.edu.ifrn.conta.persistencia.ValorInicialDoDonoNaContaPatrimonioFactory;
 import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -47,28 +47,28 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class LancamentoServicoIT {
 
-	@Inject
-	private LancamentoFabrica lancamentoFabrica;
+	@Autowired
+	private LancamentoFactory lancamentoFactory;
 
-	@Inject
-	private DonoFabrica donoFabrica;
+	@Autowired
+	private DonoFactory donoFactory;
 
-	@Inject
+	@Autowired
 	private LancamentoServico lancamentoServico;
 
-	@Inject
-	private ValorInicialDoDonoNaContaPatrimonioFabrica valorInicialDoDonoNaContaPatrimonioFabrica;
+	@Autowired
+	private ValorInicialDoDonoNaContaPatrimonioFactory valorInicialDoDonoNaContaPatrimonioFactory;
 
-	@Inject
-	private ContaPatrimonioFabrica contaPatrimonioFabrica;
+	@Autowired
+	private ContaPatrimonioFactory contaPatrimonioFactory;
 
-	@Inject
-	private ContaCreditoFabrica contaCreditoFabrica;
+	@Autowired
+	private ContaCreditoFactory contaCreditoFactory;
 
-	@Inject
-	private ContaDebitoFabrica contaDebitoFabrica;
+	@Autowired
+	private ContaDebitoFactory contaDebitoFactory;
 
-	@BeforeAll
+	@BeforeEach
 	public void deletarTodos() {
 		this.lancamentoServico.deleteAll();
 		assertThat(this.lancamentoServico.findAll())
@@ -85,11 +85,11 @@ public class LancamentoServicoIT {
 	public void lancamentoComContaEntradaInvalida() {
 		IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			Lancamento lancamento = Lancamento.builder()
-			.contaEntrada(this.contaCreditoFabrica.estagio())
-			.contaSaida(this.contaPatrimonioFabrica.poupanca())
+			.contaEntrada(this.contaCreditoFactory.estagio())
+			.contaSaida(this.contaPatrimonioFactory.poupanca())
 			.valor(BigDecimal.TEN)
 			.data(LocalDateTime.now())
-			.dono(this.donoFabrica.papai())
+			.dono(this.donoFactory.papai())
 			.build();
 
 			this.lancamentoServico.save(lancamento);
@@ -102,11 +102,11 @@ public class LancamentoServicoIT {
 	public void lancamentoComContaSaidaInvalida() {
 		IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			Lancamento lancamento = Lancamento.builder()
-			.contaEntrada(this.contaPatrimonioFabrica.poupanca())
-			.contaSaida(this.contaDebitoFabrica.gasolina())
+			.contaEntrada(this.contaPatrimonioFactory.poupanca())
+			.contaSaida(this.contaDebitoFactory.gasolina())
 			.valor(BigDecimal.TEN)
 			.data(LocalDateTime.now())
-			.dono(this.donoFabrica.papai())
+			.dono(this.donoFactory.papai())
 			.build();
 
 			this.lancamentoServico.save(lancamento);
@@ -117,31 +117,31 @@ public class LancamentoServicoIT {
 
 	@Test
 	public void transferenciaDePapaiParaMamae() {
-		this.lancamentoServico.transferir(BigDecimal.TEN, this.donoFabrica.papai(),
-			this.contaDebitoFabrica.despesaComConjuge(), this.contaPatrimonioFabrica.poupanca(),
-			this.donoFabrica.mamae(), this.contaPatrimonioFabrica.poupanca(),
-			this.contaCreditoFabrica.receitaComConjuge());
+		this.lancamentoServico.transferir(BigDecimal.TEN, this.donoFactory.papai(),
+			this.contaDebitoFactory.despesaComConjuge(), this.contaPatrimonioFactory.poupanca(),
+			this.donoFactory.mamae(), this.contaPatrimonioFactory.poupanca(),
+			this.contaCreditoFactory.receitaComConjuge());
 	}
 
 	@Test
 	public void saldo800() {
 		// cria o ambiente de teste
-		Dono papai = this.donoFabrica.papai();
+		Dono papai = this.donoFactory.papai();
 
 		ContaPatrimonio poupanca
-			= this.contaPatrimonioFabrica.poupanca();
+			= this.contaPatrimonioFactory.poupanca();
 
 		ContaDebito gasolina
-			= this.contaDebitoFabrica.gasolina();
+			= this.contaDebitoFactory.gasolina();
 
 		ContaCredito estagio
-			= this.contaCreditoFabrica.estagio();
+			= this.contaCreditoFactory.estagio();
 
-		this.valorInicialDoDonoNaContaPatrimonioFabrica.valorInicialDoDonoNaContaPatrimonio(
+		this.valorInicialDoDonoNaContaPatrimonioFactory.valorInicialDoDonoNaContaPatrimonio(
 			papai, poupanca, new BigDecimal(1000));
 
-		this.lancamentoFabrica.lancamento(papai, gasolina, poupanca, new BigDecimal(500));
-		this.lancamentoFabrica.lancamento(papai, poupanca, estagio, new BigDecimal(300));
+		this.lancamentoFactory.lancamento(papai, gasolina, poupanca, new BigDecimal(500));
+		this.lancamentoFactory.lancamento(papai, poupanca, estagio, new BigDecimal(300));
 
 		// executa a operacao a ser testada
 		// verifica o efeito da execucao da operacao a ser testada

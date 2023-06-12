@@ -16,7 +16,7 @@
 
 package br.edu.ifrn.conta.persistencia;
 
-import jakarta.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.Categoria;
@@ -32,11 +32,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class CategoriaRepositoryIT {
 
-	@Inject
+	@Autowired
 	private CategoriaRepository categoriaRepository;
 
-	@Inject
-	private CategoriaFabrica categoriaFabrica;
+	@Autowired
+	private CategoriaFactory categoriaFactory;
 
 	@Test
 	public void repositorioNaoEhNulo() {
@@ -47,20 +47,20 @@ public class CategoriaRepositoryIT {
 	@Test
 	public void deletarUm() {
 		// cria o ambiente de teste
-		Categoria categoria = this.categoriaFabrica.categoria("CATEGORIA UNICA");
+		Categoria categoria = this.categoriaFactory.categoria("CATEGORIA UNICA");
 
 		// executa a operacao a ser testada
 		this.categoriaRepository.delete(categoria);
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.categoriaRepository.findById(categoria.getId()))
-			.isNull();
+		assertThat(this.categoriaRepository.findById(categoria.getId()).isPresent())
+			.isFalse();
 	}
 
 	@Test
 	public void salvarUm() {
 		// executa a operacao a ser testada
-		Categoria categoria = this.categoriaFabrica.transporte();
+		Categoria categoria = this.categoriaFactory.transporte();
 
 		// verifica o efeito da execucao da operacao a ser testada
 		assertThat(categoria.getId())

@@ -16,7 +16,7 @@
 
 package br.edu.ifrn.conta.persistencia;
 
-import jakarta.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.Categoria;
@@ -34,10 +34,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class ContaPatrimonioRepositoryIT {
 
-	@Inject
-	private ContaPatrimonioFabrica contaPatrimonioFabrica;
+	@Autowired
+	private ContaPatrimonioFactory contaPatrimonioFactory;
 
-	@Inject
+	@Autowired
 	private ContaPatrimonioRepository contaPatrimonioRepository;
 
 	@Test
@@ -48,10 +48,10 @@ public class ContaPatrimonioRepositoryIT {
 	@Test
 	public void findAllByExample() {
 		// cria o ambiente de teste
-		this.contaPatrimonioFabrica.poupanca();
+		this.contaPatrimonioFactory.poupanca();
 
 		ContaPatrimonio contaPatrimonioExemplo = ContaPatrimonio.builder()
-			.categoria(Categoria.builder().descricao(CategoriaFabrica.BANCO).build())
+			.categoria(Categoria.builder().descricao(CategoriaFactory.BANCO).build())
 			.build();
 
 		// executa a operacao a ser testada

@@ -16,23 +16,23 @@
 
 package br.edu.ifrn.conta.persistencia;
 
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.edu.ifrn.conta.dominio.Categoria;
 import br.edu.ifrn.conta.dominio.ContaDebito;
 
-@Named
-public class ContaDebitoFabrica {
+@Component
+public class ContaDebitoFactory {
 
 	public final static String GASOLINA = "gasolina";
 	public final static String DESPESA_CONJUGE = "despesa com cônjuge";
 
-	@Inject
+	@Autowired
 	private ContaDebitoRepository contaDebitoRepository;
 
-	@Inject
-	private CategoriaFabrica categoriaFabrica;
+	@Autowired
+	private CategoriaFactory categoriaFactory;
 
 	private ContaDebito contaDebito(String descricao, Categoria categoria) {
 		ContaDebito contaDebito = this.contaDebitoRepository.findByDescricao(descricao);
@@ -47,10 +47,10 @@ public class ContaDebitoFabrica {
 	}
 
 	public ContaDebito gasolina() {
-		return contaDebito(GASOLINA, this.categoriaFabrica.transporte());
+		return contaDebito(GASOLINA, this.categoriaFactory.transporte());
 	}
 
 	public ContaDebito despesaComConjuge() {
-		return contaDebito(DESPESA_CONJUGE, this.categoriaFabrica.categoriaDespesaConjuge());
+		return contaDebito(DESPESA_CONJUGE, this.categoriaFactory.categoriaDespesaConjuge());
 	}
 }

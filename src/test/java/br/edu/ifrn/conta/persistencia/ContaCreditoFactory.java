@@ -16,23 +16,23 @@
 
 package br.edu.ifrn.conta.persistencia;
 
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.edu.ifrn.conta.dominio.Categoria;
 import br.edu.ifrn.conta.dominio.ContaCredito;
 
-@Named
-public class ContaCreditoFabrica {
+@Component
+public class ContaCreditoFactory {
 
 	public final static String ESTAGIO = "estágio";
 	public final static String RECEITA_CONJUGE = "receita com cônjuge";
 
-	@Inject
+	@Autowired
 	private ContaCreditoRepository contaCreditoRepository;
 
-	@Inject
-	private CategoriaFabrica categoriaFabrica;
+	@Autowired
+	private CategoriaFactory categoriaFactory;
 
 	public ContaCredito contaCredito(String descricao, Categoria categoria) {
 		ContaCredito contaCredito = this.contaCreditoRepository.findByDescricao(descricao);
@@ -47,10 +47,10 @@ public class ContaCreditoFabrica {
 	}
 
 	public ContaCredito estagio() {
-		return contaCredito(ESTAGIO, this.categoriaFabrica.salario());
+		return contaCredito(ESTAGIO, this.categoriaFactory.salario());
 	}
 
 	public ContaCredito receitaComConjuge() {
-		return contaCredito(RECEITA_CONJUGE, this.categoriaFabrica.categoriaReceitaConjuge());
+		return contaCredito(RECEITA_CONJUGE, this.categoriaFactory.categoriaReceitaConjuge());
 	}
 }

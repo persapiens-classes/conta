@@ -18,7 +18,7 @@ package br.edu.ifrn.conta.persistencia;
 
 import java.math.BigDecimal;
 
-import jakarta.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.ContaPatrimonio;
@@ -36,17 +36,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class ValorInicialDoDonoNaContaPatrimonioRepositoryIT {
 
-	@Inject
+	@Autowired
 	private ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;
 
-	@Inject
-	private DonoFabrica donoFabrica;
+	@Autowired
+	private DonoFactory donoFactory;
 
-	@Inject
-	private ValorInicialDoDonoNaContaPatrimonioFabrica valorInicialDoDonoNaContaPatrimonioFabrica;
+	@Autowired
+	private ValorInicialDoDonoNaContaPatrimonioFactory valorInicialDoDonoNaContaPatrimonioFactory;
 
-	@Inject
-	private ContaPatrimonioFabrica contaPatrimonioFabrica;
+	@Autowired
+	private ContaPatrimonioFactory contaPatrimonioFactory;
 
 	@Test
 	public void repositorioNaoEhNulo() {
@@ -57,12 +57,12 @@ public class ValorInicialDoDonoNaContaPatrimonioRepositoryIT {
 	@Test
 	public void findByDonoAndContaPatrimonio() {
 		// cria o ambiente de teste
-		Dono papai = this.donoFabrica.papai();
+		Dono papai = this.donoFactory.papai();
 
-		ContaPatrimonio contaPatrimonio = this.contaPatrimonioFabrica.poupanca();
+		ContaPatrimonio contaPatrimonio = this.contaPatrimonioFactory.poupanca();
 
 		ValorInicialDoDonoNaContaPatrimonio valorInicialDoDonoNaContaPatrimonio
-			= this.valorInicialDoDonoNaContaPatrimonioFabrica.valorInicialDoDonoNaContaPatrimonio(papai, contaPatrimonio, new BigDecimal(100));
+			= this.valorInicialDoDonoNaContaPatrimonioFactory.valorInicialDoDonoNaContaPatrimonio(papai, contaPatrimonio, new BigDecimal(100));
 
 		// executa a operacao a ser testada
 		// verifica o efeito da execucao da operacao a ser testada
