@@ -54,7 +54,7 @@ public class ContaCreditoServicoIT {
 		ContaCredito contaCredito = this.contaCreditoFabrica.receitaComConjuge();
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.contaCreditoServico.findById(contaCredito.getId()))
+		assertThat(this.contaCreditoServico.findById(contaCredito.getId()).get())
 			.isEqualTo(contaCredito);
 	}
 
@@ -68,8 +68,8 @@ public class ContaCreditoServicoIT {
 		this.contaCreditoServico.delete(contaCredito);
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.contaCreditoServico.findById(contaCredito.getId()))
-			.isNull();
+		assertThat(this.contaCreditoServico.findById(contaCredito.getId()).isPresent())
+			.isFalse();
 	}
 
 }

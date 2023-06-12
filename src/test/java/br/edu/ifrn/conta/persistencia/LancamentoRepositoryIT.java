@@ -25,7 +25,7 @@ import br.edu.ifrn.conta.dominio.ContaCredito;
 import br.edu.ifrn.conta.dominio.ContaDebito;
 import br.edu.ifrn.conta.dominio.ContaPatrimonio;
 import br.edu.ifrn.conta.dominio.Dono;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -56,7 +56,7 @@ public class LancamentoRepositoryIT {
 	@Inject
 	private LancamentoRepository lancamentoRepository;
 
-	@BeforeAll
+	@BeforeEach
 	public void deletarTodos() {
 		this.lancamentoRepository.deleteAll();
 		assertThat(this.lancamentoRepository.findAll())
@@ -84,7 +84,7 @@ public class LancamentoRepositoryIT {
 
             // executa a operacao a ser testada
             // verifica o efeito da execucao da operacao a ser testada
-            assertThat(this.lancamentoRepository.creditosSum(papai, poupanca))
+            assertThat(this.lancamentoRepository.creditosSum(papai, poupanca).getValor())
                     .isEqualTo(new BigDecimal(300).setScale(2));
 	}
 
@@ -103,7 +103,7 @@ public class LancamentoRepositoryIT {
 
 		// executa a operacao a ser testada
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.lancamentoRepository.creditosSum(papai, poupanca))
+		assertThat(this.lancamentoRepository.debitosSum(papai, poupanca).getValor())
 			.isEqualTo(new BigDecimal(500).setScale(2));
 	}
 }

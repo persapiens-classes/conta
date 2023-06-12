@@ -34,7 +34,7 @@ import br.edu.ifrn.conta.persistencia.DonoFabrica;
 import br.edu.ifrn.conta.persistencia.LancamentoFabrica;
 import br.edu.ifrn.conta.persistencia.ValorInicialDoDonoNaContaPatrimonioFabrica;
 import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -68,7 +68,7 @@ public class LancamentoServicoIT {
 	@Inject
 	private ContaDebitoFabrica contaDebitoFabrica;
 
-	@BeforeAll
+	@BeforeEach
 	public void deletarTodos() {
 		this.lancamentoServico.deleteAll();
 		assertThat(this.lancamentoServico.findAll())

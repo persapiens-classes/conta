@@ -56,7 +56,7 @@ public class ContaCreditoRepositoryIT {
 
 		// executa a operacao a ser testada
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.contaCreditoRepository.findOne(Example.of(contaCreditoExemplo)))
+		assertThat(this.contaCreditoRepository.findOne(Example.of(contaCreditoExemplo)).get())
 			.isEqualTo(contaCredito);
 	}
 

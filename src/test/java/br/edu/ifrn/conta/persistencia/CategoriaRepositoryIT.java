@@ -53,8 +53,8 @@ public class CategoriaRepositoryIT {
 		this.categoriaRepository.delete(categoria);
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.categoriaRepository.findById(categoria.getId()))
-			.isNull();
+		assertThat(this.categoriaRepository.findById(categoria.getId()).isPresent())
+			.isFalse();
 	}
 
 	@Test

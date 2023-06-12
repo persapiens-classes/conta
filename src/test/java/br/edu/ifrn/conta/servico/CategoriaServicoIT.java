@@ -50,7 +50,7 @@ public class CategoriaServicoIT {
 		Categoria categoria = this.categoriaFabrica.banco();
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.categoriaServico.findById(categoria.getId()))
+		assertThat(this.categoriaServico.findById(categoria.getId()).get())
 			.isEqualTo(categoria);
 	}
 
@@ -63,8 +63,8 @@ public class CategoriaServicoIT {
 		this.categoriaServico.delete(categoria);
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.categoriaServico.findById(categoria.getId()))
-			.isNull();
+		assertThat(this.categoriaServico.findById(categoria.getId()).isPresent())
+			.isFalse();
 	}
 
 }
