@@ -54,9 +54,6 @@ public class LancamentoRepositoryIT {
 	private ContaPatrimonioFabrica contaPatrimonioFabrica;
 
 	@Inject
-	private ValorInicialDoDonoNaContaPatrimonioFabrica valorInicialDoDonoNaContaPatrimonioFabrica;
-
-	@Inject
 	private LancamentoRepository lancamentoRepository;
 
 	@BeforeAll
@@ -73,7 +70,26 @@ public class LancamentoRepositoryIT {
 	}
 
 	@Test
-	public void saldo800() {
+	public void saldoCreditos300() {
+            // cria o ambiente de teste
+            Dono papai = this.donoFabrica.papai();
+
+            ContaPatrimonio poupanca
+                    = this.contaPatrimonioFabrica.poupanca();
+
+            ContaCredito estagio
+                    = this.contaCreditoFabrica.estagio();
+
+            this.lancamentoFabrica.lancamento(papai, poupanca, estagio, new BigDecimal(300));
+
+            // executa a operacao a ser testada
+            // verifica o efeito da execucao da operacao a ser testada
+            assertThat(this.lancamentoRepository.creditosSum(papai, poupanca))
+                    .isEqualTo(new BigDecimal(300).setScale(2));
+	}
+
+	@Test
+	public void saldoDebitos500() {
 		// cria o ambiente de teste
 		Dono papai = this.donoFabrica.papai();
 
@@ -83,18 +99,11 @@ public class LancamentoRepositoryIT {
 		ContaDebito gasolina
 			= this.contaDebitoFabrica.gasolina();
 
-		ContaCredito estagio
-			= this.contaCreditoFabrica.estagio();
-
-		this.valorInicialDoDonoNaContaPatrimonioFabrica.valorInicialDoDonoNaContaPatrimonio(
-			papai, poupanca, new BigDecimal(1000));
-
 		this.lancamentoFabrica.lancamento(papai, gasolina, poupanca, new BigDecimal(500));
-		this.lancamentoFabrica.lancamento(papai, poupanca, estagio, new BigDecimal(300));
 
 		// executa a operacao a ser testada
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.lancamentoRepository.saldo(papai, poupanca))
-			.isEqualTo(new BigDecimal(800).setScale(2));
+		assertThat(this.lancamentoRepository.creditosSum(papai, poupanca))
+			.isEqualTo(new BigDecimal(500).setScale(2));
 	}
 }

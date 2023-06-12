@@ -28,6 +28,7 @@ import br.edu.ifrn.conta.dominio.ContaPatrimonio;
 import br.edu.ifrn.conta.dominio.Dono;
 import br.edu.ifrn.conta.dominio.Lancamento;
 import br.edu.ifrn.conta.persistencia.LancamentoRepository;
+import br.edu.ifrn.conta.persistencia.ValorInicialDoDonoNaContaPatrimonioRepository;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,6 +40,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class LancamentoServico extends CrudServico<Lancamento, Long> {
 
 	private LancamentoRepository lancamentoRepository;
+        private ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;
 
 	@Inject
 	public LancamentoServico(LancamentoRepository lancamentoRepository) {
@@ -47,7 +49,17 @@ public class LancamentoServico extends CrudServico<Lancamento, Long> {
 	}
 
 	public BigDecimal saldo(Dono dono, ContaPatrimonio contaPatrimonio) {
-		return this.lancamentoRepository.saldo(dono, contaPatrimonio);
+            // recupera o valor inicial do dono na conta patrimonio
+            BigDecimal result = this.valorInicialDoDonoNaContaPatrimonioRepository
+                    .findByDonoAndContaPatrimonio(dono, contaPatrimonio).getValorInicial();
+
+            // soma todos os lancamentos de credito do dono na conta patrimonio
+            BigDecimal creditos = this.lancamentoRepository.creditosSum(dono, contaPatrimonio).getValor();
+
+            // subtrai todos os lancamentos de debito do dono na conta patrimonio
+            BigDecimal debitos = this.lancamentoRepository.debitosSum(dono, contaPatrimonio).getValor();
+
+            return result.add(creditos).subtract(debitos);
 	}
 
 	@Override

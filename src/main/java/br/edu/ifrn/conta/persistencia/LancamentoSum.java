@@ -18,14 +18,10 @@ package br.edu.ifrn.conta.persistencia;
 
 import java.math.BigDecimal;
 
-import br.edu.ifrn.conta.dominio.ContaPatrimonio;
-import br.edu.ifrn.conta.dominio.Dono;
-
 /**
- * Interface custom de repositorio.
+ * Representa o calculo de soma dos valores do lancamento.
  * @author Marcelo Fernandes
  */
-public interface LancamentoRepositoryCustom {
-
-	BigDecimal saldo(Dono dono, ContaPatrimonio contaPatrimonio);
+public interface LancamentoSum {
+    BigDecimal getValor();
 }

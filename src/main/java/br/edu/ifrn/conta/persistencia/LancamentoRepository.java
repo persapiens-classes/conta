@@ -16,14 +16,21 @@
 
 package br.edu.ifrn.conta.persistencia;
 
+import br.edu.ifrn.conta.dominio.ContaPatrimonio;
+import br.edu.ifrn.conta.dominio.Dono;
 import br.edu.ifrn.conta.dominio.Lancamento;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  * Implementacao de repositorio de lancamento.
  * @author Marcelo Fernandes
  */
-public interface LancamentoRepository extends CrudRepository<Lancamento, Long>, LancamentoRepositoryCustom {
+public interface LancamentoRepository extends CrudRepository<Lancamento, Long> {
+    @Query("SELECT SUM(l.valor) FROM Lancamento l WHERE l.dono = ?1 and l.contaEntrada = ?2")
+    LancamentoSum creditosSum(Dono dono, ContaPatrimonio contaPatrimonio);
 
+    @Query("SELECT SUM(l.valor) FROM Lancamento l WHERE l.dono = ?1 and l.contaSaida = ?2")
+    LancamentoSum debitosSum(Dono dono, ContaPatrimonio contaPatrimonio);
 }
