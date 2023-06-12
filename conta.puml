@@ -1,0 +1,31 @@
+@startuml
+abstract class br.edu.ifrn.conta.dominio.Conta {
+ +descricao
+}
+class br.edu.ifrn.conta.dominio.Categoria {
+ +descricao
+}
+class br.edu.ifrn.conta.dominio.ContaCredito
+class br.edu.ifrn.conta.dominio.ContaDebito
+class br.edu.ifrn.conta.dominio.ContaPatrimonio
+class br.edu.ifrn.conta.dominio.Dono {
+ +descricao
+}
+class br.edu.ifrn.conta.dominio.Lancamento  {
+ +valor
+ +data
+ +descricao
+}
+class br.edu.ifrn.conta.dominio.ValorInicialDoDonoNaContaPatrimonio {
+ +valorInicial
+}
+br.edu.ifrn.conta.dominio.Categoria "1" *-- br.edu.ifrn.conta.dominio.Conta : esta em uma
+br.edu.ifrn.conta.dominio.Dono "1" *-- br.edu.ifrn.conta.dominio.Lancamento : pertence a um
+br.edu.ifrn.conta.dominio.Conta "1" *-- br.edu.ifrn.conta.dominio.Lancamento : conta entrada
+br.edu.ifrn.conta.dominio.Conta "1" *-- br.edu.ifrn.conta.dominio.Lancamento : conta saida
+br.edu.ifrn.conta.dominio.Dono "1" *-- br.edu.ifrn.conta.dominio.ValorInicialDoDonoNaContaPatrimonio : pertence a um
+br.edu.ifrn.conta.dominio.ContaPatrimonio "1" *-- br.edu.ifrn.conta.dominio.ValorInicialDoDonoNaContaPatrimonio : e de uma
+br.edu.ifrn.conta.dominio.ContaCredito --|> br.edu.ifrn.conta.dominio.Conta
+br.edu.ifrn.conta.dominio.ContaDebito --|> br.edu.ifrn.conta.dominio.Conta
+br.edu.ifrn.conta.dominio.ContaPatrimonio --|> br.edu.ifrn.conta.dominio.Conta
+@enduml
