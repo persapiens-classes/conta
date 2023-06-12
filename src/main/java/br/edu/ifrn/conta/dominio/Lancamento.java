@@ -17,7 +17,8 @@ package br.edu.ifrn.conta.dominio;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.Comparator;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,9 +29,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import java.util.Comparator;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -78,9 +76,8 @@ public class Lancamento implements Serializable, Comparable<Lancamento> {
     @Column(nullable = false)
     private BigDecimal valor;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
-    private Date data;
+    private LocalDateTime data;
 
     private String descricao;
 

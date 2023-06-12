@@ -17,7 +17,7 @@
 package br.edu.ifrn.conta.servico;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.inject.Inject;
 
@@ -88,7 +88,7 @@ public class LancamentoServicoIT {
 			.contaEntrada(this.contaCreditoFabrica.estagio())
 			.contaSaida(this.contaPatrimonioFabrica.poupanca())
 			.valor(BigDecimal.TEN)
-			.data(new Date())
+			.data(LocalDateTime.now())
 			.dono(this.donoFabrica.papai())
 			.build();
 
@@ -105,7 +105,7 @@ public class LancamentoServicoIT {
 			.contaEntrada(this.contaPatrimonioFabrica.poupanca())
 			.contaSaida(this.contaDebitoFabrica.gasolina())
 			.valor(BigDecimal.TEN)
-			.data(new Date())
+			.data(LocalDateTime.now())
 			.dono(this.donoFabrica.papai())
 			.build();
 
