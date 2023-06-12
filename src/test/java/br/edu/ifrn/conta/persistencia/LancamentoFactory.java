@@ -16,34 +16,31 @@
 
 package br.edu.ifrn.conta.persistencia;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.edu.ifrn.conta.dominio.Conta;
 import br.edu.ifrn.conta.dominio.Dono;
+import br.edu.ifrn.conta.dominio.Lancamento;
 
 @Component
-public class DonoFabrica {
-
-	public final static String PAPAI = "Papai";
-	public final static String MAMAE = "Mamãe";
+public class LancamentoFactory {
 
 	@Autowired
-	private DonoRepository donoRepository;
+	private LancamentoRepository lancamentoRepository;
 
-	public Dono dono(String descricao) {
-		Dono dono = this.donoRepository.findByDescricao(descricao);
-		if (dono == null) {
-			dono = Dono.builder().descricao(descricao).build();
-			this.donoRepository.save(dono);
-		}
-		return dono;
-	}
-
-	public Dono papai() {
-		return dono(PAPAI);
-	}
-
-	public Dono mamae() {
-		return dono(MAMAE);
+	public Lancamento lancamento(Dono dono, Conta contaEntrada, Conta contaSaida, BigDecimal valor) {
+		Lancamento lancamento = Lancamento.builder()
+			.contaEntrada(contaEntrada)
+			.contaSaida(contaSaida)
+			.data(LocalDateTime.now())
+			.dono(dono)
+			.valor(valor.setScale(2))
+			.build();
+		this.lancamentoRepository.save(lancamento);
+		return lancamento;
 	}
 }

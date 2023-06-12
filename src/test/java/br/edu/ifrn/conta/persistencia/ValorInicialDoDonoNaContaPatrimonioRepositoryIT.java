@@ -40,13 +40,13 @@ public class ValorInicialDoDonoNaContaPatrimonioRepositoryIT {
 	private ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;
 
 	@Autowired
-	private DonoFabrica donoFabrica;
+	private DonoFactory donoFactory;
 
 	@Autowired
-	private ValorInicialDoDonoNaContaPatrimonioFabrica valorInicialDoDonoNaContaPatrimonioFabrica;
+	private ValorInicialDoDonoNaContaPatrimonioFactory valorInicialDoDonoNaContaPatrimonioFactory;
 
 	@Autowired
-	private ContaPatrimonioFabrica contaPatrimonioFabrica;
+	private ContaPatrimonioFactory contaPatrimonioFactory;
 
 	@Test
 	public void repositorioNaoEhNulo() {
@@ -57,12 +57,12 @@ public class ValorInicialDoDonoNaContaPatrimonioRepositoryIT {
 	@Test
 	public void findByDonoAndContaPatrimonio() {
 		// cria o ambiente de teste
-		Dono papai = this.donoFabrica.papai();
+		Dono papai = this.donoFactory.papai();
 
-		ContaPatrimonio contaPatrimonio = this.contaPatrimonioFabrica.poupanca();
+		ContaPatrimonio contaPatrimonio = this.contaPatrimonioFactory.poupanca();
 
 		ValorInicialDoDonoNaContaPatrimonio valorInicialDoDonoNaContaPatrimonio
-			= this.valorInicialDoDonoNaContaPatrimonioFabrica.valorInicialDoDonoNaContaPatrimonio(papai, contaPatrimonio, new BigDecimal(100));
+			= this.valorInicialDoDonoNaContaPatrimonioFactory.valorInicialDoDonoNaContaPatrimonio(papai, contaPatrimonio, new BigDecimal(100));
 
 		// executa a operacao a ser testada
 		// verifica o efeito da execucao da operacao a ser testada

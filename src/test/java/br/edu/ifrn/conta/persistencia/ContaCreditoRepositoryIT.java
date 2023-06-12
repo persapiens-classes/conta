@@ -38,7 +38,7 @@ public class ContaCreditoRepositoryIT {
 	private ContaCreditoRepository contaCreditoRepository;
 
 	@Autowired
-	private ContaCreditoFabrica contaCreditoFabrica;
+	private ContaCreditoFactory contaCreditoFactory;
 
 	@Test
 	public void repositorioNaoEhNulo() {
@@ -48,10 +48,10 @@ public class ContaCreditoRepositoryIT {
 	@Test
 	public void findOneByExample() {
 		// cria o ambiente de teste
-		ContaCredito contaCredito = this.contaCreditoFabrica.estagio();
+		ContaCredito contaCredito = this.contaCreditoFactory.estagio();
 
 		ContaCredito contaCreditoExemplo = ContaCredito.builder()
-			.categoria(Categoria.builder().descricao(CategoriaFabrica.SALARIO).build())
+			.categoria(Categoria.builder().descricao(CategoriaFactory.SALARIO).build())
 			.build();
 
 		// executa a operacao a ser testada

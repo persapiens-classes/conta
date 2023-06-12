@@ -39,19 +39,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LancamentoRepositoryIT {
 
 	@Autowired
-	private LancamentoFabrica lancamentoFabrica;
+	private LancamentoFactory lancamentoFactory;
 
 	@Autowired
-	private DonoFabrica donoFabrica;
+	private DonoFactory donoFactory;
 
 	@Autowired
-	private ContaCreditoFabrica contaCreditoFabrica;
+	private ContaCreditoFactory contaCreditoFactory;
 
 	@Autowired
-	private ContaDebitoFabrica contaDebitoFabrica;
+	private ContaDebitoFactory contaDebitoFactory;
 
 	@Autowired
-	private ContaPatrimonioFabrica contaPatrimonioFabrica;
+	private ContaPatrimonioFactory contaPatrimonioFactory;
 
 	@Autowired
 	private LancamentoRepository lancamentoRepository;
@@ -72,15 +72,15 @@ public class LancamentoRepositoryIT {
 	@Test
 	public void saldoCreditos300() {
             // cria o ambiente de teste
-            Dono papai = this.donoFabrica.papai();
+            Dono papai = this.donoFactory.papai();
 
             ContaPatrimonio poupanca
-                    = this.contaPatrimonioFabrica.poupanca();
+                    = this.contaPatrimonioFactory.poupanca();
 
             ContaCredito estagio
-                    = this.contaCreditoFabrica.estagio();
+                    = this.contaCreditoFactory.estagio();
 
-            this.lancamentoFabrica.lancamento(papai, poupanca, estagio, new BigDecimal(300));
+            this.lancamentoFactory.lancamento(papai, poupanca, estagio, new BigDecimal(300));
 
             // executa a operacao a ser testada
             // verifica o efeito da execucao da operacao a ser testada
@@ -91,15 +91,15 @@ public class LancamentoRepositoryIT {
 	@Test
 	public void saldoDebitos500() {
 		// cria o ambiente de teste
-		Dono papai = this.donoFabrica.papai();
+		Dono papai = this.donoFactory.papai();
 
 		ContaPatrimonio poupanca
-			= this.contaPatrimonioFabrica.poupanca();
+			= this.contaPatrimonioFactory.poupanca();
 
 		ContaDebito gasolina
-			= this.contaDebitoFabrica.gasolina();
+			= this.contaDebitoFactory.gasolina();
 
-		this.lancamentoFabrica.lancamento(papai, gasolina, poupanca, new BigDecimal(500));
+		this.lancamentoFactory.lancamento(papai, gasolina, poupanca, new BigDecimal(500));
 
 		// executa a operacao a ser testada
 		// verifica o efeito da execucao da operacao a ser testada

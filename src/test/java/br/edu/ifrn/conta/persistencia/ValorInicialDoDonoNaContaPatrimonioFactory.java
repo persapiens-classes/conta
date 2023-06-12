@@ -26,7 +26,7 @@ import br.edu.ifrn.conta.dominio.Dono;
 import br.edu.ifrn.conta.dominio.ValorInicialDoDonoNaContaPatrimonio;
 
 @Component
-public class ValorInicialDoDonoNaContaPatrimonioFabrica {
+public class ValorInicialDoDonoNaContaPatrimonioFactory {
 
 	@Autowired
 	private ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;

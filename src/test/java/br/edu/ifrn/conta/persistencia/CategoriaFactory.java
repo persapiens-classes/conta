@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 import br.edu.ifrn.conta.dominio.Categoria;
 
 @Component
-public class CategoriaFabrica {
+public class CategoriaFactory {
 
 	public final static String SALARIO = "Salário";
 	public final static String TRANSPORTE = "Transporte";

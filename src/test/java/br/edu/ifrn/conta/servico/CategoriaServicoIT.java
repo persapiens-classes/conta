@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.Categoria;
-import br.edu.ifrn.conta.persistencia.CategoriaFabrica;
+import br.edu.ifrn.conta.persistencia.CategoriaFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -37,7 +37,7 @@ public class CategoriaServicoIT {
 	private CategoriaServico categoriaServico;
 
 	@Autowired
-	private CategoriaFabrica categoriaFabrica;
+	private CategoriaFactory categoriaFactory;
 
 	@Test
 	public void repositorioNaoEhNulo() {
@@ -47,7 +47,7 @@ public class CategoriaServicoIT {
 	@Test
 	public void salvarUm() {
 		// cria o ambiente de teste
-		Categoria categoria = this.categoriaFabrica.banco();
+		Categoria categoria = this.categoriaFactory.banco();
 
 		// verifica o efeito da execucao da operacao a ser testada
 		assertThat(this.categoriaServico.findById(categoria.getId()).get())
@@ -57,7 +57,7 @@ public class CategoriaServicoIT {
 	@Test
 	public void deletarUm() {
 		// cria o ambiente de teste
-		Categoria categoria = this.categoriaFabrica.categoria("CATEGORIA UNICA DO SERVICOIT");
+		Categoria categoria = this.categoriaFactory.categoria("CATEGORIA UNICA DO SERVICOIT");
 
 		// executa a operacao a ser testada
 		this.categoriaServico.delete(categoria);

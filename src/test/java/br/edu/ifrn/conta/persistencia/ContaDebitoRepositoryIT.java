@@ -35,7 +35,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ContaDebitoRepositoryIT {
 
 	@Autowired
-	private ContaDebitoFabrica contaDebitoFabrica;
+	private ContaDebitoFactory contaDebitoFactory;
 
 	@Autowired
 	private ContaDebitoRepository contaDebitoRepository;
@@ -49,10 +49,10 @@ public class ContaDebitoRepositoryIT {
 	@Test
 	public void findAllByExample() {
 		// cria o ambiente de teste
-		ContaDebito contaDebito = this.contaDebitoFabrica.gasolina();
+		ContaDebito contaDebito = this.contaDebitoFactory.gasolina();
 
 		ContaDebito contaDebitoExemplo = ContaDebito.builder()
-			.categoria(Categoria.builder().descricao(CategoriaFabrica.TRANSPORTE).build())
+			.categoria(Categoria.builder().descricao(CategoriaFactory.TRANSPORTE).build())
 			.build();
 
 		// executa a operacao a ser testada

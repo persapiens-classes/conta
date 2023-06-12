@@ -36,7 +36,7 @@ public class DonoRepositoryIT {
 	private DonoRepository donoRepository;
 
 	@Autowired
-	private DonoFabrica donoFabrica;
+	private DonoFactory donoFactory;
 
 	@Test
 	public void repositorioNaoEhNulo() {
@@ -47,22 +47,22 @@ public class DonoRepositoryIT {
 	@Test
 	public void findByDescricao() {
 		// cria o ambiente de teste
-		Dono papai = this.donoFabrica.papai();
-		Dono mamae = this.donoFabrica.mamae();
+		Dono papai = this.donoFactory.papai();
+		Dono mamae = this.donoFactory.mamae();
 
 		// executa a operacao a ser testada
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.donoRepository.findByDescricao(DonoFabrica.PAPAI))
+		assertThat(this.donoRepository.findByDescricao(DonoFactory.PAPAI))
 			.isEqualTo(papai);
-		assertThat(this.donoRepository.findByDescricao(DonoFabrica.MAMAE))
+		assertThat(this.donoRepository.findByDescricao(DonoFactory.MAMAE))
 			.isEqualTo(mamae);
 	}
 
 	@Test
 	public void countByDescricao() {
 		// cria o ambiente de teste
-		this.donoFabrica.papai();
-		this.donoFabrica.mamae();
+		this.donoFactory.papai();
+		this.donoFactory.mamae();
 
 		// executa a operacao a ser testada
 		// verifica o efeito da execucao da operacao a ser testada
@@ -75,7 +75,7 @@ public class DonoRepositoryIT {
 		String descricaoUnica = "Dono único";
 
 		// cria o ambiente de teste
-		this.donoFabrica.dono(descricaoUnica);
+		this.donoFactory.dono(descricaoUnica);
 
 		// executa a operacao a ser testada
 		this.donoRepository.deleteByDescricao(descricaoUnica);

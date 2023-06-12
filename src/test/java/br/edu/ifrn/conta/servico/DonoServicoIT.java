@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.Dono;
-import br.edu.ifrn.conta.persistencia.DonoFabrica;
+import br.edu.ifrn.conta.persistencia.DonoFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -37,7 +37,7 @@ public class DonoServicoIT {
 	private DonoServico donoServico;
 
 	@Autowired
-	private DonoFabrica donoFabrica;
+	private DonoFactory donoFactory;
 
 	@Test
 	public void repositorioNaoEhNulo() {
@@ -48,7 +48,7 @@ public class DonoServicoIT {
 	@Test
 	public void salvarUm() {
 		// cria o ambiente de teste
-		Dono dono = this.donoFabrica.mamae();
+		Dono dono = this.donoFactory.mamae();
 
 		// verifica o efeito da execucao da operacao a ser testada
 		assertThat(this.donoServico.findById(dono.getId()).get())
@@ -58,7 +58,7 @@ public class DonoServicoIT {
 	@Test
 	public void deletarUm() {
 		// cria o ambiente de teste
-		Dono dono = this.donoFabrica.dono("DONO UNICO DO DONO SERVIÇO IT");
+		Dono dono = this.donoFactory.dono("DONO UNICO DO DONO SERVIÇO IT");
 
 		// executa a operacao a ser testada
 		this.donoServico.delete(dono);

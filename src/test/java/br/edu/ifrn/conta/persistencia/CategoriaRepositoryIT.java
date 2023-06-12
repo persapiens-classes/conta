@@ -36,7 +36,7 @@ public class CategoriaRepositoryIT {
 	private CategoriaRepository categoriaRepository;
 
 	@Autowired
-	private CategoriaFabrica categoriaFabrica;
+	private CategoriaFactory categoriaFactory;
 
 	@Test
 	public void repositorioNaoEhNulo() {
@@ -47,7 +47,7 @@ public class CategoriaRepositoryIT {
 	@Test
 	public void deletarUm() {
 		// cria o ambiente de teste
-		Categoria categoria = this.categoriaFabrica.categoria("CATEGORIA UNICA");
+		Categoria categoria = this.categoriaFactory.categoria("CATEGORIA UNICA");
 
 		// executa a operacao a ser testada
 		this.categoriaRepository.delete(categoria);
@@ -60,7 +60,7 @@ public class CategoriaRepositoryIT {
 	@Test
 	public void salvarUm() {
 		// executa a operacao a ser testada
-		Categoria categoria = this.categoriaFabrica.transporte();
+		Categoria categoria = this.categoriaFactory.transporte();
 
 		// verifica o efeito da execucao da operacao a ser testada
 		assertThat(categoria.getId())

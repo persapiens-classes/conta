@@ -19,33 +19,31 @@ package br.edu.ifrn.conta.persistencia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.edu.ifrn.conta.dominio.Categoria;
-import br.edu.ifrn.conta.dominio.ContaPatrimonio;
+import br.edu.ifrn.conta.dominio.Dono;
 
 @Component
-public class ContaPatrimonioFabrica {
+public class DonoFactory {
 
-	public final static String POUPANCA = "poupança";
-
-	@Autowired
-	private ContaPatrimonioRepository contaPatrimonioRepository;
+	public final static String PAPAI = "Papai";
+	public final static String MAMAE = "Mamãe";
 
 	@Autowired
-	private CategoriaFabrica categoriaFabrica;
+	private DonoRepository donoRepository;
 
-	private ContaPatrimonio contaPatrimonio(String descricao, Categoria categoria) {
-		ContaPatrimonio contaPatrimonio = this.contaPatrimonioRepository.findByDescricao(descricao);
-		if (contaPatrimonio == null) {
-			contaPatrimonio = ContaPatrimonio.builder()
-				.descricao(descricao)
-				.categoria(categoria)
-				.build();
-			this.contaPatrimonioRepository.save(contaPatrimonio);
+	public Dono dono(String descricao) {
+		Dono dono = this.donoRepository.findByDescricao(descricao);
+		if (dono == null) {
+			dono = Dono.builder().descricao(descricao).build();
+			this.donoRepository.save(dono);
 		}
-		return contaPatrimonio;
+		return dono;
 	}
 
-	public ContaPatrimonio poupanca() {
-		return contaPatrimonio(POUPANCA, this.categoriaFabrica.banco());
+	public Dono papai() {
+		return dono(PAPAI);
+	}
+
+	public Dono mamae() {
+		return dono(MAMAE);
 	}
 }

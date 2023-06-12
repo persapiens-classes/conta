@@ -20,37 +20,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.edu.ifrn.conta.dominio.Categoria;
-import br.edu.ifrn.conta.dominio.ContaCredito;
+import br.edu.ifrn.conta.dominio.ContaDebito;
 
 @Component
-public class ContaCreditoFabrica {
+public class ContaDebitoFactory {
 
-	public final static String ESTAGIO = "estágio";
-	public final static String RECEITA_CONJUGE = "receita com cônjuge";
-
-	@Autowired
-	private ContaCreditoRepository contaCreditoRepository;
+	public final static String GASOLINA = "gasolina";
+	public final static String DESPESA_CONJUGE = "despesa com cônjuge";
 
 	@Autowired
-	private CategoriaFabrica categoriaFabrica;
+	private ContaDebitoRepository contaDebitoRepository;
 
-	public ContaCredito contaCredito(String descricao, Categoria categoria) {
-		ContaCredito contaCredito = this.contaCreditoRepository.findByDescricao(descricao);
-		if (contaCredito == null) {
-			contaCredito = ContaCredito.builder()
+	@Autowired
+	private CategoriaFactory categoriaFactory;
+
+	private ContaDebito contaDebito(String descricao, Categoria categoria) {
+		ContaDebito contaDebito = this.contaDebitoRepository.findByDescricao(descricao);
+		if (contaDebito == null) {
+			contaDebito = ContaDebito.builder()
 				.descricao(descricao)
 				.categoria(categoria)
 				.build();
-			this.contaCreditoRepository.save(contaCredito);
+			this.contaDebitoRepository.save(contaDebito);
 		}
-		return contaCredito;
+		return contaDebito;
 	}
 
-	public ContaCredito estagio() {
-		return contaCredito(ESTAGIO, this.categoriaFabrica.salario());
+	public ContaDebito gasolina() {
+		return contaDebito(GASOLINA, this.categoriaFactory.transporte());
 	}
 
-	public ContaCredito receitaComConjuge() {
-		return contaCredito(RECEITA_CONJUGE, this.categoriaFabrica.categoriaReceitaConjuge());
+	public ContaDebito despesaComConjuge() {
+		return contaDebito(DESPESA_CONJUGE, this.categoriaFactory.categoriaDespesaConjuge());
 	}
 }
