@@ -19,9 +19,6 @@ package br.edu.ifrn.conta.servico;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-
 import br.edu.ifrn.conta.dominio.ContaCredito;
 import br.edu.ifrn.conta.dominio.ContaDebito;
 import br.edu.ifrn.conta.dominio.ContaPatrimonio;
@@ -29,6 +26,8 @@ import br.edu.ifrn.conta.dominio.Dono;
 import br.edu.ifrn.conta.dominio.Lancamento;
 import br.edu.ifrn.conta.persistencia.LancamentoRepository;
 import br.edu.ifrn.conta.persistencia.ValorInicialDoDonoNaContaPatrimonioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,13 +35,13 @@ import org.springframework.transaction.annotation.Transactional;
  * Servico de Lancamento.
  * @author Marcelo Fernandes
  */
-@Named
+@Component
 public class LancamentoServico extends CrudServico<Lancamento, Long> {
 
 	private LancamentoRepository lancamentoRepository;
         private ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;
 
-	@Inject
+	@Autowired
 	public LancamentoServico(LancamentoRepository lancamentoRepository) {
 		super();
 		this.lancamentoRepository = lancamentoRepository;

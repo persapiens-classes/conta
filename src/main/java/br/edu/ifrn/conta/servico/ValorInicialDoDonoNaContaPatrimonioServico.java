@@ -16,14 +16,13 @@
 
 package br.edu.ifrn.conta.servico;
 
-import jakarta.inject.Named;
-
 import br.edu.ifrn.conta.dominio.ValorInicialDoDonoNaContaPatrimonio;
+import org.springframework.stereotype.Component;
 
 /**
  * Servico de ValorInicialDoDonoNaContaPatrimonio.
  * @author Marcelo Fernandes
  */
-@Named
+@Component
 public class ValorInicialDoDonoNaContaPatrimonioServico extends CrudServico<ValorInicialDoDonoNaContaPatrimonio, Long> {
 }

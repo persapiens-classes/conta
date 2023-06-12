@@ -16,14 +16,13 @@
 
 package br.edu.ifrn.conta.servico;
 
-import jakarta.inject.Named;
-
 import br.edu.ifrn.conta.dominio.ContaDebito;
+import org.springframework.stereotype.Component;
 
 /**
  * Servico de ContaDebito.
  * @author Marcelo Fernandes
  */
-@Named
+@Component
 public class ContaDebitoServico extends ContaServico<ContaDebito, Long> {
 }
