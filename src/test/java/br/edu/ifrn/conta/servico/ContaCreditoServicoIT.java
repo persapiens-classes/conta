@@ -16,7 +16,7 @@
 
 package br.edu.ifrn.conta.servico;
 
-import jakarta.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.ContaCredito;
@@ -34,13 +34,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class ContaCreditoServicoIT {
 
-	@Inject
+	@Autowired
 	private ContaCreditoServico contaCreditoServico;
 
-	@Inject
+	@Autowired
 	private ContaCreditoFabrica contaCreditoFabrica;
 
-	@Inject
+	@Autowired
 	private CategoriaFabrica categoriaFabrica;
 
 	@Test

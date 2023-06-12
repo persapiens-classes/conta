@@ -18,7 +18,7 @@ package br.edu.ifrn.conta.persistencia;
 
 import java.math.BigDecimal;
 
-import jakarta.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.ContaCredito;
@@ -38,22 +38,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class LancamentoRepositoryIT {
 
-	@Inject
+	@Autowired
 	private LancamentoFabrica lancamentoFabrica;
 
-	@Inject
+	@Autowired
 	private DonoFabrica donoFabrica;
 
-	@Inject
+	@Autowired
 	private ContaCreditoFabrica contaCreditoFabrica;
 
-	@Inject
+	@Autowired
 	private ContaDebitoFabrica contaDebitoFabrica;
 
-	@Inject
+	@Autowired
 	private ContaPatrimonioFabrica contaPatrimonioFabrica;
 
-	@Inject
+	@Autowired
 	private LancamentoRepository lancamentoRepository;
 
 	@BeforeEach

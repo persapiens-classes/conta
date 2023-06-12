@@ -16,12 +16,12 @@
 
 package br.edu.ifrn.conta.persistencia;
 
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.edu.ifrn.conta.dominio.Categoria;
 
-@Named
+@Component
 public class CategoriaFabrica {
 
 	public final static String SALARIO = "Salário";
@@ -30,7 +30,7 @@ public class CategoriaFabrica {
 	public final static String CATEGORIA_DESPESA_CONJUGE = "categoria despesa com cônjuge";
 	public final static String CATEGORIA_RECEITA_CONJUGE = "categoria receita com cônjuge";
 
-	@Inject
+	@Autowired
 	private CategoriaRepository categoriaRepository;
 
 	public Categoria categoria(String descricao) {

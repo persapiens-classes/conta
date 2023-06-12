@@ -19,7 +19,7 @@ package br.edu.ifrn.conta.servico;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import jakarta.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dominio.ContaCredito;
@@ -47,25 +47,25 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class LancamentoServicoIT {
 
-	@Inject
+	@Autowired
 	private LancamentoFabrica lancamentoFabrica;
 
-	@Inject
+	@Autowired
 	private DonoFabrica donoFabrica;
 
-	@Inject
+	@Autowired
 	private LancamentoServico lancamentoServico;
 
-	@Inject
+	@Autowired
 	private ValorInicialDoDonoNaContaPatrimonioFabrica valorInicialDoDonoNaContaPatrimonioFabrica;
 
-	@Inject
+	@Autowired
 	private ContaPatrimonioFabrica contaPatrimonioFabrica;
 
-	@Inject
+	@Autowired
 	private ContaCreditoFabrica contaCreditoFabrica;
 
-	@Inject
+	@Autowired
 	private ContaDebitoFabrica contaDebitoFabrica;
 
 	@BeforeEach

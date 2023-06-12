@@ -18,17 +18,17 @@ package br.edu.ifrn.conta.persistencia;
 
 import java.math.BigDecimal;
 
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.edu.ifrn.conta.dominio.ContaPatrimonio;
 import br.edu.ifrn.conta.dominio.Dono;
 import br.edu.ifrn.conta.dominio.ValorInicialDoDonoNaContaPatrimonio;
 
-@Named
+@Component
 public class ValorInicialDoDonoNaContaPatrimonioFabrica {
 
-	@Inject
+	@Autowired
 	private ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;
 
 	public ValorInicialDoDonoNaContaPatrimonio valorInicialDoDonoNaContaPatrimonio(

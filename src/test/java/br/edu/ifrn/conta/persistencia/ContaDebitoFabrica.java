@@ -16,22 +16,22 @@
 
 package br.edu.ifrn.conta.persistencia;
 
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.edu.ifrn.conta.dominio.Categoria;
 import br.edu.ifrn.conta.dominio.ContaDebito;
 
-@Named
+@Component
 public class ContaDebitoFabrica {
 
 	public final static String GASOLINA = "gasolina";
 	public final static String DESPESA_CONJUGE = "despesa com cônjuge";
 
-	@Inject
+	@Autowired
 	private ContaDebitoRepository contaDebitoRepository;
 
-	@Inject
+	@Autowired
 	private CategoriaFabrica categoriaFabrica;
 
 	private ContaDebito contaDebito(String descricao, Categoria categoria) {

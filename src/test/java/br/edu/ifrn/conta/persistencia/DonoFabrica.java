@@ -16,18 +16,18 @@
 
 package br.edu.ifrn.conta.persistencia;
 
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.edu.ifrn.conta.dominio.Dono;
 
-@Named
+@Component
 public class DonoFabrica {
 
 	public final static String PAPAI = "Papai";
 	public final static String MAMAE = "Mamãe";
 
-	@Inject
+	@Autowired
 	private DonoRepository donoRepository;
 
 	public Dono dono(String descricao) {

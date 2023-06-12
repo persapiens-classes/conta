@@ -19,17 +19,17 @@ package br.edu.ifrn.conta.persistencia;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.edu.ifrn.conta.dominio.Conta;
 import br.edu.ifrn.conta.dominio.Dono;
 import br.edu.ifrn.conta.dominio.Lancamento;
 
-@Named
+@Component
 public class LancamentoFabrica {
 
-	@Inject
+	@Autowired
 	private LancamentoRepository lancamentoRepository;
 
 	public Lancamento lancamento(Dono dono, Conta contaEntrada, Conta contaSaida, BigDecimal valor) {
