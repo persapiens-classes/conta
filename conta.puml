@@ -1,31 +1,31 @@
 @startuml
-abstract class br.edu.ifrn.conta.dominio.Conta {
+abstract class br.edu.ifrn.conta.domain.Conta {
  +descricao
 }
-class br.edu.ifrn.conta.dominio.Categoria {
+class br.edu.ifrn.conta.domain.Categoria {
  +descricao
 }
-class br.edu.ifrn.conta.dominio.ContaCredito
-class br.edu.ifrn.conta.dominio.ContaDebito
-class br.edu.ifrn.conta.dominio.ContaPatrimonio
-class br.edu.ifrn.conta.dominio.Dono {
+class br.edu.ifrn.conta.domain.ContaCredito
+class br.edu.ifrn.conta.domain.ContaDebito
+class br.edu.ifrn.conta.domain.ContaPatrimonio
+class br.edu.ifrn.conta.domain.Dono {
  +descricao
 }
-class br.edu.ifrn.conta.dominio.Lancamento  {
+class br.edu.ifrn.conta.domain.Lancamento  {
  +valor
  +data
  +descricao
 }
-class br.edu.ifrn.conta.dominio.ValorInicialDoDonoNaContaPatrimonio {
+class br.edu.ifrn.conta.domain.ValorInicialDoDonoNaContaPatrimonio {
  +valorInicial
 }
-br.edu.ifrn.conta.dominio.Categoria "1" *-- br.edu.ifrn.conta.dominio.Conta : esta em uma
-br.edu.ifrn.conta.dominio.Dono "1" *-- br.edu.ifrn.conta.dominio.Lancamento : pertence a um
-br.edu.ifrn.conta.dominio.Conta "1" *-- br.edu.ifrn.conta.dominio.Lancamento : conta entrada
-br.edu.ifrn.conta.dominio.Conta "1" *-- br.edu.ifrn.conta.dominio.Lancamento : conta saida
-br.edu.ifrn.conta.dominio.Dono "1" *-- br.edu.ifrn.conta.dominio.ValorInicialDoDonoNaContaPatrimonio : pertence a um
-br.edu.ifrn.conta.dominio.ContaPatrimonio "1" *-- br.edu.ifrn.conta.dominio.ValorInicialDoDonoNaContaPatrimonio : e de uma
-br.edu.ifrn.conta.dominio.ContaCredito --|> br.edu.ifrn.conta.dominio.Conta
-br.edu.ifrn.conta.dominio.ContaDebito --|> br.edu.ifrn.conta.dominio.Conta
-br.edu.ifrn.conta.dominio.ContaPatrimonio --|> br.edu.ifrn.conta.dominio.Conta
+br.edu.ifrn.conta.domain.Categoria "1" *-- br.edu.ifrn.conta.domain.Conta : esta em uma
+br.edu.ifrn.conta.domain.Dono "1" *-- br.edu.ifrn.conta.domain.Lancamento : pertence a um
+br.edu.ifrn.conta.domain.Conta "1" *-- br.edu.ifrn.conta.domain.Lancamento : conta entrada
+br.edu.ifrn.conta.domain.Conta "1" *-- br.edu.ifrn.conta.domain.Lancamento : conta saida
+br.edu.ifrn.conta.domain.Dono "1" *-- br.edu.ifrn.conta.domain.ValorInicialDoDonoNaContaPatrimonio : pertence a um
+br.edu.ifrn.conta.domain.ContaPatrimonio "1" *-- br.edu.ifrn.conta.domain.ValorInicialDoDonoNaContaPatrimonio : e de uma
+br.edu.ifrn.conta.domain.ContaCredito --|> br.edu.ifrn.conta.domain.Conta
+br.edu.ifrn.conta.domain.ContaDebito --|> br.edu.ifrn.conta.domain.Conta
+br.edu.ifrn.conta.domain.ContaPatrimonio --|> br.edu.ifrn.conta.domain.Conta
 @enduml
