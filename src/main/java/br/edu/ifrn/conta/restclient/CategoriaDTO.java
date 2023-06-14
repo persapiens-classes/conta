@@ -4,7 +4,5 @@ import lombok.Data;
 
 @Data
 public class CategoriaDTO {
-    
     private CategoriaEmbedded _embedded;
-
 }

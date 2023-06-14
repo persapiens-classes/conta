@@ -1,8 +1,9 @@
 package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.ContaApplication;
-import br.edu.ifrn.conta.domain.Categoria;
+import br.edu.ifrn.conta.domain.ContaCredito;
 import br.edu.ifrn.conta.persistence.CategoriaFactory;
+import br.edu.ifrn.conta.persistence.ContaCreditoFactory;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,38 +18,51 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class CategoriaRestClientIT {
+public class ContaCreditoRestClientIT {
 
     @Value(value = "${local.server.port}")
     private int port;
 
     @Autowired
     private TestRestTemplate testRestTemplate;
-
-    private CategoriaRestClient categoriaRestClient() {
+    
+    private CategoriaRestClientFactory categoriaRestClientFactory() {
         return CategoriaRestClientFactory.builder()
                 .port(port)
                 .restTemplate(testRestTemplate.getRestTemplate())
-                .build().categoriaRestClient();
+                .build();
+    }
+
+    private ContaCreditoRestClient contaCreditoRestClient() {
+        return ContaCreditoRestClientFactory.builder()
+                .port(port)
+                .restTemplate(testRestTemplate.getRestTemplate())
+                .categoriaRestClientFactory(categoriaRestClientFactory())
+                .build()
+                .contaCreditoRestClient();
     }
 
     @Test
     public void salvarUm() {        
         // executa a operacao a ser testada
-        String descricao = CategoriaFactory.SALARIO;
+        String descricao = ContaCreditoFactory.ESTAGIO;
+        String categoriaDescricao = CategoriaFactory.SALARIO;
         
-        Categoria categoria = Categoria.builder().descricao(descricao).build();
+        ContaCredito estagio = ContaCredito.builder()
+                .descricao(descricao)
+                .categoria(this.categoriaRestClientFactory().categoria(categoriaDescricao))
+                .build();
 
         // verifica a operacao save
-        assertThat(categoriaRestClient().save(categoria))
+        assertThat(contaCreditoRestClient().save(estagio))
         	.isNotNull();
 
         // verifica a operacao findByDescricao
-        assertThat(categoriaRestClient().findByDescricao(descricao).getDescricao())
-                .isEqualTo(categoria.getDescricao());
+        assertThat(contaCreditoRestClient().findByDescricao(descricao).getDescricao())
+                .isEqualTo(estagio.getDescricao());
         
         // verifica a operacao findAll
-        assertThat(categoriaRestClient().findAll())
+        assertThat(contaCreditoRestClient().findAll())
                 .isNotEmpty();        
     }
 

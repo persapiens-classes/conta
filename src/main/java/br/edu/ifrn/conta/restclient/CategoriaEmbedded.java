@@ -6,7 +6,5 @@ import lombok.Data;
 
 @Data
 public class CategoriaEmbedded {
-    
     private Iterable<Categoria> categorias;
-
 }

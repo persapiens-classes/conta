@@ -6,7 +6,5 @@ import lombok.Data;
 
 @Data
 public class DonoEmbedded {
-    
     private Iterable<Dono> donos;
-
 }
