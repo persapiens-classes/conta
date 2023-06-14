@@ -28,7 +28,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class LancamentoServiceIT {
 
 	@Autowired
