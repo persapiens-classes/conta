@@ -3,16 +3,17 @@ package br.edu.ifrn.conta.restclient;
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.domain.Dono;
 import br.edu.ifrn.conta.persistence.DonoFactory;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -25,15 +26,10 @@ public class DonoRestClientIT {
     private TestRestTemplate testRestTemplate;
 
     private DonoRestClient donoRestClient() {
-        return DonoRestClient.builder()
-                .entityRestHelper(RestClientHelper.<Dono>builder()
-                    .endpoint("donos")
-                    .protocol("http")
-                    .servername("localhost")
-                    .port(port)
-                    .restTemplate(testRestTemplate.getRestTemplate())
-                    .build())
-                .build();
+        return DonoRestClientFactory.builder()
+                .port(port)
+                .restTemplate(testRestTemplate.getRestTemplate())
+                .build().donoRestClient();
     }
     
     @Test
