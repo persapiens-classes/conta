@@ -1,8 +1,8 @@
 package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.ContaApplication;
-import br.edu.ifrn.conta.domain.Dono;
-import br.edu.ifrn.conta.persistence.DonoFactory;
+import br.edu.ifrn.conta.domain.Categoria;
+import br.edu.ifrn.conta.persistence.CategoriaFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -16,7 +16,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class DonoRestClientIT {
+public class CategoriaRestClientIT {
 
     @Value(value = "${local.server.port}")
     private int port;
@@ -24,10 +24,10 @@ public class DonoRestClientIT {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
-    private DonoRestClient donoRestClient() {
-        return DonoRestClient.builder()
-                .entityRestHelper(RestClientHelper.<Dono>builder()
-                    .endpoint("donos")
+    private CategoriaRestClient categoriaRestClient() {
+        return CategoriaRestClient.builder()
+                .entityRestHelper(RestClientHelper.<Categoria>builder()
+                    .endpoint("categorias")
                     .protocol("http")
                     .servername("localhost")
                     .port(port)
@@ -35,39 +35,24 @@ public class DonoRestClientIT {
                     .build())
                 .build();
     }
-    
-    @Test
-    public void deletarUm() {
-        // cria o ambiente de teste
-        String descricao = "DONO EXCEPCIONAL";
-        donoRestClient().save(Dono.builder().descricao(descricao).build());
-        assertThat(donoRestClient().findByDescricao(descricao).getDescricao())
-        	.isEqualTo(descricao);
-        
-        // executa a operacao a ser testada
-        donoRestClient().deleteByDescricao(descricao);
-        // verifica o efeito da execucao da operacao a ser testada
-        assertThat(donoRestClient().findByDescricao(descricao))
-        	.isNull();
-    }
 
     @Test
     public void salvarUm() {        
         // executa a operacao a ser testada
-        String descricao = DonoFactory.PAPAI;
+        String descricao = CategoriaFactory.SALARIO;
         
-        Dono dono = Dono.builder().descricao(descricao).build();
+        Categoria categoria = Categoria.builder().descricao(descricao).build();
 
         // verifica a operacao save
-        assertThat(donoRestClient().save(dono))
+        assertThat(categoriaRestClient().save(categoria))
         	.isNotNull();
 
         // verifica a operacao findByDescricao
-        assertThat(donoRestClient().findByDescricao(descricao).getDescricao())
-                .isEqualTo(dono.getDescricao());
+        assertThat(categoriaRestClient().findByDescricao(descricao).getDescricao())
+                .isEqualTo(categoria.getDescricao());
         
         // verifica a operacao findAll
-        assertThat(donoRestClient().findAll())
+        assertThat(categoriaRestClient().findAll())
                 .isNotEmpty();        
     }
 
