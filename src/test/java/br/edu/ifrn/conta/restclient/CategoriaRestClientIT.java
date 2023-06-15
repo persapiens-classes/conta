@@ -19,6 +19,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CategoriaRestClientIT {
 
+    private final String protocol = "http";
+    private final String servername = "localhost";
+
     @Value(value = "${local.server.port}")
     private int port;
 
@@ -27,6 +30,8 @@ public class CategoriaRestClientIT {
 
     private CategoriaRestClient categoriaRestClient() {
         return CategoriaRestClientFactory.builder()
+                .protocol(protocol)
+                .servername(servername)
                 .port(port)
                 .restTemplate(testRestTemplate.getRestTemplate())
                 .build().categoriaRestClient();

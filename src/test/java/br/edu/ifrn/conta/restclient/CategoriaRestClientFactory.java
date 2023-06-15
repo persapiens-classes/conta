@@ -10,6 +10,10 @@ import org.springframework.web.client.RestTemplate;
 @Data
 public class CategoriaRestClientFactory {
 
+    private String protocol;
+    
+    private String servername;
+
     private int port;
 
     private RestTemplate restTemplate;
@@ -18,8 +22,8 @@ public class CategoriaRestClientFactory {
         return CategoriaRestClient.builder()
                 .entityRestHelper(RestClientHelper.<Categoria>builder()
                     .endpoint("categorias")
-                    .protocol("http")
-                    .servername("localhost")
+                    .protocol(protocol)
+                    .servername(servername)
                     .port(port)
                     .restTemplate(restTemplate)
                     .build())

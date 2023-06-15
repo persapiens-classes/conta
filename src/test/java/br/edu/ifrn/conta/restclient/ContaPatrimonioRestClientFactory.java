@@ -11,6 +11,10 @@ import org.springframework.web.client.RestTemplate;
 @Data
 public class ContaPatrimonioRestClientFactory {
 
+    private String protocol;
+    
+    private String servername;
+
     private int port;
 
     private RestTemplate restTemplate;
@@ -21,8 +25,8 @@ public class ContaPatrimonioRestClientFactory {
         return ContaPatrimonioRestClient.builder()
                 .entityRestHelper(RestClientHelper.<ContaPatrimonio>builder()
                     .endpoint("contasPatrimonio")
-                    .protocol("http")
-                    .servername("localhost")
+                    .protocol(protocol)
+                    .servername(servername)
                     .port(port)
                     .restTemplate(restTemplate)
                     .build())

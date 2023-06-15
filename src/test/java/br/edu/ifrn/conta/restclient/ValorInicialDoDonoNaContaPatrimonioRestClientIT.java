@@ -23,6 +23,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ValorInicialDoDonoNaContaPatrimonioRestClientIT {
 
+    private final String protocol = "http";
+    private final String servername = "localhost";
+
     @Value(value = "${local.server.port}")
     private int port;
 
@@ -31,6 +34,8 @@ public class ValorInicialDoDonoNaContaPatrimonioRestClientIT {
 
     private DonoRestClientFactory donoRestClientFactory() {
         return DonoRestClientFactory.builder()
+                .protocol(protocol)
+                .servername(servername)
                 .port(port)
                 .restTemplate(testRestTemplate.getRestTemplate())
                 .build();
@@ -38,6 +43,8 @@ public class ValorInicialDoDonoNaContaPatrimonioRestClientIT {
 
     private ContaPatrimonioRestClientFactory contaPatrimonioRestClientFactory() {
         return ContaPatrimonioRestClientFactory.builder()
+                .protocol(protocol)
+                .servername(servername)
                 .port(port)
                 .restTemplate(testRestTemplate.getRestTemplate())
                 .build();
@@ -45,6 +52,8 @@ public class ValorInicialDoDonoNaContaPatrimonioRestClientIT {
 
     private ValorInicialDoDonoNaContaPatrimonioRestClient valorInicialDoDonoNaContaPatrimonioRestClient() {
         return ValorInicialDoDonoNaContaPatrimonioRestClientFactory.builder()
+                .protocol(protocol)
+                .servername(servername)
                 .port(port)
                 .restTemplate(testRestTemplate.getRestTemplate())
                 .build().valorInicialDoDonoNaContaPatrimonioRestClient();
