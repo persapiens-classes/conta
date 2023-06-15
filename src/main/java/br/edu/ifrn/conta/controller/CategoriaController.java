@@ -20,7 +20,7 @@ public class CategoriaController extends CrudController<CategoriaDTO, Categoria,
     
     @GetMapping("/findByDescricao")
     public CategoriaDTO findByDescricao(@RequestParam String descricao) {
-        return toDTO(categoriaService.findByDescricao(descricao));
+        return toDTOCheckNull(categoriaService.findByDescricao(descricao));
     }
 
     @Override

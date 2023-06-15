@@ -19,16 +19,35 @@ public abstract class CrudController <D extends Object, T extends Object, ID ext
     
     @PostMapping
     public D save(@RequestBody D dto) {
-        return (D) toEntity((D) crudService.save(toEntity(dto)));
+        T saved = crudService.save(toEntityCheckNull(dto));
+        return toDTOCheckNull(saved);
     }
     
     @GetMapping
     public Iterable<D> findAll() {
         List<D> result = new ArrayList<>();
         for(T entity : crudService.findAll()) {
-            result.add(toDTO(entity));
+            result.add(toDTOCheckNull(entity));
         }
         return  result;
+    }
+    
+    public T toEntityCheckNull(D dto) {
+        T result = null;
+        if (dto != null) {
+            result = toEntityCheckNull(dto);
+        }
+        
+        return result;
+    }
+    
+    public D toDTOCheckNull(T entity) {
+        D result = null;
+        if (entity != null) {
+            result = toDTO(entity);
+        }
+        
+        return result;        
     }
     
     protected abstract T toEntity(D dto);

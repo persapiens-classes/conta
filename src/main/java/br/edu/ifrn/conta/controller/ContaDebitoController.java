@@ -24,7 +24,7 @@ public class ContaDebitoController extends CrudController<ContaDebitoDTO, ContaD
     
     @GetMapping("/findByDescricao")
     public ContaDebitoDTO findByDescricao(@RequestParam String descricao) {
-        return toDTO(contaDebitoService.findByDescricao(descricao));
+        return toDTOCheckNull(contaDebitoService.findByDescricao(descricao));
     }
 
     @Override

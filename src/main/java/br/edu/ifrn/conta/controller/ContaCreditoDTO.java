@@ -1,6 +1,5 @@
 package br.edu.ifrn.conta.controller;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

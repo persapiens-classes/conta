@@ -29,7 +29,7 @@ public class ValorInicialDoDonoNaContaPatrimonioController extends CrudControlle
     
     @GetMapping("findByDonoAndContaPatrimonio")
     public ValorInicialDoDonoNaContaPatrimonioDTO findByDonoAndContaPatrimonio(@RequestParam String dono, @RequestParam String contaPatrimonio) {
-        return toDTO(valorInicialDoDonoNaContaPatrimonioService.findByDonoAndContaPatrimonio(
+        return toDTOCheckNull(valorInicialDoDonoNaContaPatrimonioService.findByDonoAndContaPatrimonio(
         donoService.findByDescricao(dono), 
 contaPatrimonioService.findByDescricao(contaPatrimonio)));
     }

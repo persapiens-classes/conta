@@ -21,7 +21,7 @@ public class DonoController extends CrudController<DonoDTO, Dono, Long> {
     
     @GetMapping("/findByDescricao")
     public DonoDTO findByDescricao(@RequestParam String descricao) {
-        return toDTO(donoService.findByDescricao(descricao));
+        return toDTOCheckNull(donoService.findByDescricao(descricao));
     }
     
     @DeleteMapping("/deleteByDescricao")
@@ -38,12 +38,8 @@ public class DonoController extends CrudController<DonoDTO, Dono, Long> {
 
     @Override
     protected DonoDTO toDTO(Dono entity) {
-        DonoDTO result = null;
-        if (entity != null) {
-            result = DonoDTO.builder()
-               .descricao(entity.getDescricao())
-               .build();
-        }
-        return result;
+        return DonoDTO.builder()
+           .descricao(entity.getDescricao())
+           .build();
     }
 }

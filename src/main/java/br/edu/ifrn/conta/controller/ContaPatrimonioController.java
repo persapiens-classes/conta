@@ -18,28 +18,28 @@ public class ContaPatrimonioController extends CrudController<ContaPatrimonioDTO
 
     @Autowired
     private ContaPatrimonioService contaPatrimonioService;
-    
+
     @Autowired
     private CategoriaService categoriaService;
-    
+
     @GetMapping("/findByDescricao")
     public ContaPatrimonioDTO findByDescricao(@RequestParam String descricao) {
-        return toDTO(contaPatrimonioService.findByDescricao(descricao));
+        return toDTOCheckNull(contaPatrimonioService.findByDescricao(descricao));
     }
 
     @Override
     protected ContaPatrimonio toEntity(ContaPatrimonioDTO dto) {
         return ContaPatrimonio.builder()
-            .descricao(dto.getDescricao())
-            .categoria(categoriaService.findByDescricao(dto.getCategoria().getDescricao()))
-            .build();
+                .descricao(dto.getDescricao())
+                .categoria(categoriaService.findByDescricao(dto.getCategoria().getDescricao()))
+                .build();
     }
 
     @Override
     protected ContaPatrimonioDTO toDTO(ContaPatrimonio entity) {
         return ContaPatrimonioDTO.builder()
-            .descricao(entity.getDescricao())
-            .categoria(CategoriaDTO.builder().descricao(entity.getCategoria().getDescricao()).build())
-            .build();
+                .descricao(entity.getDescricao())
+                .categoria(CategoriaDTO.builder().descricao(entity.getCategoria().getDescricao()).build())
+                .build();
     }
 }
