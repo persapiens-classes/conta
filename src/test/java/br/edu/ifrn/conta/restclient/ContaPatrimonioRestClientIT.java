@@ -52,7 +52,7 @@ public class ContaPatrimonioRestClientIT {
     @Test
     public void salvarUm() {        
         // executa a operacao a ser testada
-        String descricao = ContaPatrimonioFactory.POUPANCA;
+        String descricao = "Conta Corrente";
         String categoriaDescricao = CategoriaFactory.BANCO;
         
         ContaPatrimonioDTO poupanca = ContaPatrimonioDTO.builder()

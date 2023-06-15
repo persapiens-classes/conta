@@ -2,7 +2,6 @@ package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.controller.DonoDTO;
-import br.edu.ifrn.conta.persistence.DonoFactory;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -55,7 +54,7 @@ public class DonoRestClientIT {
     @Test
     public void salvarUm() {        
         // executa a operacao a ser testada
-        String descricao = DonoFactory.PAPAI;
+        String descricao = "Vizinho";
         
         DonoDTO dono = DonoDTO.builder().descricao(descricao).build();
 

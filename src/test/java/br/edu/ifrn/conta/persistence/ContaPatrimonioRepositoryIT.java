@@ -35,6 +35,7 @@ public class ContaPatrimonioRepositoryIT {
 		this.contaPatrimonioFactory.poupanca();
 
 		ContaPatrimonio contaPatrimonioExemplo = ContaPatrimonio.builder()
+                        .descricao(ContaPatrimonioFactory.POUPANCA)
 			.categoria(Categoria.builder().descricao(CategoriaFactory.BANCO).build())
 			.build();
 
