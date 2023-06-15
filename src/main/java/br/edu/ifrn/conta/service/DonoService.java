@@ -17,4 +17,8 @@ public class DonoService extends CrudService<Dono, Long> {
     public Dono findByDescricao(String descricao) {
         return donoRepository.findByDescricao(descricao);
     }
+    
+    public void deleteByDescricao(String descricao) {
+        donoRepository.deleteByDescricao(descricao);
+    }
 }
