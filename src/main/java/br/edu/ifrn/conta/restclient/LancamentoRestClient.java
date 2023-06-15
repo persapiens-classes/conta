@@ -20,15 +20,5 @@ public class LancamentoRestClient {
         return this.entityRestHelper.getRestTemplate().postForObject(
                 entityRestHelper.saveUri(), entity, LancamentoDTO.class);
     }
-
-    public BigDecimal saldo(String dono, String contaPatrimonio) {
-        System.out.println("Chamou SALDO " + entityRestHelper.url() + "/saldo" + dono + "-" + contaPatrimonio);
-        return this.entityRestHelper.getRestTemplate().getForObject(
-        UriComponentsBuilder.fromHttpUrl(entityRestHelper.url() + "/saldo")
-            .queryParam("dono", dono)
-            .queryParam("contaPatrimonio", contaPatrimonio)
-            .build().encode().toUri()
-            , BigDecimal.class);
-    }
     
 }

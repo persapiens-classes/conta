@@ -1,6 +1,5 @@
 package br.edu.ifrn.conta.controller;
 
-import br.edu.ifrn.conta.domain.Dono;
 import br.edu.ifrn.conta.domain.ValorInicialDoDonoNaContaPatrimonio;
 import br.edu.ifrn.conta.service.ContaPatrimonioService;
 import br.edu.ifrn.conta.service.DonoService;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Service of valorInicialDoDonoNaContaPatrimonio.
+ * valorInicialDoDonoNaContaPatrimonio controller.
  */
 @RestController
 @RequestMapping("/valorInicialDoDonoNaContaPatrimonio")

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Service of conta patrimonio.
+ * conta patrimonio controller.
  */
 @RestController
 @RequestMapping("/contaPatrimonio")

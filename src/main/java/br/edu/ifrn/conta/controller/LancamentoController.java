@@ -5,15 +5,12 @@ import br.edu.ifrn.conta.service.ContaPatrimonioService;
 import br.edu.ifrn.conta.service.ContaService;
 import br.edu.ifrn.conta.service.DonoService;
 import br.edu.ifrn.conta.service.LancamentoService;
-import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Service of Lancamento.
+ * Lancamento controller.
  */
 @RestController
 @RequestMapping("/lancamento")
@@ -27,13 +24,6 @@ public class LancamentoController extends CrudController<LancamentoDTO, Lancamen
     private ContaPatrimonioService contaPatrimonioService;
     @Autowired
     private ContaService contaService;
-
-    @GetMapping("/saldo")
-    public BigDecimal saldo(@RequestParam String dono, @RequestParam String contaPatrimonio) {
-        System.out.println("CHEGOU NO SALDO " + dono + "-" + contaPatrimonio);
-        return lancamentoService.saldo(donoService.findByDescricao(dono),
-                contaPatrimonioService.findByDescricao(contaPatrimonio));
-    }
 
     @Override
     protected Lancamento toEntity(LancamentoDTO dto) {
