@@ -20,8 +20,7 @@ public class ContaCreditoRestClient {
     }
 
     public Iterable<ContaCredito> findAll() {
-        return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findAllUri(), ContaCreditoDTO.class).get_embedded().getContasCredito();
+        return this.entityRestHelper.findAll();
     }
 
     public ContaCredito save(ContaCredito entity) {

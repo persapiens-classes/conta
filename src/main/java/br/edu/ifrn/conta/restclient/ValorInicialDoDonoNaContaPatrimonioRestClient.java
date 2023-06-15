@@ -11,8 +11,7 @@ public class ValorInicialDoDonoNaContaPatrimonioRestClient {
     private RestClientHelper<ValorInicialDoDonoNaContaPatrimonio> entityRestHelper;
 
     public Iterable<ValorInicialDoDonoNaContaPatrimonio> findAll() {
-        return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findAllUri(), ValorInicialDoDonoNaContaPatrimonioDTO.class).get_embedded().getValoresIniciaisDoDonoNaContaPatrimonio();
+        return this.entityRestHelper.findAll();
     }
 
     public ValorInicialDoDonoNaContaPatrimonio save(ValorInicialDoDonoNaContaPatrimonio entity) {

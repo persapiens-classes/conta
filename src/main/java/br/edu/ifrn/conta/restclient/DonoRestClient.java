@@ -20,8 +20,7 @@ public class DonoRestClient {
     }
 
     public Iterable<Dono> findAll() {
-        return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findAllUri(), DonoDTO.class).get_embedded().getDonos();
+        return this.entityRestHelper.findAll();
     }
 
     public Dono save(Dono entity) {

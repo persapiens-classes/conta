@@ -16,8 +16,7 @@ public class CategoriaRestClient {
     }
 
     public Iterable<Categoria> findAll() {
-        return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findAllUri(), CategoriaDTO.class).get_embedded().getCategorias();
+        return this.entityRestHelper.findAll();
     }
 
     public Categoria save(Categoria entity) {

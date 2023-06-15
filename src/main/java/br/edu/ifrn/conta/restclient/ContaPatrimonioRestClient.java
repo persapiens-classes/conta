@@ -20,8 +20,7 @@ public class ContaPatrimonioRestClient {
     }
 
     public Iterable<ContaPatrimonio> findAll() {
-        return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findAllUri(), ContaPatrimonioDTO.class).get_embedded().getContasPatrimonio();
+        return this.entityRestHelper.findAll();
     }
 
     public ContaPatrimonio save(ContaPatrimonio entity) {

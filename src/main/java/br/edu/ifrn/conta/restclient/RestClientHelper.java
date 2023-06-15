@@ -4,6 +4,7 @@ import java.net.URI;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -18,7 +19,7 @@ public class RestClientHelper <T> {
     private int port;
     private RestTemplate restTemplate;
 
-    private String url() {
+    public String url() {
         return protocol + "://" + servername + ":" + port + "/" + endpoint;
     }
 
@@ -34,12 +35,24 @@ public class RestClientHelper <T> {
     }
     
     public void deleteByDescricao(String descricao) {
-        this.restTemplate.exchange(uri("/search/deleteByDescricao", "descricao", descricao), 
-        HttpMethod.GET, null, new ParameterizedTypeReference<T>(){});
+        this.restTemplate.exchange(uri("/deleteByDescricao", "descricao", descricao), 
+        HttpMethod.DELETE, null, new ParameterizedTypeReference<T>(){});
     }
 
+    public Iterable<T> findAll() {
+        return this.restTemplate.exchange(findAllUri(), 
+      HttpMethod.GET, null, 
+            new ParameterizedTypeReference<Iterable<T>>(){})
+                .getBody();
+    }
+
+    public T save(T entity) {
+        return this.restTemplate.exchange(saveUri(), 
+            HttpMethod.POST, new HttpEntity<>(entity), new ParameterizedTypeReference<T>(){}).getBody();
+    }
+    
     public URI findByDescricaoUri(String descricao) {
-        return uri("/search/findByDescricao", "descricao", descricao);
+        return uri("/findByDescricao", "descricao", descricao);
     }
 
     public URI findAllUri() {
