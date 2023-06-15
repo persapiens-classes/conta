@@ -36,7 +36,7 @@ import lombok.ToString;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @SequenceGenerator(sequenceName = "seq_conta", name = "ID_SEQUENCE", allocationSize = 1)
-public abstract class Conta implements Serializable, Comparable<Conta> {
+public class Conta implements Serializable, Comparable<Conta> {
 
     private static final long serialVersionUID = 1L;
 

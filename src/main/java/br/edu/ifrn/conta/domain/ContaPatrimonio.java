@@ -1,5 +1,6 @@
 package br.edu.ifrn.conta.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
@@ -33,6 +34,7 @@ public class ContaPatrimonio extends Conta {
         this.valoresIniciaisDosDonos = valoresIniciaisDosDonos;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "contaPatrimonio")
     private Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisDosDonos;
 

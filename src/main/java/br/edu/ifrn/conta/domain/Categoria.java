@@ -1,5 +1,6 @@
 package br.edu.ifrn.conta.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -44,6 +45,7 @@ public class Categoria implements Serializable, Comparable<Categoria> {
     @Column(nullable = false, unique = true)
     private String descricao;
 
+    @JsonIgnore
     @Singular
     @OneToMany(mappedBy = "categoria")
     private Set<Conta> contas;
