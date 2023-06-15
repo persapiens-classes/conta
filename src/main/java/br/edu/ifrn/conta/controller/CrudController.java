@@ -27,7 +27,7 @@ public abstract class CrudController <D extends Object, T extends Object, ID ext
     public Iterable<D> findAll() {
         List<D> result = new ArrayList<>();
         for(T entity : crudService.findAll()) {
-            result.add(toDTOCheckNull(entity));
+            result.add(toDTO(entity));
         }
         return  result;
     }
@@ -35,7 +35,7 @@ public abstract class CrudController <D extends Object, T extends Object, ID ext
     public T toEntityCheckNull(D dto) {
         T result = null;
         if (dto != null) {
-            result = toEntityCheckNull(dto);
+            result = toEntity(dto);
         }
         
         return result;
