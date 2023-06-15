@@ -1,12 +1,12 @@
 package br.edu.ifrn.conta.restclient;
 
-import br.edu.ifrn.conta.domain.Categoria;
-import lombok.Builder;
+import br.edu.ifrn.conta.controller.CategoriaDTO;
+import lombok.experimental.SuperBuilder;
 import lombok.Data;
 
 import org.springframework.web.client.RestTemplate;
 
-@Builder
+@SuperBuilder
 @Data
 public class CategoriaRestClientFactory {
 
@@ -20,7 +20,7 @@ public class CategoriaRestClientFactory {
 
     public CategoriaRestClient categoriaRestClient() {
         return CategoriaRestClient.builder()
-                .entityRestHelper(RestClientHelper.<Categoria>builder()
+                .entityRestHelper(RestClientHelper.<CategoriaDTO>builder()
                     .endpoint("categoria")
                     .protocol(protocol)
                     .servername(servername)
@@ -30,10 +30,10 @@ public class CategoriaRestClientFactory {
                 .build();
     }
 
-    public Categoria categoria(String descricao) {
-        Categoria result = categoriaRestClient().findByDescricao(descricao);
+    public CategoriaDTO categoria(String descricao) {
+        CategoriaDTO result = categoriaRestClient().findByDescricao(descricao);
         if (result == null) {
-            result = Categoria.builder().descricao(descricao).build();
+            result = CategoriaDTO.builder().descricao(descricao).build();
             result = categoriaRestClient().save(result);
         }
         

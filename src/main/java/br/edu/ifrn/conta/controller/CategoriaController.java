@@ -9,17 +9,32 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Service of Categoria.
+ * Categoria controller.
  */
 @RestController
 @RequestMapping("/categoria")
-public class CategoriaController extends CrudController<Categoria, Long> {
+public class CategoriaController extends CrudController<CategoriaDTO, Categoria, Long> {
 
     @Autowired
     private CategoriaService categoriaService;
     
     @GetMapping("/findByDescricao")
-    public Categoria findByDescricao(@RequestParam String descricao) {
-        return categoriaService.findByDescricao(descricao);
+    public CategoriaDTO findByDescricao(@RequestParam String descricao) {
+        return toDTO(categoriaService.findByDescricao(descricao));
     }
+
+    @Override
+    protected Categoria toEntity(CategoriaDTO dto) {
+        return Categoria.builder()
+           .descricao(dto.getDescricao())
+           .build();
+    }
+
+    @Override
+    protected CategoriaDTO toDTO(Categoria entity) {
+        return CategoriaDTO.builder()
+           .descricao(entity.getDescricao())
+           .build();
+    }
+
 }

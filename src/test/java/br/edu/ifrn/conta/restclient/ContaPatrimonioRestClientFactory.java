@@ -1,13 +1,13 @@
 package br.edu.ifrn.conta.restclient;
 
-import br.edu.ifrn.conta.domain.Categoria;
-import br.edu.ifrn.conta.domain.ContaPatrimonio;
-import lombok.Builder;
+import br.edu.ifrn.conta.controller.CategoriaDTO;
+import br.edu.ifrn.conta.controller.ContaPatrimonioDTO;
+import lombok.experimental.SuperBuilder;
 import lombok.Data;
 
 import org.springframework.web.client.RestTemplate;
 
-@Builder
+@SuperBuilder
 @Data
 public class ContaPatrimonioRestClientFactory {
 
@@ -23,7 +23,7 @@ public class ContaPatrimonioRestClientFactory {
 
     public ContaPatrimonioRestClient contaPatrimonioRestClient() {
         return ContaPatrimonioRestClient.builder()
-                .entityRestHelper(RestClientHelper.<ContaPatrimonio>builder()
+                .entityRestHelper(RestClientHelper.<ContaPatrimonioDTO>builder()
                     .endpoint("contaPatrimonio")
                     .protocol(protocol)
                     .servername(servername)
@@ -33,12 +33,12 @@ public class ContaPatrimonioRestClientFactory {
                 .build();
     }
     
-    public ContaPatrimonio contaPatrimonio(String descricao, String categoriaDescricao) {
-        ContaPatrimonio result = contaPatrimonioRestClient().findByDescricao(descricao);
+    public ContaPatrimonioDTO contaPatrimonio(String descricao, String categoriaDescricao) {
+        ContaPatrimonioDTO result = contaPatrimonioRestClient().findByDescricao(descricao);
         if (result == null) {
-            Categoria categoria = categoriaRestClientFactory.categoria(categoriaDescricao);
+            CategoriaDTO categoria = categoriaRestClientFactory.categoria(categoriaDescricao);
             
-            result = ContaPatrimonio.builder().descricao(descricao)
+            result = ContaPatrimonioDTO.builder().descricao(descricao)
                     .categoria(categoria)
                     .build();
             result = contaPatrimonioRestClient().save(result);

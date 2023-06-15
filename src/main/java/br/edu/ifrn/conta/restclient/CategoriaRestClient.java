@@ -1,27 +1,27 @@
 package br.edu.ifrn.conta.restclient;
 
-import br.edu.ifrn.conta.domain.Categoria;
-import lombok.Builder;
+import br.edu.ifrn.conta.controller.CategoriaDTO;
+import lombok.experimental.SuperBuilder;
 import lombok.Data;
 
 @Data
-@Builder
+@SuperBuilder
 public class CategoriaRestClient {
 
-    private RestClientHelper<Categoria> entityRestHelper;
+    private RestClientHelper<CategoriaDTO> entityRestHelper;
 
-    public Categoria findByDescricao(String descricao) {
+    public CategoriaDTO findByDescricao(String descricao) {
         return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findByDescricaoUri(descricao), Categoria.class);
+                entityRestHelper.findByDescricaoUri(descricao), CategoriaDTO.class);
     }
 
-    public Iterable<Categoria> findAll() {
+    public Iterable<CategoriaDTO> findAll() {
         return this.entityRestHelper.findAll();
     }
 
-    public Categoria save(Categoria entity) {
+    public CategoriaDTO save(CategoriaDTO entity) {
         return this.entityRestHelper.getRestTemplate().postForObject(
-                entityRestHelper.saveUri(), entity, Categoria.class);
+                entityRestHelper.saveUri(), entity, CategoriaDTO.class);
     }
 
 }

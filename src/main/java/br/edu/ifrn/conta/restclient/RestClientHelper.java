@@ -1,7 +1,7 @@
 package br.edu.ifrn.conta.restclient;
 
 import java.net.URI;
-import lombok.Builder;
+import lombok.experimental.SuperBuilder;
 import lombok.Data;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Data
-@Builder
+@SuperBuilder
 public class RestClientHelper <T> {
 
     private String endpoint;

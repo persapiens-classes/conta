@@ -1,31 +1,31 @@
 package br.edu.ifrn.conta.restclient;
 
-import br.edu.ifrn.conta.domain.Dono;
-import lombok.Builder;
+import br.edu.ifrn.conta.controller.DonoDTO;
+import lombok.experimental.SuperBuilder;
 import lombok.Data;
 
 @Data
-@Builder
+@SuperBuilder
 public class DonoRestClient {
 
-    private RestClientHelper<Dono> entityRestHelper;
+    private RestClientHelper<DonoDTO> entityRestHelper;
 
     public void deleteByDescricao(String descricao) {
         entityRestHelper.deleteByDescricao(descricao);
     }
 
-    public Dono findByDescricao(String descricao) {
+    public DonoDTO findByDescricao(String descricao) {
         return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findByDescricaoUri(descricao), Dono.class);
+                entityRestHelper.findByDescricaoUri(descricao), DonoDTO.class);
     }
 
-    public Iterable<Dono> findAll() {
+    public Iterable<DonoDTO> findAll() {
         return this.entityRestHelper.findAll();
     }
 
-    public Dono save(Dono entity) {
+    public DonoDTO save(DonoDTO entity) {
         return this.entityRestHelper.getRestTemplate().postForObject(
-                entityRestHelper.saveUri(), entity, Dono.class);
+                entityRestHelper.saveUri(), entity, DonoDTO.class);
     }
 
 }

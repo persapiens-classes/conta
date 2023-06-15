@@ -1,7 +1,7 @@
 package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.ContaApplication;
-import br.edu.ifrn.conta.domain.Dono;
+import br.edu.ifrn.conta.controller.DonoDTO;
 import br.edu.ifrn.conta.persistence.DonoFactory;
 
 import org.junit.jupiter.api.Test;
@@ -41,7 +41,7 @@ public class DonoRestClientIT {
     public void deletarUm() {
         // cria o ambiente de teste
         String descricao = "DONO EXCEPCIONAL";
-        donoRestClient().save(Dono.builder().descricao(descricao).build());
+        donoRestClient().save(DonoDTO.builder().descricao(descricao).build());
         assertThat(donoRestClient().findByDescricao(descricao).getDescricao())
         	.isEqualTo(descricao);
         
@@ -57,7 +57,7 @@ public class DonoRestClientIT {
         // executa a operacao a ser testada
         String descricao = DonoFactory.PAPAI;
         
-        Dono dono = Dono.builder().descricao(descricao).build();
+        DonoDTO dono = DonoDTO.builder().descricao(descricao).build();
 
         // verifica a operacao save
         assertThat(donoRestClient().save(dono))

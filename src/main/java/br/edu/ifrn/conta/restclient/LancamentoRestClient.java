@@ -1,27 +1,28 @@
 package br.edu.ifrn.conta.restclient;
 
-import br.edu.ifrn.conta.domain.Lancamento;
+import br.edu.ifrn.conta.controller.LancamentoDTO;
 import java.math.BigDecimal;
-import lombok.Builder;
+import lombok.experimental.SuperBuilder;
 import lombok.Data;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Data
-@Builder
+@SuperBuilder
 public class LancamentoRestClient {
 
-    private RestClientHelper<Lancamento> entityRestHelper;
+    private RestClientHelper<LancamentoDTO> entityRestHelper;
 
-    public Iterable<Lancamento> findAll() {
+    public Iterable<LancamentoDTO> findAll() {
         return this.entityRestHelper.findAll();
     }
 
-    public Lancamento save(Lancamento entity) {
+    public LancamentoDTO save(LancamentoDTO entity) {
         return this.entityRestHelper.getRestTemplate().postForObject(
-                entityRestHelper.saveUri(), entity, Lancamento.class);
+                entityRestHelper.saveUri(), entity, LancamentoDTO.class);
     }
 
     public BigDecimal saldo(String dono, String contaPatrimonio) {
+        System.out.println("Chamou SALDO " + entityRestHelper.url() + "/saldo" + dono + "-" + contaPatrimonio);
         return this.entityRestHelper.getRestTemplate().getForObject(
         UriComponentsBuilder.fromHttpUrl(entityRestHelper.url() + "/saldo")
             .queryParam("dono", dono)

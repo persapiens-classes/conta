@@ -1,13 +1,12 @@
 package br.edu.ifrn.conta.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
 import lombok.AccessLevel;
-import lombok.Builder;
+import lombok.experimental.SuperBuilder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +17,7 @@ import lombok.ToString;
 /**
  * Conta Patrimonio entity.
  */
+@SuperBuilder
 @Getter
 @Setter
 @ToString(callSuper = true, exclude = "valoresIniciaisDosDonos")
@@ -28,13 +28,7 @@ public class ContaPatrimonio extends Conta {
 
     private static final long serialVersionUID = 1L;
 
-    @Builder
-    public ContaPatrimonio(@Singular("valorInicialDoDono") Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisDosDonos, Long id, String descricao, Categoria categoria) {
-        super(id, descricao, categoria);
-        this.valoresIniciaisDosDonos = valoresIniciaisDosDonos;
-    }
-
-    @JsonIgnore
+    @Singular
     @OneToMany(mappedBy = "contaPatrimonio")
     private Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisDosDonos;
 

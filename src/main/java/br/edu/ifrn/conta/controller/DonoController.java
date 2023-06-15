@@ -10,22 +10,40 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Service of Lancamento.
+ * Dono Controller
  */
 @RestController
 @RequestMapping("/dono")
-public class DonoController extends CrudController<Dono, Long> {
+public class DonoController extends CrudController<DonoDTO, Dono, Long> {
 
     @Autowired
     private DonoService donoService;
     
     @GetMapping("/findByDescricao")
-    public Dono findByDescricao(@RequestParam String descricao) {
-        return donoService.findByDescricao(descricao);
+    public DonoDTO findByDescricao(@RequestParam String descricao) {
+        return toDTO(donoService.findByDescricao(descricao));
     }
     
     @DeleteMapping("/deleteByDescricao")
     public void deleteByDescricao(@RequestParam String descricao) {
         donoService.deleteByDescricao(descricao);
+    }
+
+    @Override
+    protected Dono toEntity(DonoDTO dto) {
+        return Dono.builder()
+           .descricao(dto.getDescricao())
+           .build();        
+    }
+
+    @Override
+    protected DonoDTO toDTO(Dono entity) {
+        DonoDTO result = null;
+        if (entity != null) {
+            result = DonoDTO.builder()
+               .descricao(entity.getDescricao())
+               .build();
+        }
+        return result;
     }
 }

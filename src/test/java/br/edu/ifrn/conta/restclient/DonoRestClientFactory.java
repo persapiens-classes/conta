@@ -1,12 +1,12 @@
 package br.edu.ifrn.conta.restclient;
 
-import br.edu.ifrn.conta.domain.Dono;
-import lombok.Builder;
+import br.edu.ifrn.conta.controller.DonoDTO;
+import lombok.experimental.SuperBuilder;
 import lombok.Data;
 
 import org.springframework.web.client.RestTemplate;
 
-@Builder
+@SuperBuilder
 @Data
 public class DonoRestClientFactory {
 
@@ -20,7 +20,7 @@ public class DonoRestClientFactory {
 
     public DonoRestClient donoRestClient() {
         return DonoRestClient.builder()
-                .entityRestHelper(RestClientHelper.<Dono>builder()
+                .entityRestHelper(RestClientHelper.<DonoDTO>builder()
                     .endpoint("dono")
                     .protocol(protocol)
                     .servername(servername)
@@ -30,10 +30,10 @@ public class DonoRestClientFactory {
                 .build();
     }
     
-    public Dono dono(String descricao) {
-        Dono result = donoRestClient().findByDescricao(descricao);
+    public DonoDTO dono(String descricao) {
+        DonoDTO result = donoRestClient().findByDescricao(descricao);
         if (result == null) {
-            result = Dono.builder().descricao(descricao).build();
+            result = DonoDTO.builder().descricao(descricao).build();
             result = donoRestClient().save(result);
         }
         
