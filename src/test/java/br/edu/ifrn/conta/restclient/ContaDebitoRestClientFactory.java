@@ -1,13 +1,13 @@
 package br.edu.ifrn.conta.restclient;
 
-import br.edu.ifrn.conta.domain.Categoria;
-import br.edu.ifrn.conta.domain.ContaDebito;
-import lombok.Builder;
+import br.edu.ifrn.conta.controller.CategoriaDTO;
+import br.edu.ifrn.conta.controller.ContaDebitoDTO;
+import lombok.experimental.SuperBuilder;
 import lombok.Data;
 
 import org.springframework.web.client.RestTemplate;
 
-@Builder
+@SuperBuilder
 @Data
 public class ContaDebitoRestClientFactory {
 
@@ -23,7 +23,7 @@ public class ContaDebitoRestClientFactory {
 
     public ContaDebitoRestClient contaDebitoRestClient() {
         return ContaDebitoRestClient.builder()
-                .entityRestHelper(RestClientHelper.<ContaDebito>builder()
+                .entityRestHelper(RestClientHelper.<ContaDebitoDTO>builder()
                     .endpoint("contaDebito")
                     .protocol(protocol)
                     .servername(servername)
@@ -33,12 +33,12 @@ public class ContaDebitoRestClientFactory {
                 .build();
     }
     
-    public ContaDebito contaDebito(String descricao, String categoriaDescricao) {
-        ContaDebito result = contaDebitoRestClient().findByDescricao(descricao);
+    public ContaDebitoDTO contaDebito(String descricao, String categoriaDescricao) {
+        ContaDebitoDTO result = contaDebitoRestClient().findByDescricao(descricao);
         if (result == null) {
-            Categoria categoria = categoriaRestClientFactory.categoria(categoriaDescricao);
+            CategoriaDTO categoria = categoriaRestClientFactory.categoria(categoriaDescricao);
             
-            result = ContaDebito.builder().descricao(descricao)
+            result = ContaDebitoDTO.builder().descricao(descricao)
                     .categoria(categoria)
                     .build();
             result = contaDebitoRestClient().save(result);

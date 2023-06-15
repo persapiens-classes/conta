@@ -1,12 +1,12 @@
 package br.edu.ifrn.conta.restclient;
 
-import br.edu.ifrn.conta.domain.ValorInicialDoDonoNaContaPatrimonio;
-import lombok.Builder;
+import br.edu.ifrn.conta.controller.ValorInicialDoDonoNaContaPatrimonioDTO;
+import lombok.experimental.SuperBuilder;
 import lombok.Data;
 
 import org.springframework.web.client.RestTemplate;
 
-@Builder
+@SuperBuilder
 @Data
 public class ValorInicialDoDonoNaContaPatrimonioRestClientFactory {
 
@@ -20,7 +20,7 @@ public class ValorInicialDoDonoNaContaPatrimonioRestClientFactory {
 
     public ValorInicialDoDonoNaContaPatrimonioRestClient valorInicialDoDonoNaContaPatrimonioRestClient() {
         return ValorInicialDoDonoNaContaPatrimonioRestClient.builder()
-                .entityRestHelper(RestClientHelper.<ValorInicialDoDonoNaContaPatrimonio>builder()
+                .entityRestHelper(RestClientHelper.<ValorInicialDoDonoNaContaPatrimonioDTO>builder()
                     .endpoint("valorInicialDoDonoNaContaPatrimonio")
                     .protocol(protocol)
                     .servername(servername)

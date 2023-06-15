@@ -1,7 +1,7 @@
 package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.ContaApplication;
-import br.edu.ifrn.conta.domain.ContaCredito;
+import br.edu.ifrn.conta.controller.ContaCreditoDTO;
 import br.edu.ifrn.conta.persistence.CategoriaFactory;
 import br.edu.ifrn.conta.persistence.ContaCreditoFactory;
 
@@ -55,10 +55,10 @@ public class ContaCreditoRestClientIT {
         String descricao = ContaCreditoFactory.ESTAGIO;
         String categoriaDescricao = CategoriaFactory.SALARIO;
         
-        ContaCredito estagio = ContaCredito.builder()
-                .descricao(descricao)
-                .categoria(this.categoriaRestClientFactory().categoria(categoriaDescricao))
-                .build();
+        ContaCreditoDTO estagio = ContaCreditoDTO.builder()
+            .descricao(descricao)
+            .categoria(this.categoriaRestClientFactory().categoria(categoriaDescricao))
+            .build();
 
         // verifica a operacao save
         assertThat(contaCreditoRestClient().save(estagio))

@@ -16,7 +16,7 @@ import java.util.Comparator;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.experimental.SuperBuilder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,7 +30,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @EqualsAndHashCode(of = {"valorInicial", "dono", "contaPatrimonio"})
-@Builder
+@SuperBuilder
 @Entity
 @SequenceGenerator(sequenceName = "seq_valorInicial", name = "ID_SEQUENCE", allocationSize = 1)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

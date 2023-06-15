@@ -3,7 +3,7 @@ package br.edu.ifrn.conta.restclient;
 import java.math.BigDecimal;
 
 import br.edu.ifrn.conta.ContaApplication;
-import br.edu.ifrn.conta.domain.ValorInicialDoDonoNaContaPatrimonio;
+import br.edu.ifrn.conta.controller.ValorInicialDoDonoNaContaPatrimonioDTO;
 import br.edu.ifrn.conta.persistence.CategoriaFactory;
 import br.edu.ifrn.conta.persistence.ContaPatrimonioFactory;
 import br.edu.ifrn.conta.persistence.DonoFactory;
@@ -76,7 +76,7 @@ public class ValorInicialDoDonoNaContaPatrimonioRestClientIT {
         String poupanca = ContaPatrimonioFactory.POUPANCA;
         String banco = CategoriaFactory.BANCO;
 
-        ValorInicialDoDonoNaContaPatrimonio dono = ValorInicialDoDonoNaContaPatrimonio.builder()
+        ValorInicialDoDonoNaContaPatrimonioDTO dono = ValorInicialDoDonoNaContaPatrimonioDTO.builder()
                 .valorInicial(new BigDecimal(1000))
                 .dono(donoRestClientFactory().dono(mamae))
                 .contaPatrimonio(contaPatrimonioRestClientFactory().contaPatrimonio(poupanca, banco))

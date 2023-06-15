@@ -1,12 +1,12 @@
 package br.edu.ifrn.conta.restclient;
 
-import br.edu.ifrn.conta.domain.Lancamento;
-import lombok.Builder;
+import br.edu.ifrn.conta.controller.LancamentoDTO;
+import lombok.experimental.SuperBuilder;
 import lombok.Data;
 
 import org.springframework.web.client.RestTemplate;
 
-@Builder
+@SuperBuilder
 @Data
 public class LancamentoRestClientFactory {
 
@@ -20,7 +20,7 @@ public class LancamentoRestClientFactory {
 
     public LancamentoRestClient lancamentoRestClient() {
         return LancamentoRestClient.builder()
-                .entityRestHelper(RestClientHelper.<Lancamento>builder()
+                .entityRestHelper(RestClientHelper.<LancamentoDTO>builder()
                     .endpoint("lancamento")
                     .protocol(protocol)
                     .servername(servername)

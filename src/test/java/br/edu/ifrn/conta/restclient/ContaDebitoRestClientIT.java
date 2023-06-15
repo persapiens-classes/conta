@@ -1,7 +1,7 @@
 package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.ContaApplication;
-import br.edu.ifrn.conta.domain.ContaDebito;
+import br.edu.ifrn.conta.controller.ContaDebitoDTO;
 import br.edu.ifrn.conta.persistence.CategoriaFactory;
 import br.edu.ifrn.conta.persistence.ContaDebitoFactory;
 
@@ -55,7 +55,7 @@ public class ContaDebitoRestClientIT {
         String descricao = ContaDebitoFactory.GASOLINA;
         String categoriaDescricao = CategoriaFactory.TRANSPORTE;
         
-        ContaDebito gasolina = ContaDebito.builder()
+        ContaDebitoDTO gasolina = ContaDebitoDTO.builder()
                 .descricao(descricao)
                 .categoria(this.categoriaRestClientFactory().categoria(categoriaDescricao))
                 .build();

@@ -1,7 +1,7 @@
 package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.ContaApplication;
-import br.edu.ifrn.conta.domain.Categoria;
+import br.edu.ifrn.conta.controller.CategoriaDTO;
 import br.edu.ifrn.conta.persistence.CategoriaFactory;
 
 import org.junit.jupiter.api.Test;
@@ -42,7 +42,7 @@ public class CategoriaRestClientIT {
         // executa a operacao a ser testada
         String descricao = CategoriaFactory.SALARIO;
         
-        Categoria categoria = Categoria.builder().descricao(descricao).build();
+        CategoriaDTO categoria = CategoriaDTO.builder().descricao(descricao).build();
 
         // verifica a operacao save
         assertThat(categoriaRestClient().save(categoria))

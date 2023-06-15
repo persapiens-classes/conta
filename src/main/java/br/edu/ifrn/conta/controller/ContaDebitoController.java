@@ -1,6 +1,7 @@
 package br.edu.ifrn.conta.controller;
 
 import br.edu.ifrn.conta.domain.ContaDebito;
+import br.edu.ifrn.conta.service.CategoriaService;
 import br.edu.ifrn.conta.service.ContaDebitoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,13 +14,32 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/contaDebito")
-public class ContaDebitoController extends CrudController<ContaDebito, Long> {
+public class ContaDebitoController extends CrudController<ContaDebitoDTO, ContaDebito, Long> {
 
     @Autowired
     private ContaDebitoService contaDebitoService;
     
+    @Autowired
+    private CategoriaService categoriaService;
+    
     @GetMapping("/findByDescricao")
-    public ContaDebito findByDescricao(@RequestParam String descricao) {
-        return contaDebitoService.findByDescricao(descricao);
+    public ContaDebitoDTO findByDescricao(@RequestParam String descricao) {
+        return toDTOCheckNull(contaDebitoService.findByDescricao(descricao));
+    }
+
+    @Override
+    protected ContaDebito toEntity(ContaDebitoDTO dto) {
+        return ContaDebito.builder()
+            .descricao(dto.getDescricao())
+            .categoria(categoriaService.findByDescricao(dto.getCategoria().getDescricao()))
+            .build();
+    }
+
+    @Override
+    protected ContaDebitoDTO toDTO(ContaDebito entity) {
+        return ContaDebitoDTO.builder()
+            .descricao(entity.getDescricao())
+            .categoria(CategoriaDTO.builder().descricao(entity.getCategoria().getDescricao()).build())
+            .build();
     }
 }

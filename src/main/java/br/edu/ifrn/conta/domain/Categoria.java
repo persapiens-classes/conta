@@ -1,6 +1,5 @@
 package br.edu.ifrn.conta.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -14,7 +13,7 @@ import jakarta.persistence.SequenceGenerator;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.experimental.SuperBuilder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +28,7 @@ import lombok.ToString;
 @Setter
 @ToString(exclude = "contas")
 @EqualsAndHashCode(of = "descricao")
-@Builder
+@SuperBuilder
 @Entity
 @SequenceGenerator(sequenceName = "seq_categoria", name = "ID_SEQUENCE", allocationSize = 1)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -45,7 +44,6 @@ public class Categoria implements Serializable, Comparable<Categoria> {
     @Column(nullable = false, unique = true)
     private String descricao;
 
-    @JsonIgnore
     @Singular
     @OneToMany(mappedBy = "categoria")
     private Set<Conta> contas;

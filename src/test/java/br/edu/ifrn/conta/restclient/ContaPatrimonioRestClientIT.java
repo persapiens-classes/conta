@@ -1,7 +1,7 @@
 package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.ContaApplication;
-import br.edu.ifrn.conta.domain.ContaPatrimonio;
+import br.edu.ifrn.conta.controller.ContaPatrimonioDTO;
 import br.edu.ifrn.conta.persistence.CategoriaFactory;
 import br.edu.ifrn.conta.persistence.ContaPatrimonioFactory;
 
@@ -55,7 +55,7 @@ public class ContaPatrimonioRestClientIT {
         String descricao = ContaPatrimonioFactory.POUPANCA;
         String categoriaDescricao = CategoriaFactory.BANCO;
         
-        ContaPatrimonio poupanca = ContaPatrimonio.builder()
+        ContaPatrimonioDTO poupanca = ContaPatrimonioDTO.builder()
                 .descricao(descricao)
                 .categoria(this.categoriaRestClientFactory().categoria(categoriaDescricao))
                 .build();

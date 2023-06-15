@@ -1,12 +1,12 @@
 package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.ContaApplication;
-import br.edu.ifrn.conta.domain.ContaCredito;
-import br.edu.ifrn.conta.domain.ContaDebito;
-import br.edu.ifrn.conta.domain.ContaPatrimonio;
-import br.edu.ifrn.conta.domain.Dono;
-import br.edu.ifrn.conta.domain.Lancamento;
-import br.edu.ifrn.conta.domain.ValorInicialDoDonoNaContaPatrimonio;
+import br.edu.ifrn.conta.controller.ContaCreditoDTO;
+import br.edu.ifrn.conta.controller.ContaDebitoDTO;
+import br.edu.ifrn.conta.controller.ContaPatrimonioDTO;
+import br.edu.ifrn.conta.controller.DonoDTO;
+import br.edu.ifrn.conta.controller.LancamentoDTO;
+import br.edu.ifrn.conta.controller.ValorInicialDoDonoNaContaPatrimonioDTO;
 import br.edu.ifrn.conta.persistence.ContaCreditoFactory;
 import br.edu.ifrn.conta.persistence.DonoFactory;
 import br.edu.ifrn.conta.persistence.CategoriaFactory;
@@ -116,7 +116,7 @@ public class LancamentoRestClientIT {
         String poupanca = ContaPatrimonioFactory.POUPANCA;
         String banco = CategoriaFactory.BANCO;
         
-        Lancamento lancamento = Lancamento.builder()
+        LancamentoDTO lancamento = LancamentoDTO.builder()
                 .valor(new BigDecimal(543))
                 .data(LocalDateTime.now())
                 .descricao("Teste de Sistema")
@@ -136,12 +136,12 @@ public class LancamentoRestClientIT {
 
     @Test
     public void saldo500() {
-        Dono titio = donoRestClientFactory().dono("titio");
-        ContaPatrimonio poupanca = contaPatrimonioRestClientFactory().contaPatrimonio(
+        DonoDTO titio = donoRestClientFactory().dono("titio");
+        ContaPatrimonioDTO poupanca = contaPatrimonioRestClientFactory().contaPatrimonio(
     ContaPatrimonioFactory.POUPANCA, CategoriaFactory.BANCO);
 
         // valor inicial 100
-        ValorInicialDoDonoNaContaPatrimonio valorInicial = ValorInicialDoDonoNaContaPatrimonio.builder()
+        ValorInicialDoDonoNaContaPatrimonioDTO valorInicial = ValorInicialDoDonoNaContaPatrimonioDTO.builder()
                 .contaPatrimonio(poupanca)
                 .dono(titio)
                 .valorInicial(new BigDecimal(100))
@@ -149,9 +149,9 @@ public class LancamentoRestClientIT {
         valorInicialDoDonoNaContaPatrimonioRestClient().save(valorInicial);
         
         // creditou 600
-        ContaCredito estagio = contaCreditoRestClientFactory().contaCredito(
+        ContaCreditoDTO estagio = contaCreditoRestClientFactory().contaCredito(
     ContaCreditoFactory.ESTAGIO, CategoriaFactory.SALARIO);        
-        Lancamento lancamentoCredito = Lancamento.builder()
+        LancamentoDTO lancamentoCredito = LancamentoDTO.builder()
                 .valor(new BigDecimal(600))
                 .data(LocalDateTime.now())
                 .dono(titio)
@@ -161,9 +161,9 @@ public class LancamentoRestClientIT {
         lancamentoRestClient().save(lancamentoCredito);
 
         // debitou 200
-        ContaDebito gasolina = contaDebitoRestClientFactory().contaDebito(
+        ContaDebitoDTO gasolina = contaDebitoRestClientFactory().contaDebito(
     ContaDebitoFactory.GASOLINA, CategoriaFactory.TRANSPORTE);
-        Lancamento lancamentoDebito = Lancamento.builder()
+        LancamentoDTO lancamentoDebito = LancamentoDTO.builder()
                 .valor(new BigDecimal(200))
                 .data(LocalDateTime.now())
                 .dono(titio)

@@ -1,31 +1,31 @@
 package br.edu.ifrn.conta.restclient;
 
-import br.edu.ifrn.conta.domain.ContaCredito;
-import lombok.Builder;
+import br.edu.ifrn.conta.controller.ContaCreditoDTO;
+import lombok.experimental.SuperBuilder;
 import lombok.Data;
 
 @Data
-@Builder
+@SuperBuilder
 public class ContaCreditoRestClient {
 
-    private RestClientHelper<ContaCredito> entityRestHelper;
+    private RestClientHelper<ContaCreditoDTO> entityRestHelper;
 
     public void deleteByDescricao(String descricao) {
         entityRestHelper.deleteByDescricao(descricao);
     }
 
-    public ContaCredito findByDescricao(String descricao) {
+    public ContaCreditoDTO findByDescricao(String descricao) {
         return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findByDescricaoUri(descricao), ContaCredito.class);
+                entityRestHelper.findByDescricaoUri(descricao), ContaCreditoDTO.class);
     }
 
-    public Iterable<ContaCredito> findAll() {
+    public Iterable<ContaCreditoDTO> findAll() {
         return this.entityRestHelper.findAll();
     }
 
-    public ContaCredito save(ContaCredito entity) {
+    public ContaCreditoDTO save(ContaCreditoDTO entity) {
         return this.entityRestHelper.getRestTemplate().postForObject(
-                entityRestHelper.saveUri(), entity, ContaCredito.class);
+                entityRestHelper.saveUri(), entity, ContaCreditoDTO.class);
     }
 
 }

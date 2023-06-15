@@ -1,31 +1,31 @@
 package br.edu.ifrn.conta.restclient;
 
-import br.edu.ifrn.conta.domain.ContaPatrimonio;
-import lombok.Builder;
+import br.edu.ifrn.conta.controller.ContaPatrimonioDTO;
+import lombok.experimental.SuperBuilder;
 import lombok.Data;
 
 @Data
-@Builder
+@SuperBuilder
 public class ContaPatrimonioRestClient {
 
-    private RestClientHelper<ContaPatrimonio> entityRestHelper;
+    private RestClientHelper<ContaPatrimonioDTO> entityRestHelper;
 
     public void deleteByDescricao(String descricao) {
         entityRestHelper.deleteByDescricao(descricao);
     }
 
-    public ContaPatrimonio findByDescricao(String descricao) {
+    public ContaPatrimonioDTO findByDescricao(String descricao) {
         return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findByDescricaoUri(descricao), ContaPatrimonio.class);
+                entityRestHelper.findByDescricaoUri(descricao), ContaPatrimonioDTO.class);
     }
 
-    public Iterable<ContaPatrimonio> findAll() {
+    public Iterable<ContaPatrimonioDTO> findAll() {
         return this.entityRestHelper.findAll();
     }
 
-    public ContaPatrimonio save(ContaPatrimonio entity) {
+    public ContaPatrimonioDTO save(ContaPatrimonioDTO entity) {
         return this.entityRestHelper.getRestTemplate().postForObject(
-                entityRestHelper.saveUri(), entity, ContaPatrimonio.class);
+                entityRestHelper.saveUri(), entity, ContaPatrimonioDTO.class);
     }
 
 }
