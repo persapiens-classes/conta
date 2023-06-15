@@ -37,7 +37,6 @@ public class DonoRestClientIT {
                 .build().donoRestClient();
     }
     
-    /* todo: not working yet
     @Test
     public void deletarUm() {
         // cria o ambiente de teste
@@ -52,7 +51,6 @@ public class DonoRestClientIT {
         assertThat(donoRestClient().findByDescricao(descricao))
         	.isNull();
     }
-    */
 
     @Test
     public void salvarUm() {        
