@@ -41,12 +41,22 @@ public class ValorInicialDoDonoNaContaPatrimonioRestClientIT {
                 .build();
     }
 
+    private CategoriaRestClientFactory categoriaRestClientFactory() {
+        return CategoriaRestClientFactory.builder()
+                .protocol(protocol)
+                .servername(servername)
+                .port(port)
+                .restTemplate(testRestTemplate.getRestTemplate())
+                .build();
+    }
+
     private ContaPatrimonioRestClientFactory contaPatrimonioRestClientFactory() {
         return ContaPatrimonioRestClientFactory.builder()
                 .protocol(protocol)
                 .servername(servername)
                 .port(port)
                 .restTemplate(testRestTemplate.getRestTemplate())
+                .categoriaRestClientFactory(categoriaRestClientFactory())
                 .build();
     }
 

@@ -21,7 +21,7 @@ public class ValorInicialDoDonoNaContaPatrimonioRestClientFactory {
     public ValorInicialDoDonoNaContaPatrimonioRestClient valorInicialDoDonoNaContaPatrimonioRestClient() {
         return ValorInicialDoDonoNaContaPatrimonioRestClient.builder()
                 .entityRestHelper(RestClientHelper.<ValorInicialDoDonoNaContaPatrimonio>builder()
-                    .endpoint("valoresIniciaisDoDonoNaContaPatrimonio")
+                    .endpoint("valorInicialDoDonoNaContaPatrimonio")
                     .protocol(protocol)
                     .servername(servername)
                     .port(port)

@@ -24,7 +24,7 @@ public class ContaDebitoRestClientFactory {
     public ContaDebitoRestClient contaDebitoRestClient() {
         return ContaDebitoRestClient.builder()
                 .entityRestHelper(RestClientHelper.<ContaDebito>builder()
-                    .endpoint("contasDebito")
+                    .endpoint("contaDebito")
                     .protocol(protocol)
                     .servername(servername)
                     .port(port)

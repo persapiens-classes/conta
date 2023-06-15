@@ -21,7 +21,7 @@ public class LancamentoRestClientFactory {
     public LancamentoRestClient lancamentoRestClient() {
         return LancamentoRestClient.builder()
                 .entityRestHelper(RestClientHelper.<Lancamento>builder()
-                    .endpoint("lancamentos")
+                    .endpoint("lancamento")
                     .protocol(protocol)
                     .servername(servername)
                     .port(port)

@@ -24,7 +24,7 @@ public class ContaPatrimonioRestClientFactory {
     public ContaPatrimonioRestClient contaPatrimonioRestClient() {
         return ContaPatrimonioRestClient.builder()
                 .entityRestHelper(RestClientHelper.<ContaPatrimonio>builder()
-                    .endpoint("contasPatrimonio")
+                    .endpoint("contaPatrimonio")
                     .protocol(protocol)
                     .servername(servername)
                     .port(port)

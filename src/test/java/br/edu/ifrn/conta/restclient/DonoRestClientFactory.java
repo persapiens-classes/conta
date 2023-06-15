@@ -21,7 +21,7 @@ public class DonoRestClientFactory {
     public DonoRestClient donoRestClient() {
         return DonoRestClient.builder()
                 .entityRestHelper(RestClientHelper.<Dono>builder()
-                    .endpoint("donos")
+                    .endpoint("dono")
                     .protocol(protocol)
                     .servername(servername)
                     .port(port)

@@ -1,13 +1,20 @@
 package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.ContaApplication;
+import br.edu.ifrn.conta.domain.ContaCredito;
+import br.edu.ifrn.conta.domain.ContaDebito;
+import br.edu.ifrn.conta.domain.ContaPatrimonio;
+import br.edu.ifrn.conta.domain.Dono;
 import br.edu.ifrn.conta.domain.Lancamento;
+import br.edu.ifrn.conta.domain.ValorInicialDoDonoNaContaPatrimonio;
 import br.edu.ifrn.conta.persistence.ContaCreditoFactory;
 import br.edu.ifrn.conta.persistence.DonoFactory;
 import br.edu.ifrn.conta.persistence.CategoriaFactory;
+import br.edu.ifrn.conta.persistence.ContaDebitoFactory;
 import br.edu.ifrn.conta.persistence.ContaPatrimonioFactory;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +25,6 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -71,6 +77,16 @@ public class LancamentoRestClientIT {
                 .build();
     }
 
+    private ContaDebitoRestClientFactory contaDebitoRestClientFactory() {
+        return ContaDebitoRestClientFactory.builder()
+                .protocol(protocol)
+                .servername(servername)
+                .port(port)
+                .restTemplate(testRestTemplate.getRestTemplate())
+                .categoriaRestClientFactory(categoriaRestClientFactory())
+                .build();
+    }
+
     private LancamentoRestClient lancamentoRestClient() {
         return LancamentoRestClientFactory.builder()
                 .protocol(protocol)
@@ -79,6 +95,16 @@ public class LancamentoRestClientIT {
                 .restTemplate(testRestTemplate.getRestTemplate())
                 .build()
                 .lancamentoRestClient();
+    }
+
+    private ValorInicialDoDonoNaContaPatrimonioRestClient valorInicialDoDonoNaContaPatrimonioRestClient() {
+        return ValorInicialDoDonoNaContaPatrimonioRestClientFactory.builder()
+                .protocol(protocol)
+                .servername(servername)
+                .port(port)
+                .restTemplate(testRestTemplate.getRestTemplate())
+                .build()
+                .valorInicialDoDonoNaContaPatrimonioRestClient();
     }
 
     @Test
@@ -106,6 +132,51 @@ public class LancamentoRestClientIT {
         // verifica a operacao findAll
         assertThat(lancamentoRestClient().findAll())
                 .isNotEmpty();        
+    }
+
+    @Test
+    public void saldo500() {
+        Dono titio = donoRestClientFactory().dono("titio");
+        ContaPatrimonio poupanca = contaPatrimonioRestClientFactory().contaPatrimonio(
+    ContaPatrimonioFactory.POUPANCA, CategoriaFactory.BANCO);
+
+        // valor inicial 100
+        ValorInicialDoDonoNaContaPatrimonio valorInicial = ValorInicialDoDonoNaContaPatrimonio.builder()
+                .contaPatrimonio(poupanca)
+                .dono(titio)
+                .valorInicial(new BigDecimal(100))
+                .build();
+        valorInicialDoDonoNaContaPatrimonioRestClient().save(valorInicial);
+        
+        // creditou 600
+        ContaCredito estagio = contaCreditoRestClientFactory().contaCredito(
+    ContaCreditoFactory.ESTAGIO, CategoriaFactory.SALARIO);        
+        Lancamento lancamentoCredito = Lancamento.builder()
+                .valor(new BigDecimal(600))
+                .data(LocalDateTime.now())
+                .dono(titio)
+                .contaEntrada(poupanca)
+                .contaSaida(estagio)
+                .build();
+        lancamentoRestClient().save(lancamentoCredito);
+
+        // debitou 200
+        ContaDebito gasolina = contaDebitoRestClientFactory().contaDebito(
+    ContaDebitoFactory.GASOLINA, CategoriaFactory.TRANSPORTE);
+        Lancamento lancamentoDebito = Lancamento.builder()
+                .valor(new BigDecimal(200))
+                .data(LocalDateTime.now())
+                .dono(titio)
+                .contaEntrada(gasolina)
+                .contaSaida(poupanca)
+                .build();
+        lancamentoRestClient().save(lancamentoDebito);
+        
+        // executa a operacao a ser testada
+        BigDecimal saldo = lancamentoRestClient().saldo(
+        titio.getDescricao(), poupanca.getDescricao());
+        
+        assertThat(saldo).isEqualTo(new BigDecimal(500).setScale(2));
     }
 
 }
