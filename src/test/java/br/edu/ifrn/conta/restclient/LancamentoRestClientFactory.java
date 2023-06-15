@@ -21,23 +21,13 @@ public class LancamentoRestClientFactory {
     public LancamentoRestClient lancamentoRestClient() {
         return LancamentoRestClient.builder()
                 .entityRestHelper(RestClientHelper.<Lancamento>builder()
-                    .endpoint("lancamentos")
+                    .endpoint("lancamento")
                     .protocol(protocol)
                     .servername(servername)
                     .port(port)
                     .restTemplate(restTemplate)
                     .build())
                 .build();
-    }
-    
-    public Lancamento lancamento(String descricao) {
-        Lancamento result = lancamentoRestClient().findByDescricao(descricao);
-        if (result == null) {
-            result = Lancamento.builder().descricao(descricao).build();
-            result = lancamentoRestClient().save(result);
-        }
-        
-        return result;
     }
 
 }

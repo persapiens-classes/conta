@@ -12,7 +12,7 @@ public class ContaPatrimonioTests {
 	private static final String CARTEIRA = "carteira";
 	private static final String PATRIMONIO_INDIVIDUAL = "patrimonio individual";
 	private static final String PATRIMONIO_PESSOAL = "patrimonio pessoal";
-	private static final String POUPANCA = "poupança";
+	private static final String POUPANCA = "poupanca";
 
 	@Test
 	public void descricaoECategoriaIguais() {

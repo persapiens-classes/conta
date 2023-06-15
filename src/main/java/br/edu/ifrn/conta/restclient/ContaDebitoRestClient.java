@@ -16,17 +16,16 @@ public class ContaDebitoRestClient {
 
     public ContaDebito findByDescricao(String descricao) {
         return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findByDescricaoUrl(descricao), ContaDebito.class);
+                entityRestHelper.findByDescricaoUri(descricao), ContaDebito.class);
     }
 
     public Iterable<ContaDebito> findAll() {
-        return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findAllUrl(), ContaDebitoDTO.class).get_embedded().getContasDebito();
+        return this.entityRestHelper.findAll();
     }
 
     public ContaDebito save(ContaDebito entity) {
         return this.entityRestHelper.getRestTemplate().postForObject(
-                entityRestHelper.saveUrl(), entity, ContaDebito.class);
+                entityRestHelper.saveUri(), entity, ContaDebito.class);
     }
 
 }

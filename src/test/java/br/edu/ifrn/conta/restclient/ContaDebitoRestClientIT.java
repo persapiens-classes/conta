@@ -55,18 +55,18 @@ public class ContaDebitoRestClientIT {
         String descricao = ContaDebitoFactory.GASOLINA;
         String categoriaDescricao = CategoriaFactory.TRANSPORTE;
         
-        ContaDebito estagio = ContaDebito.builder()
+        ContaDebito gasolina = ContaDebito.builder()
                 .descricao(descricao)
                 .categoria(this.categoriaRestClientFactory().categoria(categoriaDescricao))
                 .build();
 
         // verifica a operacao save
-        assertThat(contaDebitoRestClient().save(estagio))
+        assertThat(contaDebitoRestClient().save(gasolina))
         	.isNotNull();
 
         // verifica a operacao findByDescricao
         assertThat(contaDebitoRestClient().findByDescricao(descricao).getDescricao())
-                .isEqualTo(estagio.getDescricao());
+                .isEqualTo(gasolina.getDescricao());
         
         // verifica a operacao findAll
         assertThat(contaDebitoRestClient().findAll())

@@ -21,7 +21,7 @@ public class CategoriaRestClientFactory {
     public CategoriaRestClient categoriaRestClient() {
         return CategoriaRestClient.builder()
                 .entityRestHelper(RestClientHelper.<Categoria>builder()
-                    .endpoint("categorias")
+                    .endpoint("categoria")
                     .protocol(protocol)
                     .servername(servername)
                     .port(port)

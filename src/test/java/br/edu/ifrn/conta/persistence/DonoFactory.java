@@ -9,7 +9,7 @@ import br.edu.ifrn.conta.domain.Dono;
 public class DonoFactory {
 
 	public final static String PAPAI = "Papai";
-	public final static String MAMAE = "Mamãe";
+	public final static String MAMAE = "Mamae";
 
 	@Autowired
 	private DonoRepository donoRepository;

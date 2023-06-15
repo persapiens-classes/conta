@@ -24,7 +24,7 @@ public class ContaDebitoRestClientFactory {
     public ContaDebitoRestClient contaDebitoRestClient() {
         return ContaDebitoRestClient.builder()
                 .entityRestHelper(RestClientHelper.<ContaDebito>builder()
-                    .endpoint("contasDebito")
+                    .endpoint("contaDebito")
                     .protocol(protocol)
                     .servername(servername)
                     .port(port)
@@ -33,7 +33,7 @@ public class ContaDebitoRestClientFactory {
                 .build();
     }
     
-    public ContaDebito contaCredito(String descricao, String categoriaDescricao) {
+    public ContaDebito contaDebito(String descricao, String categoriaDescricao) {
         ContaDebito result = contaDebitoRestClient().findByDescricao(descricao);
         if (result == null) {
             Categoria categoria = categoriaRestClientFactory.categoria(categoriaDescricao);

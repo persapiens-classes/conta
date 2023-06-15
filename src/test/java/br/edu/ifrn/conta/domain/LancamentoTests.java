@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LancamentoTests {
 
 	private static final String PAPAI = "papai";
-	private static final String MAMAE = "mamãe";
+	private static final String MAMAE = "mamae";
 	private static final String TRANSPORTE = "transporte";
 	private static final String PATRIMONIO_INDIVIDUAL = "patrimônio individual";
 	private static final String GASOLINA = "gasolina";

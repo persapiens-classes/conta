@@ -12,17 +12,16 @@ public class CategoriaRestClient {
 
     public Categoria findByDescricao(String descricao) {
         return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findByDescricaoUrl(descricao), Categoria.class);
+                entityRestHelper.findByDescricaoUri(descricao), Categoria.class);
     }
 
     public Iterable<Categoria> findAll() {
-        return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findAllUrl(), CategoriaDTO.class).get_embedded().getCategorias();
+        return this.entityRestHelper.findAll();
     }
 
     public Categoria save(Categoria entity) {
         return this.entityRestHelper.getRestTemplate().postForObject(
-                entityRestHelper.saveUrl(), entity, Categoria.class);
+                entityRestHelper.saveUri(), entity, Categoria.class);
     }
 
 }

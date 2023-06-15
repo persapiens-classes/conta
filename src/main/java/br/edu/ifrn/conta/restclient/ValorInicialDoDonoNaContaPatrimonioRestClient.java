@@ -10,23 +10,13 @@ public class ValorInicialDoDonoNaContaPatrimonioRestClient {
 
     private RestClientHelper<ValorInicialDoDonoNaContaPatrimonio> entityRestHelper;
 
-    public void deleteByDescricao(String descricao) {
-        entityRestHelper.deleteByDescricao(descricao);
-    }
-
-    public ValorInicialDoDonoNaContaPatrimonio findByDescricao(String descricao) {
-        return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findByDescricaoUrl(descricao), ValorInicialDoDonoNaContaPatrimonio.class);
-    }
-
     public Iterable<ValorInicialDoDonoNaContaPatrimonio> findAll() {
-        return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findAllUrl(), ValorInicialDoDonoNaContaPatrimonioDTO.class).get_embedded().getValoresIniciaisDoDonoNaContaPatrimonio();
+        return this.entityRestHelper.findAll();
     }
 
     public ValorInicialDoDonoNaContaPatrimonio save(ValorInicialDoDonoNaContaPatrimonio entity) {
         return this.entityRestHelper.getRestTemplate().postForObject(
-                entityRestHelper.saveUrl(), entity, ValorInicialDoDonoNaContaPatrimonio.class);
+                entityRestHelper.saveUri(), entity, ValorInicialDoDonoNaContaPatrimonio.class);
     }
 
 }

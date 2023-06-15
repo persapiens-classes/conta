@@ -55,18 +55,18 @@ public class ContaPatrimonioRestClientIT {
         String descricao = ContaPatrimonioFactory.POUPANCA;
         String categoriaDescricao = CategoriaFactory.BANCO;
         
-        ContaPatrimonio estagio = ContaPatrimonio.builder()
+        ContaPatrimonio poupanca = ContaPatrimonio.builder()
                 .descricao(descricao)
                 .categoria(this.categoriaRestClientFactory().categoria(categoriaDescricao))
                 .build();
 
         // verifica a operacao save
-        assertThat(contaPatrimonioRestClient().save(estagio))
+        assertThat(contaPatrimonioRestClient().save(poupanca))
         	.isNotNull();
 
         // verifica a operacao findByDescricao
         assertThat(contaPatrimonioRestClient().findByDescricao(descricao).getDescricao())
-                .isEqualTo(estagio.getDescricao());
+                .isEqualTo(poupanca.getDescricao());
         
         // verifica a operacao findAll
         assertThat(contaPatrimonioRestClient().findAll())

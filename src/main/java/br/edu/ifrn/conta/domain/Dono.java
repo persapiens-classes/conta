@@ -1,5 +1,6 @@
 package br.edu.ifrn.conta.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -44,10 +45,12 @@ public class Dono implements Serializable, Comparable<Dono> {
     @Column(nullable = false, unique = true)
     private String descricao;
 
+    @JsonIgnore
     @Singular
     @OneToMany(mappedBy = "dono")
     private Set<Lancamento> lancamentos;
 
+    @JsonIgnore
     @Singular("valorInicialNaContaPatrimonio")
     @OneToMany(mappedBy = "dono")
     private Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisNasContasPatrimonio;
