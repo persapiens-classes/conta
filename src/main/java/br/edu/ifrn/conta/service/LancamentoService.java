@@ -21,66 +21,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class LancamentoService extends CrudService<Lancamento, Long> {
 
-	private LancamentoRepository lancamentoRepository;
-        private ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;
+    @Override
+    @Transactional
+    public Lancamento save(Lancamento objeto) {
+        objeto.verificarAtributos();
 
-	@Autowired
-	public LancamentoService(LancamentoRepository lancamentoRepository, ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository) {
-		super();
-		this.lancamentoRepository = lancamentoRepository;
-                this.valorInicialDoDonoNaContaPatrimonioRepository = valorInicialDoDonoNaContaPatrimonioRepository;
-	}
-
-	public BigDecimal saldo(Dono dono, ContaPatrimonio contaPatrimonio) {
-            // recupera o valor inicial do dono na conta patrimonio
-            BigDecimal result = this.valorInicialDoDonoNaContaPatrimonioRepository
-                    .findByDonoAndContaPatrimonio(dono, contaPatrimonio).getValorInicial();
-
-            // soma todos os lancamentos de credito do dono na conta patrimonio
-            BigDecimal creditos = this.lancamentoRepository.creditosSum(dono, contaPatrimonio).getValor();
-
-            // subtrai todos os lancamentos de debito do dono na conta patrimonio
-            BigDecimal debitos = this.lancamentoRepository.debitosSum(dono, contaPatrimonio).getValor();
-
-            return result.add(creditos).subtract(debitos);
-	}
-
-	@Override
-	@Transactional
-	public Lancamento save(Lancamento objeto) {
-		objeto.verificarAtributos();
-
-		return super.save(objeto);
-	}
-
-	@Transactional
-	public void transferir(BigDecimal valor, Dono donoDebito, ContaDebito contaDebito, ContaPatrimonio contaPatrimonioADebitar, Dono donoCredito, ContaPatrimonio contaPatrimonioACreditar, ContaCredito contaCredito) {
-
-		if (donoCredito.equals(donoDebito)) {
-			throw new IllegalArgumentException("Donos das contas devem ser diferentes: "
-				+ donoDebito + " = " + donoCredito);
-		}
-
-		LocalDateTime data = LocalDateTime.now();
-
-		Lancamento lancamentoComDespesa = Lancamento.builder()
-			.contaEntrada(contaDebito)
-			.contaSaida(contaPatrimonioADebitar)
-			.dono(donoDebito)
-			.valor(valor)
-			.data(data)
-			.descricao("Lançamento de débito de uma transferência")
-			.build();
-		save(lancamentoComDespesa);
-
-		Lancamento lancamentoComReceita = Lancamento.builder()
-			.contaEntrada(contaPatrimonioACreditar)
-			.contaSaida(contaCredito)
-			.dono(donoCredito)
-			.valor(valor)
-			.data(data)
-			.descricao("Lançamento de crédito de uma transferência")
-			.build();
-		save(lancamentoComReceita);
-	}
+        return super.save(objeto);
+    }
 }

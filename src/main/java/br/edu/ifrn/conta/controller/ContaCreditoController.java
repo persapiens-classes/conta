@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Service of conta credito.
+ * conta credito controller.
  */
 @RestController
 @RequestMapping("/contaCredito")
