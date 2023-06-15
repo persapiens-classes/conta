@@ -36,6 +36,7 @@ public class ContaDebitoRepositoryIT {
 		ContaDebito contaDebito = this.contaDebitoFactory.gasolina();
 
 		ContaDebito contaDebitoExemplo = ContaDebito.builder()
+                        .descricao(ContaDebitoFactory.GASOLINA)
 			.categoria(Categoria.builder().descricao(CategoriaFactory.TRANSPORTE).build())
 			.build();
 

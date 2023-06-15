@@ -35,6 +35,7 @@ public class ContaCreditoRepositoryIT {
 		ContaCredito contaCredito = this.contaCreditoFactory.estagio();
 
 		ContaCredito contaCreditoExemplo = ContaCredito.builder()
+                        .descricao(ContaCreditoFactory.ESTAGIO)
 			.categoria(Categoria.builder().descricao(CategoriaFactory.SALARIO).build())
 			.build();
 
