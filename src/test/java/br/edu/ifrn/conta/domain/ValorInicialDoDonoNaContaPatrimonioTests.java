@@ -12,10 +12,10 @@ public class ValorInicialDoDonoNaContaPatrimonioTests {
 
 	private static final String CARTEIRA = "carteira";
 	private static final String PATRIMONIO_INDIVIDUAL = "patrimonio individual";
-	private static final String POUPANCA = "poupança";
+	private static final String POUPANCA = "poupanca";
 
 	private static final String PAPAI = "papai";
-	private static final String MAMAE = "mamãe";
+	private static final String MAMAE = "mamae";
 
 	private ValorInicialDoDonoNaContaPatrimonio valorInicialDoDonoNaContaPatrimonio(
 		String descricaoCategoria, String descricaoDono, BigDecimal valorInicial) {

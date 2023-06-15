@@ -33,6 +33,15 @@ public class LancamentoRestClientIT {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
+    private CategoriaRestClientFactory categoriaRestClientFactory() {
+        return CategoriaRestClientFactory.builder()
+                .protocol(protocol)
+                .servername(servername)
+                .port(port)
+                .restTemplate(testRestTemplate.getRestTemplate())
+                .build();
+    }
+
     private DonoRestClientFactory donoRestClientFactory() {
         return DonoRestClientFactory.builder()
                 .protocol(protocol)
@@ -48,6 +57,7 @@ public class LancamentoRestClientIT {
                 .servername(servername)
                 .port(port)
                 .restTemplate(testRestTemplate.getRestTemplate())
+                .categoriaRestClientFactory(categoriaRestClientFactory())
                 .build();
     }
 
@@ -57,6 +67,7 @@ public class LancamentoRestClientIT {
                 .servername(servername)
                 .port(port)
                 .restTemplate(testRestTemplate.getRestTemplate())
+                .categoriaRestClientFactory(categoriaRestClientFactory())
                 .build();
     }
 

@@ -9,7 +9,7 @@ import br.edu.ifrn.conta.domain.ContaPatrimonio;
 @Component
 public class ContaPatrimonioFactory {
 
-	public final static String POUPANCA = "poupança";
+	public final static String POUPANCA = "poupanca";
 
 	@Autowired
 	private ContaPatrimonioRepository contaPatrimonioRepository;

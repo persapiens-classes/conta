@@ -33,7 +33,7 @@ public class ContaDebitoRestClientFactory {
                 .build();
     }
     
-    public ContaDebito contaCredito(String descricao, String categoriaDescricao) {
+    public ContaDebito contaDebito(String descricao, String categoriaDescricao) {
         ContaDebito result = contaDebitoRestClient().findByDescricao(descricao);
         if (result == null) {
             Categoria categoria = categoriaRestClientFactory.categoria(categoriaDescricao);

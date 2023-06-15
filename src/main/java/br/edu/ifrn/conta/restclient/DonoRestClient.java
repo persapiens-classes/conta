@@ -16,17 +16,17 @@ public class DonoRestClient {
 
     public Dono findByDescricao(String descricao) {
         return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findByDescricaoUrl(descricao), Dono.class);
+                entityRestHelper.findByDescricaoUri(descricao), Dono.class);
     }
 
     public Iterable<Dono> findAll() {
         return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findAllUrl(), DonoDTO.class).get_embedded().getDonos();
+                entityRestHelper.findAllUri(), DonoDTO.class).get_embedded().getDonos();
     }
 
     public Dono save(Dono entity) {
         return this.entityRestHelper.getRestTemplate().postForObject(
-                entityRestHelper.saveUrl(), entity, Dono.class);
+                entityRestHelper.saveUri(), entity, Dono.class);
     }
 
 }

@@ -16,17 +16,17 @@ public class ContaPatrimonioRestClient {
 
     public ContaPatrimonio findByDescricao(String descricao) {
         return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findByDescricaoUrl(descricao), ContaPatrimonio.class);
+                entityRestHelper.findByDescricaoUri(descricao), ContaPatrimonio.class);
     }
 
     public Iterable<ContaPatrimonio> findAll() {
         return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findAllUrl(), ContaPatrimonioDTO.class).get_embedded().getContasPatrimonio();
+                entityRestHelper.findAllUri(), ContaPatrimonioDTO.class).get_embedded().getContasPatrimonio();
     }
 
     public ContaPatrimonio save(ContaPatrimonio entity) {
         return this.entityRestHelper.getRestTemplate().postForObject(
-                entityRestHelper.saveUrl(), entity, ContaPatrimonio.class);
+                entityRestHelper.saveUri(), entity, ContaPatrimonio.class);
     }
 
 }

@@ -42,6 +42,8 @@ public class ContaPatrimonioRestClientFactory {
                     .categoria(categoria)
                     .build();
             result = contaPatrimonioRestClient().save(result);
+            
+            result = contaPatrimonioRestClient().findByDescricao(descricao);
         }
         
         return result;

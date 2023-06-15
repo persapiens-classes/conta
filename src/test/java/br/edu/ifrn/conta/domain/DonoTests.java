@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DonoTests {
 
 	private static final String PAPAI = "papai";
-	private static final String MAMAE = "mamãe";
+	private static final String MAMAE = "mamae";
 	private static final String GASOLINA = "gasolina";
 	private static final String IPVA = "ipva";
 	private static final String CARTEIRA = "carteira";

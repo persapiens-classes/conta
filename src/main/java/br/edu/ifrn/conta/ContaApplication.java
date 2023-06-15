@@ -1,6 +1,7 @@
 package br.edu.ifrn.conta;
 
 import br.edu.ifrn.conta.domain.Categoria;
+import br.edu.ifrn.conta.domain.Conta;
 import br.edu.ifrn.conta.domain.ContaCredito;
 import br.edu.ifrn.conta.domain.ContaDebito;
 import br.edu.ifrn.conta.domain.ContaPatrimonio;
@@ -23,8 +24,8 @@ public class ContaApplication implements RepositoryRestConfigurer {
     @Override
     public void configureRepositoryRestConfiguration(
             RepositoryRestConfiguration config, CorsRegistry cors) {
-        config.exposeIdsFor(Dono.class, Categoria.class,
+        config.exposeIdsFor(Dono.class, Categoria.class, Conta.class,
     ContaCredito.class, ContaDebito.class, ContaPatrimonio.class, 
-                ValorInicialDoDonoNaContaPatrimonio.class);
+    ValorInicialDoDonoNaContaPatrimonio.class);
     }
 }

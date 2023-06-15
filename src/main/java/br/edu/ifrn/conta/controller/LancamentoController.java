@@ -24,6 +24,6 @@ public class LancamentoController extends CrudService<Lancamento, Long> {
     @GetMapping("/saldo")
     public BigDecimal saldo(@RequestParam String dono, @RequestParam String contaPatrimonio) {
         return lancamentoService.saldo(donoService.findByDescricao(dono),
-                contaPatrimonioService.findByDescricao(dono));
+                contaPatrimonioService.findByDescricao(contaPatrimonio));
     }
 }

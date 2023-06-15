@@ -1,10 +1,12 @@
 package br.edu.ifrn.conta.restclient;
 
+import java.net.URI;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Data
 @Builder
@@ -20,21 +22,32 @@ public class RestClientHelper <T> {
         return protocol + "://" + servername + ":" + port + "/" + endpoint;
     }
 
+    private URI uri() {
+        return UriComponentsBuilder.fromHttpUrl(url())
+            .build().encode().toUri();
+    }
+    
+    private URI uri(String suffix, String param, String value) {
+        return UriComponentsBuilder.fromHttpUrl(url() + suffix)
+            .queryParam(param, value)
+            .build().encode().toUri();
+    }
+    
     public void deleteByDescricao(String descricao) {
-        this.restTemplate.exchange(url() + "/search/deleteByDescricao?descricao=" + descricao, 
+        this.restTemplate.exchange(uri("/search/deleteByDescricao", "descricao", descricao), 
         HttpMethod.GET, null, new ParameterizedTypeReference<T>(){});
     }
 
-    public String findByDescricaoUrl(String descricao) {
-        return url() + "/search/findByDescricao?descricao=" + descricao;
+    public URI findByDescricaoUri(String descricao) {
+        return uri("/search/findByDescricao", "descricao", descricao);
     }
 
-    public String findAllUrl() {
-        return url();
+    public URI findAllUri() {
+        return uri();
     }
 
-    public String saveUrl() {
-        return url();
+    public URI saveUri() {
+        return uri();
     }
 
 }
