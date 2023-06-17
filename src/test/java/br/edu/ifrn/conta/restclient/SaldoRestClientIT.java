@@ -11,6 +11,7 @@ import br.edu.ifrn.conta.persistence.ContaCreditoFactory;
 import br.edu.ifrn.conta.persistence.CategoriaFactory;
 import br.edu.ifrn.conta.persistence.ContaDebitoFactory;
 import br.edu.ifrn.conta.persistence.ContaPatrimonioFactory;
+import br.edu.ifrn.conta.persistence.DonoFactory;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -118,7 +119,7 @@ public class SaldoRestClientIT {
 
     @Test
     public void saldo500() {
-        DonoDTO titio = donoRestClientFactory().dono("titio");
+        DonoDTO titio = donoRestClientFactory().dono(DonoFactory.TITIO);
         ContaPatrimonioDTO poupanca = contaPatrimonioRestClientFactory().contaPatrimonio(
     ContaPatrimonioFactory.POUPANCA, CategoriaFactory.BANCO);
 

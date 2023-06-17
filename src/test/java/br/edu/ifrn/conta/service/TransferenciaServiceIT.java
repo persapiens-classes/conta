@@ -5,10 +5,9 @@ import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ifrn.conta.ContaApplication;
-import br.edu.ifrn.conta.persistence.ContaCreditoFactory;
-import br.edu.ifrn.conta.persistence.ContaDebitoFactory;
 import br.edu.ifrn.conta.persistence.ContaPatrimonioFactory;
 import br.edu.ifrn.conta.persistence.DonoFactory;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -29,16 +28,20 @@ public class TransferenciaServiceIT {
     private ContaPatrimonioFactory contaPatrimonioFactory;
 
     @Autowired
-    private ContaCreditoFactory contaCreditoFactory;
-
-    @Autowired
-    private ContaDebitoFactory contaDebitoFactory;
+    private LancamentoService lancamentoService;
 
     @Test
-    public void transferenciaDePapaiParaMamae() {
-        this.transferenciaService.transferir(BigDecimal.TEN, this.donoFactory.papai(),
-    this.contaDebitoFactory.despesaComConjuge(), this.contaPatrimonioFactory.poupanca(),
-    this.donoFactory.mamae(), this.contaCreditoFactory.receitaComConjuge(),
-    this.contaPatrimonioFactory.poupanca());
+    public void transferenciaDe10DePapaiParaMamae() {
+        this.transferenciaService.transferir(BigDecimal.TEN, 
+    this.donoFactory.papai(), this.contaPatrimonioFactory.contaCorrente(),
+   this.donoFactory.mamae(), this.contaPatrimonioFactory.poupanca());
+        
+        assertThat(lancamentoService.debitosSum(this.donoFactory.papai(), 
+    this.contaPatrimonioFactory.contaCorrente()))
+            .isEqualTo(BigDecimal.TEN.setScale(2));
+
+        assertThat(lancamentoService.creditosSum(this.donoFactory.mamae(), 
+    this.contaPatrimonioFactory.poupanca()))
+            .isEqualTo(BigDecimal.TEN.setScale(2));
     }
 }

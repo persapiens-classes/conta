@@ -21,17 +21,27 @@ public class TransferenciaService {
 
     private LancamentoService lancamentoService;
 
+    private ContaDebitoService contaDebitoService;
+
+    private ContaCreditoService contaCreditoService;
+    
     @Autowired
-    public TransferenciaService(LancamentoService lancamentoService) {
+    public TransferenciaService(LancamentoService lancamentoService,
+            ContaDebitoService contaDebitoService, ContaCreditoService contaCreditoService) {
         super();
         this.lancamentoService = lancamentoService;
+        this.contaDebitoService = contaDebitoService;
+        this.contaCreditoService = contaCreditoService;
     }
-
+    
     @Transactional
     public void transferir(BigDecimal valor, 
-            Dono donoDebito, ContaDebito contaDebito, ContaPatrimonio contaPatrimonioADebitar, 
-            Dono donoCredito, ContaCredito contaCredito, ContaPatrimonio contaPatrimonioACreditar) {
+            Dono donoDebito, ContaPatrimonio contaPatrimonioADebitar, 
+            Dono donoCredito, ContaPatrimonio contaPatrimonioACreditar) {
 
+        ContaDebito contaDebito = contaDebitoService.despesaTransferencia();
+        ContaCredito contaCredito = contaCreditoService.receitaTransferencia();
+        
         if (donoCredito.equals(donoDebito)) {
             throw new IllegalArgumentException("Donos das contas devem ser diferentes: "
                     + donoDebito + " = " + donoCredito);
