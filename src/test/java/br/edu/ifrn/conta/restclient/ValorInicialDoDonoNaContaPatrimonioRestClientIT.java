@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.controller.ValorInicialDoDonoNaContaPatrimonioDTO;
-import br.edu.ifrn.conta.persistence.CategoriaFactory;
-import br.edu.ifrn.conta.persistence.ContaPatrimonioFactory;
-import br.edu.ifrn.conta.persistence.DonoFactory;
+import static br.edu.ifrn.conta.util.CategoriaConstants.BANCO;
+import static br.edu.ifrn.conta.util.ContaPatrimonioConstants.POUPANCA;
+import static br.edu.ifrn.conta.util.DonoConstants.MAMAE;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -72,9 +72,9 @@ public class ValorInicialDoDonoNaContaPatrimonioRestClientIT {
     @Test
     public void salvarUm() {        
         // executa a operacao a ser testada
-        String mamae = DonoFactory.MAMAE;
-        String poupanca = ContaPatrimonioFactory.POUPANCA;
-        String banco = CategoriaFactory.BANCO;
+        String mamae = MAMAE;
+        String poupanca = POUPANCA;
+        String banco = BANCO;
 
         ValorInicialDoDonoNaContaPatrimonioDTO dono = ValorInicialDoDonoNaContaPatrimonioDTO.builder()
                 .valorInicial(new BigDecimal(1000))

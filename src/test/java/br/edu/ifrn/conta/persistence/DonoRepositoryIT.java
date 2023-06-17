@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.domain.Dono;
+import static br.edu.ifrn.conta.util.DonoConstants.MAMAE;
+import static br.edu.ifrn.conta.util.DonoConstants.PAPAI;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -36,9 +38,9 @@ public class DonoRepositoryIT {
 
         // executa a operacao a ser testada
         // verifica o efeito da execucao da operacao a ser testada
-        assertThat(this.donoRepository.findByDescricao(DonoFactory.PAPAI).get())
+        assertThat(this.donoRepository.findByDescricao(PAPAI).get())
                 .isEqualTo(papai);
-        assertThat(this.donoRepository.findByDescricao(DonoFactory.MAMAE).get())
+        assertThat(this.donoRepository.findByDescricao(MAMAE).get())
                 .isEqualTo(mamae);
     }
 

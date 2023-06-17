@@ -5,14 +5,13 @@ import org.springframework.stereotype.Component;
 
 import br.edu.ifrn.conta.domain.Categoria;
 import br.edu.ifrn.conta.domain.ContaPatrimonio;
+import static br.edu.ifrn.conta.util.ContaPatrimonioConstants.CONTA_CORRENTE;
+import static br.edu.ifrn.conta.util.ContaPatrimonioConstants.CONTA_INVESTIMENTO;
+import static br.edu.ifrn.conta.util.ContaPatrimonioConstants.POUPANCA;
 import java.util.Optional;
 
 @Component
 public class ContaPatrimonioFactory {
-
-    public final static String POUPANCA = "poupanca";
-    public final static String CONTA_CORRENTE = "conta corrente";
-    public final static String CONTA_INVESTIMENTO = "conta investimento";
 
     @Autowired
     private ContaPatrimonioRepository contaPatrimonioRepository;

@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.domain.Categoria;
 import br.edu.ifrn.conta.domain.ContaDebito;
+import static br.edu.ifrn.conta.util.CategoriaConstants.TRANSPORTE;
+import static br.edu.ifrn.conta.util.ContaDebitoConstants.GASOLINA;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -36,8 +38,8 @@ public class ContaDebitoRepositoryIT {
 		ContaDebito contaDebito = this.contaDebitoFactory.gasolina();
 
 		ContaDebito contaDebitoExemplo = ContaDebito.builder()
-                        .descricao(ContaDebitoFactory.GASOLINA)
-			.categoria(Categoria.builder().descricao(CategoriaFactory.TRANSPORTE).build())
+                        .descricao(GASOLINA)
+			.categoria(Categoria.builder().descricao(TRANSPORTE).build())
 			.build();
 
 		// executa a operacao a ser testada

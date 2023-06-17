@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.domain.Categoria;
 import br.edu.ifrn.conta.domain.ContaPatrimonio;
+import static br.edu.ifrn.conta.util.CategoriaConstants.BANCO;
+import static br.edu.ifrn.conta.util.ContaPatrimonioConstants.POUPANCA;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -35,8 +37,8 @@ public class ContaPatrimonioRepositoryIT {
 		this.contaPatrimonioFactory.poupanca();
 
 		ContaPatrimonio contaPatrimonioExemplo = ContaPatrimonio.builder()
-                        .descricao(ContaPatrimonioFactory.POUPANCA)
-			.categoria(Categoria.builder().descricao(CategoriaFactory.BANCO).build())
+                        .descricao(POUPANCA)
+			.categoria(Categoria.builder().descricao(BANCO).build())
 			.build();
 
 		// executa a operacao a ser testada
