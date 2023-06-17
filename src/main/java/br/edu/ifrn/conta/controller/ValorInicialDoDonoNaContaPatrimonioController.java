@@ -4,6 +4,7 @@ import br.edu.ifrn.conta.domain.ValorInicialDoDonoNaContaPatrimonio;
 import br.edu.ifrn.conta.service.ContaPatrimonioService;
 import br.edu.ifrn.conta.service.DonoService;
 import br.edu.ifrn.conta.service.ValorInicialDoDonoNaContaPatrimonioService;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,18 +28,18 @@ public class ValorInicialDoDonoNaContaPatrimonioController extends CrudControlle
     private ContaPatrimonioService contaPatrimonioService;
     
     @GetMapping("findByDonoAndContaPatrimonio")
-    public ValorInicialDoDonoNaContaPatrimonioDTO findByDonoAndContaPatrimonio(@RequestParam String dono, @RequestParam String contaPatrimonio) {
-        return toDTOCheckNull(valorInicialDoDonoNaContaPatrimonioService.findByDonoAndContaPatrimonio(
-        donoService.findByDescricao(dono), 
-contaPatrimonioService.findByDescricao(contaPatrimonio)));
+    public Optional<ValorInicialDoDonoNaContaPatrimonioDTO> findByDonoAndContaPatrimonio(@RequestParam String dono, @RequestParam String contaPatrimonio) {
+        return toDTOOptional(valorInicialDoDonoNaContaPatrimonioService.findByDonoAndContaPatrimonio(
+        donoService.findByDescricao(dono).get(), 
+contaPatrimonioService.findByDescricao(contaPatrimonio).get()));
     }
 
     @Override
     protected ValorInicialDoDonoNaContaPatrimonio toEntity(ValorInicialDoDonoNaContaPatrimonioDTO dto) {
         return ValorInicialDoDonoNaContaPatrimonio.builder()
             .valorInicial(dto.getValorInicial())
-            .dono(donoService.findByDescricao(dto.getDono().getDescricao()))
-            .contaPatrimonio(contaPatrimonioService.findByDescricao(dto.getContaPatrimonio().getDescricao()))
+            .dono(donoService.findByDescricao(dto.getDono().getDescricao()).get())
+            .contaPatrimonio(contaPatrimonioService.findByDescricao(dto.getContaPatrimonio().getDescricao()).get())
             .build();        
     }
 

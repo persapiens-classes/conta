@@ -1,7 +1,6 @@
 package br.edu.ifrn.conta.controller;
 
-import br.edu.ifrn.conta.domain.ContaPatrimonio;
-import br.edu.ifrn.conta.domain.Dono;
+import br.edu.ifrn.conta.domain.Conta;
 import br.edu.ifrn.conta.domain.Lancamento;
 import br.edu.ifrn.conta.service.ContaPatrimonioService;
 import br.edu.ifrn.conta.service.ContaService;
@@ -27,16 +26,16 @@ public class LancamentoController extends CrudController<LancamentoDTO, Lancamen
     @Autowired
     private ContaPatrimonioService contaPatrimonioService;
     @Autowired
-    private ContaService contaService;
+    private ContaService<Conta, Long> contaService;
 
     @Override
     protected Lancamento toEntity(LancamentoDTO dto) {
         return Lancamento.builder()
             .contaEntrada(contaService.findByDescricao(
-        dto.getContaEntrada().getDescricao()))
+        dto.getContaEntrada().getDescricao()).get())
             .contaSaida(contaService.findByDescricao(
-        dto.getContaSaida().getDescricao()))
-            .dono(donoService.findByDescricao(dto.getDono().getDescricao()))
+        dto.getContaSaida().getDescricao()).get())
+            .dono(donoService.findByDescricao(dto.getDono().getDescricao()).get())
             .data(dto.getData())
             .valor(dto.getValor())
             .descricao(dto.getDescricao())
@@ -65,13 +64,13 @@ public class LancamentoController extends CrudController<LancamentoDTO, Lancamen
 
     @GetMapping("/creditosSum")
     public BigDecimal creditosSum(String dono, String contaPatrimonio) {
-        return lancamentoService.creditosSum(donoService.findByDescricao(dono), 
-contaPatrimonioService.findByDescricao(contaPatrimonio));
+        return lancamentoService.creditosSum(donoService.findByDescricao(dono).get(), 
+contaPatrimonioService.findByDescricao(contaPatrimonio).get());
     }
     
     @GetMapping("/debitosSum")
     public BigDecimal debitosSum(String dono, String contaPatrimonio) {
-        return lancamentoService.debitosSum(donoService.findByDescricao(dono), 
-contaPatrimonioService.findByDescricao(contaPatrimonio));
+        return lancamentoService.debitosSum(donoService.findByDescricao(dono).get(), 
+contaPatrimonioService.findByDescricao(contaPatrimonio).get());
     }
 }

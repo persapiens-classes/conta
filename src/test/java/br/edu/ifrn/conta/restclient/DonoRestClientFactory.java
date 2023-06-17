@@ -1,6 +1,7 @@
 package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.controller.DonoDTO;
+import java.util.Optional;
 import lombok.experimental.SuperBuilder;
 import lombok.Data;
 
@@ -31,13 +32,13 @@ public class DonoRestClientFactory {
     }
     
     public DonoDTO dono(String descricao) {
-        DonoDTO result = donoRestClient().findByDescricao(descricao);
-        if (result == null) {
-            result = DonoDTO.builder().descricao(descricao).build();
-            result = donoRestClient().save(result);
+        Optional<DonoDTO> findByDescricao = donoRestClient().findByDescricao(descricao);
+        if (findByDescricao.isEmpty()) {
+            DonoDTO result = DonoDTO.builder().descricao(descricao).build();
+            return donoRestClient().save(result);
+        } else {        
+            return findByDescricao.get();
         }
-        
-        return result;
     }
 
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import br.edu.ifrn.conta.domain.Categoria;
 import br.edu.ifrn.conta.domain.ContaPatrimonio;
+import java.util.Optional;
 
 @Component
 public class ContaPatrimonioFactory {
@@ -20,15 +21,16 @@ public class ContaPatrimonioFactory {
     private CategoriaFactory categoriaFactory;
 
     private ContaPatrimonio contaPatrimonio(String descricao, Categoria categoria) {
-        ContaPatrimonio contaPatrimonio = this.contaPatrimonioRepository.findByDescricao(descricao);
-        if (contaPatrimonio == null) {
-            contaPatrimonio = ContaPatrimonio.builder()
+        Optional<ContaPatrimonio> findByDescricao = this.contaPatrimonioRepository.findByDescricao(descricao);
+        if (findByDescricao.isEmpty()) {
+            ContaPatrimonio contaPatrimonio = ContaPatrimonio.builder()
                     .descricao(descricao)
                     .categoria(categoria)
                     .build();
-            this.contaPatrimonioRepository.save(contaPatrimonio);
+            return this.contaPatrimonioRepository.save(contaPatrimonio);
+        } else {
+            return findByDescricao.get();
         }
-        return contaPatrimonio;
     }
 
     public ContaPatrimonio poupanca() {

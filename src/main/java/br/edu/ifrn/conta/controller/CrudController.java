@@ -4,6 +4,7 @@ import br.edu.ifrn.conta.service.CrudService;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,8 +20,8 @@ public abstract class CrudController <D extends Object, T extends Object, ID ext
     
     @PostMapping
     public D save(@RequestBody D dto) {
-        T saved = crudService.save(toEntityCheckNull(dto));
-        return toDTOCheckNull(saved);
+        T saved = crudService.save(toEntity(dto));
+        return toDTO(saved);
     }
     
     @GetMapping
@@ -32,22 +33,12 @@ public abstract class CrudController <D extends Object, T extends Object, ID ext
         return  result;
     }
     
-    public T toEntityCheckNull(D dto) {
-        T result = null;
-        if (dto != null) {
-            result = toEntity(dto);
+    public Optional<D> toDTOOptional(Optional<T> entity) {
+        if (entity.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return Optional.of(toDTO(entity.get()));
         }
-        
-        return result;
-    }
-    
-    public D toDTOCheckNull(T entity) {
-        D result = null;
-        if (entity != null) {
-            result = toDTO(entity);
-        }
-        
-        return result;        
     }
     
     protected abstract T toEntity(D dto);

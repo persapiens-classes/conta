@@ -29,7 +29,7 @@ public class SaldoController {
 
     @GetMapping("/saldo")
     public BigDecimal saldo(@RequestParam String dono, @RequestParam String contaPatrimonio) {
-        return saldoService.saldo(donoService.findByDescricao(dono),
-                contaPatrimonioService.findByDescricao(contaPatrimonio));
+        return saldoService.saldo(donoService.findByDescricao(dono).get(),
+                contaPatrimonioService.findByDescricao(contaPatrimonio).get());
     }
 }

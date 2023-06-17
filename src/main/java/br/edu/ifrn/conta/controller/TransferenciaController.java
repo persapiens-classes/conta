@@ -26,9 +26,9 @@ public class TransferenciaController {
     @PostMapping("/transferir")
     public void transferir(@RequestBody TransferenciaDTO transferenciaDTO) {
         transferenciaService.transferir(transferenciaDTO.getValor(),
-            donoService.findByDescricao(transferenciaDTO.getDonoDebito().getDescricao()),
-            contaPatrimonioService.findByDescricao(transferenciaDTO.getContaDebito().getDescricao()),
-            donoService.findByDescricao(transferenciaDTO.getDonoCredito().getDescricao()),
-            contaPatrimonioService.findByDescricao(transferenciaDTO.getContaCredito().getDescricao()));
+            donoService.findByDescricao(transferenciaDTO.getDonoDebito().getDescricao()).get(),
+            contaPatrimonioService.findByDescricao(transferenciaDTO.getContaDebito().getDescricao()).get(),
+            donoService.findByDescricao(transferenciaDTO.getDonoCredito().getDescricao()).get(),
+            contaPatrimonioService.findByDescricao(transferenciaDTO.getContaCredito().getDescricao()).get());
     }
 }

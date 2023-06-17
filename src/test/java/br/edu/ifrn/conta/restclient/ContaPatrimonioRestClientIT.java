@@ -64,7 +64,7 @@ public class ContaPatrimonioRestClientIT {
         	.isNotNull();
 
         // verifica a operacao findByDescricao
-        assertThat(contaPatrimonioRestClient().findByDescricao(descricao).getDescricao())
+        assertThat(contaPatrimonioRestClient().findByDescricao(descricao).get().getDescricao())
                 .isEqualTo(poupanca.getDescricao());
         
         // verifica a operacao findAll

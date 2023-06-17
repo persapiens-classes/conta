@@ -1,6 +1,7 @@
 package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.controller.CategoriaDTO;
+import java.util.Optional;
 import lombok.experimental.SuperBuilder;
 import lombok.Data;
 
@@ -10,9 +11,9 @@ public class CategoriaRestClient {
 
     private RestClientHelper<CategoriaDTO> entityRestHelper;
 
-    public CategoriaDTO findByDescricao(String descricao) {
-        return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findByDescricaoUri(descricao), CategoriaDTO.class);
+    public Optional<CategoriaDTO> findByDescricao(String descricao) {
+        return Optional.ofNullable(this.entityRestHelper.getRestTemplate().getForObject(
+                entityRestHelper.findByDescricaoUri(descricao), CategoriaDTO.class));
     }
 
     public Iterable<CategoriaDTO> findAll() {

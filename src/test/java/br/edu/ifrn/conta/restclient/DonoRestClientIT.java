@@ -41,14 +41,14 @@ public class DonoRestClientIT {
         // cria o ambiente de teste
         String descricao = "DONO EXCEPCIONAL";
         donoRestClient().save(DonoDTO.builder().descricao(descricao).build());
-        assertThat(donoRestClient().findByDescricao(descricao).getDescricao())
+        assertThat(donoRestClient().findByDescricao(descricao).get().getDescricao())
         	.isEqualTo(descricao);
         
         // executa a operacao a ser testada
         donoRestClient().deleteByDescricao(descricao);
         // verifica o efeito da execucao da operacao a ser testada
         assertThat(donoRestClient().findByDescricao(descricao))
-        	.isNull();
+        	.isEmpty();
     }
 
     @Test
@@ -63,7 +63,7 @@ public class DonoRestClientIT {
         	.isNotNull();
 
         // verifica a operacao findByDescricao
-        assertThat(donoRestClient().findByDescricao(descricao).getDescricao())
+        assertThat(donoRestClient().findByDescricao(descricao).get().getDescricao())
                 .isEqualTo(dono.getDescricao());
         
         // verifica a operacao findAll

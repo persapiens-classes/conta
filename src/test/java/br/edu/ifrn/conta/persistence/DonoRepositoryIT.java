@@ -16,56 +16,56 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class DonoRepositoryIT {
 
-	@Autowired
-	private DonoRepository donoRepository;
+    @Autowired
+    private DonoRepository donoRepository;
 
-	@Autowired
-	private DonoFactory donoFactory;
+    @Autowired
+    private DonoFactory donoFactory;
 
-	@Test
-	public void repositorioNaoEhNulo() {
-		assertThat(this.donoRepository)
-			.isNotNull();
-	}
+    @Test
+    public void repositorioNaoEhNulo() {
+        assertThat(this.donoRepository)
+                .isNotNull();
+    }
 
-	@Test
-	public void findByDescricao() {
-		// cria o ambiente de teste
-		Dono papai = this.donoFactory.papai();
-		Dono mamae = this.donoFactory.mamae();
+    @Test
+    public void findByDescricao() {
+        // cria o ambiente de teste
+        Dono papai = this.donoFactory.papai();
+        Dono mamae = this.donoFactory.mamae();
 
-		// executa a operacao a ser testada
-		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.donoRepository.findByDescricao(DonoFactory.PAPAI))
-			.isEqualTo(papai);
-		assertThat(this.donoRepository.findByDescricao(DonoFactory.MAMAE))
-			.isEqualTo(mamae);
-	}
+        // executa a operacao a ser testada
+        // verifica o efeito da execucao da operacao a ser testada
+        assertThat(this.donoRepository.findByDescricao(DonoFactory.PAPAI).get())
+                .isEqualTo(papai);
+        assertThat(this.donoRepository.findByDescricao(DonoFactory.MAMAE).get())
+                .isEqualTo(mamae);
+    }
 
-	@Test
-	public void countByDescricao() {
-		// cria o ambiente de teste
-		this.donoFactory.papai();
-		this.donoFactory.mamae();
+    @Test
+    public void countByDescricao() {
+        // cria o ambiente de teste
+        this.donoFactory.papai();
+        this.donoFactory.mamae();
 
-		// executa a operacao a ser testada
-		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.donoRepository.countByDescricaoContains("a"))
-			.isEqualTo(2);
-	}
+        // executa a operacao a ser testada
+        // verifica o efeito da execucao da operacao a ser testada
+        assertThat(this.donoRepository.countByDescricaoContains("a"))
+                .isEqualTo(2);
+    }
 
-	@Test
-	public void deleteByDescricao() {
-		String descricaoUnica = "Dono único";
+    @Test
+    public void deleteByDescricao() {
+        String descricaoUnica = "Dono único";
 
-		// cria o ambiente de teste
-		this.donoFactory.dono(descricaoUnica);
+        // cria o ambiente de teste
+        this.donoFactory.dono(descricaoUnica);
 
-		// executa a operacao a ser testada
-		this.donoRepository.deleteByDescricao(descricaoUnica);
+        // executa a operacao a ser testada
+        this.donoRepository.deleteByDescricao(descricaoUnica);
 
-		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.donoRepository.countByDescricaoContains(descricaoUnica))
-			.isEqualTo(0);
-	}
+        // verifica o efeito da execucao da operacao a ser testada
+        assertThat(this.donoRepository.countByDescricaoContains(descricaoUnica))
+                .isEqualTo(0);
+    }
 }

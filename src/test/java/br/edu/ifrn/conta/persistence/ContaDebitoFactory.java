@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import br.edu.ifrn.conta.domain.Categoria;
 import br.edu.ifrn.conta.domain.ContaDebito;
+import java.util.Optional;
 
 @Component
 public class ContaDebitoFactory {
@@ -18,15 +19,16 @@ public class ContaDebitoFactory {
     private CategoriaFactory categoriaFactory;
 
     private ContaDebito contaDebito(String descricao, Categoria categoria) {
-        ContaDebito contaDebito = this.contaDebitoRepository.findByDescricao(descricao);
-        if (contaDebito == null) {
-            contaDebito = ContaDebito.builder()
+        Optional<ContaDebito> findByDescricao = this.contaDebitoRepository.findByDescricao(descricao);
+        if (findByDescricao.isEmpty()) {
+            ContaDebito contaDebito = ContaDebito.builder()
                     .descricao(descricao)
                     .categoria(categoria)
                     .build();
-            this.contaDebitoRepository.save(contaDebito);
+            return this.contaDebitoRepository.save(contaDebito);
+        } else {
+            return findByDescricao.get();
         }
-        return contaDebito;
     }
 
     public ContaDebito gasolina() {

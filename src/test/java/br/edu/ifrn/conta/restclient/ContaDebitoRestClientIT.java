@@ -64,7 +64,7 @@ public class ContaDebitoRestClientIT {
         	.isNotNull();
 
         // verifica a operacao findByDescricao
-        assertThat(contaDebitoRestClient().findByDescricao(descricao).getDescricao())
+        assertThat(contaDebitoRestClient().findByDescricao(descricao).get().getDescricao())
                 .isEqualTo(gasolina.getDescricao());
         
         // verifica a operacao findAll

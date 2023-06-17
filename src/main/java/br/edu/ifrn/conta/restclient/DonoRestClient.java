@@ -1,6 +1,7 @@
 package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.controller.DonoDTO;
+import java.util.Optional;
 import lombok.experimental.SuperBuilder;
 import lombok.Data;
 
@@ -14,9 +15,9 @@ public class DonoRestClient {
         entityRestHelper.deleteByDescricao(descricao);
     }
 
-    public DonoDTO findByDescricao(String descricao) {
-        return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findByDescricaoUri(descricao), DonoDTO.class);
+    public Optional<DonoDTO> findByDescricao(String descricao) {
+        return Optional.ofNullable(this.entityRestHelper.getRestTemplate().getForObject(
+                entityRestHelper.findByDescricaoUri(descricao), DonoDTO.class));
     }
 
     public Iterable<DonoDTO> findAll() {

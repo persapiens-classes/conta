@@ -48,7 +48,7 @@ public class CategoriaRestClientIT {
         	.isNotNull();
 
         // verifica a operacao findByDescricao
-        assertThat(categoriaRestClient().findByDescricao(descricao).getDescricao())
+        assertThat(categoriaRestClient().findByDescricao(descricao).get().getDescricao())
                 .isEqualTo(categoria.getDescricao());
         
         // verifica a operacao findAll
