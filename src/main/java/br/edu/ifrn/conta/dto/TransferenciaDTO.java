@@ -1,4 +1,4 @@
-package br.edu.ifrn.conta.controller;
+package br.edu.ifrn.conta.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

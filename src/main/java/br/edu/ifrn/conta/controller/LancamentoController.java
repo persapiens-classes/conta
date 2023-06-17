@@ -1,5 +1,8 @@
 package br.edu.ifrn.conta.controller;
 
+import br.edu.ifrn.conta.dto.DonoDTO;
+import br.edu.ifrn.conta.dto.LancamentoDTO;
+import br.edu.ifrn.conta.dto.CategoriaDTO;
 import br.edu.ifrn.conta.domain.Conta;
 import br.edu.ifrn.conta.domain.Lancamento;
 import br.edu.ifrn.conta.service.ContaPatrimonioService;

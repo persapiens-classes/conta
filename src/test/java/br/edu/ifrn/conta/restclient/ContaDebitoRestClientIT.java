@@ -1,7 +1,7 @@
 package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.ContaApplication;
-import br.edu.ifrn.conta.controller.ContaDebitoDTO;
+import br.edu.ifrn.conta.dto.ContaDebitoDTO;
 import static br.edu.ifrn.conta.util.CategoriaConstants.TRANSPORTE;
 
 import org.junit.jupiter.api.Test;

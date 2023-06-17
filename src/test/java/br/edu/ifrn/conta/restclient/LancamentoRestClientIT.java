@@ -1,7 +1,7 @@
 package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.ContaApplication;
-import br.edu.ifrn.conta.controller.LancamentoDTO;
+import br.edu.ifrn.conta.dto.LancamentoDTO;
 import static br.edu.ifrn.conta.util.CategoriaConstants.BANCO;
 import static br.edu.ifrn.conta.util.CategoriaConstants.SALARIO;
 import static br.edu.ifrn.conta.util.ContaCreditoConstants.ESTAGIO;

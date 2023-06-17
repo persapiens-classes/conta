@@ -1,7 +1,7 @@
 package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.ContaApplication;
-import br.edu.ifrn.conta.controller.ContaPatrimonioDTO;
+import br.edu.ifrn.conta.dto.ContaPatrimonioDTO;
 import static br.edu.ifrn.conta.util.CategoriaConstants.BANCO;
 
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package br.edu.ifrn.conta.controller;
+package br.edu.ifrn.conta.dto;
 
 import java.io.Serializable;
 import lombok.experimental.SuperBuilder;
@@ -13,6 +13,6 @@ import lombok.ToString;
 @Data
 @ToString
 @NoArgsConstructor
-public class CategoriaDTO implements Serializable {
+public class DonoDTO implements Serializable {
     private String descricao;
 }
