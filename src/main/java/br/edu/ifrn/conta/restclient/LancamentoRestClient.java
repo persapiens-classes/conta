@@ -20,5 +20,22 @@ public class LancamentoRestClient {
         return this.entityRestHelper.getRestTemplate().postForObject(
                 entityRestHelper.saveUri(), entity, LancamentoDTO.class);
     }
-    
+
+    public BigDecimal creditosSum(String dono, String contaPatrimonio) {
+        return this.entityRestHelper.getRestTemplate().getForObject(
+        UriComponentsBuilder.fromHttpUrl(entityRestHelper.url() + "/creditosSum")
+            .queryParam("dono", dono)
+            .queryParam("contaPatrimonio", contaPatrimonio)
+            .build().encode().toUri()
+            , BigDecimal.class);
+    }
+
+    public BigDecimal debitosSum(String dono, String contaPatrimonio) {
+        return this.entityRestHelper.getRestTemplate().getForObject(
+        UriComponentsBuilder.fromHttpUrl(entityRestHelper.url() + "/debitosSum")
+            .queryParam("dono", dono)
+            .queryParam("contaPatrimonio", contaPatrimonio)
+            .build().encode().toUri()
+            , BigDecimal.class);
+    }
 }

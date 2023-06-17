@@ -3,7 +3,6 @@ package br.edu.ifrn.conta.restclient;
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.controller.ContaPatrimonioDTO;
 import br.edu.ifrn.conta.persistence.CategoriaFactory;
-import br.edu.ifrn.conta.persistence.ContaPatrimonioFactory;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -52,7 +51,7 @@ public class ContaPatrimonioRestClientIT {
     @Test
     public void salvarUm() {        
         // executa a operacao a ser testada
-        String descricao = "Conta Corrente";
+        String descricao = "Conta Super";
         String categoriaDescricao = CategoriaFactory.BANCO;
         
         ContaPatrimonioDTO poupanca = ContaPatrimonioDTO.builder()

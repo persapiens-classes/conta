@@ -10,6 +10,7 @@ public class DonoFactory {
 
 	public final static String PAPAI = "Papai";
 	public final static String MAMAE = "Mamae";
+	public final static String TITIO = "Titio";
 
 	@Autowired
 	private DonoRepository donoRepository;

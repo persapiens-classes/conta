@@ -35,7 +35,7 @@ public class ContaCreditoServiceIT {
 	@Test
 	public void salvarUm() {
 		// cria o ambiente de teste
-		ContaCredito contaCredito = this.contaCreditoFactory.receitaComConjuge();
+		ContaCredito contaCredito = this.contaCreditoFactory.estagio();
 
 		// verifica o efeito da execucao da operacao a ser testada
 		assertThat(this.contaCreditoServico.findById(contaCredito.getId()).get())

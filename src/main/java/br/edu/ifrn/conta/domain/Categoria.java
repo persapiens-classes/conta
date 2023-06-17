@@ -36,6 +36,8 @@ import lombok.ToString;
 public class Categoria implements Serializable, Comparable<Categoria> {
 
     private static final long serialVersionUID = 1L;
+    public final static String CATEGORIA_DESPESA_TRANSFERENCIA = "categoria despesa de transferência";
+    public final static String CATEGORIA_RECEITA_TRANSFERENCIA = "categoria receita de transferência";
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")

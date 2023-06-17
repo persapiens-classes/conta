@@ -1,11 +1,15 @@
 package br.edu.ifrn.conta.controller;
 
+import br.edu.ifrn.conta.domain.ContaPatrimonio;
+import br.edu.ifrn.conta.domain.Dono;
 import br.edu.ifrn.conta.domain.Lancamento;
 import br.edu.ifrn.conta.service.ContaPatrimonioService;
 import br.edu.ifrn.conta.service.ContaService;
 import br.edu.ifrn.conta.service.DonoService;
 import br.edu.ifrn.conta.service.LancamentoService;
+import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,7 +42,7 @@ public class LancamentoController extends CrudController<LancamentoDTO, Lancamen
             .descricao(dto.getDescricao())
             .build();
     }
-
+    
     @Override
     protected LancamentoDTO toDTO(Lancamento entity) {
         return LancamentoDTO.builder()
@@ -57,5 +61,17 @@ public class LancamentoController extends CrudController<LancamentoDTO, Lancamen
             .valor(entity.getValor())
             .descricao(entity.getDescricao())
             .build();
+    }
+
+    @GetMapping("/creditosSum")
+    public BigDecimal creditosSum(String dono, String contaPatrimonio) {
+        return lancamentoService.creditosSum(donoService.findByDescricao(dono), 
+contaPatrimonioService.findByDescricao(contaPatrimonio));
+    }
+    
+    @GetMapping("/debitosSum")
+    public BigDecimal debitosSum(String dono, String contaPatrimonio) {
+        return lancamentoService.debitosSum(donoService.findByDescricao(dono), 
+contaPatrimonioService.findByDescricao(contaPatrimonio));
     }
 }
