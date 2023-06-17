@@ -1,6 +1,7 @@
 package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.controller.ContaPatrimonioDTO;
+import java.util.Optional;
 import lombok.experimental.SuperBuilder;
 import lombok.Data;
 
@@ -14,9 +15,9 @@ public class ContaPatrimonioRestClient {
         entityRestHelper.deleteByDescricao(descricao);
     }
 
-    public ContaPatrimonioDTO findByDescricao(String descricao) {
-        return this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findByDescricaoUri(descricao), ContaPatrimonioDTO.class);
+    public Optional<ContaPatrimonioDTO> findByDescricao(String descricao) {
+        return Optional.ofNullable(this.entityRestHelper.getRestTemplate().getForObject(
+                entityRestHelper.findByDescricaoUri(descricao), ContaPatrimonioDTO.class));
     }
 
     public Iterable<ContaPatrimonioDTO> findAll() {

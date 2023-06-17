@@ -2,6 +2,7 @@ package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.controller.CategoriaDTO;
 import br.edu.ifrn.conta.controller.ContaPatrimonioDTO;
+import java.util.Optional;
 import lombok.experimental.SuperBuilder;
 import lombok.Data;
 
@@ -34,19 +35,17 @@ public class ContaPatrimonioRestClientFactory {
     }
     
     public ContaPatrimonioDTO contaPatrimonio(String descricao, String categoriaDescricao) {
-        ContaPatrimonioDTO result = contaPatrimonioRestClient().findByDescricao(descricao);
-        if (result == null) {
+        Optional<ContaPatrimonioDTO> findByDescricao = contaPatrimonioRestClient().findByDescricao(descricao);
+        if (findByDescricao.isEmpty()) {
             CategoriaDTO categoria = categoriaRestClientFactory.categoria(categoriaDescricao);
             
-            result = ContaPatrimonioDTO.builder().descricao(descricao)
+            ContaPatrimonioDTO result = ContaPatrimonioDTO.builder().descricao(descricao)
                     .categoria(categoria)
                     .build();
-            result = contaPatrimonioRestClient().save(result);
-            
-            result = contaPatrimonioRestClient().findByDescricao(descricao);
+            return contaPatrimonioRestClient().save(result);
+        } else {        
+            return findByDescricao.get();
         }
-        
-        return result;
     }
 
 }

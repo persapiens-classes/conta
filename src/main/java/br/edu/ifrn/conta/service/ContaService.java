@@ -3,6 +3,7 @@ package br.edu.ifrn.conta.service;
 import br.edu.ifrn.conta.domain.Conta;
 import br.edu.ifrn.conta.persistence.ContaRepository;
 import java.io.Serializable;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ public class ContaService<T extends Conta, ID extends Serializable> extends Crud
     @Autowired
     private ContaRepository<T, ID> contaRepository;
     
-    public T findByDescricao(String descricao) {
+    public Optional<T> findByDescricao(String descricao) {
         return contaRepository.findByDescricao(descricao);
     }
 }

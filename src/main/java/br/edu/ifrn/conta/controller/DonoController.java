@@ -2,6 +2,7 @@ package br.edu.ifrn.conta.controller;
 
 import br.edu.ifrn.conta.domain.Dono;
 import br.edu.ifrn.conta.service.DonoService;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +21,8 @@ public class DonoController extends CrudController<DonoDTO, Dono, Long> {
     private DonoService donoService;
     
     @GetMapping("/findByDescricao")
-    public DonoDTO findByDescricao(@RequestParam String descricao) {
-        return toDTOCheckNull(donoService.findByDescricao(descricao));
+    public Optional<DonoDTO> findByDescricao(@RequestParam String descricao) {
+        return toDTOOptional(donoService.findByDescricao(descricao));
     }
     
     @DeleteMapping("/deleteByDescricao")

@@ -28,7 +28,8 @@ public class SaldoService {
     public BigDecimal saldo(Dono dono, ContaPatrimonio contaPatrimonio) {
         // recupera o valor inicial do dono na conta patrimonio
         BigDecimal result = this.valorInicialDoDonoNaContaPatrimonioRepository
-                .findByDonoAndContaPatrimonio(dono, contaPatrimonio).getValorInicial();
+            .findByDonoAndContaPatrimonio(dono, contaPatrimonio)
+            .get().getValorInicial();
 
         // soma todos os lancamentos de credito do dono na conta patrimonio
         BigDecimal creditos = this.lancamentoRepository.creditosSum(dono, contaPatrimonio).getValor();

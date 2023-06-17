@@ -2,6 +2,7 @@ package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.controller.CategoriaDTO;
 import br.edu.ifrn.conta.controller.ContaDebitoDTO;
+import java.util.Optional;
 import lombok.experimental.SuperBuilder;
 import lombok.Data;
 
@@ -34,17 +35,17 @@ public class ContaDebitoRestClientFactory {
     }
     
     public ContaDebitoDTO contaDebito(String descricao, String categoriaDescricao) {
-        ContaDebitoDTO result = contaDebitoRestClient().findByDescricao(descricao);
-        if (result == null) {
+        Optional<ContaDebitoDTO> findByDescricao = contaDebitoRestClient().findByDescricao(descricao);
+        if (findByDescricao.isEmpty()) {
             CategoriaDTO categoria = categoriaRestClientFactory.categoria(categoriaDescricao);
             
-            result = ContaDebitoDTO.builder().descricao(descricao)
+            ContaDebitoDTO result = ContaDebitoDTO.builder().descricao(descricao)
                     .categoria(categoria)
                     .build();
-            result = contaDebitoRestClient().save(result);
+            return contaDebitoRestClient().save(result);
+        } else {        
+            return findByDescricao.get();
         }
-        
-        return result;
     }
 
 }

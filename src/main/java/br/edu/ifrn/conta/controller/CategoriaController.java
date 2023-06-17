@@ -2,6 +2,7 @@ package br.edu.ifrn.conta.controller;
 
 import br.edu.ifrn.conta.domain.Categoria;
 import br.edu.ifrn.conta.service.CategoriaService;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +20,8 @@ public class CategoriaController extends CrudController<CategoriaDTO, Categoria,
     private CategoriaService categoriaService;
     
     @GetMapping("/findByDescricao")
-    public CategoriaDTO findByDescricao(@RequestParam String descricao) {
-        return toDTOCheckNull(categoriaService.findByDescricao(descricao));
+    public Optional<CategoriaDTO> findByDescricao(@RequestParam String descricao) {
+        return toDTOOptional(categoriaService.findByDescricao(descricao));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package br.edu.ifrn.conta.persistence;
 
 import br.edu.ifrn.conta.domain.Dono;
+import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public interface DonoRepository extends CrudRepository<Dono, Long> {
 
-	Dono findByDescricao(String descricao);
+    Optional<Dono> findByDescricao(String descricao);
 
-	long countByDescricaoContains(String descricao);
+    long countByDescricaoContains(String descricao);
 
-	@Transactional
-	void deleteByDescricao(String descricao);
+    @Transactional
+    void deleteByDescricao(String descricao);
 
 }
