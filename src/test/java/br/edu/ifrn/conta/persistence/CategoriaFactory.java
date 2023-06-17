@@ -4,14 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.edu.ifrn.conta.domain.Categoria;
+import static br.edu.ifrn.conta.util.CategoriaConstants.BANCO;
+import static br.edu.ifrn.conta.util.CategoriaConstants.SALARIO;
+import static br.edu.ifrn.conta.util.CategoriaConstants.TRANSPORTE;
 import java.util.Optional;
 
 @Component
 public class CategoriaFactory {
-
-    public final static String SALARIO = "Salário";
-    public final static String TRANSPORTE = "Transporte";
-    public final static String BANCO = "Banco";
 
     @Autowired
     private CategoriaRepository categoriaRepository;

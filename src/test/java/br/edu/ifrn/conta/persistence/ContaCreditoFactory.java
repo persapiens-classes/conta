@@ -5,12 +5,11 @@ import org.springframework.stereotype.Component;
 
 import br.edu.ifrn.conta.domain.Categoria;
 import br.edu.ifrn.conta.domain.ContaCredito;
+import static br.edu.ifrn.conta.util.ContaCreditoConstants.ESTAGIO;
 import java.util.Optional;
 
 @Component
 public class ContaCreditoFactory {
-
-    public final static String ESTAGIO = "estágio";
 
     @Autowired
     private ContaCreditoRepository contaCreditoRepository;

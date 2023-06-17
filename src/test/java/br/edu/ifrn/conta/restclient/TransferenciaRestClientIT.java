@@ -4,9 +4,11 @@ import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.controller.ContaPatrimonioDTO;
 import br.edu.ifrn.conta.controller.DonoDTO;
 import br.edu.ifrn.conta.controller.TransferenciaDTO;
-import br.edu.ifrn.conta.persistence.CategoriaFactory;
-import br.edu.ifrn.conta.persistence.ContaPatrimonioFactory;
-import br.edu.ifrn.conta.persistence.DonoFactory;
+import static br.edu.ifrn.conta.util.CategoriaConstants.BANCO;
+import static br.edu.ifrn.conta.util.ContaPatrimonioConstants.CONTA_CORRENTE;
+import static br.edu.ifrn.conta.util.ContaPatrimonioConstants.CONTA_INVESTIMENTO;
+import static br.edu.ifrn.conta.util.DonoConstants.PAPAI;
+import static br.edu.ifrn.conta.util.DonoConstants.TITIO;
 import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -83,13 +85,13 @@ public class TransferenciaRestClientIT {
 
     @Test
     public void transferir50DeContaCorrentePapaiParaContaInvestimentoTitio() {
-        DonoDTO papai = donoRestClientFactory().dono(DonoFactory.PAPAI);
-        DonoDTO titio = donoRestClientFactory().dono(DonoFactory.TITIO);
+        DonoDTO papai = donoRestClientFactory().dono(PAPAI);
+        DonoDTO titio = donoRestClientFactory().dono(TITIO);
 
         ContaPatrimonioDTO contaCorrente = contaPatrimonioRestClientFactory().contaPatrimonio(
-    ContaPatrimonioFactory.CONTA_CORRENTE, CategoriaFactory.BANCO);
+    CONTA_CORRENTE, BANCO);
         ContaPatrimonioDTO contaInvestimento = contaPatrimonioRestClientFactory().contaPatrimonio(
-    ContaPatrimonioFactory.CONTA_INVESTIMENTO, CategoriaFactory.BANCO);
+    CONTA_INVESTIMENTO, BANCO);
         
         // executa a operacao a ser testada
         transferenciaRestClient().transferir(TransferenciaDTO.builder()

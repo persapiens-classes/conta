@@ -2,7 +2,7 @@ package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.controller.ContaCreditoDTO;
-import br.edu.ifrn.conta.persistence.CategoriaFactory;
+import static br.edu.ifrn.conta.util.CategoriaConstants.SALARIO;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -52,7 +52,7 @@ public class ContaCreditoRestClientIT {
     public void salvarUm() {        
         // executa a operacao a ser testada
         String descricao = "Emprego Fixo";
-        String categoriaDescricao = CategoriaFactory.SALARIO;
+        String categoriaDescricao = SALARIO;
         
         ContaCreditoDTO estagio = ContaCreditoDTO.builder()
             .descricao(descricao)

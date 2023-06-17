@@ -7,11 +7,13 @@ import br.edu.ifrn.conta.controller.ContaPatrimonioDTO;
 import br.edu.ifrn.conta.controller.DonoDTO;
 import br.edu.ifrn.conta.controller.LancamentoDTO;
 import br.edu.ifrn.conta.controller.ValorInicialDoDonoNaContaPatrimonioDTO;
-import br.edu.ifrn.conta.persistence.ContaCreditoFactory;
-import br.edu.ifrn.conta.persistence.CategoriaFactory;
-import br.edu.ifrn.conta.persistence.ContaDebitoFactory;
-import br.edu.ifrn.conta.persistence.ContaPatrimonioFactory;
-import br.edu.ifrn.conta.persistence.DonoFactory;
+import static br.edu.ifrn.conta.util.CategoriaConstants.BANCO;
+import static br.edu.ifrn.conta.util.CategoriaConstants.SALARIO;
+import static br.edu.ifrn.conta.util.CategoriaConstants.TRANSPORTE;
+import static br.edu.ifrn.conta.util.ContaCreditoConstants.ESTAGIO;
+import static br.edu.ifrn.conta.util.ContaDebitoConstants.GASOLINA;
+import static br.edu.ifrn.conta.util.ContaPatrimonioConstants.POUPANCA;
+import static br.edu.ifrn.conta.util.DonoConstants.TITIO;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -119,9 +121,9 @@ public class SaldoRestClientIT {
 
     @Test
     public void saldo500() {
-        DonoDTO titio = donoRestClientFactory().dono(DonoFactory.TITIO);
+        DonoDTO titio = donoRestClientFactory().dono(TITIO);
         ContaPatrimonioDTO poupanca = contaPatrimonioRestClientFactory().contaPatrimonio(
-    ContaPatrimonioFactory.POUPANCA, CategoriaFactory.BANCO);
+    POUPANCA, BANCO);
 
         // valor inicial 100
         ValorInicialDoDonoNaContaPatrimonioDTO valorInicial = ValorInicialDoDonoNaContaPatrimonioDTO.builder()
@@ -133,7 +135,7 @@ public class SaldoRestClientIT {
         
         // creditou 600
         ContaCreditoDTO estagio = contaCreditoRestClientFactory().contaCredito(
-    ContaCreditoFactory.ESTAGIO, CategoriaFactory.SALARIO);        
+    ESTAGIO, SALARIO);        
         LancamentoDTO lancamentoCredito = LancamentoDTO.builder()
                 .valor(new BigDecimal(600))
                 .data(LocalDateTime.now())
@@ -145,7 +147,7 @@ public class SaldoRestClientIT {
 
         // debitou 200
         ContaDebitoDTO gasolina = contaDebitoRestClientFactory().contaDebito(
-    ContaDebitoFactory.GASOLINA, CategoriaFactory.TRANSPORTE);
+    GASOLINA, TRANSPORTE);
         LancamentoDTO lancamentoDebito = LancamentoDTO.builder()
                 .valor(new BigDecimal(200))
                 .data(LocalDateTime.now())

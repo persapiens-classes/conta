@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.domain.Categoria;
 import br.edu.ifrn.conta.domain.ContaCredito;
+import static br.edu.ifrn.conta.util.CategoriaConstants.SALARIO;
+import static br.edu.ifrn.conta.util.ContaCreditoConstants.ESTAGIO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -35,8 +37,8 @@ public class ContaCreditoRepositoryIT {
 		ContaCredito contaCredito = this.contaCreditoFactory.estagio();
 
 		ContaCredito contaCreditoExemplo = ContaCredito.builder()
-                        .descricao(ContaCreditoFactory.ESTAGIO)
-			.categoria(Categoria.builder().descricao(CategoriaFactory.SALARIO).build())
+                        .descricao(ESTAGIO)
+			.categoria(Categoria.builder().descricao(SALARIO).build())
 			.build();
 
 		// executa a operacao a ser testada

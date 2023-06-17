@@ -4,14 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.edu.ifrn.conta.domain.Dono;
+import static br.edu.ifrn.conta.util.DonoConstants.MAMAE;
+import static br.edu.ifrn.conta.util.DonoConstants.PAPAI;
 import java.util.Optional;
 
 @Component
 public class DonoFactory {
-
-    public final static String PAPAI = "Papai";
-    public final static String MAMAE = "Mamae";
-    public final static String TITIO = "Titio";
 
     @Autowired
     private DonoRepository donoRepository;

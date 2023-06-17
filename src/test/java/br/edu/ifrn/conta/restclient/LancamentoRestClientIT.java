@@ -2,10 +2,11 @@ package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.controller.LancamentoDTO;
-import br.edu.ifrn.conta.persistence.ContaCreditoFactory;
-import br.edu.ifrn.conta.persistence.DonoFactory;
-import br.edu.ifrn.conta.persistence.CategoriaFactory;
-import br.edu.ifrn.conta.persistence.ContaPatrimonioFactory;
+import static br.edu.ifrn.conta.util.CategoriaConstants.BANCO;
+import static br.edu.ifrn.conta.util.CategoriaConstants.SALARIO;
+import static br.edu.ifrn.conta.util.ContaCreditoConstants.ESTAGIO;
+import static br.edu.ifrn.conta.util.ContaPatrimonioConstants.POUPANCA;
+import static br.edu.ifrn.conta.util.DonoConstants.MAMAE;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -83,11 +84,11 @@ public class LancamentoRestClientIT {
     @Test
     public void salvarUm() {        
         // executa a operacao a ser testada
-        String mamae = DonoFactory.MAMAE;
-        String estagio = ContaCreditoFactory.ESTAGIO;
-        String salario = CategoriaFactory.SALARIO;
-        String poupanca = ContaPatrimonioFactory.POUPANCA;
-        String banco = CategoriaFactory.BANCO;
+        String mamae = MAMAE;
+        String estagio = ESTAGIO;
+        String salario = SALARIO;
+        String poupanca = POUPANCA;
+        String banco = BANCO;
         
         LancamentoDTO lancamento = LancamentoDTO.builder()
                 .valor(new BigDecimal(543))

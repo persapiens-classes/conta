@@ -5,12 +5,11 @@ import org.springframework.stereotype.Component;
 
 import br.edu.ifrn.conta.domain.Categoria;
 import br.edu.ifrn.conta.domain.ContaDebito;
+import static br.edu.ifrn.conta.util.ContaDebitoConstants.GASOLINA;
 import java.util.Optional;
 
 @Component
 public class ContaDebitoFactory {
-
-    public final static String GASOLINA = "gasolina";
 
     @Autowired
     private ContaDebitoRepository contaDebitoRepository;
