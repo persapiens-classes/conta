@@ -1,5 +1,6 @@
 package br.edu.ifrn.conta.controller;
 
+import br.edu.ifrn.conta.dto.DonoDTO;
 import br.edu.ifrn.conta.domain.Dono;
 import br.edu.ifrn.conta.service.DonoService;
 import java.util.Optional;

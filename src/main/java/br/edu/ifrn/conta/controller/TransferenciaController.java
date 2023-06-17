@@ -1,5 +1,6 @@
 package br.edu.ifrn.conta.controller;
 
+import br.edu.ifrn.conta.dto.TransferenciaDTO;
 import br.edu.ifrn.conta.service.ContaPatrimonioService;
 import br.edu.ifrn.conta.service.DonoService;
 import br.edu.ifrn.conta.service.TransferenciaService;

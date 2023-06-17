@@ -3,7 +3,7 @@ package br.edu.ifrn.conta.restclient;
 import java.math.BigDecimal;
 
 import br.edu.ifrn.conta.ContaApplication;
-import br.edu.ifrn.conta.controller.ValorInicialDoDonoNaContaPatrimonioDTO;
+import br.edu.ifrn.conta.dto.ValorInicialDoDonoNaContaPatrimonioDTO;
 import static br.edu.ifrn.conta.util.CategoriaConstants.BANCO;
 import static br.edu.ifrn.conta.util.ContaPatrimonioConstants.POUPANCA;
 import static br.edu.ifrn.conta.util.DonoConstants.MAMAE;

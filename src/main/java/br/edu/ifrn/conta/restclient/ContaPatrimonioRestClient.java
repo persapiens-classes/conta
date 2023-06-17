@@ -1,6 +1,6 @@
 package br.edu.ifrn.conta.restclient;
 
-import br.edu.ifrn.conta.controller.ContaPatrimonioDTO;
+import br.edu.ifrn.conta.dto.ContaPatrimonioDTO;
 import java.util.Optional;
 import lombok.experimental.SuperBuilder;
 import lombok.Data;

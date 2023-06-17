@@ -1,6 +1,6 @@
 package br.edu.ifrn.conta.restclient;
 
-import br.edu.ifrn.conta.controller.LancamentoDTO;
+import br.edu.ifrn.conta.dto.LancamentoDTO;
 import java.math.BigDecimal;
 import lombok.experimental.SuperBuilder;
 import lombok.Data;

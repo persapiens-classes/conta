@@ -1,5 +1,6 @@
 package br.edu.ifrn.conta.controller;
 
+import br.edu.ifrn.conta.dto.CategoriaDTO;
 import br.edu.ifrn.conta.domain.Categoria;
 import br.edu.ifrn.conta.service.CategoriaService;
 import java.util.Optional;

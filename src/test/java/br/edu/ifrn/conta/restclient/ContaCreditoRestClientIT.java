@@ -1,7 +1,7 @@
 package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.ContaApplication;
-import br.edu.ifrn.conta.controller.ContaCreditoDTO;
+import br.edu.ifrn.conta.dto.ContaCreditoDTO;
 import static br.edu.ifrn.conta.util.CategoriaConstants.SALARIO;
 
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,6 @@
 package br.edu.ifrn.conta.restclient;
 
-import br.edu.ifrn.conta.controller.ValorInicialDoDonoNaContaPatrimonioDTO;
+import br.edu.ifrn.conta.dto.ValorInicialDoDonoNaContaPatrimonioDTO;
 import lombok.experimental.SuperBuilder;
 import lombok.Data;
 

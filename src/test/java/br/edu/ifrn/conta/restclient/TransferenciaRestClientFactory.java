@@ -1,6 +1,6 @@
 package br.edu.ifrn.conta.restclient;
 
-import br.edu.ifrn.conta.controller.TransferenciaDTO;
+import br.edu.ifrn.conta.dto.TransferenciaDTO;
 import lombok.experimental.SuperBuilder;
 import lombok.Data;
 
