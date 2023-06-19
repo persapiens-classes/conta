@@ -18,6 +18,8 @@
     <properties>
         <java.version>17</java.version>
         <springdoc.version>2.1.0</springdoc.version>
+
+        <decycle-maven-plugin.version>0.11.0</decycle-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -86,10 +88,59 @@
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <scope>runtime</scope>
-        </dependency>        
+        </dependency>
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>de.obqo.decycle</groupId>
+                    <artifactId>decycle-maven-plugin</artifactId>
+                    <version>${decycle-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <slicings>
+                            <slicing>
+                                <name>branches</name>
+                                <patterns>br.edu.ifrn.conta.*=base, br.edu.ifrn.conta.{*}.**</patterns>
+                                <constraints>
+                                    <allow>controller, service, domain</allow>
+                                    <allow>service, persistence, domain</allow>
+                                    <allow>
+                                        <one-of>controller, persistence</one-of>
+                                    </allow>
+                                    <allow>
+                                        <one-of>dto, domain</one-of>
+                                    </allow>
+                                    <allow>
+                                        <one-of>restclient, controller</one-of>
+                                        <any-of>dto</any-of>
+                                    </allow>
+                                    <allow>
+                                        <one-of>restclient, service</one-of>
+                                    </allow>
+                                    <allow>
+                                        <one-of>restclient, persistence</one-of>
+                                        <any-of>util</any-of>
+                                    </allow>
+                                    <allow>
+                                        <one-of>restclient, domain</one-of>
+                                    </allow>
+                                </constraints>
+                            </slicing>
+                        </slicings>
+                    </configuration>
+                </plugin>                
+            </plugins>
+        </pluginManagement>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -109,6 +160,10 @@
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                 </configuration>
             </plugin>                
+            <plugin>
+                <groupId>de.obqo.decycle</groupId>
+                <artifactId>decycle-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 
