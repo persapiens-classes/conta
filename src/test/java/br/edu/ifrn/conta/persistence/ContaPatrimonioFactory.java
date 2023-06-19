@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import br.edu.ifrn.conta.domain.Categoria;
 import br.edu.ifrn.conta.domain.ContaPatrimonio;
+import static br.edu.ifrn.conta.util.ContaPatrimonioConstants.CARTEIRA;
 import static br.edu.ifrn.conta.util.ContaPatrimonioConstants.CONTA_CORRENTE;
 import static br.edu.ifrn.conta.util.ContaPatrimonioConstants.CONTA_INVESTIMENTO;
 import static br.edu.ifrn.conta.util.ContaPatrimonioConstants.POUPANCA;
@@ -42,5 +43,9 @@ public class ContaPatrimonioFactory {
 
     public ContaPatrimonio contaInvestimento() {
         return contaPatrimonio(CONTA_INVESTIMENTO, this.categoriaFactory.banco());
+    }
+
+    public ContaPatrimonio carteira() {
+        return contaPatrimonio(CARTEIRA, this.categoriaFactory.especie());
     }
 }

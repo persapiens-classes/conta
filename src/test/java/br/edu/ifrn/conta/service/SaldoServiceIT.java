@@ -52,8 +52,8 @@ public class SaldoServiceIT {
         // cria o ambiente de teste
         Dono papai = this.donoFactory.papai();
 
-        ContaPatrimonio poupanca
-                = this.contaPatrimonioFactory.poupanca();
+        ContaPatrimonio carteira
+                = this.contaPatrimonioFactory.carteira();
 
         ContaDebito gasolina
                 = this.contaDebitoFactory.gasolina();
@@ -62,14 +62,14 @@ public class SaldoServiceIT {
                 = this.contaCreditoFactory.estagio();
 
         this.valorInicialDoDonoNaContaPatrimonioFactory.valorInicialDoDonoNaContaPatrimonio(
-                papai, poupanca, new BigDecimal(1000));
+                papai, carteira, new BigDecimal(1000));
 
-        this.lancamentoFactory.lancamento(papai, gasolina, poupanca, new BigDecimal(500));
-        this.lancamentoFactory.lancamento(papai, poupanca, estagio, new BigDecimal(300));
+        this.lancamentoFactory.lancamento(papai, gasolina, carteira, new BigDecimal(500));
+        this.lancamentoFactory.lancamento(papai, carteira, estagio, new BigDecimal(300));
 
         // executa a operacao a ser testada
         // verifica o efeito da execucao da operacao a ser testada
-        assertThat(this.saldoService.saldo(papai, poupanca))
+        assertThat(this.saldoService.saldo(papai, carteira))
                 .isEqualTo(new BigDecimal(800).setScale(2));
     }
 }

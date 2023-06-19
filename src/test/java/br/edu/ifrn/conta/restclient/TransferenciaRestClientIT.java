@@ -95,10 +95,10 @@ public class TransferenciaRestClientIT {
         
         // executa a operacao a ser testada
         transferenciaRestClient().transferir(TransferenciaDTO.builder()
-            .donoDebito(papai)
-            .donoCredito(titio)
-            .contaDebito(contaCorrente)
-            .contaCredito(contaInvestimento)
+            .donoDebito(papai.getDescricao())
+            .donoCredito(titio.getDescricao())
+            .contaDebito(contaCorrente.getDescricao())
+            .contaCredito(contaInvestimento.getDescricao())
             .valor(new BigDecimal(50))
             .build());
         
