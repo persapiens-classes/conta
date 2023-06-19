@@ -1,6 +1,5 @@
-package br.edu.ifrn.conta.controller;
+package br.edu.ifrn.conta.dto;
 
-import br.edu.ifrn.conta.dto.CategoriaDTO;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.NoArgsConstructor;

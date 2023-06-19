@@ -1,6 +1,5 @@
 package br.edu.ifrn.conta.dto;
 
-import br.edu.ifrn.conta.controller.ContaDTO;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

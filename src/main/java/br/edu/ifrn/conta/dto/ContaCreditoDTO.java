@@ -1,6 +1,5 @@
 package br.edu.ifrn.conta.dto;
 
-import br.edu.ifrn.conta.controller.ContaDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
