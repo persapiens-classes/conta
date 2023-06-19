@@ -9,7 +9,7 @@ import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 /**
- * DTO interface.
+ * Transferencia DTO.
  */
 @SuperBuilder
 @Data
@@ -18,8 +18,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class TransferenciaDTO implements Serializable {
     private BigDecimal valor;
-    private DonoDTO donoDebito;
-    private ContaPatrimonioDTO contaDebito;
-    private DonoDTO donoCredito;
-    private ContaPatrimonioDTO contaCredito;
+    private String donoDebito;
+    private String contaDebito;
+    private String donoCredito;
+    private String contaCredito;
 }

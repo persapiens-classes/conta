@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import br.edu.ifrn.conta.domain.Categoria;
 import static br.edu.ifrn.conta.util.CategoriaConstants.BANCO;
+import static br.edu.ifrn.conta.util.CategoriaConstants.ESPECIE;
 import static br.edu.ifrn.conta.util.CategoriaConstants.SALARIO;
 import static br.edu.ifrn.conta.util.CategoriaConstants.TRANSPORTE;
 import java.util.Optional;
@@ -35,5 +36,9 @@ public class CategoriaFactory {
 
     public Categoria salario() {
         return categoria(SALARIO);
+    }
+
+    public Categoria especie() {
+        return categoria(ESPECIE);
     }
 }
