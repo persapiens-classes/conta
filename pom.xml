@@ -22,6 +22,11 @@
         <decycle-maven-plugin.version>0.11.0</decycle-maven-plugin.version>
 
         <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>        
+
+        <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
+        <spring-javaformat.version>0.0.41</spring-javaformat.version>
+        <checkstyle.version>10.13.0</checkstyle.version>
+        <checkstyle.configLocation>io/spring/javaformat/checkstyle/checkstyle.xml</checkstyle.configLocation>
     </properties>
 
     <dependencyManagement>
@@ -173,6 +178,36 @@
                         </execution>
                     </executions>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${maven-checkstyle-plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.puppycrawl.tools</groupId>
+                            <artifactId>checkstyle</artifactId>
+                            <version>${checkstyle.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>io.spring.javaformat</groupId>
+                            <artifactId>spring-javaformat-checkstyle</artifactId>
+                            <version>${spring-javaformat.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <failsOnError>true</failsOnError>
+                        <failOnViolation>true</failOnViolation>
+                        <configLocation>${checkstyle.configLocation}</configLocation>
+                        <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+                        <consoleOutput>true</consoleOutput>
+                        <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                    </configuration>
+                </plugin>  
+                <plugin>
+                    <groupId>io.spring.javaformat</groupId>
+                    <artifactId>spring-javaformat-maven-plugin</artifactId>
+                    <version>${spring-javaformat.version}</version>
+                </plugin>          
             </plugins>
         </pluginManagement>
 
@@ -205,6 +240,49 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>format</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.spring.javaformat</groupId>
+                        <artifactId>spring-javaformat-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>apply</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>check-checkstyle</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-checkstyle-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>checkstyle-validation</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <name>conta</name>
     <description>Conta do Desenvolvimento de Sistemas Corporativos</description>
