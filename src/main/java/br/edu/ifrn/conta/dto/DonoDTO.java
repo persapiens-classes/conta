@@ -14,5 +14,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class DonoDTO implements Serializable {
-    private String descricao;
+
+	private String descricao;
+
 }

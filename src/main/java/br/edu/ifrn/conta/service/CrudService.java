@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Default service delagating to repository.
+ *
  * @param <T> entity
  * @param <ID> entity id
  */

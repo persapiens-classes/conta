@@ -17,39 +17,36 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class DonoServiceIT {
 
-    @Autowired
-    private DonoService donoServico;
+	@Autowired
+	private DonoService donoServico;
 
-    @Autowired
-    private DonoFactory donoFactory;
+	@Autowired
+	private DonoFactory donoFactory;
 
-    @Test
-    public void repositorioNaoEhNulo() {
-        assertThat(this.donoServico)
-                .isNotNull();
-    }
+	@Test
+	public void repositorioNaoEhNulo() {
+		assertThat(this.donoServico).isNotNull();
+	}
 
-    @Test
-    public void salvarUm() {
-        // cria o ambiente de teste
-        Dono dono = this.donoFactory.mamae();
+	@Test
+	public void salvarUm() {
+		// cria o ambiente de teste
+		Dono dono = this.donoFactory.mamae();
 
-        // verifica o efeito da execucao da operacao a ser testada
-        assertThat(this.donoServico.findById(dono.getId()).get())
-                .isEqualTo(dono);
-    }
+		// verifica o efeito da execucao da operacao a ser testada
+		assertThat(this.donoServico.findById(dono.getId()).get()).isEqualTo(dono);
+	}
 
-    @Test
-    public void deletarUm() {
-        // cria o ambiente de teste
-        Dono dono = this.donoFactory.dono("DONO UNICO DO DONO SERVIÇO IT");
+	@Test
+	public void deletarUm() {
+		// cria o ambiente de teste
+		Dono dono = this.donoFactory.dono("DONO UNICO DO DONO SERVIÇO IT");
 
-        // executa a operacao a ser testada
-        this.donoServico.delete(dono);
+		// executa a operacao a ser testada
+		this.donoServico.delete(dono);
 
-        // verifica o efeito da execucao da operacao a ser testada
-        assertThat(this.donoServico.findById(dono.getId()).isPresent())
-                .isFalse();
-    }
+		// verifica o efeito da execucao da operacao a ser testada
+		assertThat(this.donoServico.findById(dono.getId()).isPresent()).isFalse();
+	}
 
 }

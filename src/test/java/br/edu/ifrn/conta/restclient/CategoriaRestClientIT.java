@@ -18,42 +18,42 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CategoriaRestClientIT {
 
-    private final String protocol = "http";
-    private final String servername = "localhost";
+	private final String protocol = "http";
 
-    @Value(value = "${local.server.port}")
-    private int port;
+	private final String servername = "localhost";
 
-    @Autowired
-    private TestRestTemplate testRestTemplate;
+	@Value(value = "${local.server.port}")
+	private int port;
 
-    private CategoriaRestClient categoriaRestClient() {
-        return CategoriaRestClientFactory.builder()
-                .protocol(protocol)
-                .servername(servername)
-                .port(port)
-                .restTemplate(testRestTemplate.getRestTemplate())
-                .build().categoriaRestClient();
-    }
+	@Autowired
+	private TestRestTemplate testRestTemplate;
 
-    @Test
-    public void salvarUm() {        
-        // executa a operacao a ser testada
-        String descricao = "Receita Isenta";
-        
-        CategoriaDTO categoria = CategoriaDTO.builder().descricao(descricao).build();
+	private CategoriaRestClient categoriaRestClient() {
+		return CategoriaRestClientFactory.builder()
+			.protocol(protocol)
+			.servername(servername)
+			.port(port)
+			.restTemplate(testRestTemplate.getRestTemplate())
+			.build()
+			.categoriaRestClient();
+	}
 
-        // verifica a operacao save
-        assertThat(categoriaRestClient().save(categoria))
-        	.isNotNull();
+	@Test
+	public void salvarUm() {
+		// executa a operacao a ser testada
+		String descricao = "Receita Isenta";
 
-        // verifica a operacao findByDescricao
-        assertThat(categoriaRestClient().findByDescricao(descricao).get().getDescricao())
-                .isEqualTo(categoria.getDescricao());
-        
-        // verifica a operacao findAll
-        assertThat(categoriaRestClient().findAll())
-                .isNotEmpty();        
-    }
+		CategoriaDTO categoria = CategoriaDTO.builder().descricao(descricao).build();
+
+		// verifica a operacao save
+		assertThat(categoriaRestClient().save(categoria)).isNotNull();
+
+		// verifica a operacao findByDescricao
+		assertThat(categoriaRestClient().findByDescricao(descricao).get().getDescricao())
+			.isEqualTo(categoria.getDescricao());
+
+		// verifica a operacao findAll
+		assertThat(categoriaRestClient().findAll()).isNotEmpty();
+	}
 
 }

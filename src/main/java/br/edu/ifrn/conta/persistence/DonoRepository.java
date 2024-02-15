@@ -11,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public interface DonoRepository extends CrudRepository<Dono, Long> {
 
-    Optional<Dono> findByDescricao(String descricao);
+	Optional<Dono> findByDescricao(String descricao);
 
-    long countByDescricaoContains(String descricao);
+	long countByDescricaoContains(String descricao);
 
-    @Transactional
-    void deleteByDescricao(String descricao);
+	@Transactional
+	void deleteByDescricao(String descricao);
 
 }

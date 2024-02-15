@@ -11,34 +11,35 @@ import org.springframework.web.client.RestTemplate;
 @Data
 public class DonoRestClientFactory {
 
-    private String protocol;
-    
-    private String servername;
+	private String protocol;
 
-    private int port;
+	private String servername;
 
-    private RestTemplate restTemplate;
+	private int port;
 
-    public DonoRestClient donoRestClient() {
-        return DonoRestClient.builder()
-                .entityRestHelper(RestClientHelper.<DonoDTO>builder()
-                    .endpoint("dono")
-                    .protocol(protocol)
-                    .servername(servername)
-                    .port(port)
-                    .restTemplate(restTemplate)
-                    .build())
-                .build();
-    }
-    
-    public DonoDTO dono(String descricao) {
-        Optional<DonoDTO> findByDescricao = donoRestClient().findByDescricao(descricao);
-        if (findByDescricao.isEmpty()) {
-            DonoDTO result = DonoDTO.builder().descricao(descricao).build();
-            return donoRestClient().save(result);
-        } else {        
-            return findByDescricao.get();
-        }
-    }
+	private RestTemplate restTemplate;
+
+	public DonoRestClient donoRestClient() {
+		return DonoRestClient.builder()
+			.entityRestHelper(RestClientHelper.<DonoDTO>builder()
+				.endpoint("dono")
+				.protocol(protocol)
+				.servername(servername)
+				.port(port)
+				.restTemplate(restTemplate)
+				.build())
+			.build();
+	}
+
+	public DonoDTO dono(String descricao) {
+		Optional<DonoDTO> findByDescricao = donoRestClient().findByDescricao(descricao);
+		if (findByDescricao.isEmpty()) {
+			DonoDTO result = DonoDTO.builder().descricao(descricao).build();
+			return donoRestClient().save(result);
+		}
+		else {
+			return findByDescricao.get();
+		}
+	}
 
 }

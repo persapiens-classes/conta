@@ -18,42 +18,40 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ContaCreditoServiceIT {
 
-    @Autowired
-    private ContaCreditoService contaCreditoServico;
+	@Autowired
+	private ContaCreditoService contaCreditoServico;
 
-    @Autowired
-    private ContaCreditoFactory contaCreditoFactory;
+	@Autowired
+	private ContaCreditoFactory contaCreditoFactory;
 
-    @Autowired
-    private CategoriaFactory categoriaFactory;
+	@Autowired
+	private CategoriaFactory categoriaFactory;
 
-    @Test
-    public void repositorioNaoEhNulo() {
-        assertThat(this.contaCreditoServico).isNotNull();
-    }
+	@Test
+	public void repositorioNaoEhNulo() {
+		assertThat(this.contaCreditoServico).isNotNull();
+	}
 
-    @Test
-    public void salvarUm() {
-        // cria o ambiente de teste
-        ContaCredito contaCredito = this.contaCreditoFactory.estagio();
+	@Test
+	public void salvarUm() {
+		// cria o ambiente de teste
+		ContaCredito contaCredito = this.contaCreditoFactory.estagio();
 
-        // verifica o efeito da execucao da operacao a ser testada
-        assertThat(this.contaCreditoServico.findById(contaCredito.getId()).get())
-                .isEqualTo(contaCredito);
-    }
+		// verifica o efeito da execucao da operacao a ser testada
+		assertThat(this.contaCreditoServico.findById(contaCredito.getId()).get()).isEqualTo(contaCredito);
+	}
 
-    @Test
-    public void deletarUm() {
-        // cria o ambiente de teste
-        ContaCredito contaCredito = this.contaCreditoFactory.contaCredito(
-                "CONTA ÚNICA DO SERVICO IT", this.categoriaFactory.banco());
+	@Test
+	public void deletarUm() {
+		// cria o ambiente de teste
+		ContaCredito contaCredito = this.contaCreditoFactory.contaCredito("CONTA ÚNICA DO SERVICO IT",
+				this.categoriaFactory.banco());
 
-        // executa a operacao a ser testada
-        this.contaCreditoServico.delete(contaCredito);
+		// executa a operacao a ser testada
+		this.contaCreditoServico.delete(contaCredito);
 
-        // verifica o efeito da execucao da operacao a ser testada
-        assertThat(this.contaCreditoServico.findById(contaCredito.getId()).isPresent())
-                .isFalse();
-    }
+		// verifica o efeito da execucao da operacao a ser testada
+		assertThat(this.contaCreditoServico.findById(contaCredito.getId()).isPresent()).isFalse();
+	}
 
 }

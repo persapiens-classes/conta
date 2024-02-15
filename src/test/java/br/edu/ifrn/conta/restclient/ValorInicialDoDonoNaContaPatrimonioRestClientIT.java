@@ -23,72 +23,72 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ValorInicialDoDonoNaContaPatrimonioRestClientIT {
 
-    private final String protocol = "http";
-    private final String servername = "localhost";
+	private final String protocol = "http";
 
-    @Value(value = "${local.server.port}")
-    private int port;
+	private final String servername = "localhost";
 
-    @Autowired
-    private TestRestTemplate testRestTemplate;
+	@Value(value = "${local.server.port}")
+	private int port;
 
-    private DonoRestClientFactory donoRestClientFactory() {
-        return DonoRestClientFactory.builder()
-                .protocol(protocol)
-                .servername(servername)
-                .port(port)
-                .restTemplate(testRestTemplate.getRestTemplate())
-                .build();
-    }
+	@Autowired
+	private TestRestTemplate testRestTemplate;
 
-    private CategoriaRestClientFactory categoriaRestClientFactory() {
-        return CategoriaRestClientFactory.builder()
-                .protocol(protocol)
-                .servername(servername)
-                .port(port)
-                .restTemplate(testRestTemplate.getRestTemplate())
-                .build();
-    }
+	private DonoRestClientFactory donoRestClientFactory() {
+		return DonoRestClientFactory.builder()
+			.protocol(protocol)
+			.servername(servername)
+			.port(port)
+			.restTemplate(testRestTemplate.getRestTemplate())
+			.build();
+	}
 
-    private ContaPatrimonioRestClientFactory contaPatrimonioRestClientFactory() {
-        return ContaPatrimonioRestClientFactory.builder()
-                .protocol(protocol)
-                .servername(servername)
-                .port(port)
-                .restTemplate(testRestTemplate.getRestTemplate())
-                .categoriaRestClientFactory(categoriaRestClientFactory())
-                .build();
-    }
+	private CategoriaRestClientFactory categoriaRestClientFactory() {
+		return CategoriaRestClientFactory.builder()
+			.protocol(protocol)
+			.servername(servername)
+			.port(port)
+			.restTemplate(testRestTemplate.getRestTemplate())
+			.build();
+	}
 
-    private ValorInicialDoDonoNaContaPatrimonioRestClient valorInicialDoDonoNaContaPatrimonioRestClient() {
-        return ValorInicialDoDonoNaContaPatrimonioRestClientFactory.builder()
-                .protocol(protocol)
-                .servername(servername)
-                .port(port)
-                .restTemplate(testRestTemplate.getRestTemplate())
-                .build().valorInicialDoDonoNaContaPatrimonioRestClient();
-    }
+	private ContaPatrimonioRestClientFactory contaPatrimonioRestClientFactory() {
+		return ContaPatrimonioRestClientFactory.builder()
+			.protocol(protocol)
+			.servername(servername)
+			.port(port)
+			.restTemplate(testRestTemplate.getRestTemplate())
+			.categoriaRestClientFactory(categoriaRestClientFactory())
+			.build();
+	}
 
-    @Test
-    public void salvarUm() {        
-        // executa a operacao a ser testada
-        String mamae = MAMAE;
-        String poupanca = POUPANCA;
-        String banco = BANCO;
+	private ValorInicialDoDonoNaContaPatrimonioRestClient valorInicialDoDonoNaContaPatrimonioRestClient() {
+		return ValorInicialDoDonoNaContaPatrimonioRestClientFactory.builder()
+			.protocol(protocol)
+			.servername(servername)
+			.port(port)
+			.restTemplate(testRestTemplate.getRestTemplate())
+			.build()
+			.valorInicialDoDonoNaContaPatrimonioRestClient();
+	}
 
-        ValorInicialDoDonoNaContaPatrimonioDTO dono = ValorInicialDoDonoNaContaPatrimonioDTO.builder()
-                .valorInicial(new BigDecimal(1000))
-                .dono(donoRestClientFactory().dono(mamae))
-                .contaPatrimonio(contaPatrimonioRestClientFactory().contaPatrimonio(poupanca, banco))
-                .build();
+	@Test
+	public void salvarUm() {
+		// executa a operacao a ser testada
+		String mamae = MAMAE;
+		String poupanca = POUPANCA;
+		String banco = BANCO;
 
-        // verifica a operacao save
-        assertThat(valorInicialDoDonoNaContaPatrimonioRestClient().save(dono))
-        	.isNotNull();
-        
-        // verifica a operacao findAll
-        assertThat(valorInicialDoDonoNaContaPatrimonioRestClient().findAll())
-                .isNotEmpty();        
-    }
+		ValorInicialDoDonoNaContaPatrimonioDTO dono = ValorInicialDoDonoNaContaPatrimonioDTO.builder()
+			.valorInicial(new BigDecimal(1000))
+			.dono(donoRestClientFactory().dono(mamae))
+			.contaPatrimonio(contaPatrimonioRestClientFactory().contaPatrimonio(poupanca, banco))
+			.build();
+
+		// verifica a operacao save
+		assertThat(valorInicialDoDonoNaContaPatrimonioRestClient().save(dono)).isNotNull();
+
+		// verifica a operacao findAll
+		assertThat(valorInicialDoDonoNaContaPatrimonioRestClient().findAll()).isNotEmpty();
+	}
 
 }

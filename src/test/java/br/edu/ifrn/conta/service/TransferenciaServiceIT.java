@@ -18,30 +18,29 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TransferenciaServiceIT {
 
-    @Autowired
-    private DonoFactory donoFactory;
+	@Autowired
+	private DonoFactory donoFactory;
 
-    @Autowired
-    private TransferenciaService transferenciaService;
+	@Autowired
+	private TransferenciaService transferenciaService;
 
-    @Autowired
-    private ContaPatrimonioFactory contaPatrimonioFactory;
+	@Autowired
+	private ContaPatrimonioFactory contaPatrimonioFactory;
 
-    @Autowired
-    private LancamentoService lancamentoService;
+	@Autowired
+	private LancamentoService lancamentoService;
 
-    @Test
-    public void transferenciaDe10DePapaiParaMamae() {
-        this.transferenciaService.transferir(BigDecimal.TEN, 
-    this.donoFactory.papai(), this.contaPatrimonioFactory.contaCorrente(),
-   this.donoFactory.mamae(), this.contaPatrimonioFactory.poupanca());
-        
-        assertThat(lancamentoService.debitosSum(this.donoFactory.papai(), 
-    this.contaPatrimonioFactory.contaCorrente()))
-            .isEqualTo(BigDecimal.TEN.setScale(2));
+	@Test
+	public void transferenciaDe10DePapaiParaMamae() {
+		this.transferenciaService.transferir(BigDecimal.TEN, this.donoFactory.papai(),
+				this.contaPatrimonioFactory.contaCorrente(), this.donoFactory.mamae(),
+				this.contaPatrimonioFactory.poupanca());
 
-        assertThat(lancamentoService.creditosSum(this.donoFactory.mamae(), 
-    this.contaPatrimonioFactory.poupanca()))
-            .isEqualTo(BigDecimal.TEN.setScale(2));
-    }
+		assertThat(lancamentoService.debitosSum(this.donoFactory.papai(), this.contaPatrimonioFactory.contaCorrente()))
+			.isEqualTo(BigDecimal.TEN.setScale(2));
+
+		assertThat(lancamentoService.creditosSum(this.donoFactory.mamae(), this.contaPatrimonioFactory.poupanca()))
+			.isEqualTo(BigDecimal.TEN.setScale(2));
+	}
+
 }

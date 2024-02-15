@@ -18,57 +18,54 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class DonoRestClientIT {
 
-    private final String protocol = "http";
-    private final String servername = "localhost";
+	private final String protocol = "http";
 
-    @Value(value = "${local.server.port}")
-    private int port;
+	private final String servername = "localhost";
 
-    @Autowired
-    private TestRestTemplate testRestTemplate;
+	@Value(value = "${local.server.port}")
+	private int port;
 
-    private DonoRestClient donoRestClient() {
-        return DonoRestClientFactory.builder()
-                .protocol(protocol)
-                .servername(servername)
-                .port(port)
-                .restTemplate(testRestTemplate.getRestTemplate())
-                .build().donoRestClient();
-    }
-    
-    @Test
-    public void deletarUm() {
-        // cria o ambiente de teste
-        String descricao = "DONO EXCEPCIONAL";
-        donoRestClient().save(DonoDTO.builder().descricao(descricao).build());
-        assertThat(donoRestClient().findByDescricao(descricao).get().getDescricao())
-        	.isEqualTo(descricao);
-        
-        // executa a operacao a ser testada
-        donoRestClient().deleteByDescricao(descricao);
-        // verifica o efeito da execucao da operacao a ser testada
-        assertThat(donoRestClient().findByDescricao(descricao))
-        	.isEmpty();
-    }
+	@Autowired
+	private TestRestTemplate testRestTemplate;
 
-    @Test
-    public void salvarUm() {        
-        // executa a operacao a ser testada
-        String descricao = "Vizinho";
-        
-        DonoDTO dono = DonoDTO.builder().descricao(descricao).build();
+	private DonoRestClient donoRestClient() {
+		return DonoRestClientFactory.builder()
+			.protocol(protocol)
+			.servername(servername)
+			.port(port)
+			.restTemplate(testRestTemplate.getRestTemplate())
+			.build()
+			.donoRestClient();
+	}
 
-        // verifica a operacao save
-        assertThat(donoRestClient().save(dono))
-        	.isNotNull();
+	@Test
+	public void deletarUm() {
+		// cria o ambiente de teste
+		String descricao = "DONO EXCEPCIONAL";
+		donoRestClient().save(DonoDTO.builder().descricao(descricao).build());
+		assertThat(donoRestClient().findByDescricao(descricao).get().getDescricao()).isEqualTo(descricao);
 
-        // verifica a operacao findByDescricao
-        assertThat(donoRestClient().findByDescricao(descricao).get().getDescricao())
-                .isEqualTo(dono.getDescricao());
-        
-        // verifica a operacao findAll
-        assertThat(donoRestClient().findAll())
-                .isNotEmpty();        
-    }
+		// executa a operacao a ser testada
+		donoRestClient().deleteByDescricao(descricao);
+		// verifica o efeito da execucao da operacao a ser testada
+		assertThat(donoRestClient().findByDescricao(descricao)).isEmpty();
+	}
+
+	@Test
+	public void salvarUm() {
+		// executa a operacao a ser testada
+		String descricao = "Vizinho";
+
+		DonoDTO dono = DonoDTO.builder().descricao(descricao).build();
+
+		// verifica a operacao save
+		assertThat(donoRestClient().save(dono)).isNotNull();
+
+		// verifica a operacao findByDescricao
+		assertThat(donoRestClient().findByDescricao(descricao).get().getDescricao()).isEqualTo(dono.getDescricao());
+
+		// verifica a operacao findAll
+		assertThat(donoRestClient().findAll()).isNotEmpty();
+	}
 
 }

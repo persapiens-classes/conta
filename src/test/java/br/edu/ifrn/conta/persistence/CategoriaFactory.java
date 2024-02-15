@@ -13,32 +13,34 @@ import java.util.Optional;
 @Component
 public class CategoriaFactory {
 
-    @Autowired
-    private CategoriaRepository categoriaRepository;
+	@Autowired
+	private CategoriaRepository categoriaRepository;
 
-    public Categoria categoria(String descricao) {
-        Optional<Categoria> findByDescricao = this.categoriaRepository.findByDescricao(descricao);
-        if (findByDescricao.isEmpty()) {
-            Categoria categoria = Categoria.builder().descricao(descricao).build();
-            return this.categoriaRepository.save(categoria);
-        } else {
-            return findByDescricao.get();
-        }
-    }
+	public Categoria categoria(String descricao) {
+		Optional<Categoria> findByDescricao = this.categoriaRepository.findByDescricao(descricao);
+		if (findByDescricao.isEmpty()) {
+			Categoria categoria = Categoria.builder().descricao(descricao).build();
+			return this.categoriaRepository.save(categoria);
+		}
+		else {
+			return findByDescricao.get();
+		}
+	}
 
-    public Categoria transporte() {
-        return categoria(TRANSPORTE);
-    }
+	public Categoria transporte() {
+		return categoria(TRANSPORTE);
+	}
 
-    public Categoria banco() {
-        return categoria(BANCO);
-    }
+	public Categoria banco() {
+		return categoria(BANCO);
+	}
 
-    public Categoria salario() {
-        return categoria(SALARIO);
-    }
+	public Categoria salario() {
+		return categoria(SALARIO);
+	}
 
-    public Categoria especie() {
-        return categoria(ESPECIE);
-    }
+	public Categoria especie() {
+		return categoria(ESPECIE);
+	}
+
 }

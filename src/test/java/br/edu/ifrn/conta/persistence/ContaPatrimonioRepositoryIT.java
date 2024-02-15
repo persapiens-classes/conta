@@ -37,14 +37,13 @@ public class ContaPatrimonioRepositoryIT {
 		this.contaPatrimonioFactory.poupanca();
 
 		ContaPatrimonio contaPatrimonioExemplo = ContaPatrimonio.builder()
-                        .descricao(POUPANCA)
+			.descricao(POUPANCA)
 			.categoria(Categoria.builder().descricao(BANCO).build())
 			.build();
 
 		// executa a operacao a ser testada
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.contaPatrimonioRepository.count(Example.of(contaPatrimonioExemplo)))
-			.isEqualTo(1);
+		assertThat(this.contaPatrimonioRepository.count(Example.of(contaPatrimonioExemplo))).isEqualTo(1);
 	}
 
 }

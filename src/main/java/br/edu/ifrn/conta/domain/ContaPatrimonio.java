@@ -26,10 +26,10 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ContaPatrimonio extends Conta {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Singular
-    @OneToMany(mappedBy = "contaPatrimonio")
-    private Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisDosDonos;
+	@Singular
+	@OneToMany(mappedBy = "contaPatrimonio")
+	private Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisDosDonos;
 
 }

@@ -20,39 +20,39 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ValorInicialDoDonoNaContaPatrimonioRepositoryIT {
 
-    @Autowired
-    private ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;
+	@Autowired
+	private ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;
 
-    @Autowired
-    private DonoFactory donoFactory;
+	@Autowired
+	private DonoFactory donoFactory;
 
-    @Autowired
-    private ValorInicialDoDonoNaContaPatrimonioFactory valorInicialDoDonoNaContaPatrimonioFactory;
+	@Autowired
+	private ValorInicialDoDonoNaContaPatrimonioFactory valorInicialDoDonoNaContaPatrimonioFactory;
 
-    @Autowired
-    private ContaPatrimonioFactory contaPatrimonioFactory;
+	@Autowired
+	private ContaPatrimonioFactory contaPatrimonioFactory;
 
-    @Test
-    public void repositorioNaoEhNulo() {
-        assertThat(this.valorInicialDoDonoNaContaPatrimonioRepository)
-                .isNotNull();
-    }
+	@Test
+	public void repositorioNaoEhNulo() {
+		assertThat(this.valorInicialDoDonoNaContaPatrimonioRepository).isNotNull();
+	}
 
-    @Test
-    public void findByDonoAndContaPatrimonio() {
-        // cria o ambiente de teste
-        Dono papai = this.donoFactory.papai();
+	@Test
+	public void findByDonoAndContaPatrimonio() {
+		// cria o ambiente de teste
+		Dono papai = this.donoFactory.papai();
 
-        ContaPatrimonio contaPatrimonio = this.contaPatrimonioFactory.poupanca();
+		ContaPatrimonio contaPatrimonio = this.contaPatrimonioFactory.poupanca();
 
-        ValorInicialDoDonoNaContaPatrimonio valorInicialDoDonoNaContaPatrimonio
-            = this.valorInicialDoDonoNaContaPatrimonioFactory.valorInicialDoDonoNaContaPatrimonio(
-            papai, contaPatrimonio, new BigDecimal(100));
+		ValorInicialDoDonoNaContaPatrimonio valorInicialDoDonoNaContaPatrimonio = this.valorInicialDoDonoNaContaPatrimonioFactory
+			.valorInicialDoDonoNaContaPatrimonio(papai, contaPatrimonio, new BigDecimal(100));
 
-        // executa a operacao a ser testada
-        // verifica o efeito da execucao da operacao a ser testada
-        assertThat(this.valorInicialDoDonoNaContaPatrimonioRepository.findByDonoAndContaPatrimonio(
-                papai, contaPatrimonio).get())
-            .isEqualTo(valorInicialDoDonoNaContaPatrimonio);
-    }
+		// executa a operacao a ser testada
+		// verifica o efeito da execucao da operacao a ser testada
+		assertThat(
+				this.valorInicialDoDonoNaContaPatrimonioRepository.findByDonoAndContaPatrimonio(papai, contaPatrimonio)
+					.get())
+			.isEqualTo(valorInicialDoDonoNaContaPatrimonio);
+	}
+
 }

@@ -10,24 +10,24 @@ import org.springframework.web.client.RestTemplate;
 @Data
 public class TransferenciaRestClientFactory {
 
-    private String protocol;
-    
-    private String servername;
-    
-    private int port;
+	private String protocol;
 
-    private RestTemplate restTemplate;
+	private String servername;
 
-    public TransferenciaRestClient transferenciaRestClient() {
-        return TransferenciaRestClient.builder()
-                .entityRestHelper(RestClientHelper.<TransferenciaDTO>builder()
-                    .endpoint("")
-                    .protocol(protocol)
-                    .servername(servername)
-                    .port(port)
-                    .restTemplate(restTemplate)
-                    .build())
-                .build();
-    }
+	private int port;
+
+	private RestTemplate restTemplate;
+
+	public TransferenciaRestClient transferenciaRestClient() {
+		return TransferenciaRestClient.builder()
+			.entityRestHelper(RestClientHelper.<TransferenciaDTO>builder()
+				.endpoint("")
+				.protocol(protocol)
+				.servername(servername)
+				.port(port)
+				.restTemplate(restTemplate)
+				.build())
+			.build();
+	}
 
 }

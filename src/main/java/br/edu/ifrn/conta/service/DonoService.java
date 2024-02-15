@@ -12,16 +12,17 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class DonoService extends CrudService<Dono, Long> {
-    
-    @Autowired
-    private DonoRepository donoRepository;
-    
-    public Optional<Dono> findByDescricao(String descricao) {
-        return donoRepository.findByDescricao(descricao);
-    }
-    
-    @Transactional
-    public void deleteByDescricao(String descricao) {
-        donoRepository.deleteByDescricao(descricao);
-    }
+
+	@Autowired
+	private DonoRepository donoRepository;
+
+	public Optional<Dono> findByDescricao(String descricao) {
+		return donoRepository.findByDescricao(descricao);
+	}
+
+	@Transactional
+	public void deleteByDescricao(String descricao) {
+		donoRepository.deleteByDescricao(descricao);
+	}
+
 }

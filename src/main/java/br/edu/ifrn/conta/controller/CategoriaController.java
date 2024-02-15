@@ -17,26 +17,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/categoria")
 public class CategoriaController extends CrudController<CategoriaDTO, Categoria, Long> {
 
-    @Autowired
-    private CategoriaService categoriaService;
-    
-    @GetMapping("/findByDescricao")
-    public Optional<CategoriaDTO> findByDescricao(@RequestParam String descricao) {
-        return toDTOOptional(categoriaService.findByDescricao(descricao));
-    }
+	@Autowired
+	private CategoriaService categoriaService;
 
-    @Override
-    protected Categoria toEntity(CategoriaDTO dto) {
-        return Categoria.builder()
-           .descricao(dto.getDescricao())
-           .build();
-    }
+	@GetMapping("/findByDescricao")
+	public Optional<CategoriaDTO> findByDescricao(@RequestParam String descricao) {
+		return toDTOOptional(categoriaService.findByDescricao(descricao));
+	}
 
-    @Override
-    protected CategoriaDTO toDTO(Categoria entity) {
-        return CategoriaDTO.builder()
-           .descricao(entity.getDescricao())
-           .build();
-    }
+	@Override
+	protected Categoria toEntity(CategoriaDTO dto) {
+		return Categoria.builder().descricao(dto.getDescricao()).build();
+	}
+
+	@Override
+	protected CategoriaDTO toDTO(Categoria entity) {
+		return CategoriaDTO.builder().descricao(entity.getDescricao()).build();
+	}
 
 }

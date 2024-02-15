@@ -14,8 +14,9 @@ import org.springframework.data.repository.query.QueryByExampleExecutor;
  * @param <T> account
  * @param <ID> account key
  */
-public interface ContaRepository<T extends Conta, ID extends Serializable> extends CrudRepository<T, ID>, QueryByExampleExecutor<T> {
+public interface ContaRepository<T extends Conta, ID extends Serializable>
+		extends CrudRepository<T, ID>, QueryByExampleExecutor<T> {
 
-    Optional<T> findByDescricao(String descricao);
+	Optional<T> findByDescricao(String descricao);
 
 }

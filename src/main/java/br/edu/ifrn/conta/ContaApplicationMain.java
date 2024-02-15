@@ -11,9 +11,7 @@ public class ContaApplicationMain {
 	}
 
 	public static void main(String[] args) {
-		new SpringApplicationBuilder()
-			.sources(ContaApplication.class)
-			.run(args);
+		new SpringApplicationBuilder().sources(ContaApplication.class).run(args);
 	}
 
 }

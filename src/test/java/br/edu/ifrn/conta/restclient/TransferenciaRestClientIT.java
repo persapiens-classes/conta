@@ -21,92 +21,91 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TransferenciaRestClientIT {
 
-    private final String protocol = "http";
-    private final String servername = "localhost";
-    
-    @Value(value = "${local.server.port}")
-    private int port;
+	private final String protocol = "http";
 
-    @Autowired
-    private TestRestTemplate testRestTemplate;
+	private final String servername = "localhost";
 
-    private CategoriaRestClientFactory categoriaRestClientFactory() {
-        return CategoriaRestClientFactory.builder()
-                .protocol(protocol)
-                .servername(servername)
-                .port(port)
-                .restTemplate(testRestTemplate.getRestTemplate())
-                .build();
-    }
+	@Value(value = "${local.server.port}")
+	private int port;
 
-    private DonoRestClientFactory donoRestClientFactory() {
-        return DonoRestClientFactory.builder()
-                .protocol(protocol)
-                .servername(servername)
-                .port(port)
-                .restTemplate(testRestTemplate.getRestTemplate())
-                .build();
-    }
+	@Autowired
+	private TestRestTemplate testRestTemplate;
 
-    private ContaPatrimonioRestClientFactory contaPatrimonioRestClientFactory() {
-        return ContaPatrimonioRestClientFactory.builder()
-                .protocol(protocol)
-                .servername(servername)
-                .port(port)
-                .restTemplate(testRestTemplate.getRestTemplate())
-                .categoriaRestClientFactory(categoriaRestClientFactory())
-                .build();
-    }
+	private CategoriaRestClientFactory categoriaRestClientFactory() {
+		return CategoriaRestClientFactory.builder()
+			.protocol(protocol)
+			.servername(servername)
+			.port(port)
+			.restTemplate(testRestTemplate.getRestTemplate())
+			.build();
+	}
 
-    private LancamentoRestClient lancamentoRestClient() {
-        return LancamentoRestClientFactory.builder()
-                .protocol(protocol)
-                .servername(servername)
-                .port(port)
-                .restTemplate(testRestTemplate.getRestTemplate())
-                .build()
-                .lancamentoRestClient();
-    }
+	private DonoRestClientFactory donoRestClientFactory() {
+		return DonoRestClientFactory.builder()
+			.protocol(protocol)
+			.servername(servername)
+			.port(port)
+			.restTemplate(testRestTemplate.getRestTemplate())
+			.build();
+	}
 
-    private TransferenciaRestClient transferenciaRestClient() {
-        return TransferenciaRestClientFactory.builder()
-                .protocol(protocol)
-                .servername(servername)
-                .port(port)
-                .restTemplate(testRestTemplate.getRestTemplate())
-                .build()
-                .transferenciaRestClient();
-    }
+	private ContaPatrimonioRestClientFactory contaPatrimonioRestClientFactory() {
+		return ContaPatrimonioRestClientFactory.builder()
+			.protocol(protocol)
+			.servername(servername)
+			.port(port)
+			.restTemplate(testRestTemplate.getRestTemplate())
+			.categoriaRestClientFactory(categoriaRestClientFactory())
+			.build();
+	}
 
-    @Test
-    public void transferir50DeContaCorrentePapaiParaContaInvestimentoTitio() {
-        DonoDTO papai = donoRestClientFactory().dono(PAPAI);
-        DonoDTO titio = donoRestClientFactory().dono(TITIO);
+	private LancamentoRestClient lancamentoRestClient() {
+		return LancamentoRestClientFactory.builder()
+			.protocol(protocol)
+			.servername(servername)
+			.port(port)
+			.restTemplate(testRestTemplate.getRestTemplate())
+			.build()
+			.lancamentoRestClient();
+	}
 
-        ContaPatrimonioDTO contaCorrente = contaPatrimonioRestClientFactory().contaPatrimonio(
-    CONTA_CORRENTE, BANCO);
-        ContaPatrimonioDTO contaInvestimento = contaPatrimonioRestClientFactory().contaPatrimonio(
-    CONTA_INVESTIMENTO, BANCO);
-        
-        // executa a operacao a ser testada
-        transferenciaRestClient().transferir(TransferenciaDTO.builder()
-            .donoDebito(papai.getDescricao())
-            .donoCredito(titio.getDescricao())
-            .contaDebito(contaCorrente.getDescricao())
-            .contaCredito(contaInvestimento.getDescricao())
-            .valor(new BigDecimal(50))
-            .build());
-        
-        assertThat(lancamentoRestClient().debitosSum(papai.getDescricao(), contaCorrente.getDescricao()))
-            .isEqualTo(new BigDecimal(50).setScale(2));
-        
-        assertThat(lancamentoRestClient().creditosSum(titio.getDescricao(), contaInvestimento.getDescricao()))
-            .isEqualTo(new BigDecimal(50).setScale(2));
-    }
+	private TransferenciaRestClient transferenciaRestClient() {
+		return TransferenciaRestClientFactory.builder()
+			.protocol(protocol)
+			.servername(servername)
+			.port(port)
+			.restTemplate(testRestTemplate.getRestTemplate())
+			.build()
+			.transferenciaRestClient();
+	}
+
+	@Test
+	public void transferir50DeContaCorrentePapaiParaContaInvestimentoTitio() {
+		DonoDTO papai = donoRestClientFactory().dono(PAPAI);
+		DonoDTO titio = donoRestClientFactory().dono(TITIO);
+
+		ContaPatrimonioDTO contaCorrente = contaPatrimonioRestClientFactory().contaPatrimonio(CONTA_CORRENTE, BANCO);
+		ContaPatrimonioDTO contaInvestimento = contaPatrimonioRestClientFactory().contaPatrimonio(CONTA_INVESTIMENTO,
+				BANCO);
+
+		// executa a operacao a ser testada
+		transferenciaRestClient().transferir(TransferenciaDTO.builder()
+			.donoDebito(papai.getDescricao())
+			.donoCredito(titio.getDescricao())
+			.contaDebito(contaCorrente.getDescricao())
+			.contaCredito(contaInvestimento.getDescricao())
+			.valor(new BigDecimal(50))
+			.build());
+
+		assertThat(lancamentoRestClient().debitosSum(papai.getDescricao(), contaCorrente.getDescricao()))
+			.isEqualTo(new BigDecimal(50).setScale(2));
+
+		assertThat(lancamentoRestClient().creditosSum(titio.getDescricao(), contaInvestimento.getDescricao()))
+			.isEqualTo(new BigDecimal(50).setScale(2));
+	}
 
 }

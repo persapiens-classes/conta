@@ -15,4 +15,5 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @NoArgsConstructor
 public class ContaPatrimonioDTO extends ContaDTO {
+
 }

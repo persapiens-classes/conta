@@ -37,14 +37,13 @@ public class ContaCreditoRepositoryIT {
 		ContaCredito contaCredito = this.contaCreditoFactory.estagio();
 
 		ContaCredito contaCreditoExemplo = ContaCredito.builder()
-                        .descricao(ESTAGIO)
+			.descricao(ESTAGIO)
 			.categoria(Categoria.builder().descricao(SALARIO).build())
 			.build();
 
 		// executa a operacao a ser testada
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.contaCreditoRepository.findOne(Example.of(contaCreditoExemplo)).get())
-			.isEqualTo(contaCredito);
+		assertThat(this.contaCreditoRepository.findOne(Example.of(contaCreditoExemplo)).get()).isEqualTo(contaCredito);
 	}
 
 }

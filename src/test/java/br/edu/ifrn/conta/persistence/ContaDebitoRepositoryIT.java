@@ -28,8 +28,7 @@ public class ContaDebitoRepositoryIT {
 
 	@Test
 	public void repositorioNaoEhNulo() {
-		assertThat(this.contaDebitoRepository)
-			.isNotNull();
+		assertThat(this.contaDebitoRepository).isNotNull();
 	}
 
 	@Test
@@ -38,14 +37,13 @@ public class ContaDebitoRepositoryIT {
 		ContaDebito contaDebito = this.contaDebitoFactory.gasolina();
 
 		ContaDebito contaDebitoExemplo = ContaDebito.builder()
-                        .descricao(GASOLINA)
+			.descricao(GASOLINA)
 			.categoria(Categoria.builder().descricao(TRANSPORTE).build())
 			.build();
 
 		// executa a operacao a ser testada
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.contaDebitoRepository.findOne(Example.of(contaDebitoExemplo)).get())
-			.isEqualTo(contaDebito);
+		assertThat(this.contaDebitoRepository.findOne(Example.of(contaDebitoExemplo)).get()).isEqualTo(contaDebito);
 	}
 
 }

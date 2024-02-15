@@ -18,30 +18,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/dono")
 public class DonoController extends CrudController<DonoDTO, Dono, Long> {
 
-    @Autowired
-    private DonoService donoService;
-    
-    @GetMapping("/findByDescricao")
-    public Optional<DonoDTO> findByDescricao(@RequestParam String descricao) {
-        return toDTOOptional(donoService.findByDescricao(descricao));
-    }
-    
-    @DeleteMapping("/deleteByDescricao")
-    public void deleteByDescricao(@RequestParam String descricao) {
-        donoService.deleteByDescricao(descricao);
-    }
+	@Autowired
+	private DonoService donoService;
 
-    @Override
-    protected Dono toEntity(DonoDTO dto) {
-        return Dono.builder()
-           .descricao(dto.getDescricao())
-           .build();        
-    }
+	@GetMapping("/findByDescricao")
+	public Optional<DonoDTO> findByDescricao(@RequestParam String descricao) {
+		return toDTOOptional(donoService.findByDescricao(descricao));
+	}
 
-    @Override
-    protected DonoDTO toDTO(Dono entity) {
-        return DonoDTO.builder()
-           .descricao(entity.getDescricao())
-           .build();
-    }
+	@DeleteMapping("/deleteByDescricao")
+	public void deleteByDescricao(@RequestParam String descricao) {
+		donoService.deleteByDescricao(descricao);
+	}
+
+	@Override
+	protected Dono toEntity(DonoDTO dto) {
+		return Dono.builder().descricao(dto.getDescricao()).build();
+	}
+
+	@Override
+	protected DonoDTO toDTO(Dono entity) {
+		return DonoDTO.builder().descricao(entity.getDescricao()).build();
+	}
+
 }

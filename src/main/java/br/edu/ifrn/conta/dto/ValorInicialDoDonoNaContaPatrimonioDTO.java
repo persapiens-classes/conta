@@ -15,7 +15,11 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class ValorInicialDoDonoNaContaPatrimonioDTO implements Serializable {
-    private DonoDTO dono;
-    private ContaPatrimonioDTO contaPatrimonio;
-    private BigDecimal valorInicial;
+
+	private DonoDTO dono;
+
+	private ContaPatrimonioDTO contaPatrimonio;
+
+	private BigDecimal valorInicial;
+
 }

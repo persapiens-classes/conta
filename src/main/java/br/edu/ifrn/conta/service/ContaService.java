@@ -12,10 +12,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ContaService<T extends Conta, ID extends Serializable> extends CrudService<T, ID> {
-    @Autowired
-    private ContaRepository<T, ID> contaRepository;
-    
-    public Optional<T> findByDescricao(String descricao) {
-        return contaRepository.findByDescricao(descricao);
-    }
+
+	@Autowired
+	private ContaRepository<T, ID> contaRepository;
+
+	public Optional<T> findByDescricao(String descricao) {
+		return contaRepository.findByDescricao(descricao);
+	}
+
 }

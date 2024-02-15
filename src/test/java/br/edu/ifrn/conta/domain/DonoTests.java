@@ -11,17 +11,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DonoTests {
 
 	private static final String PAPAI = "papai";
+
 	private static final String MAMAE = "mamae";
+
 	private static final String GASOLINA = "gasolina";
+
 	private static final String IPVA = "ipva";
+
 	private static final String CARTEIRA = "carteira";
+
 	private static final String BANCO = "banco";
+
 	private static final String PATRIMONIO_INDIVIDUAL = "patrimônio individual";
 
 	@Test
 	public void descricaoPapaiIgualSemLancamentos() {
-		assertThat(Dono.builder().descricao(PAPAI).build())
-			.isEqualTo(Dono.builder().descricao(PAPAI).build());
+		assertThat(Dono.builder().descricao(PAPAI).build()).isEqualTo(Dono.builder().descricao(PAPAI).build());
 	}
 
 	@Test
@@ -30,18 +35,23 @@ public class DonoTests {
 		Lancamento lancamentoIpva = Lancamento.builder().descricao(IPVA).build();
 
 		ValorInicialDoDonoNaContaPatrimonio valorInicialNaCarteira = ValorInicialDoDonoNaContaPatrimonio.builder()
-			.contaPatrimonio(ContaPatrimonio.builder().descricao(CARTEIRA)
-				.categoria(Categoria.builder().descricao(PATRIMONIO_INDIVIDUAL).build()).build())
+			.contaPatrimonio(ContaPatrimonio.builder()
+				.descricao(CARTEIRA)
+				.categoria(Categoria.builder().descricao(PATRIMONIO_INDIVIDUAL).build())
+				.build())
 			.valorInicial(new BigDecimal(100))
 			.build();
 
 		ValorInicialDoDonoNaContaPatrimonio valorInicialNoBanco = ValorInicialDoDonoNaContaPatrimonio.builder()
-			.contaPatrimonio(ContaPatrimonio.builder().descricao(BANCO)
-				.categoria(Categoria.builder().descricao(PATRIMONIO_INDIVIDUAL).build()).build())
+			.contaPatrimonio(ContaPatrimonio.builder()
+				.descricao(BANCO)
+				.categoria(Categoria.builder().descricao(PATRIMONIO_INDIVIDUAL).build())
+				.build())
 			.valorInicial(new BigDecimal(1000))
 			.build();
 
-		Dono papai1 = Dono.builder().descricao(PAPAI)
+		Dono papai1 = Dono.builder()
+			.descricao(PAPAI)
 			.lancamento(lancamentoGasolina)
 			.lancamento(lancamentoIpva)
 			.valorInicialNaContaPatrimonio(valorInicialNaCarteira)
@@ -55,8 +65,7 @@ public class DonoTests {
 
 	@Test
 	public void descricaoDiferente() {
-		assertThat(Dono.builder().descricao(PAPAI).build())
-			.isNotEqualTo(Dono.builder().descricao(MAMAE).build());
+		assertThat(Dono.builder().descricao(PAPAI).build()).isNotEqualTo(Dono.builder().descricao(MAMAE).build());
 
 	}
 

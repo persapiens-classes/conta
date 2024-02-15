@@ -11,8 +11,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CategoriaTests {
 
 	private static final String TRANSPORTE = "transporte";
+
 	private static final String GASOLINA = "gasolina";
+
 	private static final String IPVA = "ipva";
+
 	private static final String HABITACAO = "habitação";
 
 	@Test
@@ -23,8 +26,7 @@ public class CategoriaTests {
 
 	@Test
 	public void descricaoTransporteIgualComContasDiferentes() {
-		Categoria categoriaTransporte1 = Categoria.builder().descricao(TRANSPORTE)
-			.build();
+		Categoria categoriaTransporte1 = Categoria.builder().descricao(TRANSPORTE).build();
 
 		Set<Conta> contas = new HashSet<>();
 		contas.add(ContaDebito.builder().descricao(GASOLINA).categoria(categoriaTransporte1).build());
@@ -53,4 +55,5 @@ public class CategoriaTests {
 
 		assertThat(categorias.iterator().next()).isEqualTo(habitacao);
 	}
+
 }

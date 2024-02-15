@@ -11,26 +11,25 @@ import java.util.Optional;
 @Component
 public class ContaDebitoFactory {
 
-    @Autowired
-    private ContaDebitoRepository contaDebitoRepository;
+	@Autowired
+	private ContaDebitoRepository contaDebitoRepository;
 
-    @Autowired
-    private CategoriaFactory categoriaFactory;
+	@Autowired
+	private CategoriaFactory categoriaFactory;
 
-    private ContaDebito contaDebito(String descricao, Categoria categoria) {
-        Optional<ContaDebito> findByDescricao = this.contaDebitoRepository.findByDescricao(descricao);
-        if (findByDescricao.isEmpty()) {
-            ContaDebito contaDebito = ContaDebito.builder()
-                    .descricao(descricao)
-                    .categoria(categoria)
-                    .build();
-            return this.contaDebitoRepository.save(contaDebito);
-        } else {
-            return findByDescricao.get();
-        }
-    }
+	private ContaDebito contaDebito(String descricao, Categoria categoria) {
+		Optional<ContaDebito> findByDescricao = this.contaDebitoRepository.findByDescricao(descricao);
+		if (findByDescricao.isEmpty()) {
+			ContaDebito contaDebito = ContaDebito.builder().descricao(descricao).categoria(categoria).build();
+			return this.contaDebitoRepository.save(contaDebito);
+		}
+		else {
+			return findByDescricao.get();
+		}
+	}
 
-    public ContaDebito gasolina() {
-        return contaDebito(GASOLINA, this.categoriaFactory.transporte());
-    }
+	public ContaDebito gasolina() {
+		return contaDebito(GASOLINA, this.categoriaFactory.transporte());
+	}
+
 }

@@ -15,4 +15,5 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @NoArgsConstructor
 public class ContaCreditoDTO extends ContaDTO {
+
 }

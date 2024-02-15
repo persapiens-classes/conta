@@ -10,13 +10,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 @SuperBuilder
 public class TransferenciaRestClient {
 
-    private RestClientHelper<TransferenciaDTO> entityRestHelper;
+	private RestClientHelper<TransferenciaDTO> entityRestHelper;
 
-    public void transferir(TransferenciaDTO transferenciaDTO) {
-        this.entityRestHelper.getRestTemplate().postForObject(
-         UriComponentsBuilder.fromHttpUrl(entityRestHelper.url() + "/transferir").build().encode().toUri(),
-      transferenciaDTO,
-  Void.class);
-    }
-    
+	public void transferir(TransferenciaDTO transferenciaDTO) {
+		this.entityRestHelper.getRestTemplate()
+			.postForObject(
+					UriComponentsBuilder.fromHttpUrl(entityRestHelper.url() + "/transferir").build().encode().toUri(),
+					transferenciaDTO, Void.class);
+	}
+
 }

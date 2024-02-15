@@ -27,7 +27,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(of = "descricao")
-@EqualsAndHashCode(exclude = {"lancamentos", "valoresIniciaisNasContasPatrimonio"})
+@EqualsAndHashCode(exclude = { "lancamentos", "valoresIniciaisNasContasPatrimonio" })
 @SuperBuilder
 @Entity
 @SequenceGenerator(sequenceName = "seq_dono", name = "ID_SEQUENCE", allocationSize = 1)
@@ -35,26 +35,26 @@ import lombok.ToString;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Dono implements Serializable, Comparable<Dono> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
+	private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String descricao;
+	@Column(nullable = false, unique = true)
+	private String descricao;
 
-    @Singular
-    @OneToMany(mappedBy = "dono")
-    private Set<Lancamento> lancamentos;
+	@Singular
+	@OneToMany(mappedBy = "dono")
+	private Set<Lancamento> lancamentos;
 
-    @Singular("valorInicialNaContaPatrimonio")
-    @OneToMany(mappedBy = "dono")
-    private Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisNasContasPatrimonio;
+	@Singular("valorInicialNaContaPatrimonio")
+	@OneToMany(mappedBy = "dono")
+	private Set<ValorInicialDoDonoNaContaPatrimonio> valoresIniciaisNasContasPatrimonio;
 
-    @Override
-    public int compareTo(Dono o) {
-        return this.descricao.compareTo(o.descricao);
-    }
+	@Override
+	public int compareTo(Dono o) {
+		return this.descricao.compareTo(o.descricao);
+	}
 
 }
