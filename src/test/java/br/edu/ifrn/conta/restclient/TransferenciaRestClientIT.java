@@ -7,7 +7,7 @@ import br.edu.ifrn.conta.dto.TransferenciaDTO;
 import static br.edu.ifrn.conta.util.CategoriaConstants.BANCO;
 import static br.edu.ifrn.conta.util.ContaPatrimonioConstants.CONTA_CORRENTE;
 import static br.edu.ifrn.conta.util.ContaPatrimonioConstants.CONTA_INVESTIMENTO;
-import static br.edu.ifrn.conta.util.DonoConstants.PAPAI;
+import static br.edu.ifrn.conta.util.DonoConstants.TITIA;
 import static br.edu.ifrn.conta.util.DonoConstants.TITIO;
 import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -84,8 +84,8 @@ public class TransferenciaRestClientIT {
     }
 
     @Test
-    public void transferir50DeContaCorrentePapaiParaContaInvestimentoTitio() {
-        DonoDTO papai = donoRestClientFactory().dono(PAPAI);
+    public void transferir50DeContaCorrenteTitiaParaContaInvestimentoTitio() {
+        DonoDTO titia = donoRestClientFactory().dono(TITIA);
         DonoDTO titio = donoRestClientFactory().dono(TITIO);
 
         ContaPatrimonioDTO contaCorrente = contaPatrimonioRestClientFactory().contaPatrimonio(
@@ -95,14 +95,14 @@ public class TransferenciaRestClientIT {
         
         // executa a operacao a ser testada
         transferenciaRestClient().transferir(TransferenciaDTO.builder()
-            .donoDebito(papai.getDescricao())
+            .donoDebito(titia.getDescricao())
             .donoCredito(titio.getDescricao())
             .contaDebito(contaCorrente.getDescricao())
             .contaCredito(contaInvestimento.getDescricao())
             .valor(new BigDecimal(50))
             .build());
         
-        assertThat(lancamentoRestClient().debitosSum(papai.getDescricao(), contaCorrente.getDescricao()))
+        assertThat(lancamentoRestClient().debitosSum(titia.getDescricao(), contaCorrente.getDescricao()))
             .isEqualTo(new BigDecimal(50).setScale(2));
         
         assertThat(lancamentoRestClient().creditosSum(titio.getDescricao(), contaInvestimento.getDescricao()))
