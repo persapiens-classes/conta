@@ -11,28 +11,31 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CategoriaService extends CrudService<Categoria, Long> {
-    @Autowired
-    private CategoriaRepository categoriaRepository;
-    
-    public Optional<Categoria> findByDescricao(String descricao) {
-        return categoriaRepository.findByDescricao(descricao);
-    }
-    
-    private Categoria categoria(String descricao) {
-        Optional<Categoria> findByDescricao = findByDescricao(descricao);
-        if (findByDescricao.isEmpty()) {
-            Categoria result = Categoria.builder().descricao(descricao).build();
-            return save(result);
-        } else {
-            return findByDescricao.get();
-        }
-    }
-    
-    public Categoria despesaTransferencia() {
-        return categoria(Categoria.CATEGORIA_DESPESA_TRANSFERENCIA);
-    }
-    
-    public Categoria receitaTransferencia() {
-        return categoria(Categoria.CATEGORIA_RECEITA_TRANSFERENCIA);
-    }
+
+	@Autowired
+	private CategoriaRepository categoriaRepository;
+
+	public Optional<Categoria> findByDescricao(String descricao) {
+		return categoriaRepository.findByDescricao(descricao);
+	}
+
+	private Categoria categoria(String descricao) {
+		Optional<Categoria> findByDescricao = findByDescricao(descricao);
+		if (findByDescricao.isEmpty()) {
+			Categoria result = Categoria.builder().descricao(descricao).build();
+			return save(result);
+		}
+		else {
+			return findByDescricao.get();
+		}
+	}
+
+	public Categoria despesaTransferencia() {
+		return categoria(Categoria.CATEGORIA_DESPESA_TRANSFERENCIA);
+	}
+
+	public Categoria receitaTransferencia() {
+		return categoria(Categoria.CATEGORIA_RECEITA_TRANSFERENCIA);
+	}
+
 }

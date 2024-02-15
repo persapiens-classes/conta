@@ -13,10 +13,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ValorInicialDoDonoNaContaPatrimonioService extends CrudService<ValorInicialDoDonoNaContaPatrimonio, Long> {
-    @Autowired
-    private ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;
-    
-    public Optional<ValorInicialDoDonoNaContaPatrimonio> findByDonoAndContaPatrimonio(Dono dono, ContaPatrimonio contaPatrimonio) {
-        return valorInicialDoDonoNaContaPatrimonioRepository.findByDonoAndContaPatrimonio(dono, contaPatrimonio);
-    }
+
+	@Autowired
+	private ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;
+
+	public Optional<ValorInicialDoDonoNaContaPatrimonio> findByDonoAndContaPatrimonio(Dono dono,
+			ContaPatrimonio contaPatrimonio) {
+		return valorInicialDoDonoNaContaPatrimonioRepository.findByDonoAndContaPatrimonio(dono, contaPatrimonio);
+	}
+
 }

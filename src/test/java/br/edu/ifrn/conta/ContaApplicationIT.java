@@ -13,4 +13,5 @@ public class ContaApplicationIT {
 	@Test
 	public void contextLoads() {
 	}
+
 }

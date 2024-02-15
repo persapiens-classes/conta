@@ -23,58 +23,61 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/lancamento")
 public class LancamentoController extends CrudController<LancamentoDTO, Lancamento, Long> {
 
-    @Autowired
-    private LancamentoService lancamentoService;
-    @Autowired
-    private DonoService donoService;
-    @Autowired
-    private ContaPatrimonioService contaPatrimonioService;
-    @Autowired
-    private ContaService<Conta, Long> contaService;
+	@Autowired
+	private LancamentoService lancamentoService;
 
-    @Override
-    protected Lancamento toEntity(LancamentoDTO dto) {
-        return Lancamento.builder()
-            .contaEntrada(contaService.findByDescricao(
-        dto.getContaEntrada().getDescricao()).get())
-            .contaSaida(contaService.findByDescricao(
-        dto.getContaSaida().getDescricao()).get())
-            .dono(donoService.findByDescricao(dto.getDono().getDescricao()).get())
-            .data(dto.getData())
-            .valor(dto.getValor())
-            .descricao(dto.getDescricao())
-            .build();
-    }
-    
-    @Override
-    protected LancamentoDTO toDTO(Lancamento entity) {
-        return LancamentoDTO.builder()
-            .contaEntrada(ContaDTO.builder()
-                .descricao(entity.getContaEntrada().getDescricao())
-                .categoria(CategoriaDTO.builder().descricao(
-            entity.getContaEntrada().getCategoria().getDescricao()).build())
-                .build())
-            .contaSaida(ContaDTO.builder()
-                .descricao(entity.getContaSaida().getDescricao())
-                .categoria(CategoriaDTO.builder().descricao(
-            entity.getContaSaida().getCategoria().getDescricao()).build())
-                .build())
-            .dono(DonoDTO.builder().descricao(entity.getDono().getDescricao()).build())
-            .data(entity.getData())
-            .valor(entity.getValor())
-            .descricao(entity.getDescricao())
-            .build();
-    }
+	@Autowired
+	private DonoService donoService;
 
-    @GetMapping("/creditosSum")
-    public BigDecimal creditosSum(String dono, String contaPatrimonio) {
-        return lancamentoService.creditosSum(donoService.findByDescricao(dono).get(), 
-contaPatrimonioService.findByDescricao(contaPatrimonio).get());
-    }
-    
-    @GetMapping("/debitosSum")
-    public BigDecimal debitosSum(String dono, String contaPatrimonio) {
-        return lancamentoService.debitosSum(donoService.findByDescricao(dono).get(), 
-contaPatrimonioService.findByDescricao(contaPatrimonio).get());
-    }
+	@Autowired
+	private ContaPatrimonioService contaPatrimonioService;
+
+	@Autowired
+	private ContaService<Conta, Long> contaService;
+
+	@Override
+	protected Lancamento toEntity(LancamentoDTO dto) {
+		return Lancamento.builder()
+			.contaEntrada(contaService.findByDescricao(dto.getContaEntrada().getDescricao()).get())
+			.contaSaida(contaService.findByDescricao(dto.getContaSaida().getDescricao()).get())
+			.dono(donoService.findByDescricao(dto.getDono().getDescricao()).get())
+			.data(dto.getData())
+			.valor(dto.getValor())
+			.descricao(dto.getDescricao())
+			.build();
+	}
+
+	@Override
+	protected LancamentoDTO toDTO(Lancamento entity) {
+		return LancamentoDTO.builder()
+			.contaEntrada(ContaDTO.builder()
+				.descricao(entity.getContaEntrada().getDescricao())
+				.categoria(CategoriaDTO.builder()
+					.descricao(entity.getContaEntrada().getCategoria().getDescricao())
+					.build())
+				.build())
+			.contaSaida(ContaDTO.builder()
+				.descricao(entity.getContaSaida().getDescricao())
+				.categoria(
+						CategoriaDTO.builder().descricao(entity.getContaSaida().getCategoria().getDescricao()).build())
+				.build())
+			.dono(DonoDTO.builder().descricao(entity.getDono().getDescricao()).build())
+			.data(entity.getData())
+			.valor(entity.getValor())
+			.descricao(entity.getDescricao())
+			.build();
+	}
+
+	@GetMapping("/creditosSum")
+	public BigDecimal creditosSum(String dono, String contaPatrimonio) {
+		return lancamentoService.creditosSum(donoService.findByDescricao(dono).get(),
+				contaPatrimonioService.findByDescricao(contaPatrimonio).get());
+	}
+
+	@GetMapping("/debitosSum")
+	public BigDecimal debitosSum(String dono, String contaPatrimonio) {
+		return lancamentoService.debitosSum(donoService.findByDescricao(dono).get(),
+				contaPatrimonioService.findByDescricao(contaPatrimonio).get());
+	}
+
 }

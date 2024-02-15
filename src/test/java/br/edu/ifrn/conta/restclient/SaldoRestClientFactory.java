@@ -10,24 +10,24 @@ import org.springframework.web.client.RestTemplate;
 @Data
 public class SaldoRestClientFactory {
 
-    private String protocol;
-    
-    private String servername;
-    
-    private int port;
+	private String protocol;
 
-    private RestTemplate restTemplate;
+	private String servername;
 
-    public SaldoRestClient saldoRestClient() {
-        return SaldoRestClient.builder()
-                .entityRestHelper(RestClientHelper.<LancamentoDTO>builder()
-                    .endpoint("")
-                    .protocol(protocol)
-                    .servername(servername)
-                    .port(port)
-                    .restTemplate(restTemplate)
-                    .build())
-                .build();
-    }
+	private int port;
+
+	private RestTemplate restTemplate;
+
+	public SaldoRestClient saldoRestClient() {
+		return SaldoRestClient.builder()
+			.entityRestHelper(RestClientHelper.<LancamentoDTO>builder()
+				.endpoint("")
+				.protocol(protocol)
+				.servername(servername)
+				.port(port)
+				.restTemplate(restTemplate)
+				.build())
+			.build();
+	}
 
 }

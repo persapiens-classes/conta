@@ -24,65 +24,62 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class LancamentoServiceIT {
 
-    @Autowired
-    private DonoFactory donoFactory;
+	@Autowired
+	private DonoFactory donoFactory;
 
-    @Autowired
-    private LancamentoService lancamentoServico;
+	@Autowired
+	private LancamentoService lancamentoServico;
 
-    @Autowired
-    private ContaPatrimonioFactory contaPatrimonioFactory;
+	@Autowired
+	private ContaPatrimonioFactory contaPatrimonioFactory;
 
-    @Autowired
-    private ContaCreditoFactory contaCreditoFactory;
+	@Autowired
+	private ContaCreditoFactory contaCreditoFactory;
 
-    @Autowired
-    private ContaDebitoFactory contaDebitoFactory;
+	@Autowired
+	private ContaDebitoFactory contaDebitoFactory;
 
-    @BeforeEach
-    public void deletarTodos() {
-        this.lancamentoServico.deleteAll();
-        assertThat(this.lancamentoServico.findAll())
-                .isEmpty();
-    }
+	@BeforeEach
+	public void deletarTodos() {
+		this.lancamentoServico.deleteAll();
+		assertThat(this.lancamentoServico.findAll()).isEmpty();
+	}
 
-    @Test
-    public void repositorioNaoEhNulo() {
-        assertThat(this.lancamentoServico)
-                .isNotNull();
-    }
+	@Test
+	public void repositorioNaoEhNulo() {
+		assertThat(this.lancamentoServico).isNotNull();
+	}
 
-    @Test
-    public void lancamentoComContaEntradaInvalida() {
-        IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Lancamento lancamento = Lancamento.builder()
-                    .contaEntrada(this.contaCreditoFactory.estagio())
-                    .contaSaida(this.contaPatrimonioFactory.poupanca())
-                    .valor(BigDecimal.TEN)
-                    .data(LocalDateTime.now())
-                    .dono(this.donoFactory.papai())
-                    .build();
+	@Test
+	public void lancamentoComContaEntradaInvalida() {
+		IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			Lancamento lancamento = Lancamento.builder()
+				.contaEntrada(this.contaCreditoFactory.estagio())
+				.contaSaida(this.contaPatrimonioFactory.poupanca())
+				.valor(BigDecimal.TEN)
+				.data(LocalDateTime.now())
+				.dono(this.donoFactory.papai())
+				.build();
 
-            this.lancamentoServico.save(lancamento);
-        });
-        assertThat(thrown)
-                .isNotNull();
-    }
+			this.lancamentoServico.save(lancamento);
+		});
+		assertThat(thrown).isNotNull();
+	}
 
-    @Test
-    public void lancamentoComContaSaidaInvalida() {
-        IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Lancamento lancamento = Lancamento.builder()
-                    .contaEntrada(this.contaPatrimonioFactory.poupanca())
-                    .contaSaida(this.contaDebitoFactory.gasolina())
-                    .valor(BigDecimal.TEN)
-                    .data(LocalDateTime.now())
-                    .dono(this.donoFactory.papai())
-                    .build();
+	@Test
+	public void lancamentoComContaSaidaInvalida() {
+		IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			Lancamento lancamento = Lancamento.builder()
+				.contaEntrada(this.contaPatrimonioFactory.poupanca())
+				.contaSaida(this.contaDebitoFactory.gasolina())
+				.valor(BigDecimal.TEN)
+				.data(LocalDateTime.now())
+				.dono(this.donoFactory.papai())
+				.build();
 
-            this.lancamentoServico.save(lancamento);
-        });
-        assertThat(thrown)
-                .isNotNull();
-    }
+			this.lancamentoServico.save(lancamento);
+		});
+		assertThat(thrown).isNotNull();
+	}
+
 }

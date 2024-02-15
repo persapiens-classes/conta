@@ -8,15 +8,15 @@ import lombok.Data;
 @SuperBuilder
 public class ValorInicialDoDonoNaContaPatrimonioRestClient {
 
-    private RestClientHelper<ValorInicialDoDonoNaContaPatrimonioDTO> entityRestHelper;
+	private RestClientHelper<ValorInicialDoDonoNaContaPatrimonioDTO> entityRestHelper;
 
-    public Iterable<ValorInicialDoDonoNaContaPatrimonioDTO> findAll() {
-        return this.entityRestHelper.findAll();
-    }
+	public Iterable<ValorInicialDoDonoNaContaPatrimonioDTO> findAll() {
+		return this.entityRestHelper.findAll();
+	}
 
-    public ValorInicialDoDonoNaContaPatrimonioDTO save(ValorInicialDoDonoNaContaPatrimonioDTO entity) {
-        return this.entityRestHelper.getRestTemplate().postForObject(
-                entityRestHelper.saveUri(), entity, ValorInicialDoDonoNaContaPatrimonioDTO.class);
-    }
+	public ValorInicialDoDonoNaContaPatrimonioDTO save(ValorInicialDoDonoNaContaPatrimonioDTO entity) {
+		return this.entityRestHelper.getRestTemplate()
+			.postForObject(entityRestHelper.saveUri(), entity, ValorInicialDoDonoNaContaPatrimonioDTO.class);
+	}
 
 }

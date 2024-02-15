@@ -10,24 +10,24 @@ import org.springframework.web.client.RestTemplate;
 @Data
 public class ValorInicialDoDonoNaContaPatrimonioRestClientFactory {
 
-    private String protocol;
-    
-    private String servername;
+	private String protocol;
 
-    private int port;
+	private String servername;
 
-    private RestTemplate restTemplate;
+	private int port;
 
-    public ValorInicialDoDonoNaContaPatrimonioRestClient valorInicialDoDonoNaContaPatrimonioRestClient() {
-        return ValorInicialDoDonoNaContaPatrimonioRestClient.builder()
-                .entityRestHelper(RestClientHelper.<ValorInicialDoDonoNaContaPatrimonioDTO>builder()
-                    .endpoint("valorInicialDoDonoNaContaPatrimonio")
-                    .protocol(protocol)
-                    .servername(servername)
-                    .port(port)
-                    .restTemplate(restTemplate)
-                    .build())
-                .build();
-    }
+	private RestTemplate restTemplate;
+
+	public ValorInicialDoDonoNaContaPatrimonioRestClient valorInicialDoDonoNaContaPatrimonioRestClient() {
+		return ValorInicialDoDonoNaContaPatrimonioRestClient.builder()
+			.entityRestHelper(RestClientHelper.<ValorInicialDoDonoNaContaPatrimonioDTO>builder()
+				.endpoint("valorInicialDoDonoNaContaPatrimonio")
+				.protocol(protocol)
+				.servername(servername)
+				.port(port)
+				.restTemplate(restTemplate)
+				.build())
+			.build();
+	}
 
 }

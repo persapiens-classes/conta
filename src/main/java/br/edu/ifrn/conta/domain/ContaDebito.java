@@ -21,6 +21,9 @@ import lombok.ToString;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ContaDebito extends Conta {
-    private static final long serialVersionUID = 1L;
-    public final static String DESPESA_TRANSFERENCIA = "despesa de transferência";
+
+	private static final long serialVersionUID = 1L;
+
+	public final static String DESPESA_TRANSFERENCIA = "despesa de transferência";
+
 }

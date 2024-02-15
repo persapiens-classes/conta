@@ -16,22 +16,23 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class LancamentoService extends CrudService<Lancamento, Long> {
 
-    @Autowired
-    private LancamentoRepository lancamentoRepository;
-    
-    @Override
-    @Transactional
-    public Lancamento save(Lancamento objeto) {
-        objeto.verificarAtributos();
+	@Autowired
+	private LancamentoRepository lancamentoRepository;
 
-        return super.save(objeto);
-    }
-    
-    public BigDecimal creditosSum(Dono dono, ContaPatrimonio contaPatrimonio) {
-        return lancamentoRepository.creditosSum(dono, contaPatrimonio).getValor();
-    }
-    
-    public BigDecimal debitosSum(Dono dono, ContaPatrimonio contaPatrimonio) {
-        return lancamentoRepository.debitosSum(dono, contaPatrimonio).getValor();
-    }
+	@Override
+	@Transactional
+	public Lancamento save(Lancamento objeto) {
+		objeto.verificarAtributos();
+
+		return super.save(objeto);
+	}
+
+	public BigDecimal creditosSum(Dono dono, ContaPatrimonio contaPatrimonio) {
+		return lancamentoRepository.creditosSum(dono, contaPatrimonio).getValor();
+	}
+
+	public BigDecimal debitosSum(Dono dono, ContaPatrimonio contaPatrimonio) {
+		return lancamentoRepository.debitosSum(dono, contaPatrimonio).getValor();
+	}
+
 }

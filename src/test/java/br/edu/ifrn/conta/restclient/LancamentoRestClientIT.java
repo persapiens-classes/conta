@@ -24,88 +24,87 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class LancamentoRestClientIT {
 
-    private final String protocol = "http";
-    private final String servername = "localhost";
-    
-    @Value(value = "${local.server.port}")
-    private int port;
+	private final String protocol = "http";
 
-    @Autowired
-    private TestRestTemplate testRestTemplate;
+	private final String servername = "localhost";
 
-    private CategoriaRestClientFactory categoriaRestClientFactory() {
-        return CategoriaRestClientFactory.builder()
-                .protocol(protocol)
-                .servername(servername)
-                .port(port)
-                .restTemplate(testRestTemplate.getRestTemplate())
-                .build();
-    }
+	@Value(value = "${local.server.port}")
+	private int port;
 
-    private DonoRestClientFactory donoRestClientFactory() {
-        return DonoRestClientFactory.builder()
-                .protocol(protocol)
-                .servername(servername)
-                .port(port)
-                .restTemplate(testRestTemplate.getRestTemplate())
-                .build();
-    }
+	@Autowired
+	private TestRestTemplate testRestTemplate;
 
-    private ContaCreditoRestClientFactory contaCreditoRestClientFactory() {
-        return ContaCreditoRestClientFactory.builder()
-                .protocol(protocol)
-                .servername(servername)
-                .port(port)
-                .restTemplate(testRestTemplate.getRestTemplate())
-                .categoriaRestClientFactory(categoriaRestClientFactory())
-                .build();
-    }
+	private CategoriaRestClientFactory categoriaRestClientFactory() {
+		return CategoriaRestClientFactory.builder()
+			.protocol(protocol)
+			.servername(servername)
+			.port(port)
+			.restTemplate(testRestTemplate.getRestTemplate())
+			.build();
+	}
 
-    private ContaPatrimonioRestClientFactory contaPatrimonioRestClientFactory() {
-        return ContaPatrimonioRestClientFactory.builder()
-                .protocol(protocol)
-                .servername(servername)
-                .port(port)
-                .restTemplate(testRestTemplate.getRestTemplate())
-                .categoriaRestClientFactory(categoriaRestClientFactory())
-                .build();
-    }
+	private DonoRestClientFactory donoRestClientFactory() {
+		return DonoRestClientFactory.builder()
+			.protocol(protocol)
+			.servername(servername)
+			.port(port)
+			.restTemplate(testRestTemplate.getRestTemplate())
+			.build();
+	}
 
-    private LancamentoRestClient lancamentoRestClient() {
-        return LancamentoRestClientFactory.builder()
-                .protocol(protocol)
-                .servername(servername)
-                .port(port)
-                .restTemplate(testRestTemplate.getRestTemplate())
-                .build()
-                .lancamentoRestClient();
-    }
+	private ContaCreditoRestClientFactory contaCreditoRestClientFactory() {
+		return ContaCreditoRestClientFactory.builder()
+			.protocol(protocol)
+			.servername(servername)
+			.port(port)
+			.restTemplate(testRestTemplate.getRestTemplate())
+			.categoriaRestClientFactory(categoriaRestClientFactory())
+			.build();
+	}
 
-    @Test
-    public void salvarUm() {        
-        // executa a operacao a ser testada
-        String mamae = MAMAE;
-        String estagio = ESTAGIO;
-        String salario = SALARIO;
-        String poupanca = POUPANCA;
-        String banco = BANCO;
-        
-        LancamentoDTO lancamento = LancamentoDTO.builder()
-                .valor(new BigDecimal(543))
-                .data(LocalDateTime.now())
-                .descricao("Teste de Sistema")
-                .dono(donoRestClientFactory().dono(mamae))
-                .contaEntrada(contaPatrimonioRestClientFactory().contaPatrimonio(poupanca, banco))
-                .contaSaida(contaCreditoRestClientFactory().contaCredito(estagio, salario))
-                .build();
+	private ContaPatrimonioRestClientFactory contaPatrimonioRestClientFactory() {
+		return ContaPatrimonioRestClientFactory.builder()
+			.protocol(protocol)
+			.servername(servername)
+			.port(port)
+			.restTemplate(testRestTemplate.getRestTemplate())
+			.categoriaRestClientFactory(categoriaRestClientFactory())
+			.build();
+	}
 
-        // verifica a operacao save
-        assertThat(lancamentoRestClient().save(lancamento))
-        	.isNotNull();
-        
-        // verifica a operacao findAll
-        assertThat(lancamentoRestClient().findAll())
-                .isNotEmpty();        
-    }
+	private LancamentoRestClient lancamentoRestClient() {
+		return LancamentoRestClientFactory.builder()
+			.protocol(protocol)
+			.servername(servername)
+			.port(port)
+			.restTemplate(testRestTemplate.getRestTemplate())
+			.build()
+			.lancamentoRestClient();
+	}
+
+	@Test
+	public void salvarUm() {
+		// executa a operacao a ser testada
+		String mamae = MAMAE;
+		String estagio = ESTAGIO;
+		String salario = SALARIO;
+		String poupanca = POUPANCA;
+		String banco = BANCO;
+
+		LancamentoDTO lancamento = LancamentoDTO.builder()
+			.valor(new BigDecimal(543))
+			.data(LocalDateTime.now())
+			.descricao("Teste de Sistema")
+			.dono(donoRestClientFactory().dono(mamae))
+			.contaEntrada(contaPatrimonioRestClientFactory().contaPatrimonio(poupanca, banco))
+			.contaSaida(contaCreditoRestClientFactory().contaCredito(estagio, salario))
+			.build();
+
+		// verifica a operacao save
+		assertThat(lancamentoRestClient().save(lancamento)).isNotNull();
+
+		// verifica a operacao findAll
+		assertThat(lancamentoRestClient().findAll()).isNotEmpty();
+	}
 
 }

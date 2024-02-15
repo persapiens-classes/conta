@@ -13,26 +13,28 @@ import java.util.Optional;
 @Component
 public class ValorInicialDoDonoNaContaPatrimonioFactory {
 
-    @Autowired
-    private ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;
+	@Autowired
+	private ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;
 
-    public ValorInicialDoDonoNaContaPatrimonio valorInicialDoDonoNaContaPatrimonio(
-            Dono dono, ContaPatrimonio contaPatrimonio, BigDecimal valor) {
-        Optional<ValorInicialDoDonoNaContaPatrimonio> findBy = 
-            valorInicialDoDonoNaContaPatrimonioRepository.findByDonoAndContaPatrimonio(dono, contaPatrimonio);
+	public ValorInicialDoDonoNaContaPatrimonio valorInicialDoDonoNaContaPatrimonio(Dono dono,
+			ContaPatrimonio contaPatrimonio, BigDecimal valor) {
+		Optional<ValorInicialDoDonoNaContaPatrimonio> findBy = valorInicialDoDonoNaContaPatrimonioRepository
+			.findByDonoAndContaPatrimonio(dono, contaPatrimonio);
 
-        ValorInicialDoDonoNaContaPatrimonio valorInicialDoDonoNaContaPatrimonio;
-        if (findBy.isEmpty()) {
-            valorInicialDoDonoNaContaPatrimonio = ValorInicialDoDonoNaContaPatrimonio.builder()
-                .dono(dono)
-                .contaPatrimonio(contaPatrimonio)
-                .build();
-        } else {
-            valorInicialDoDonoNaContaPatrimonio = findBy.get();
-        }
+		ValorInicialDoDonoNaContaPatrimonio valorInicialDoDonoNaContaPatrimonio;
+		if (findBy.isEmpty()) {
+			valorInicialDoDonoNaContaPatrimonio = ValorInicialDoDonoNaContaPatrimonio.builder()
+				.dono(dono)
+				.contaPatrimonio(contaPatrimonio)
+				.build();
+		}
+		else {
+			valorInicialDoDonoNaContaPatrimonio = findBy.get();
+		}
 
-        valorInicialDoDonoNaContaPatrimonio.setValorInicial(valor.setScale(2));
+		valorInicialDoDonoNaContaPatrimonio.setValorInicial(valor.setScale(2));
 
-        return this.valorInicialDoDonoNaContaPatrimonioRepository.save(valorInicialDoDonoNaContaPatrimonio);
-    }
+		return this.valorInicialDoDonoNaContaPatrimonioRepository.save(valorInicialDoDonoNaContaPatrimonio);
+	}
+
 }

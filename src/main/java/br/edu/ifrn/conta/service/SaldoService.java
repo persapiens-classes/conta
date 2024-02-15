@@ -8,35 +8,38 @@ import br.edu.ifrn.conta.persistence.ValorInicialDoDonoNaContaPatrimonioReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 /**
  * Service of saldo.
  */
 @Service
 public class SaldoService {
 
-    private LancamentoRepository lancamentoRepository;
-    private ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;
+	private LancamentoRepository lancamentoRepository;
 
-    @Autowired
-    public SaldoService(LancamentoRepository lancamentoRepository, ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository) {
-        super();
-        this.lancamentoRepository = lancamentoRepository;
-        this.valorInicialDoDonoNaContaPatrimonioRepository = valorInicialDoDonoNaContaPatrimonioRepository;
-    }
+	private ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository;
 
-    public BigDecimal saldo(Dono dono, ContaPatrimonio contaPatrimonio) {
-        // recupera o valor inicial do dono na conta patrimonio
-        BigDecimal result = this.valorInicialDoDonoNaContaPatrimonioRepository
-            .findByDonoAndContaPatrimonio(dono, contaPatrimonio)
-            .get().getValorInicial();
+	@Autowired
+	public SaldoService(LancamentoRepository lancamentoRepository,
+			ValorInicialDoDonoNaContaPatrimonioRepository valorInicialDoDonoNaContaPatrimonioRepository) {
+		super();
+		this.lancamentoRepository = lancamentoRepository;
+		this.valorInicialDoDonoNaContaPatrimonioRepository = valorInicialDoDonoNaContaPatrimonioRepository;
+	}
 
-        // soma todos os lancamentos de credito do dono na conta patrimonio
-        BigDecimal creditos = this.lancamentoRepository.creditosSum(dono, contaPatrimonio).getValor();
+	public BigDecimal saldo(Dono dono, ContaPatrimonio contaPatrimonio) {
+		// recupera o valor inicial do dono na conta patrimonio
+		BigDecimal result = this.valorInicialDoDonoNaContaPatrimonioRepository
+			.findByDonoAndContaPatrimonio(dono, contaPatrimonio)
+			.get()
+			.getValorInicial();
 
-        // subtrai todos os lancamentos de debito do dono na conta patrimonio
-        BigDecimal debitos = this.lancamentoRepository.debitosSum(dono, contaPatrimonio).getValor();
+		// soma todos os lancamentos de credito do dono na conta patrimonio
+		BigDecimal creditos = this.lancamentoRepository.creditosSum(dono, contaPatrimonio).getValor();
 
-        return result.add(creditos).subtract(debitos);
-    }
+		// subtrai todos os lancamentos de debito do dono na conta patrimonio
+		BigDecimal debitos = this.lancamentoRepository.debitosSum(dono, contaPatrimonio).getValor();
+
+		return result.add(creditos).subtract(debitos);
+	}
+
 }

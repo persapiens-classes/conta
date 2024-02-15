@@ -16,10 +16,17 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class LancamentoDTO implements Serializable {
-    private LocalDateTime data;
-    private BigDecimal valor;
-    private ContaDTO contaEntrada;
-    private ContaDTO contaSaida;
-    private DonoDTO dono;
-    private String descricao;
+
+	private LocalDateTime data;
+
+	private BigDecimal valor;
+
+	private ContaDTO contaEntrada;
+
+	private ContaDTO contaSaida;
+
+	private DonoDTO dono;
+
+	private String descricao;
+
 }

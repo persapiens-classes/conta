@@ -14,5 +14,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class CategoriaDTO implements Serializable {
-    private String descricao;
+
+	private String descricao;
+
 }

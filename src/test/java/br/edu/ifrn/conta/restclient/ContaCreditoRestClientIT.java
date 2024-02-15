@@ -19,57 +19,56 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ContaCreditoRestClientIT {
 
-    private final String protocol = "http";
-    private final String servername = "localhost";
+	private final String protocol = "http";
 
-    @Value(value = "${local.server.port}")
-    private int port;
+	private final String servername = "localhost";
 
-    @Autowired
-    private TestRestTemplate testRestTemplate;
-    
-    private CategoriaRestClientFactory categoriaRestClientFactory() {
-        return CategoriaRestClientFactory.builder()
-                .protocol(protocol)
-                .servername(servername)
-                .port(port)
-                .restTemplate(testRestTemplate.getRestTemplate())
-                .build();
-    }
+	@Value(value = "${local.server.port}")
+	private int port;
 
-    private ContaCreditoRestClient contaCreditoRestClient() {
-        return ContaCreditoRestClientFactory.builder()
-                .protocol(protocol)
-                .servername(servername)
-                .port(port)
-                .restTemplate(testRestTemplate.getRestTemplate())
-                .categoriaRestClientFactory(categoriaRestClientFactory())
-                .build()
-                .contaCreditoRestClient();
-    }
+	@Autowired
+	private TestRestTemplate testRestTemplate;
 
-    @Test
-    public void salvarUm() {        
-        // executa a operacao a ser testada
-        String descricao = "Emprego Fixo";
-        String categoriaDescricao = SALARIO;
-        
-        ContaCreditoDTO estagio = ContaCreditoDTO.builder()
-            .descricao(descricao)
-            .categoria(this.categoriaRestClientFactory().categoria(categoriaDescricao))
-            .build();
+	private CategoriaRestClientFactory categoriaRestClientFactory() {
+		return CategoriaRestClientFactory.builder()
+			.protocol(protocol)
+			.servername(servername)
+			.port(port)
+			.restTemplate(testRestTemplate.getRestTemplate())
+			.build();
+	}
 
-        // verifica a operacao save
-        assertThat(contaCreditoRestClient().save(estagio))
-        	.isNotNull();
+	private ContaCreditoRestClient contaCreditoRestClient() {
+		return ContaCreditoRestClientFactory.builder()
+			.protocol(protocol)
+			.servername(servername)
+			.port(port)
+			.restTemplate(testRestTemplate.getRestTemplate())
+			.categoriaRestClientFactory(categoriaRestClientFactory())
+			.build()
+			.contaCreditoRestClient();
+	}
 
-        // verifica a operacao findByDescricao
-        assertThat(contaCreditoRestClient().findByDescricao(descricao).get().getDescricao())
-                .isEqualTo(estagio.getDescricao());
-        
-        // verifica a operacao findAll
-        assertThat(contaCreditoRestClient().findAll())
-                .isNotEmpty();        
-    }
+	@Test
+	public void salvarUm() {
+		// executa a operacao a ser testada
+		String descricao = "Emprego Fixo";
+		String categoriaDescricao = SALARIO;
+
+		ContaCreditoDTO estagio = ContaCreditoDTO.builder()
+			.descricao(descricao)
+			.categoria(this.categoriaRestClientFactory().categoria(categoriaDescricao))
+			.build();
+
+		// verifica a operacao save
+		assertThat(contaCreditoRestClient().save(estagio)).isNotNull();
+
+		// verifica a operacao findByDescricao
+		assertThat(contaCreditoRestClient().findByDescricao(descricao).get().getDescricao())
+			.isEqualTo(estagio.getDescricao());
+
+		// verifica a operacao findAll
+		assertThat(contaCreditoRestClient().findAll()).isNotEmpty();
+	}
 
 }
