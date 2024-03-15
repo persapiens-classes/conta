@@ -17,7 +17,7 @@
 
     <properties>
         <java.version>17</java.version>
-        <springdoc.version>2.1.0</springdoc.version>
+        <springdoc.version>2.4.0</springdoc.version>
 
         <decycle-maven-plugin.version>0.11.0</decycle-maven-plugin.version>
 
