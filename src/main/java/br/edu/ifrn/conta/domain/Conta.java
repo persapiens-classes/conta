@@ -31,7 +31,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"descricao", "categoria"})
+@EqualsAndHashCode(of = { "descricao", "categoria" })
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -39,25 +39,23 @@ import lombok.experimental.SuperBuilder;
 @SequenceGenerator(sequenceName = "seq_conta", name = "ID_SEQUENCE", allocationSize = 1)
 public class Conta implements Serializable, Comparable<Conta> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
+	private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String descricao;
+	@Column(nullable = false, unique = true)
+	private String descricao;
 
-    @NonNull
-    @ManyToOne
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_conta_categoria"))
-    private Categoria categoria;
+	@NonNull
+	@ManyToOne
+	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_conta_categoria"))
+	private Categoria categoria;
 
-    @Override
-    public int compareTo(Conta o) {
-        return Comparator.comparing(Conta::getDescricao)
-                .thenComparing(Conta::getCategoria)
-                .compare(this, o);
-    }
+	@Override
+	public int compareTo(Conta o) {
+		return Comparator.comparing(Conta::getDescricao).thenComparing(Conta::getCategoria).compare(this, o);
+	}
 
 }

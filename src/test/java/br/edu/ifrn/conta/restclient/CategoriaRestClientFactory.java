@@ -11,34 +11,35 @@ import org.springframework.web.client.RestTemplate;
 @Data
 public class CategoriaRestClientFactory {
 
-    private String protocol;
-    
-    private String servername;
+	private String protocol;
 
-    private int port;
+	private String servername;
 
-    private RestTemplate restTemplate;
+	private int port;
 
-    public CategoriaRestClient categoriaRestClient() {
-        return CategoriaRestClient.builder()
-                .entityRestHelper(RestClientHelper.<CategoriaDTO>builder()
-                    .endpoint("categoria")
-                    .protocol(protocol)
-                    .servername(servername)
-                    .port(port)
-                    .restTemplate(restTemplate)
-                    .build())
-                .build();
-    }
+	private RestTemplate restTemplate;
 
-    public CategoriaDTO categoria(String descricao) {
-        Optional<CategoriaDTO> findByDescricao = categoriaRestClient().findByDescricao(descricao);
-        if (findByDescricao.isEmpty()) {
-            CategoriaDTO result = CategoriaDTO.builder().descricao(descricao).build();
-            return categoriaRestClient().save(result);
-        } else {
-            return findByDescricao.get();
-        }
-    }
+	public CategoriaRestClient categoriaRestClient() {
+		return CategoriaRestClient.builder()
+			.entityRestHelper(RestClientHelper.<CategoriaDTO>builder()
+				.endpoint("categoria")
+				.protocol(protocol)
+				.servername(servername)
+				.port(port)
+				.restTemplate(restTemplate)
+				.build())
+			.build();
+	}
+
+	public CategoriaDTO categoria(String descricao) {
+		Optional<CategoriaDTO> findByDescricao = categoriaRestClient().findByDescricao(descricao);
+		if (findByDescricao.isEmpty()) {
+			CategoriaDTO result = CategoriaDTO.builder().descricao(descricao).build();
+			return categoriaRestClient().save(result);
+		}
+		else {
+			return findByDescricao.get();
+		}
+	}
 
 }

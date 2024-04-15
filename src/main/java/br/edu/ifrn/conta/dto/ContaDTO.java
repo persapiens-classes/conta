@@ -14,6 +14,9 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @NoArgsConstructor
 public class ContaDTO implements Serializable {
-    private String descricao;
-    private CategoriaDTO categoria;
+
+	private String descricao;
+
+	private CategoriaDTO categoria;
+
 }

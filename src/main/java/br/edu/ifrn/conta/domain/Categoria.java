@@ -35,24 +35,26 @@ import lombok.ToString;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Categoria implements Serializable, Comparable<Categoria> {
 
-    private static final long serialVersionUID = 1L;
-    public final static String CATEGORIA_DESPESA_TRANSFERENCIA = "categoria despesa de transferência";
-    public final static String CATEGORIA_RECEITA_TRANSFERENCIA = "categoria receita de transferência";
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
-    private Long id;
+	public final static String CATEGORIA_DESPESA_TRANSFERENCIA = "categoria despesa de transferência";
 
-    @Column(nullable = false, unique = true)
-    private String descricao;
+	public final static String CATEGORIA_RECEITA_TRANSFERENCIA = "categoria receita de transferência";
 
-    @Singular
-    @OneToMany(mappedBy = "categoria")
-    private Set<Conta> contas;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
+	private Long id;
 
-    @Override
-    public int compareTo(Categoria o) {
-        return this.descricao.compareTo(o.getDescricao());
-    }
+	@Column(nullable = false, unique = true)
+	private String descricao;
+
+	@Singular
+	@OneToMany(mappedBy = "categoria")
+	private Set<Conta> contas;
+
+	@Override
+	public int compareTo(Categoria o) {
+		return this.descricao.compareTo(o.getDescricao());
+	}
 
 }

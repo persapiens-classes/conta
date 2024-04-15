@@ -19,30 +19,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/contaDebito")
 public class ContaDebitoController extends CrudController<ContaDebitoDTO, ContaDebito, Long> {
 
-    @Autowired
-    private ContaDebitoService contaDebitoService;
-    
-    @Autowired
-    private CategoriaService categoriaService;
-    
-    @GetMapping("/findByDescricao")
-    public Optional<ContaDebitoDTO> findByDescricao(@RequestParam String descricao) {
-        return toDTOOptional(contaDebitoService.findByDescricao(descricao));
-    }
+	@Autowired
+	private ContaDebitoService contaDebitoService;
 
-    @Override
-    protected ContaDebito toEntity(ContaDebitoDTO dto) {
-        return ContaDebito.builder()
-            .descricao(dto.getDescricao())
-            .categoria(categoriaService.findByDescricao(dto.getCategoria().getDescricao()).get())
-            .build();
-    }
+	@Autowired
+	private CategoriaService categoriaService;
 
-    @Override
-    protected ContaDebitoDTO toDTO(ContaDebito entity) {
-        return ContaDebitoDTO.builder()
-            .descricao(entity.getDescricao())
-            .categoria(CategoriaDTO.builder().descricao(entity.getCategoria().getDescricao()).build())
-            .build();
-    }
+	@GetMapping("/findByDescricao")
+	public Optional<ContaDebitoDTO> findByDescricao(@RequestParam String descricao) {
+		return toDTOOptional(contaDebitoService.findByDescricao(descricao));
+	}
+
+	@Override
+	protected ContaDebito toEntity(ContaDebitoDTO dto) {
+		return ContaDebito.builder()
+			.descricao(dto.getDescricao())
+			.categoria(categoriaService.findByDescricao(dto.getCategoria().getDescricao()).get())
+			.build();
+	}
+
+	@Override
+	protected ContaDebitoDTO toDTO(ContaDebito entity) {
+		return ContaDebitoDTO.builder()
+			.descricao(entity.getDescricao())
+			.categoria(CategoriaDTO.builder().descricao(entity.getCategoria().getDescricao()).build())
+			.build();
+	}
+
 }

@@ -9,20 +9,20 @@ import lombok.Data;
 @SuperBuilder
 public class CategoriaRestClient {
 
-    private RestClientHelper<CategoriaDTO> entityRestHelper;
+	private RestClientHelper<CategoriaDTO> entityRestHelper;
 
-    public Optional<CategoriaDTO> findByDescricao(String descricao) {
-        return Optional.ofNullable(this.entityRestHelper.getRestTemplate().getForObject(
-                entityRestHelper.findByDescricaoUri(descricao), CategoriaDTO.class));
-    }
+	public Optional<CategoriaDTO> findByDescricao(String descricao) {
+		return Optional.ofNullable(this.entityRestHelper.getRestTemplate()
+			.getForObject(entityRestHelper.findByDescricaoUri(descricao), CategoriaDTO.class));
+	}
 
-    public Iterable<CategoriaDTO> findAll() {
-        return this.entityRestHelper.findAll();
-    }
+	public Iterable<CategoriaDTO> findAll() {
+		return this.entityRestHelper.findAll();
+	}
 
-    public CategoriaDTO save(CategoriaDTO entity) {
-        return this.entityRestHelper.getRestTemplate().postForObject(
-                entityRestHelper.saveUri(), entity, CategoriaDTO.class);
-    }
+	public CategoriaDTO save(CategoriaDTO entity) {
+		return this.entityRestHelper.getRestTemplate()
+			.postForObject(entityRestHelper.saveUri(), entity, CategoriaDTO.class);
+	}
 
 }

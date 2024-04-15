@@ -10,6 +10,6 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface CategoriaRepository extends CrudRepository<Categoria, Long> {
 
-    Optional<Categoria> findByDescricao(String descricao);
+	Optional<Categoria> findByDescricao(String descricao);
 
 }

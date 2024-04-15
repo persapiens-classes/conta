@@ -10,15 +10,16 @@ import org.springframework.web.util.UriComponentsBuilder;
 @SuperBuilder
 public class SaldoRestClient {
 
-    private RestClientHelper<LancamentoDTO> entityRestHelper;
+	private RestClientHelper<LancamentoDTO> entityRestHelper;
 
-    public BigDecimal saldo(String dono, String contaPatrimonio) {
-        return this.entityRestHelper.getRestTemplate().getForObject(
-        UriComponentsBuilder.fromHttpUrl(entityRestHelper.url() + "/saldo")
-            .queryParam("dono", dono)
-            .queryParam("contaPatrimonio", contaPatrimonio)
-            .build().encode().toUri()
-            , BigDecimal.class);
-    }
-    
+	public BigDecimal saldo(String dono, String contaPatrimonio) {
+		return this.entityRestHelper.getRestTemplate()
+			.getForObject(UriComponentsBuilder.fromHttpUrl(entityRestHelper.url() + "/saldo")
+				.queryParam("dono", dono)
+				.queryParam("contaPatrimonio", contaPatrimonio)
+				.build()
+				.encode()
+				.toUri(), BigDecimal.class);
+	}
+
 }

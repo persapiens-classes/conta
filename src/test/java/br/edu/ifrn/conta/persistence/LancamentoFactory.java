@@ -27,4 +27,5 @@ public class LancamentoFactory {
 		this.lancamentoRepository.save(lancamento);
 		return lancamento;
 	}
+
 }

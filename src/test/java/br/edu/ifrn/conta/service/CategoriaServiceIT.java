@@ -17,38 +17,36 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CategoriaServiceIT {
 
-    @Autowired
-    private CategoriaService categoriaServico;
+	@Autowired
+	private CategoriaService categoriaServico;
 
-    @Autowired
-    private CategoriaFactory categoriaFactory;
+	@Autowired
+	private CategoriaFactory categoriaFactory;
 
-    @Test
-    public void repositorioNaoEhNulo() {
-        assertThat(this.categoriaServico).isNotNull();
-    }
+	@Test
+	public void repositorioNaoEhNulo() {
+		assertThat(this.categoriaServico).isNotNull();
+	}
 
-    @Test
-    public void salvarUm() {
-        // cria o ambiente de teste
-        Categoria categoria = this.categoriaFactory.banco();
+	@Test
+	public void salvarUm() {
+		// cria o ambiente de teste
+		Categoria categoria = this.categoriaFactory.banco();
 
-        // verifica o efeito da execucao da operacao a ser testada
-        assertThat(this.categoriaServico.findById(categoria.getId()).get())
-                .isEqualTo(categoria);
-    }
+		// verifica o efeito da execucao da operacao a ser testada
+		assertThat(this.categoriaServico.findById(categoria.getId()).get()).isEqualTo(categoria);
+	}
 
-    @Test
-    public void deletarUm() {
-        // cria o ambiente de teste
-        Categoria categoria = this.categoriaFactory.categoria("CATEGORIA UNICA DO SERVICOIT");
+	@Test
+	public void deletarUm() {
+		// cria o ambiente de teste
+		Categoria categoria = this.categoriaFactory.categoria("CATEGORIA UNICA DO SERVICOIT");
 
-        // executa a operacao a ser testada
-        this.categoriaServico.delete(categoria);
+		// executa a operacao a ser testada
+		this.categoriaServico.delete(categoria);
 
-        // verifica o efeito da execucao da operacao a ser testada
-        assertThat(this.categoriaServico.findById(categoria.getId()).isPresent())
-                .isFalse();
-    }
+		// verifica o efeito da execucao da operacao a ser testada
+		assertThat(this.categoriaServico.findById(categoria.getId()).isPresent()).isFalse();
+	}
 
 }

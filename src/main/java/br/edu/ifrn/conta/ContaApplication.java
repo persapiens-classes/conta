@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ContaApplication {
 
-    protected ContaApplication() {
-    }
+	protected ContaApplication() {
+	}
+
 }

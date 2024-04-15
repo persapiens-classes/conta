@@ -29,37 +29,38 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"valorInicial", "dono", "contaPatrimonio"})
+@EqualsAndHashCode(of = { "valorInicial", "dono", "contaPatrimonio" })
 @SuperBuilder
 @Entity
 @SequenceGenerator(sequenceName = "seq_valorInicial", name = "ID_SEQUENCE", allocationSize = 1)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class ValorInicialDoDonoNaContaPatrimonio implements Serializable, Comparable<ValorInicialDoDonoNaContaPatrimonio> {
+public class ValorInicialDoDonoNaContaPatrimonio
+		implements Serializable, Comparable<ValorInicialDoDonoNaContaPatrimonio> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQUENCE")
+	private Long id;
 
-    @Column(nullable = false)
-    private BigDecimal valorInicial;
+	@Column(nullable = false)
+	private BigDecimal valorInicial;
 
-    @ManyToOne
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_valorInicial_dono"))
-    private Dono dono;
+	@ManyToOne
+	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_valorInicial_dono"))
+	private Dono dono;
 
-    @ManyToOne
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_valorInicial_contaPatrimonio"))
-    private ContaPatrimonio contaPatrimonio;
+	@ManyToOne
+	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_valorInicial_contaPatrimonio"))
+	private ContaPatrimonio contaPatrimonio;
 
-    @Override
-    public int compareTo(ValorInicialDoDonoNaContaPatrimonio o) {
-        return Comparator.comparing(ValorInicialDoDonoNaContaPatrimonio::getValorInicial)
-                .thenComparing(ValorInicialDoDonoNaContaPatrimonio::getDono)
-                .thenComparing(ValorInicialDoDonoNaContaPatrimonio::getContaPatrimonio)
-                .compare(this, o);
-    }
+	@Override
+	public int compareTo(ValorInicialDoDonoNaContaPatrimonio o) {
+		return Comparator.comparing(ValorInicialDoDonoNaContaPatrimonio::getValorInicial)
+			.thenComparing(ValorInicialDoDonoNaContaPatrimonio::getDono)
+			.thenComparing(ValorInicialDoDonoNaContaPatrimonio::getContaPatrimonio)
+			.compare(this, o);
+	}
 
 }

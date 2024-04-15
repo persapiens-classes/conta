@@ -19,39 +19,42 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/valorInicialDoDonoNaContaPatrimonio")
-public class ValorInicialDoDonoNaContaPatrimonioController extends CrudController<ValorInicialDoDonoNaContaPatrimonioDTO, ValorInicialDoDonoNaContaPatrimonio, Long> {
+public class ValorInicialDoDonoNaContaPatrimonioController
+		extends CrudController<ValorInicialDoDonoNaContaPatrimonioDTO, ValorInicialDoDonoNaContaPatrimonio, Long> {
 
-    @Autowired
-    private ValorInicialDoDonoNaContaPatrimonioService valorInicialDoDonoNaContaPatrimonioService;
-    
-    @Autowired
-    private DonoService donoService;
-    
-    @Autowired
-    private ContaPatrimonioService contaPatrimonioService;
-    
-    @GetMapping("findByDonoAndContaPatrimonio")
-    public Optional<ValorInicialDoDonoNaContaPatrimonioDTO> findByDonoAndContaPatrimonio(@RequestParam String dono, @RequestParam String contaPatrimonio) {
-        return toDTOOptional(valorInicialDoDonoNaContaPatrimonioService.findByDonoAndContaPatrimonio(
-        donoService.findByDescricao(dono).get(), 
-contaPatrimonioService.findByDescricao(contaPatrimonio).get()));
-    }
+	@Autowired
+	private ValorInicialDoDonoNaContaPatrimonioService valorInicialDoDonoNaContaPatrimonioService;
 
-    @Override
-    protected ValorInicialDoDonoNaContaPatrimonio toEntity(ValorInicialDoDonoNaContaPatrimonioDTO dto) {
-        return ValorInicialDoDonoNaContaPatrimonio.builder()
-            .valorInicial(dto.getValorInicial())
-            .dono(donoService.findByDescricao(dto.getDono().getDescricao()).get())
-            .contaPatrimonio(contaPatrimonioService.findByDescricao(dto.getContaPatrimonio().getDescricao()).get())
-            .build();        
-    }
+	@Autowired
+	private DonoService donoService;
 
-    @Override
-    protected ValorInicialDoDonoNaContaPatrimonioDTO toDTO(ValorInicialDoDonoNaContaPatrimonio entity) {
-        return ValorInicialDoDonoNaContaPatrimonioDTO.builder()
-           .valorInicial(entity.getValorInicial())
-           .dono(DonoDTO.builder().descricao(entity.getDono().getDescricao()).build())
-           .contaPatrimonio(ContaPatrimonioDTO.builder().descricao(entity.getContaPatrimonio().getDescricao()).build())
-           .build();
-    }
+	@Autowired
+	private ContaPatrimonioService contaPatrimonioService;
+
+	@GetMapping("findByDonoAndContaPatrimonio")
+	public Optional<ValorInicialDoDonoNaContaPatrimonioDTO> findByDonoAndContaPatrimonio(@RequestParam String dono,
+			@RequestParam String contaPatrimonio) {
+		return toDTOOptional(valorInicialDoDonoNaContaPatrimonioService.findByDonoAndContaPatrimonio(
+				donoService.findByDescricao(dono).get(),
+				contaPatrimonioService.findByDescricao(contaPatrimonio).get()));
+	}
+
+	@Override
+	protected ValorInicialDoDonoNaContaPatrimonio toEntity(ValorInicialDoDonoNaContaPatrimonioDTO dto) {
+		return ValorInicialDoDonoNaContaPatrimonio.builder()
+			.valorInicial(dto.getValorInicial())
+			.dono(donoService.findByDescricao(dto.getDono().getDescricao()).get())
+			.contaPatrimonio(contaPatrimonioService.findByDescricao(dto.getContaPatrimonio().getDescricao()).get())
+			.build();
+	}
+
+	@Override
+	protected ValorInicialDoDonoNaContaPatrimonioDTO toDTO(ValorInicialDoDonoNaContaPatrimonio entity) {
+		return ValorInicialDoDonoNaContaPatrimonioDTO.builder()
+			.valorInicial(entity.getValorInicial())
+			.dono(DonoDTO.builder().descricao(entity.getDono().getDescricao()).build())
+			.contaPatrimonio(ContaPatrimonioDTO.builder().descricao(entity.getContaPatrimonio().getDescricao()).build())
+			.build();
+	}
+
 }

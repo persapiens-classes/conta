@@ -26,50 +26,47 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SaldoServiceIT {
 
-    @Autowired
-    private LancamentoFactory lancamentoFactory;
+	@Autowired
+	private LancamentoFactory lancamentoFactory;
 
-    @Autowired
-    private DonoFactory donoFactory;
+	@Autowired
+	private DonoFactory donoFactory;
 
-    @Autowired
-    private SaldoService saldoService;
+	@Autowired
+	private SaldoService saldoService;
 
-    @Autowired
-    private ValorInicialDoDonoNaContaPatrimonioFactory valorInicialDoDonoNaContaPatrimonioFactory;
+	@Autowired
+	private ValorInicialDoDonoNaContaPatrimonioFactory valorInicialDoDonoNaContaPatrimonioFactory;
 
-    @Autowired
-    private ContaPatrimonioFactory contaPatrimonioFactory;
+	@Autowired
+	private ContaPatrimonioFactory contaPatrimonioFactory;
 
-    @Autowired
-    private ContaCreditoFactory contaCreditoFactory;
+	@Autowired
+	private ContaCreditoFactory contaCreditoFactory;
 
-    @Autowired
-    private ContaDebitoFactory contaDebitoFactory;
+	@Autowired
+	private ContaDebitoFactory contaDebitoFactory;
 
-    @Test
-    public void saldo800() {
-        // cria o ambiente de teste
-        Dono papai = this.donoFactory.papai();
+	@Test
+	public void saldo800() {
+		// cria o ambiente de teste
+		Dono papai = this.donoFactory.papai();
 
-        ContaPatrimonio carteira
-                = this.contaPatrimonioFactory.carteira();
+		ContaPatrimonio carteira = this.contaPatrimonioFactory.carteira();
 
-        ContaDebito gasolina
-                = this.contaDebitoFactory.gasolina();
+		ContaDebito gasolina = this.contaDebitoFactory.gasolina();
 
-        ContaCredito estagio
-                = this.contaCreditoFactory.estagio();
+		ContaCredito estagio = this.contaCreditoFactory.estagio();
 
-        this.valorInicialDoDonoNaContaPatrimonioFactory.valorInicialDoDonoNaContaPatrimonio(
-                papai, carteira, new BigDecimal(1000));
+		this.valorInicialDoDonoNaContaPatrimonioFactory.valorInicialDoDonoNaContaPatrimonio(papai, carteira,
+				new BigDecimal(1000));
 
-        this.lancamentoFactory.lancamento(papai, gasolina, carteira, new BigDecimal(500));
-        this.lancamentoFactory.lancamento(papai, carteira, estagio, new BigDecimal(300));
+		this.lancamentoFactory.lancamento(papai, gasolina, carteira, new BigDecimal(500));
+		this.lancamentoFactory.lancamento(papai, carteira, estagio, new BigDecimal(300));
 
-        // executa a operacao a ser testada
-        // verifica o efeito da execucao da operacao a ser testada
-        assertThat(this.saldoService.saldo(papai, carteira))
-                .isEqualTo(new BigDecimal(800).setScale(2));
-    }
+		// executa a operacao a ser testada
+		// verifica o efeito da execucao da operacao a ser testada
+		assertThat(this.saldoService.saldo(papai, carteira)).isEqualTo(new BigDecimal(800).setScale(2));
+	}
+
 }

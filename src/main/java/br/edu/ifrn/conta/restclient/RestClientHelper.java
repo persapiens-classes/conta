@@ -11,56 +11,60 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @Data
 @SuperBuilder
-public class RestClientHelper <T> {
+public class RestClientHelper<T> {
 
-    private String endpoint;
-    private String protocol;
-    private String servername;
-    private int port;
-    private RestTemplate restTemplate;
+	private String endpoint;
 
-    public String url() {
-        return protocol + "://" + servername + ":" + port + "/" + endpoint;
-    }
+	private String protocol;
 
-    private URI uri() {
-        return UriComponentsBuilder.fromHttpUrl(url())
-            .build().encode().toUri();
-    }
-    
-    private URI uri(String suffix, String param, String value) {
-        return UriComponentsBuilder.fromHttpUrl(url() + suffix)
-            .queryParam(param, value)
-            .build().encode().toUri();
-    }
-    
-    public void deleteByDescricao(String descricao) {
-        this.restTemplate.exchange(uri("/deleteByDescricao", "descricao", descricao), 
-        HttpMethod.DELETE, null, new ParameterizedTypeReference<T>(){});
-    }
+	private String servername;
 
-    public Iterable<T> findAll() {
-        return this.restTemplate.exchange(findAllUri(), 
-      HttpMethod.GET, null, 
-            new ParameterizedTypeReference<Iterable<T>>(){})
-                .getBody();
-    }
+	private int port;
 
-    public T save(T entity) {
-        return this.restTemplate.exchange(saveUri(), 
-            HttpMethod.POST, new HttpEntity<>(entity), new ParameterizedTypeReference<T>(){}).getBody();
-    }
-    
-    public URI findByDescricaoUri(String descricao) {
-        return uri("/findByDescricao", "descricao", descricao);
-    }
+	private RestTemplate restTemplate;
 
-    public URI findAllUri() {
-        return uri();
-    }
+	public String url() {
+		return protocol + "://" + servername + ":" + port + "/" + endpoint;
+	}
 
-    public URI saveUri() {
-        return uri();
-    }
+	private URI uri() {
+		return UriComponentsBuilder.fromHttpUrl(url()).build().encode().toUri();
+	}
+
+	private URI uri(String suffix, String param, String value) {
+		return UriComponentsBuilder.fromHttpUrl(url() + suffix).queryParam(param, value).build().encode().toUri();
+	}
+
+	public void deleteByDescricao(String descricao) {
+		this.restTemplate.exchange(uri("/deleteByDescricao", "descricao", descricao), HttpMethod.DELETE, null,
+				new ParameterizedTypeReference<T>() {
+				});
+	}
+
+	public Iterable<T> findAll() {
+		return this.restTemplate
+			.exchange(findAllUri(), HttpMethod.GET, null, new ParameterizedTypeReference<Iterable<T>>() {
+			})
+			.getBody();
+	}
+
+	public T save(T entity) {
+		return this.restTemplate
+			.exchange(saveUri(), HttpMethod.POST, new HttpEntity<>(entity), new ParameterizedTypeReference<T>() {
+			})
+			.getBody();
+	}
+
+	public URI findByDescricaoUri(String descricao) {
+		return uri("/findByDescricao", "descricao", descricao);
+	}
+
+	public URI findAllUri() {
+		return uri();
+	}
+
+	public URI saveUri() {
+		return uri();
+	}
 
 }

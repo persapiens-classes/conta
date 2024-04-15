@@ -18,18 +18,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class SaldoController {
 
-    @Autowired
-    private SaldoService saldoService;
-    @Autowired
-    private DonoService donoService;
-    @Autowired
-    private ContaPatrimonioService contaPatrimonioService;
-    @Autowired
-    private ContaService contaService;
+	@Autowired
+	private SaldoService saldoService;
 
-    @GetMapping("/saldo")
-    public BigDecimal saldo(@RequestParam String dono, @RequestParam String contaPatrimonio) {
-        return saldoService.saldo(donoService.findByDescricao(dono).get(),
-                contaPatrimonioService.findByDescricao(contaPatrimonio).get());
-    }
+	@Autowired
+	private DonoService donoService;
+
+	@Autowired
+	private ContaPatrimonioService contaPatrimonioService;
+
+	@Autowired
+	private ContaService contaService;
+
+	@GetMapping("/saldo")
+	public BigDecimal saldo(@RequestParam String dono, @RequestParam String contaPatrimonio) {
+		return saldoService.saldo(donoService.findByDescricao(dono).get(),
+				contaPatrimonioService.findByDescricao(contaPatrimonio).get());
+	}
+
 }

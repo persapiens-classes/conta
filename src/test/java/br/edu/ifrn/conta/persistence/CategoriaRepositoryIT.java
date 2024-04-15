@@ -23,8 +23,7 @@ public class CategoriaRepositoryIT {
 
 	@Test
 	public void repositorioNaoEhNulo() {
-		assertThat(this.categoriaRepository)
-			.isNotNull();
+		assertThat(this.categoriaRepository).isNotNull();
 	}
 
 	@Test
@@ -36,8 +35,7 @@ public class CategoriaRepositoryIT {
 		this.categoriaRepository.delete(categoria);
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(this.categoriaRepository.findById(categoria.getId()).isPresent())
-			.isFalse();
+		assertThat(this.categoriaRepository.findById(categoria.getId()).isPresent()).isFalse();
 	}
 
 	@Test
@@ -46,8 +44,7 @@ public class CategoriaRepositoryIT {
 		Categoria categoria = this.categoriaFactory.transporte();
 
 		// verifica o efeito da execucao da operacao a ser testada
-		assertThat(categoria.getId())
-			.isNotNull();
+		assertThat(categoria.getId()).isNotNull();
 	}
 
 }
