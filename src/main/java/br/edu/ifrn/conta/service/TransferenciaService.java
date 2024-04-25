@@ -8,6 +8,8 @@ import br.edu.ifrn.conta.domain.ContaDebito;
 import br.edu.ifrn.conta.domain.ContaPatrimonio;
 import br.edu.ifrn.conta.domain.Dono;
 import br.edu.ifrn.conta.domain.Lancamento;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Service of transferencia.
  */
+@SuppressFBWarnings({"EI_EXPOSE_REP", "EI_EXPOSE_REP2"})
 @Service
 public class TransferenciaService {
 

@@ -22,6 +22,10 @@
         <decycle-maven-plugin.version>1.1.1</decycle-maven-plugin.version>
 
         <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>        
+
+        <spotbugs-maven-plugin.version>4.7.3.4</spotbugs-maven-plugin.version>
+        <findbugs-annotations.version>3.0.1</findbugs-annotations.version>
+        <findsecbugs-plugin.version>1.13.0</findsecbugs-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -35,6 +39,11 @@
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-common</artifactId>
                 <version>${springdoc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>findbugs-annotations</artifactId>
+                <version>${findbugs-annotations.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -91,6 +100,10 @@
             <artifactId>hsqldb</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>findbugs-annotations</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -140,6 +153,24 @@
                         </slicings>
                     </configuration>
                 </plugin>                
+                <plugin>
+                    <groupId>com.github.spotbugs</groupId>
+                    <artifactId>spotbugs-maven-plugin</artifactId>
+                    <version>${spotbugs-maven-plugin.version}</version>
+                    <configuration>
+                        <plugins>
+                            <plugin>
+                                <groupId>com.h3xstream.findsecbugs</groupId>
+                                <artifactId>findsecbugs-plugin</artifactId>
+                                <version>${findsecbugs-plugin.version}</version>
+                            </plugin>                            
+                        </plugins>
+                        <includeTests>true</includeTests>
+                        <xmlOutput>true</xmlOutput>
+                        <effort>Max</effort>
+                        <failOnError>true</failOnError>
+                    </configuration>
+                </plugin>
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
@@ -205,6 +236,27 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>        
+        <profile>
+            <id>check-spotbugs</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.spotbugs</groupId>
+                        <artifactId>spotbugs-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <name>conta</name>
     <description>Conta do Desenvolvimento de Sistemas Corporativos</description>

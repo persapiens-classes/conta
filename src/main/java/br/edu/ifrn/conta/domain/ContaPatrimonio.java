@@ -2,6 +2,7 @@ package br.edu.ifrn.conta.domain;
 
 import java.util.Set;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
@@ -17,6 +18,7 @@ import lombok.ToString;
 /**
  * Conta Patrimonio entity.
  */
+@SuppressFBWarnings({"EI_EXPOSE_REP", "EI_EXPOSE_REP2"})
 @SuperBuilder
 @Getter
 @Setter

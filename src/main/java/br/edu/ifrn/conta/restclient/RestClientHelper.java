@@ -3,12 +3,14 @@ package br.edu.ifrn.conta.restclient;
 import java.net.URI;
 import lombok.experimental.SuperBuilder;
 import lombok.Data;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+@SuppressFBWarnings({"EI_EXPOSE_REP", "EI_EXPOSE_REP2"})
 @Data
 @SuperBuilder
 public class RestClientHelper <T> {
