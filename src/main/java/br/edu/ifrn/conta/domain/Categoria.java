@@ -3,6 +3,7 @@ package br.edu.ifrn.conta.domain;
 import java.io.Serializable;
 import java.util.Set;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +25,7 @@ import lombok.ToString;
 /**
  * Categoria entity.
  */
+@SuppressFBWarnings({"EI_EXPOSE_REP", "EI_EXPOSE_REP2"})
 @Getter
 @Setter
 @ToString(exclude = "contas")

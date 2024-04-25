@@ -15,6 +15,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import java.util.Comparator;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,6 +28,7 @@ import lombok.experimental.SuperBuilder;
 /**
  * Conta abstract entity.
  */
+@SuppressFBWarnings({"EI_EXPOSE_REP", "EI_EXPOSE_REP2"})
 @SuperBuilder
 @Getter
 @Setter

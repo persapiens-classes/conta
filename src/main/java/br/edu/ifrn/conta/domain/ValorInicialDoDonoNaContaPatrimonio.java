@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import java.util.Comparator;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -26,6 +27,7 @@ import lombok.ToString;
 /**
  * Valor Inicial do Dono na Conta Patrimonio entity.
  */
+@SuppressFBWarnings({"EI_EXPOSE_REP", "EI_EXPOSE_REP2"})
 @Getter
 @Setter
 @ToString
