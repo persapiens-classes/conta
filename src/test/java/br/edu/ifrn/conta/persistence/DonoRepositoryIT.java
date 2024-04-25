@@ -49,11 +49,12 @@ public class DonoRepositoryIT {
         // cria o ambiente de teste
         this.donoFactory.papai();
         this.donoFactory.mamae();
+        this.donoFactory.titia();
 
         // executa a operacao a ser testada
         // verifica o efeito da execucao da operacao a ser testada
         assertThat(this.donoRepository.countByDescricaoContains("a"))
-                .isEqualTo(2);
+                .isEqualTo(3);
     }
 
     @Test
