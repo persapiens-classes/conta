@@ -34,5 +34,8 @@ jobs:
       - name: Validate
         run: ./mvnw -B clean validate
 
+      - name: Check cpd
+        run: ./mvnw -B -DskipTests=true -Pcheck-cpd verify
+
       - name: Tests
         run: ./mvnw -B -DwebDriverType=chrome verify

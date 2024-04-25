@@ -17,11 +17,16 @@
 
     <properties>
         <java.version>21</java.version>
+        
         <springdoc.version>2.3.0</springdoc.version>
 
         <decycle-maven-plugin.version>1.1.1</decycle-maven-plugin.version>
 
         <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>        
+
+        <maven-pmd-plugin.version>3.20.0</maven-pmd-plugin.version>
+        <cpd.dir>src/cpd-config</cpd.dir>
+        <cpd.excludeFromFailureFile>${cpd.dir}/cpd-exclude.properties</cpd.excludeFromFailureFile>
     </properties>
 
     <dependencyManagement>
@@ -141,6 +146,17 @@
                     </configuration>
                 </plugin>                
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-pmd-plugin</artifactId>
+                    <version>${maven-pmd-plugin.version}</version>
+                    <configuration>
+                        <targetJdk>${java.source}</targetJdk>
+                        <includeTests>false</includeTests>
+                        <analysisCache>true</analysisCache>
+                        <linkXRef>false</linkXRef>
+                    </configuration>
+                </plugin>
+                <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${jacoco-maven-plugin.version}</version>
@@ -206,6 +222,37 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>check-cpd</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-pmd-plugin</artifactId>
+                        <configuration>
+                            <skip>false</skip>
+                            <printFailingErrors>true</printFailingErrors>
+                            <verbose>true</verbose>
+                            <minimumTokens>50</minimumTokens>                            
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>cpd-check</id>
+                                <goals>
+                                    <goal>cpd-check</goal>
+                                </goals>
+                                <configuration>
+                                    <excludeFromFailureFile>${cpd.excludeFromFailureFile}</excludeFromFailureFile>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    
     <name>conta</name>
     <description>Conta do Desenvolvimento de Sistemas Corporativos</description>
     <url>https://github.com/persapiens/conta</url>
