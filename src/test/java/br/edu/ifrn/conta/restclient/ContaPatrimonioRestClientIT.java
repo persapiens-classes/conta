@@ -21,8 +21,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ContaPatrimonioRestClientIT {
 
-    private final String protocol = "http";
-    private final String servername = "localhost";
+    private static final String protocol = "http";
+    private static final String servername = "localhost";
 
     @Value(value = "${local.server.port}")
     private int port;
