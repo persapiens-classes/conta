@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.5</version>
+        <version>3.2.2</version>
         <relativePath/>
     </parent>
 
@@ -16,11 +16,13 @@
     <packaging>jar</packaging>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         
-        <joinfaces.version>5.0.5</joinfaces.version>
-        <querydsl.version>5.0.0</querydsl.version>
-        <apt-maven-plugin.version>1.1.3</apt-maven-plugin.version>
+        <springdoc.version>2.3.0</springdoc.version>
+
+        <decycle-maven-plugin.version>1.1.1</decycle-maven-plugin.version>
+
+        <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>        
 
         <maven-pmd-plugin.version>3.20.0</maven-pmd-plugin.version>
         <cpd.dir>src/cpd-config</cpd.dir>
@@ -30,31 +32,15 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.joinfaces</groupId>
-                <artifactId>joinfaces-dependencies</artifactId>
-                <version>${joinfaces.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.querydsl</groupId>
-                <artifactId>querydsl-apt</artifactId>
-                <version>${querydsl.version}</version>
-                <classifier>jakarta</classifier>
-                <scope>provided</scope>
-                <exclusions>
-                    <exclusion>
-                        <groupId>javax.transaction</groupId>
-                        <artifactId>jta</artifactId>
-                    </exclusion>
-                </exclusions>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-common</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.querydsl</groupId>
-                <artifactId>querydsl-jpa</artifactId>
-                <version>${querydsl.version}</version>
-                <classifier>jakarta</classifier>
-            </dependency>    
         </dependencies>
     </dependencyManagement>
 
@@ -76,16 +62,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.joinfaces</groupId>
-            <artifactId>primefaces-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.joinfaces</groupId>
-            <artifactId>omnifaces-spring-boot-starter</artifactId>
-        </dependency>
+        </dependency>        
         
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -99,6 +76,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>		
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-common</artifactId>
+        </dependency>
         <!--
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -110,16 +95,6 @@
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <scope>runtime</scope>
-        </dependency>        
-        <dependency>
-            <groupId>com.querydsl</groupId>
-            <artifactId>querydsl-apt</artifactId>
-            <classifier>jakarta</classifier>
-        </dependency>
-        <dependency>
-            <groupId>com.querydsl</groupId>
-            <artifactId>querydsl-jpa</artifactId>
-            <classifier>jakarta</classifier>
         </dependency>
     </dependencies>
 
@@ -127,20 +102,48 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>com.mysema.maven</groupId>
-                    <artifactId>apt-maven-plugin</artifactId>
-                    <version>${apt-maven-plugin.version}</version>
+                    <groupId>de.obqo.decycle</groupId>
+                    <artifactId>decycle-maven-plugin</artifactId>
+                    <version>${decycle-maven-plugin.version}</version>
                     <executions>
                         <execution>
                             <goals>
-                                <goal>process</goal>
+                                <goal>check</goal>
                             </goals>
-                            <configuration>
-                                <outputDirectory>target/generated-sources/annotations</outputDirectory>
-                                <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
-                            </configuration>
                         </execution>
                     </executions>
+                    <configuration>
+                        <slicings>
+                            <slicing>
+                                <name>branches</name>
+                                <patterns>br.edu.ifrn.conta.*=base, br.edu.ifrn.conta.{*}.**</patterns>
+                                <constraints>
+                                    <allow>controller, service, domain</allow>
+                                    <allow>service, persistence, domain</allow>
+                                    <allow>
+                                        <one-of>controller, persistence</one-of>
+                                    </allow>
+                                    <allow>
+                                        <one-of>dto, domain</one-of>
+                                    </allow>
+                                    <allow>
+                                        <one-of>restclient, controller</one-of>
+                                        <any-of>dto</any-of>
+                                    </allow>
+                                    <allow>
+                                        <one-of>restclient, service</one-of>
+                                    </allow>
+                                    <allow>
+                                        <one-of>restclient, persistence</one-of>
+                                        <any-of>util</any-of>
+                                    </allow>
+                                    <allow>
+                                        <one-of>restclient, domain</one-of>
+                                    </allow>
+                                </constraints>
+                            </slicing>
+                        </slicings>
+                    </configuration>
                 </plugin>                
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -153,18 +156,69 @@
                         <linkXRef>false</linkXRef>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>prepare-unit-test</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                            <configuration>
+                                <sessionId>${project.artifactId}.unit-tests</sessionId>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>prepare-integration-test</id>
+                            <goals>
+                                <goal>prepare-agent-integration</goal>
+                            </goals>
+                            <configuration>
+                                <destFile>${project.build.directory}/jacoco.exec</destFile>
+                                <append>true</append>
+                                <sessionId>${project.artifactId}.integration-tests</sessionId>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>jacoco-report</id>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
-        
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>com.mysema.maven</groupId>
-                <artifactId>apt-maven-plugin</artifactId>
-            </plugin>        
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <argLine>@{argLine} -Dfile.encoding=UTF-8</argLine>
+                </configuration>
+            </plugin>                
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>@{argLine} -Dfile.encoding=UTF-8</argLine>
+                </configuration>
+            </plugin>                
+            <plugin>
+                <groupId>de.obqo.decycle</groupId>
+                <artifactId>decycle-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 
