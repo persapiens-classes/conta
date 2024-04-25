@@ -25,6 +25,7 @@
 
         <spotbugs-maven-plugin.version>4.7.3.4</spotbugs-maven-plugin.version>
         <findbugs-annotations.version>3.0.1</findbugs-annotations.version>
+        <findsecbugs-plugin.version>1.13.0</findsecbugs-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -157,6 +158,13 @@
                     <artifactId>spotbugs-maven-plugin</artifactId>
                     <version>${spotbugs-maven-plugin.version}</version>
                     <configuration>
+                        <plugins>
+                            <plugin>
+                                <groupId>com.h3xstream.findsecbugs</groupId>
+                                <artifactId>findsecbugs-plugin</artifactId>
+                                <version>${findsecbugs-plugin.version}</version>
+                            </plugin>                            
+                        </plugins>
                         <includeTests>true</includeTests>
                         <xmlOutput>true</xmlOutput>
                         <effort>Max</effort>
