@@ -14,6 +14,7 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @NoArgsConstructor
 public class ContaDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String descricao;
     private CategoriaDTO categoria;
 }

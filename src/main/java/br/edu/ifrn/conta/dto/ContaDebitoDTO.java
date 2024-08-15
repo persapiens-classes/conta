@@ -15,4 +15,5 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @NoArgsConstructor
 public class ContaDebitoDTO extends ContaDTO {
+    private static final long serialVersionUID = 1L;
 }
