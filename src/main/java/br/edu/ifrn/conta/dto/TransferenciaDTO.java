@@ -17,6 +17,7 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @NoArgsConstructor
 public class TransferenciaDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
     private BigDecimal valor;
     private String donoDebito;
     private String contaDebito;
