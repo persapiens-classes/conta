@@ -52,4 +52,15 @@
                 <exec.appArgs></exec.appArgs>
             </properties>
         </action>
+        <action>
+            <actionName>CUSTOM-cpd</actionName>
+            <displayName>cpd</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>verify</goal>
+            </goals>
+            <activatedProfiles>
+                <activatedProfile>check-cpd</activatedProfile>
+            </activatedProfiles>
+        </action>
     </actions>
