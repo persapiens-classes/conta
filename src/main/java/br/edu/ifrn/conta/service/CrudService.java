@@ -2,6 +2,7 @@ package br.edu.ifrn.conta.service;
 
 import java.io.Serializable;
 import java.util.Optional;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.repository.CrudRepository;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @param <T> entity
  * @param <ID> entity id
  */
+@SuppressFBWarnings({"EI_EXPOSE_REP", "EI_EXPOSE_REP2"})
 @Transactional(readOnly = true)
 public class CrudService<T extends Object, ID extends Serializable> {
 

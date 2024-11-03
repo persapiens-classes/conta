@@ -3,6 +3,7 @@ package br.edu.ifrn.conta.restclient;
 import br.edu.ifrn.conta.ContaApplication;
 import br.edu.ifrn.conta.dto.CategoriaDTO;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -14,12 +15,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SuppressFBWarnings({"EI_EXPOSE_REP", "EI_EXPOSE_REP2"})
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = ContaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CategoriaRestClientIT {
 
-    private final String protocol = "http";
-    private final String servername = "localhost";
+    private static final String protocol = "http";
+    private static final String servername = "localhost";
 
     @Value(value = "${local.server.port}")
     private int port;
