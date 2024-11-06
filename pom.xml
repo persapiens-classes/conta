@@ -22,6 +22,9 @@
         <decycle-maven-plugin.version>1.1.1</decycle-maven-plugin.version>
 
         <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>        
+        <duplicate-finder-maven-plugin.version>2.0.1</duplicate-finder-maven-plugin.version>
+        <duplicate.ignoredResourcePattern>(application.yml)</duplicate.ignoredResourcePattern>
+        <duplicate.ignoredClassPattern>()</duplicate.ignoredClassPattern>
     </properties>
 
     <dependencyManagement>
@@ -173,6 +176,28 @@
                         </execution>
                     </executions>
                 </plugin>
+                <plugin>
+                    <groupId>org.basepom.maven</groupId>
+                    <artifactId>duplicate-finder-maven-plugin</artifactId>
+                    <version>${duplicate-finder-maven-plugin.version}</version>
+                    <configuration>
+                        <printEqualFiles>false</printEqualFiles>
+                        <failBuildInCaseOfDifferentContentConflict>true</failBuildInCaseOfDifferentContentConflict>
+                        <failBuildInCaseOfEqualContentConflict>false</failBuildInCaseOfEqualContentConflict>
+                        <failBuildInCaseOfConflict>false</failBuildInCaseOfConflict>
+                        <checkCompileClasspath>true</checkCompileClasspath>
+                        <checkRuntimeClasspath>true</checkRuntimeClasspath>
+                        <checkTestClasspath>true</checkTestClasspath>
+                        <ignoredResourcePatterns>
+                            <ignoredResourcePattern>${duplicate.ignoredResourcePattern}</ignoredResourcePattern>
+                        </ignoredResourcePatterns>
+                        <ignoredClassPatterns>
+                            <ignoredClassPattern>${duplicate.ignoredClassPattern}</ignoredClassPattern>
+                        </ignoredClassPatterns>
+                        <skip>false</skip>
+                        <quiet>false</quiet>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -202,6 +227,19 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.basepom.maven</groupId>
+                <artifactId>duplicate-finder-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>check-duplicate</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

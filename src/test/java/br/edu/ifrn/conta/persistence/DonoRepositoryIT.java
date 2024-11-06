@@ -52,8 +52,8 @@ public class DonoRepositoryIT {
 
         // executa a operacao a ser testada
         // verifica o efeito da execucao da operacao a ser testada
-        assertThat(this.donoRepository.countByDescricaoContains("a"))
-                .isEqualTo(2);
+        assertThat(this.donoRepository.countByDescricaoContains("apai"))
+                .isEqualTo(1);
     }
 
     @Test
