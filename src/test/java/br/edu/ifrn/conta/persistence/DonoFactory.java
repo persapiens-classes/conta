@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import br.edu.ifrn.conta.domain.Dono;
 import static br.edu.ifrn.conta.util.DonoConstants.MAMAE;
 import static br.edu.ifrn.conta.util.DonoConstants.PAPAI;
+import static br.edu.ifrn.conta.util.DonoConstants.TITIA;
 import java.util.Optional;
 
 @Component
@@ -30,5 +31,9 @@ public class DonoFactory {
 
     public Dono mamae() {
         return dono(MAMAE);
+    }
+
+    public Dono titia() {
+        return dono(TITIA);
     }
 }

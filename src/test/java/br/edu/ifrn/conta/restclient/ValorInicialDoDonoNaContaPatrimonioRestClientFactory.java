@@ -1,11 +1,13 @@
 package br.edu.ifrn.conta.restclient;
 
 import br.edu.ifrn.conta.dto.ValorInicialDoDonoNaContaPatrimonioDTO;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.experimental.SuperBuilder;
 import lombok.Data;
 
 import org.springframework.web.client.RestTemplate;
 
+@SuppressFBWarnings({"EI_EXPOSE_REP", "EI_EXPOSE_REP2"})
 @SuperBuilder
 @Data
 public class ValorInicialDoDonoNaContaPatrimonioRestClientFactory {
